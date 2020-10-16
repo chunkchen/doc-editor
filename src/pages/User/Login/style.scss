@@ -1,0 +1,67 @@
+.login-home {
+  height: 100%;
+  background-image: url("../../../asserts/login-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .login-top {
+    text-align: center;
+
+    .title {
+      position: relative;
+      top: 2px;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 600;
+      font-size: 33px;
+      font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    .desc {
+      margin-top: 12px;
+      margin-bottom: 40px;
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 14px;
+    }
+  }
+
+  .wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-form {
+    width: 368px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    color: #001529;
+    padding: 30px;
+
+    .login-logo {
+      height: 46px;
+      line-height: 46px;
+      color: #40a4fe;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //background-image: url("../../../asserts/logo.svg");
+      //background-repeat: no-repeat;
+      //background-position: center;
+    }
+
+    .login-form-forgot {
+      float: right;
+    }
+
+    .login-form-button {
+      width: 100%;
+    }
+  }
+}
+
