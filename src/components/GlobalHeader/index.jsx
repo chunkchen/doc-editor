@@ -3,8 +3,8 @@ import './index.less';
 
 import AvatarDropdown from './AvatarDropdown';
 
-export default class Index extends Component {
-  static displayName = 'index';
+export default class GlobalHeader extends Component {
+  static displayName = 'GlobalHeader';
 
   constructor(props) {
     super(props);

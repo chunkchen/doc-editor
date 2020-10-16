@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PageHeaderWrapper from '../../components/PageHeaderWrapper';
-import CropImgBox from '../../components/CropImgBox';
+import Container from '../../components/Container';
+import { FullEditor } from '../../library';
 
 export default class BlankPage extends Component {
   static displayName = 'BlankPage';
@@ -9,27 +9,45 @@ export default class BlankPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      type: null,
+      content: '',
+    };
   }
 
-  finishedCrop = (selectPosition, zoom) => {
-    console.log(selectPosition, zoom);
-  }
+  onEditorLoaded = (engine) => {
+    this.engine = engine;
+    engine.focusToEnd();
+    const { type } = this.state;
+    console.log(`${type} loaded `);
+  };
+
+  onEditorChange = (content) => {
+    const { type } = this.state;
+    console.log(`${type} change: ${content} `);
+    this.setState({
+      content,
+    });
+  };
+
+  onEditorSave = () => {
+    const { type } = this.state;
+    console.log(`${type} save`);
+  };
 
   render() {
+    const { content } = this.state;
     return (
-      <PageHeaderWrapper>
-        BlankPage
-        <CropImgBox
-          canvasId="testId"
-          imgUrl="https://www.hicooper.cn:8077/ajax/bucket/file/test2/北极熊.jpg"
-          imgWidth={800}
-          imgHeight={700}
-          color="#dddddd"
-          rectBackgroundColor="#dfdfd"
-          onFinished={this.finishedCrop}
+      <Container mode="full">
+        <FullEditor
+          value={content}
+          defaultValue={content}
+          onLoad={this.onEditorLoaded}
+          onChange={this.onEditorChange}
+          onSave={this.onEditorSave}
+          ot={false}
         />
-      </PageHeaderWrapper>
+      </Container>
     );
   }
 }

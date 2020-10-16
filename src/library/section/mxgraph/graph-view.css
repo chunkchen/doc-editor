@@ -1,0 +1,48 @@
+.itellyou-mxgraph {
+  position: relative;
+  border-radius: 2px;
+  font-size: 14px;
+  height: 100%;
+}
+
+.itellyou-mxgraph-nav {
+  border-bottom: 1px solid #e8e8e8;
+  line-height: 24px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #595959;
+  display: flex;
+  justify-content: space-between;
+}
+
+.itellyou-mxgraph-nav .mxgraph-actions {
+  display: flex;
+}
+
+.itellyou-mxgraph-nav .mxgraph-actions button {
+  background: none;
+  border: 1px solid #fff;
+  height: 24px;
+  cursor: pointer;
+  line-height: 22px;
+}
+
+.itellyou-mxgraph-preview {
+  min-height: 40px;
+  overflow: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.itellyou-mxgraph .itellyou-mxgraph-warp {
+  display: none;
+}
+
+.itellyou-mxgraph-maximize .itellyou-mxgraph-warp {
+  display: block;
+  height: 100%;
+}
+
+.itellyou-mxgraph-maximize .itellyou-mxgraph-nav, .itellyou-mxgraph-maximize .itellyou-mxgraph-preview {
+  display: none;
+}

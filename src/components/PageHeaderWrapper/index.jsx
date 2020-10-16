@@ -19,12 +19,9 @@ export default class PageHeaderWrapper extends Component {
   render() {
     const { title, content, extraContent, footer, children, className } = this.props;
     const urlHash = window.location.hash;
-    console.log(urlHash)
     const index = urlHash.indexOf('?');
     const pathname = urlHash.substr(1, index === -1 ? urlHash.length - 1 : index - 1);
-    console.log(pathname)
     const breadNames = getBreadNamesByPathname(pathname);
-    console.log(breadNames)
     let docTitle;
     if (breadNames.length === 2) {
       docTitle = `${breadNames[0]}-${breadNames[1]}`;

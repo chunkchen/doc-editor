@@ -6,7 +6,6 @@ import React from 'react';
 import { BackTop, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import BasicLayout from './layouts/BasicLayout';
-import BlankLayout from './layouts/BlankLayout';
 
 
 // 按照 Layout 分组路由
@@ -18,8 +17,7 @@ const router = () => {
       <BackTop />
       <HashRouter>
         <Switch>
-          <Route path="/user/*" component={BlankLayout} />
-          <Route path="/" component={BasicLayout} />
+          <Route path="/*" component={BasicLayout} />
         </Switch>
       </HashRouter>
     </ConfigProvider>

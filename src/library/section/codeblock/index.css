@@ -1,0 +1,798 @@
+.itellyou-codeblock {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid #e8e8e8;
+  border-radius: 2px 2px;
+  text-indent: 0;
+}
+
+.itellyou-codeblock .itellyou-embed-toolbar-item {
+  float: right;
+  line-height: 32px;
+}
+
+.itellyou-codeblock-header {
+  user-select: none;
+  padding: 4px 12px;
+  color: #595959;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.itellyou-codeblock-header ul {
+  margin: 0;
+  padding: 0;
+
+}
+
+.itellyou-codeblock-header li {
+  margin: 0;
+
+}
+
+.itellyou-codeblock-content {
+  background: #f9f9f9;
+  overflow: auto;
+
+}
+
+.itellyou-codeblock-mini .itellyou-codeblock-header {
+  position: absolute;
+  z-index: 99999;
+  right: 8px;
+  padding: 0;
+  top: 8px;
+  border: 0 none;
+  display: none;
+}
+
+.itellyou-codeblock-mini:hover .itellyou-codeblock-header {
+  display: block;
+}
+
+.itellyou-engine .CodeMirror,
+.itellyou-engine-view .CodeMirror {
+
+  /* \u5b57\u4f53\u53c2\u7167 github\uff0c\u8003\u8651\u548c 14px \u6587\u5b57\u5728\u4e00\u8d77\u6392\u7248\uff0c\u5b57\u53f7\u7528 13px */
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  font-size: 13px;
+  line-height: 21px;
+  color: #595959;
+  direction: ltr;
+
+}
+
+.itellyou-engine .CodeMirror-lines,
+.itellyou-engine-view .CodeMirror-lines {
+  padding: 8px 0;
+
+  /* Vertical padding around content */
+
+}
+
+.itellyou-engine .CodeMirror-scrollbar-filler,
+.itellyou-engine-view .CodeMirror-scrollbar-filler,
+.itellyou-engine .CodeMirror-gutter-filler,
+.itellyou-engine-view .CodeMirror-gutter-filler {
+  background-color: white;
+
+  /* The little square between H and V scrollbars */
+
+}
+
+.itellyou-engine .CodeMirror-gutters,
+.itellyou-engine-view .CodeMirror-gutters {
+  border: 0;
+  white-space: nowrap;
+  padding: 0 8px;
+  background-color: unset;
+
+}
+
+.itellyou-engine .CodeMirror-linenumber,
+.itellyou-engine-view .CodeMirror-linenumber {
+  padding: 0;
+  min-width: 20px;
+  text-align: right;
+  color: #BFBFBF;
+  white-space: nowrap;
+
+}
+
+.itellyou-engine .CodeMirror-guttermarker,
+.itellyou-engine-view .CodeMirror-guttermarker {
+  color: black;
+
+}
+
+.itellyou-engine .CodeMirror-guttermarker-subtle,
+.itellyou-engine-view .CodeMirror-guttermarker-subtle {
+  color: #999;
+
+}
+
+.itellyou-engine .CodeMirror-cursor,
+.itellyou-engine-view .CodeMirror-cursor {
+  border-left: 1px solid black;
+  border-right: none;
+  width: 0;
+
+}
+
+.itellyou-engine .CodeMirror div.CodeMirror-secondarycursor,
+.itellyou-engine-view .CodeMirror div.CodeMirror-secondarycursor {
+  border-left: 1px solid silver;
+
+}
+
+.itellyou-engine .cm-fat-cursor .CodeMirror-cursor,
+.itellyou-engine-view .cm-fat-cursor .CodeMirror-cursor {
+  width: auto;
+  border: 0 !important;
+  background: #7e7;
+
+}
+
+.itellyou-engine .cm-fat-cursor div.CodeMirror-cursors,
+.itellyou-engine-view .cm-fat-cursor div.CodeMirror-cursors {
+  z-index: 1;
+
+}
+
+.itellyou-engine .cm-fat-cursor-mark,
+.itellyou-engine-view .cm-fat-cursor-mark {
+  background-color: rgba(20, 255, 20, 0.5);
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
+
+}
+
+.itellyou-engine .cm-animate-fat-cursor,
+.itellyou-engine-view .cm-animate-fat-cursor {
+  width: auto;
+  border: 0;
+  -webkit-animation: blink 1.06s steps(1) infinite;
+  animation: blink 1.06s steps(1) infinite;
+  background-color: #7e7;
+
+}
+
+@-webkit-keyframes blink {
+  50% {
+    background-color: transparent;
+
+  }
+
+
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+
+  }
+
+
+}
+
+.itellyou-engine .cm-tab,
+.itellyou-engine-view .cm-tab {
+  display: inline-block;
+  text-decoration: inherit;
+
+}
+
+.itellyou-engine .CodeMirror-rulers,
+.itellyou-engine-view .CodeMirror-rulers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -50px;
+  bottom: -20px;
+  overflow: hidden;
+
+}
+
+.itellyou-engine .CodeMirror-ruler,
+.itellyou-engine-view .CodeMirror-ruler {
+  border-left: 1px solid #ccc;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+
+}
+
+.itellyou-engine .cm-s-default .cm-header,
+.itellyou-engine-view .cm-s-default .cm-header {
+  color: blue;
+
+}
+
+.itellyou-engine .cm-s-default .cm-quote,
+.itellyou-engine-view .cm-s-default .cm-quote {
+  color: #090;
+
+}
+
+.itellyou-engine .cm-negative,
+.itellyou-engine-view .cm-negative {
+  color: #d44;
+
+}
+
+.itellyou-engine .cm-positive,
+.itellyou-engine-view .cm-positive {
+  color: #292;
+
+}
+
+.itellyou-engine .cm-header,
+.itellyou-engine-view .cm-header,
+.itellyou-engine .cm-strong,
+.itellyou-engine-view .cm-strong {
+  font-weight: bold;
+
+}
+
+.itellyou-engine .cm-em,
+.itellyou-engine-view .cm-em {
+  font-style: italic;
+
+}
+
+.itellyou-engine .cm-link,
+.itellyou-engine-view .cm-link {
+  text-decoration: underline;
+
+}
+
+.itellyou-engine .cm-strikethrough,
+.itellyou-engine-view .cm-strikethrough {
+  text-decoration: line-through;
+
+}
+
+.itellyou-engine .cm-s-default .cm-keyword,
+.itellyou-engine-view .cm-s-default .cm-keyword {
+  color: #d73a49;
+
+}
+
+.itellyou-engine .cm-s-default .cm-atom,
+.itellyou-engine-view .cm-s-default .cm-atom {
+  color: #905;
+
+}
+
+.itellyou-engine .cm-s-default .cm-number,
+.itellyou-engine-view .cm-s-default .cm-number {
+  color: #005cc5;
+
+}
+
+.itellyou-engine .cm-s-default .cm-def,
+.itellyou-engine-view .cm-s-default .cm-def {
+  color: #005cc5;
+
+}
+
+.itellyou-engine .cm-s-default .cm-variable-2,
+.itellyou-engine-view .cm-s-default .cm-variable-2 {
+  color: #005cc5;
+
+}
+
+.itellyou-engine .cm-s-default .cm-variable-3,
+.itellyou-engine-view .cm-s-default .cm-variable-3,
+.itellyou-engine .cm-s-default .cm-type,
+.itellyou-engine-view .cm-s-default .cm-type {
+  color: #22863a;
+
+}
+
+.itellyou-engine .cm-s-default .cm-comment,
+.itellyou-engine-view .cm-s-default .cm-comment {
+  color: #6a737d;
+
+}
+
+.itellyou-engine .cm-s-default .cm-string,
+.itellyou-engine-view .cm-s-default .cm-string {
+  color: #690;
+
+}
+
+.itellyou-engine .cm-s-default .cm-string-2,
+.itellyou-engine-view .cm-s-default .cm-string-2 {
+  color: #690;
+
+}
+
+.itellyou-engine .cm-s-default .cm-meta,
+.itellyou-engine-view .cm-s-default .cm-meta {
+  color: #1f7f9a;
+
+}
+
+.itellyou-engine .cm-s-default .cm-qualifier,
+.itellyou-engine-view .cm-s-default .cm-qualifier {
+  color: #555;
+
+}
+
+.itellyou-engine .cm-s-default .cm-builtin,
+.itellyou-engine-view .cm-s-default .cm-builtin {
+  color: #6f42c1;
+
+}
+
+.itellyou-engine .cm-s-default .cm-bracket,
+.itellyou-engine-view .cm-s-default .cm-bracket {
+  color: #997;
+
+}
+
+.itellyou-engine .cm-s-default .cm-tag,
+.itellyou-engine-view .cm-s-default .cm-tag {
+  color: #22863a;
+
+}
+
+.itellyou-engine .cm-s-default .cm-attribute,
+.itellyou-engine-view .cm-s-default .cm-attribute {
+  color: #6f42c1;
+
+}
+
+.itellyou-engine .cm-s-default .cm-hr,
+.itellyou-engine-view .cm-s-default .cm-hr {
+  color: #999;
+
+}
+
+.itellyou-engine .cm-s-default .cm-link,
+.itellyou-engine-view .cm-s-default .cm-link {
+  color: #00c;
+
+}
+
+.itellyou-engine .cm-s-default .cm-error,
+.itellyou-engine-view .cm-s-default .cm-error {
+  color: #f00;
+
+}
+
+.itellyou-engine .cm-invalidchar,
+.itellyou-engine-view .cm-invalidchar {
+  color: #f00;
+
+}
+
+.itellyou-engine .cm-s-default .cm-operator,
+.itellyou-engine-view .cm-s-default .cm-operator {
+  color: #d73a49;
+
+}
+
+.itellyou-engine .cm-s-default .cm-property,
+.itellyou-engine-view .cm-s-default .cm-property {
+  color: #005cc5;
+
+}
+
+.itellyou-engine .CodeMirror-composing,
+.itellyou-engine-view .CodeMirror-composing {
+  border-bottom: 2px solid;
+
+}
+
+.itellyou-engine div.CodeMirror span.CodeMirror-matchingbracket,
+.itellyou-engine-view div.CodeMirror span.CodeMirror-matchingbracket {
+  color: #0b0;
+
+}
+
+.itellyou-engine div.CodeMirror span.CodeMirror-nonmatchingbracket,
+.itellyou-engine-view div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: #a22;
+
+}
+
+.itellyou-engine .CodeMirror-matchingtag,
+.itellyou-engine-view .CodeMirror-matchingtag {
+  background: rgba(255, 150, 0, 0.3);
+
+}
+
+.itellyou-engine .CodeMirror-activeline-background,
+.itellyou-engine-view .CodeMirror-activeline-background {
+  background: transparent;
+
+}
+
+.itellyou-engine .CodeMirror,
+.itellyou-engine-view .CodeMirror {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  background: transparent;
+
+}
+
+.itellyou-engine .CodeMirror-scroll,
+.itellyou-engine-view .CodeMirror-scroll {
+  overflow: scroll !important;
+
+  /* Things will break if this is overridden */
+
+  /* 30px is the magic margin used to hide the element's real scrollbars */
+
+  /* See overflow: hidden in .CodeMirror */
+  margin-bottom: -30px;
+  margin-right: -30px;
+  padding-bottom: 30px;
+  outline: none;
+
+  /* Prevent dragging from highlighting the element */
+  position: relative;
+
+}
+
+.itellyou-engine .CodeMirror-sizer,
+.itellyou-engine-view .CodeMirror-sizer {
+  position: relative;
+  border-right: 30px solid transparent;
+  min-height: auto !important;
+
+}
+
+.itellyou-engine .CodeMirror-vscrollbar,
+.itellyou-engine-view .CodeMirror-vscrollbar,
+.itellyou-engine .CodeMirror-hscrollbar,
+.itellyou-engine-view .CodeMirror-hscrollbar,
+.itellyou-engine .CodeMirror-scrollbar-filler,
+.itellyou-engine-view .CodeMirror-scrollbar-filler,
+.itellyou-engine .CodeMirror-gutter-filler,
+.itellyou-engine-view .CodeMirror-gutter-filler {
+  position: absolute;
+  z-index: 6;
+  display: none;
+
+}
+
+.itellyou-engine .CodeMirror-vscrollbar,
+.itellyou-engine-view .CodeMirror-vscrollbar {
+  right: 0;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: none !important;
+
+}
+
+.itellyou-engine .CodeMirror-hscrollbar,
+.itellyou-engine-view .CodeMirror-hscrollbar {
+  bottom: 0;
+  left: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  display: none !important;
+
+}
+
+.itellyou-engine .CodeMirror-scrollbar-filler,
+.itellyou-engine-view .CodeMirror-scrollbar-filler {
+  right: 0;
+  bottom: 0;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-filler,
+.itellyou-engine-view .CodeMirror-gutter-filler {
+  left: 0;
+  bottom: 0;
+
+}
+
+.itellyou-engine .CodeMirror-gutters,
+.itellyou-engine-view .CodeMirror-gutters {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  z-index: 3;
+  background: #f9f9f9;
+
+}
+
+.itellyou-engine .CodeMirror-gutter,
+.itellyou-engine-view .CodeMirror-gutter {
+  white-space: normal;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: -30px;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-wrapper,
+.itellyou-engine-view .CodeMirror-gutter-wrapper {
+  position: absolute;
+  z-index: 4;
+  background: none !important;
+  border: none !important;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-background,
+.itellyou-engine-view .CodeMirror-gutter-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-elt,
+.itellyou-engine-view .CodeMirror-gutter-elt {
+  position: absolute;
+  cursor: default;
+  z-index: 4;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-wrapper ::-moz-selection,
+.itellyou-engine-view .CodeMirror-gutter-wrapper ::-moz-selection {
+  background-color: transparent;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-wrapper ::selection,
+.itellyou-engine-view .CodeMirror-gutter-wrapper ::selection {
+  background-color: transparent;
+
+}
+
+.itellyou-engine .CodeMirror-gutter-wrapper ::-moz-selection,
+.itellyou-engine-view .CodeMirror-gutter-wrapper ::-moz-selection {
+  background-color: transparent;
+
+}
+
+.itellyou-engine .CodeMirror-lines,
+.itellyou-engine-view .CodeMirror-lines {
+  cursor: text;
+  min-height: 1px;
+
+  /* prevents collapsing before first draw */
+
+}
+
+.itellyou-engine .CodeMirror pre,
+.itellyou-engine-view .CodeMirror pre {
+
+  /* Reset some styles that the rest of the page might have set */
+  border-radius: 0;
+  border-width: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+  line-height: inherit;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+  font-variant-ligatures: contextual;
+
+}
+
+.itellyou-engine .CodeMirror-wrap pre,
+.itellyou-engine-view .CodeMirror-wrap pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+
+}
+
+.itellyou-engine .CodeMirror-linebackground,
+.itellyou-engine-view .CodeMirror-linebackground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+
+}
+
+.itellyou-engine .CodeMirror-linewidget,
+.itellyou-engine-view .CodeMirror-linewidget {
+  position: relative;
+  z-index: 2;
+  padding: 0.1px;
+
+  /* Force widget margins to stay inside of the container */
+
+}
+
+.itellyou-engine .CodeMirror-rtl pre,
+.itellyou-engine-view .CodeMirror-rtl pre {
+  direction: rtl;
+
+}
+
+.itellyou-engine .CodeMirror-code,
+.itellyou-engine-view .CodeMirror-code {
+  outline: none;
+
+}
+
+.itellyou-engine .CodeMirror-scroll,
+.itellyou-engine-view .CodeMirror-scroll,
+.itellyou-engine .CodeMirror-sizer,
+.itellyou-engine-view .CodeMirror-sizer,
+.itellyou-engine .CodeMirror-gutter,
+.itellyou-engine-view .CodeMirror-gutter,
+.itellyou-engine .CodeMirror-gutters,
+.itellyou-engine-view .CodeMirror-gutters,
+.itellyou-engine .CodeMirror-linenumber,
+.itellyou-engine-view .CodeMirror-linenumber {
+  box-sizing: content-box;
+
+}
+
+.itellyou-engine .CodeMirror-measure,
+.itellyou-engine-view .CodeMirror-measure {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+
+}
+
+.itellyou-engine .CodeMirror-cursor,
+.itellyou-engine-view .CodeMirror-cursor {
+  position: absolute;
+  pointer-events: none;
+
+}
+
+.itellyou-engine .CodeMirror-measure pre,
+.itellyou-engine-view .CodeMirror-measure pre {
+  position: static;
+
+}
+
+.itellyou-engine div.CodeMirror-cursors,
+.itellyou-engine-view div.CodeMirror-cursors {
+  visibility: hidden;
+  position: relative;
+  z-index: 3;
+
+}
+
+.itellyou-engine div.CodeMirror-dragcursors,
+.itellyou-engine-view div.CodeMirror-dragcursors {
+  visibility: visible;
+
+}
+
+.itellyou-engine .CodeMirror-focused div.CodeMirror-cursors,
+.itellyou-engine-view .CodeMirror-focused div.CodeMirror-cursors {
+  visibility: visible;
+
+}
+
+.itellyou-engine .CodeMirror-selected,
+.itellyou-engine-view .CodeMirror-selected {
+  background: #e8e8e8;
+
+}
+
+.itellyou-engine .CodeMirror-focused .CodeMirror-selected,
+.itellyou-engine-view .CodeMirror-focused .CodeMirror-selected {
+  background: #b3d7fd;
+
+}
+
+.itellyou-engine .CodeMirror-crosshair,
+.itellyou-engine-view .CodeMirror-crosshair {
+  cursor: crosshair;
+
+}
+
+.itellyou-engine .CodeMirror-line::-moz-selection,
+.itellyou-engine-view .CodeMirror-line::-moz-selection,
+.itellyou-engine .CodeMirror-line > span::-moz-selection,
+.itellyou-engine-view .CodeMirror-line > span::-moz-selection,
+.itellyou-engine .CodeMirror-line > span > span::-moz-selection,
+.itellyou-engine-view .CodeMirror-line > span > span::-moz-selection {
+  background: #b3d7fd;
+
+}
+
+.itellyou-engine .CodeMirror-line::selection,
+.itellyou-engine-view .CodeMirror-line::selection,
+.itellyou-engine .CodeMirror-line > span::selection,
+.itellyou-engine-view .CodeMirror-line > span::selection,
+.itellyou-engine .CodeMirror-line > span > span::selection,
+.itellyou-engine-view .CodeMirror-line > span > span::selection {
+  background: #b3d7fd;
+
+}
+
+.itellyou-engine .CodeMirror-line::-moz-selection,
+.itellyou-engine-view .CodeMirror-line::-moz-selection,
+.itellyou-engine .CodeMirror-line > span::-moz-selection,
+.itellyou-engine-view .CodeMirror-line > span::-moz-selection,
+.itellyou-engine .CodeMirror-line > span > span::-moz-selection,
+.itellyou-engine-view .CodeMirror-line > span > span::-moz-selection {
+  background: #b3d7fd;
+
+}
+
+.itellyou-engine .cm-searching,
+.itellyou-engine-view .cm-searching {
+  background-color: #ffa;
+  background-color: rgba(255, 255, 0, 0.4);
+
+}
+
+.itellyou-engine .cm-force-border,
+.itellyou-engine-view .cm-force-border {
+  padding-right: 0.1px;
+
+}
+
+@media print {
+
+  /* .itellyou-engine,
+   .itellyou-engine-view { */
+  /* Hide the cursor when printing */
+  /* } */
+  .itellyou-engine .CodeMirror div.CodeMirror-cursors,
+  .itellyou-engine-view .CodeMirror div.CodeMirror-cursors {
+    visibility: hidden;
+
+  }
+
+
+}
+
+.itellyou-engine .cm-tab-wrap-hack:after,
+.itellyou-engine-view .cm-tab-wrap-hack:after {
+  content: '';
+
+}
+
+.itellyou-engine span.CodeMirror-selectedtext,
+.itellyou-engine-view span.CodeMirror-selectedtext {
+  background: none;
+
+}
+
+.itellyou-engine-view .itellyou-codeblock {
+  margin: 5px 0;
+
+}
+
+.itellyou-engine-view .CodeMirror {
+  padding: 16px;
+  overflow: initial;
+
+}
+
+.itellyou-engine-view .CodeMirror pre {
+  padding: 0;
+
+}
+
+.itellyou-content-editor .itellyou-engine .itellyou-codeblock .CodeMirror-lines {
+  min-height: 40px;
+
+}

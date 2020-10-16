@@ -1,0 +1,15 @@
+export default {
+  title: '加密文本',
+  lock: '锁住',
+  setPassword: '设置密码',
+  unlock: '解锁',
+  lockInputPlaceholder: '建议设置 6 位以上',
+  lockInputTitle: '设置密码 (谨慎保管，丢失后无法找回)：',
+  passwordPattern: '密码仅支持：数字、字母及常见符号',
+  unlockInputPlaceholder: '请输入密码',
+  ok: '确认',
+  cancel: '取消',
+  errorFeedback: '密码有误',
+  lockedFeedback: '密码出错超过 5 次，请 1 分钟后再尝试',
+  contentFeedback: '请在加密Section中输入内容',
+};

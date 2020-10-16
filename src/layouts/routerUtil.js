@@ -4,22 +4,32 @@ import { Route } from 'react-router-dom';
 
 /**
  * 渲染路由组件
- * @param item
+ * @param config
+ * @param parentPath
  * @returns {*}
  */
-const renderNormalRoute = (item) => {
-  if (item && item.children && item.children.length > 0) {
-    return item.children.map(child => (
-      <Route
-        key={item.path === '/' ? child.path : item.path + child.path}
-        path={item.path === '/' ? child.path : item.path + child.path}
-        component={child.component}
-        exact
-      />
-    ));
-  }
-  return (
-    <Route key={item.path} path={item.path} component={item.component} exact={item.exact} />);
+const renderNormalRoute = (config, parentPath) => {
+  if (!config || !config.length) return [];
+  let routerList = [];
+  config.forEach((item) => {
+    let path = item.path;
+    if (!path) {
+      return;
+    }
+    if (item.component) {
+      if (parentPath) {
+        path = parentPath + path;
+      }
+      const exact = (item.children && item.children.length > 0) || item.exact;
+      routerList.push(
+        <Route path={path} component={item.component} exact={exact} key={path} />
+      );
+    }
+    if (item.children && item.children.length) {
+      routerList = routerList.concat(renderNormalRoute(item.children, path));
+    }
+  });
+  return routerList;
 };
 
 export { renderNormalRoute };

@@ -1,0 +1,26 @@
+export default {
+  'zh-cn': {
+    text: '\u6587\u672c',
+    link: '\u94fe\u63a5',
+    editLink: '\u7f16\u8f91\u94fe\u63a5',
+    addDescription: '\u6dfb\u52a0\u63cf\u8ff0',
+    linkAddress: '\u94fe\u63a5\u5730\u5740',
+    deleteLink: '\u5220\u9664\u94fe\u63a5',
+    confirm: '\u786e\u5b9a',
+    pleaseInputLink: '\u8bf7\u8f93\u5165\u94fe\u63a5',
+    emptyLink: '\u7a7a\u94fe\u63a5',
+    pleaseEnterCorrectLink: '\u8bf7\u8f93\u5165\u6b63\u786e\u7684\u94fe\u63a5',
+  },
+  en: {
+    text: 'Text',
+    link: 'Link',
+    editLink: 'Edit link',
+    addDescription: 'Add a description',
+    linkAddress: 'Link address',
+    deleteLink: 'Delete link',
+    confirm: 'Confirm',
+    pleaseInputLink: 'Please input link address',
+    emptyLink: 'Empty link',
+    pleaseEnterCorrectLink: 'Please enter the correct link',
+  },
+};

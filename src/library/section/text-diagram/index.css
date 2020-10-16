@@ -1,0 +1,187 @@
+.itellyou-section-block-max .itellyou-text-diagram {
+  height: 100%;
+  background: #fff;
+
+}
+
+.itellyou-section-block-max .itellyou-text-diagram .diagram-preview {
+  display: none;
+
+}
+
+.itellyou-text-diagram-stage {
+  position: relative;
+  border-radius: 2px;
+  font-size: 14px;
+  border: 1px solid #e8e8e8;
+
+}
+
+.itellyou-text-diagram-stage ul {
+  list-style: none;
+  margin: 0;
+
+}
+
+.itellyou-text-diagram-stage li {
+  margin: 0;
+
+}
+
+.itellyou-text-diagram-nav {
+  border-bottom: 1px solid #e8e8e8;
+  line-height: 24px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #595959;
+
+}
+
+.itellyou-text-diagram-nav a,
+.itellyou-text-diagram-nav a:hover {
+  color: #595959;
+
+}
+
+.itellyou-text-diagram-nav .diagram-name {
+  font-weight: bold;
+
+}
+
+.itellyou-text-diagram-nav .diagram-template-selector,
+.itellyou-text-diagram-nav .diagram-help {
+  margin-right: 24px;
+
+}
+
+.itellyou-text-diagram-nav .diagram-actions {
+  float: right;
+
+}
+
+.itellyou-text-diagram-nav .diagram-actions .diagram-preview {
+  background: none;
+  border: 1px solid #fff;
+  height: 24px;
+  cursor: pointer;
+  line-height: 22px;
+
+}
+
+.itellyou-text-diagram-nav .diagram-actions .diagram-preview .anticon {
+  margin-right: 4px;
+
+}
+
+.itellyou-text-diagram-nav .diagram-actions .diagram-preview:focus {
+  outline: none;
+
+}
+
+.itellyou-text-diagram-nav .diagram-actions .diagram-preview-active {
+  border: 1px solid #e8e8e8;
+  border-radius: 2px;
+  background: #f5f5f5;
+
+}
+
+.itellyou-text-diagram-editor {
+  overflow: auto;
+  font-size: 12px;
+  background-color: #f9f9f9;
+
+}
+
+.itellyou-text-diagram-layout-default .itellyou-text-diagram-editor-wrap {
+  position: relative;
+  max-height: 480px;
+
+}
+
+.itellyou-text-diagram-layout-default .itellyou-text-diagram-preview {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+
+}
+
+.itellyou-text-diagram-layout-default .itellyou-text-diagram-editor {
+
+  min-height: 80px;
+
+  max-height: 480px;
+
+}
+
+.itellyou-text-diagram-preview {
+  position: relative;
+
+}
+
+.itellyou-text-diagram-preview pre {
+  margin: 16px;
+
+}
+
+.itellyou-text-diagram-preview .itellyou-icon-loading {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: calc(50% - 22px);
+  left: 50%;
+  text-align: center;
+  color: #666;
+  font-size: 36px;
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s linear;
+  -webkit-animation: loading 0.8s linear infinite;
+  animation: loading 0.8s linear infinite;
+
+}
+
+.itellyou-text-diagram-layout-two-column {
+  height: 100%;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
+
+}
+
+.itellyou-text-diagram-layout-two-column .itellyou-text-diagram-nav {
+  position: absolute;
+  padding-left: 18px;
+  top: 0;
+  width: 100%;
+
+}
+
+.itellyou-text-diagram-layout-two-column .itellyou-text-diagram-editor-wrap {
+  width: 100%;
+  height: 100%;
+  padding-top: 33px;
+  overflow: auto;
+  display: flex;
+
+}
+
+.itellyou-text-diagram-layout-two-column .itellyou-text-diagram-editor {
+  height: 100% !important;
+  max-height: unset;
+  width: 50%;
+
+}
+
+.itellyou-text-diagram-layout-two-column .itellyou-text-diagram-preview {
+  height: 100%;
+  width: 50%;
+  overflow: auto;
+  border-left: 1px solid #e8e8e8;
+  padding: 12px;
+
+}

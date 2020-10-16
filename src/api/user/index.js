@@ -27,26 +27,6 @@ export const PageListUserApi = params => axios.get('/ajax/user/management/pageLi
 export const ListRoleApi = () => axios.get('/ajax/user/management/listRole')
   .then(res => res.data);
 
-
-/**
- * 编辑用户
- * @param params
- * @returns {Promise<AxiosResponse<any>>}
- * @constructor
- */
-export const ModifyUserInfoApi = params => axios.post('/ajax/user/management/modifyUserInfo', params)
-  .then(res => res.data);
-
-/**
- * 创建用户
- * @param params
- * @returns {Promise<AxiosResponse<any>>}
- * @constructor
- */
-export const AddUserApi = params => axios.post('/ajax/user/management/addUser', params)
-  .then(res => res.data);
-
-
 /**
  * 获取用户列表（用户名，ID， 昵称）
  * @param params

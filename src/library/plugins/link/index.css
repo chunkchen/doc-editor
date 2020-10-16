@@ -1,0 +1,92 @@
+.itellyou-link-editor {
+  max-width: 398px;
+  display: inline-block;
+  border: 1px solid #E8E8E8;
+  border-radius: 4px;
+  box-shadow: rgba(221, 221, 221, 0.5) 0px 1px 3px;
+  background: white;
+}
+
+.itellyou-link-editor .itellyou-link-invalid-link {
+  color: #CF1322;
+}
+
+.itellyou-link-editor p {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.itellyou-link-editor .itellyou-link-editor-slash {
+  margin: 0 2px;
+}
+
+.itellyou-link-editor .itellyou-link-editor-slash {
+  width: 1px;
+  height: 14px;
+  border-left: 1px solid #E8E8E8;
+  margin: 0 1px;
+  margin-top: 5px;
+  vertical-align: top;
+}
+
+.itellyou-link-editor .itellyou-icon {
+  color: #8590A6;
+  font-size: 16px;
+}
+
+.itellyou-link-editor-preview {
+  line-height: 16px;
+  padding: 6px 8px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.itellyou-link-editor-preview * {
+  display: inline-block;
+}
+
+.itellyou-link-editor-preview .itellyou-link-editor-button {
+  color: #595959;
+  margin: 0px 0px 0px 8px;
+  padding: 4px;
+}
+
+.itellyou-link-editor-preview .itellyou-link-editor-button:hover {
+  background: #F4F4F4;
+  cursor: pointer;
+}
+
+.itellyou-link-editor-preview .itellyou-link-editor-link-container {
+  color: #1890FF;
+  height: 16px;
+  padding: 0 6px;
+  min-width: 180px;
+  max-width: 292px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 12px;
+  font-size: 14px;
+  letter-spacing: 1.2px;
+  vertical-align: middle;
+}
+
+.itellyou-link-editor-preview .itellyou-link-editor-link-empty {
+  height: 16px;
+  padding: 0 6px;
+  min-width: 146px;
+  max-width: 292px;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.itellyou-link-editor-preview .itellyou-link-editor-link-container:hover {
+  cursor: pointer;
+}
+
+.itellyou-link-editor-edit {
+  width: 365px;
+  padding: 16px 12px;
+  padding-bottom: 4px;
+}
