@@ -262,26 +262,26 @@ class ControllBar extends EventEmitter2 {
       this.unBindDragColEvent();
       if (!this.colDragging || this.dropCol === undefined) return;
       const { command, selection } = this.section;
-      const { col_min, col_max } = selection.normalizeArea();
+      const { colMin, colMax } = selection.normalizeArea();
       const colBars = this.section.container.find(this.section.template.COLS_HEADER_ITEM_CLASS);
       const widths = [];
-      for (let c = col_min; c <= col_max; c++) {
+      for (let c = colMin; c <= colMax; c++) {
         widths.push(colBars[c].offsetWidth);
       }
       const dragCount = selection.colCount();
       command.mockCopy();
-      if (col_min > this.dropCol) {
+      if (colMin > this.dropCol) {
         command.insertColAt(this.dropCol, dragCount, false, true, widths);
         selection.selectCols(this.dropCol, this.dropCol + dragCount - 1);
         command.mockPaste(true);
-        selection.selectCols(col_min + dragCount, col_max + dragCount);
+        selection.selectCols(colMin + dragCount, colMax + dragCount);
         command.removeCol();
         selection.selectCols(this.dropCol, this.dropCol + dragCount - 1);
       } else {
         command.insertColAt(this.dropCol, dragCount, false, true, widths);
         selection.selectCols(this.dropCol, this.dropCol + dragCount - 1);
         command.mockPaste(true);
-        selection.selectCols(col_min, col_max);
+        selection.selectCols(colMin, colMax);
         command.removeCol();
         selection.selectCols(this.dropCol - dragCount, this.dropCol - 1);
       }
@@ -294,20 +294,20 @@ class ControllBar extends EventEmitter2 {
       this.unBindDragRowEvent();
       if (!this.rowDragging || this.dropRow === undefined) return;
       const { command, selection } = this.section;
-      const { row_min, row_max } = selection.normalizeArea();
+      const { rowMin, rowMax } = selection.normalizeArea();
       command.mockCopy();
-      if (row_min > this.dropRow) {
+      if (rowMin > this.dropRow) {
         command.insertRowAt(this.dropRow, this.dragCount, false, true);
         selection.selectRows(this.dropRow, this.dropRow + this.dragCount - 1);
         command.mockPaste(true);
-        selection.selectRows(row_min + this.dragCount, row_max + this.dragCount);
+        selection.selectRows(rowMin + this.dragCount, rowMax + this.dragCount);
         command.removeRow();
         selection.selectRows(this.dropRow, this.dropRow + this.dragCount - 1);
       } else {
         command.insertRowAt(this.dropRow, this.dragCount, false, true);
         selection.selectRows(this.dropRow, this.dropRow + this.dragCount - 1);
         command.mockPaste(true);
-        selection.selectRows(row_min, row_max);
+        selection.selectRows(rowMin, rowMax);
         command.removeRow();
         selection.selectRows(this.dropRow - this.dragCount, this.dropRow - 1);
       }
@@ -352,14 +352,14 @@ class ControllBar extends EventEmitter2 {
       if (!area || !area.total_col) return;
       const colBar = $(e.target).closest(this.section.template.COLS_HEADER_ITEM_CLASS);
       if (!colBar[0]) return;
-      const drag_col = colBar.index();
-      const { col_min, col_max } = this.section.selection.normalizeArea();
-      if (drag_col < col_min || drag_col > col_max) return;
+      const dragCol = colBar.index();
+      const { colMin, colMax } = this.section.selection.normalizeArea();
+      if (dragCol < colMin || dragCol > colMax) return;
       this.colDragging = true;
       this.dragBar = colBar;
       this.colDraggingIndex = {
-        col_min,
-        col_max,
+        colMin,
+        colMax,
       };
       this.dragCount = this.section.selection.colCount();
       this.dragBar.addClass('dragging');
@@ -375,15 +375,15 @@ class ControllBar extends EventEmitter2 {
       if (!area || !area.total_row) return;
       const rowBar = $(e.target).closest(this.section.template.ROWS_HEADER_ITEM_CLASS);
       if (!rowBar[0]) return;
-      const drag_row = rowBar.index();
+      const dragRow = rowBar.index();
 
-      const { row_min, row_max } = this.section.selection.normalizeArea();
-      if (drag_row < row_min || drag_row > row_max) return;
+      const { rowMin, rowMax } = this.section.selection.normalizeArea();
+      if (dragRow < rowMin || dragRow > rowMax) return;
       this.rowDragging = true;
       this.dragBar = rowBar;
       this.rowDraggingIndex = {
-        row_min,
-        row_max,
+        rowMin,
+        rowMax,
       };
       this.dragCount = this.section.selection.rowCount();
       this.dragBar.addClass('dragging');
@@ -403,8 +403,8 @@ class ControllBar extends EventEmitter2 {
           const col = colHeader.index();
           let currentColSelected = false;
           if (selection.area && selection.area.total_col) {
-            const { col_min, col_max } = selection.normalizeArea();
-            if (col >= col_min && col <= col_max) {
+            const { colMin, colMax } = selection.normalizeArea();
+            if (col >= colMin && col <= colMax) {
               currentColSelected = true;
             }
           }
@@ -442,8 +442,8 @@ class ControllBar extends EventEmitter2 {
           const row = rowHeader.index();
           let currentRowSelected = false;
           if (selection.area && selection.area.total_row) {
-            const { row_min, row_max } = selection.normalizeArea();
-            if (row >= row_min && row <= row_max) {
+            const { rowMin, rowMax } = selection.normalizeArea();
+            if (row >= rowMin && row <= rowMax) {
               currentRowSelected = true;
             }
           }
@@ -600,8 +600,8 @@ class ControllBar extends EventEmitter2 {
       const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
       const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
       const { total_col, total_row, total_table } = area;
-      const { row_min, row_max, col_min, col_max } = selection.normalizeArea();
-      for (let r = row_min; r <= row_max; r++) {
+      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
+      for (let r = rowMin; r <= rowMax; r++) {
         $(rowBars[r]).addClass('active');
         if (total_row || total_table) {
           $(rowBars[r]).addClass('selected');
@@ -612,7 +612,7 @@ class ControllBar extends EventEmitter2 {
         }
       }
 
-      for (let c = col_min; c <= col_max; c++) {
+      for (let c = colMin; c <= colMax; c++) {
         $(colBars[c]).addClass('active');
         if (total_col || total_table) {
           $(colBars[c]).addClass('selected');
@@ -621,7 +621,7 @@ class ControllBar extends EventEmitter2 {
           $(colBars[c]).addClass('no-dragger');
         }
       }
-      const table_select = row_min === 0 && row_max === tableModel.rows - 1 && col_min === 0 && col_max === tableModel.cols - 1;
+      const table_select = rowMin === 0 && rowMax === tableModel.rows - 1 && colMin === 0 && colMax === tableModel.cols - 1;
       if (table_select) {
         this.tableHeader.addClass('selected');
       } else {

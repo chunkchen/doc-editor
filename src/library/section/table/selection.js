@@ -59,9 +59,9 @@ class Selection extends EventEmitter2 {
         this.renderActiveBox();
         return;
       }
-      const { row_min, row_max, col_min, col_max } = this.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = this.normalizeArea();
       if (mode === 'contextmenu') {
-        if (row_min <= row && row <= row_max && col_min <= col && col <= col_max) {
+        if (rowMin <= row && row <= rowMax && colMin <= col && col <= colMax) {
           return;
         }
         this.area = hoverArea;
@@ -87,19 +87,19 @@ class Selection extends EventEmitter2 {
           break;
 
         case 'drag_n':
-          this.row_base = this.row_base !== undefined ? this.row_base : row_max;
+          this.row_base = this.row_base !== undefined ? this.row_base : rowMax;
           break;
 
         case 'drag_s':
-          this.row_base = this.row_base !== undefined ? this.row_base : row_min;
+          this.row_base = this.row_base !== undefined ? this.row_base : rowMin;
           break;
 
         case 'drag_w':
-          this.col_base = this.col_base !== undefined ? this.col_base : col_max;
+          this.col_base = this.col_base !== undefined ? this.col_base : colMax;
           break;
 
         case 'drag_e':
-          this.col_base = this.col_base !== undefined ? this.col_base : col_min;
+          this.col_base = this.col_base !== undefined ? this.col_base : colMin;
           break;
 
         default:
@@ -182,12 +182,9 @@ class Selection extends EventEmitter2 {
       const { table } = tableModel;
       if (!area) return false;
 
-      const { row_min, row_max, col_min, col_max } = this.normalizeArea();
-      const firstTd = table[row_min][col_min];
-      if (row_min + firstTd.rowSpan - 1 === row_max && col_min + firstTd.colSpan - 1 === col_max) {
-        return true;
-      }
-      return false;
+      const { rowMin, rowMax, colMin, colMax } = this.normalizeArea();
+      const firstTd = table[rowMin][colMin];
+      return firstTd && (rowMin + firstTd.rowSpan - 1 === rowMax) && (colMin + firstTd.colSpan - 1 === colMax);
     };
 
     this.hasMergeCell = () => {
@@ -207,10 +204,10 @@ class Selection extends EventEmitter2 {
       const { tableModel, area } = this;
       const { table } = tableModel;
       if (!area) return null;
-      const { row_max, col_max } = this.normalizeArea();
-      let td = table[row_max][col_max];
-      let row = row_max;
-      let col = col_max;
+      const { rowMax, colMax } = this.normalizeArea();
+      let td = table[rowMax][colMax];
+      let row = rowMax;
+      let col = colMax;
 
       if (td.isEmpty) {
         td = table[td.parent.row][td.parent.col];
@@ -221,8 +218,8 @@ class Selection extends EventEmitter2 {
       return {
         row,
         col,
-        row2: row_max,
-        col2: col_max,
+        row2: rowMax,
+        col2: colMax,
       };
     };
 
@@ -231,13 +228,13 @@ class Selection extends EventEmitter2 {
       const { table } = tableModel;
       if (!area) return null;
 
-      const { row_min, col_min } = this.normalizeArea();
-      const td = table[row_min][col_min];
+      const { rowMin, colMin } = this.normalizeArea();
+      const td = table[rowMin][colMin];
       return {
-        row: row_min,
-        col: col_min,
-        row2: row_min + td.rowSpan - 1,
-        col2: col_min + td.colSpan - 1,
+        row: rowMin,
+        col: colMin,
+        row2: rowMin + td.rowSpan - 1,
+        col2: colMin + td.colSpan - 1,
       };
     };
 
@@ -320,11 +317,11 @@ class Selection extends EventEmitter2 {
       const { area, tableModel } = this;
       if (!area) return;
 
-      const { row_min, col_min } = this.normalizeArea();
-      let new_row = this.from_row || row_min;
-      let new_col = Math.max(col_min - 1, 0);
+      const { rowMin, colMin } = this.normalizeArea();
+      let new_row = this.from_row || rowMin;
+      let new_col = Math.max(colMin - 1, 0);
       this.from_row = this.from_row || new_row;
-      if (col_min === 0 && isTab && new_row > 0) {
+      if (colMin === 0 && isTab && new_row > 0) {
         new_col = tableModel.cols - 1;
         new_row -= 1;
         this.from_row = new_row;
@@ -337,12 +334,12 @@ class Selection extends EventEmitter2 {
       if (this.section.subEngine) return;
       const { area, tableModel } = this;
       if (!area) return;
-      const { row_min, col_max } = this.normalizeArea();
-      let new_row = this.from_row || row_min;
-      let new_col = Math.min(col_max + 1, tableModel.cols - 1);
+      const { rowMin, colMax } = this.normalizeArea();
+      let new_row = this.from_row || rowMin;
+      let new_col = Math.min(colMax + 1, tableModel.cols - 1);
       this.from_row = this.from_row || new_row;
 
-      if (col_max + 1 === tableModel.cols && isTab) {
+      if (colMax + 1 === tableModel.cols && isTab) {
         new_col = 0;
         new_row += 1;
         if (new_row === tableModel.rows) {
@@ -358,10 +355,10 @@ class Selection extends EventEmitter2 {
       if (this.section.subEngine) return;
       const { area } = this;
       if (!area) return;
-      const { row_min, col_min } = this.normalizeArea();
-      const new_row = Math.max(row_min - 1, 0);
-      const new_col = this.from_col || col_min;
-      this.from_col = this.from_col || col_min;
+      const { rowMin, colMin } = this.normalizeArea();
+      const new_row = Math.max(rowMin - 1, 0);
+      const new_col = this.from_col || colMin;
+      this.from_col = this.from_col || colMin;
       delete this.from_row;
       this.selectTd(new_row, new_col);
     };
@@ -370,10 +367,10 @@ class Selection extends EventEmitter2 {
       if (this.section.subEngine) return;
       const { area, tableModel } = this;
       if (!area) return;
-      const { row_max, col_min } = this.normalizeArea();
-      const new_row = Math.min(row_max + 1, tableModel.rows - 1);
-      const new_col = this.from_col || col_min;
-      this.from_col = this.from_col || col_min;
+      const { rowMax, colMin } = this.normalizeArea();
+      const new_row = Math.min(rowMax + 1, tableModel.rows - 1);
+      const new_col = this.from_col || colMin;
+      this.from_col = this.from_col || colMin;
       delete this.from_row;
       this.selectTd(new_row, new_col);
     };
@@ -444,14 +441,14 @@ class Selection extends EventEmitter2 {
       if (!area) return;
       this.single = this.isSingleArea();
       const table = tableModel.table;
-      const { row_min, row_max, col_min, col_max } = this.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = this.normalizeArea();
       let left;
       let top;
       let width;
       let height;
 
       if (this.single) {
-        const td = table[row_min][col_min].element;
+        const td = table[rowMin][colMin].element;
         left = td.offsetLeft;
         top = td.parentNode.offsetTop;
         width = td.offsetWidth;
@@ -459,10 +456,10 @@ class Selection extends EventEmitter2 {
       } else {
         const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
         const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
-        left = colBars[col_min].offsetLeft;
-        top = rowBars[row_min].offsetTop;
-        width = colBars[col_max].offsetLeft - left + colBars[col_max].offsetWidth;
-        height = rowBars[row_max].offsetTop - top + rowBars[row_max].offsetHeight;
+        left = colBars[colMin].offsetLeft;
+        top = rowBars[rowMin].offsetTop;
+        width = colBars[colMax].offsetLeft - left + colBars[colMax].offsetWidth;
+        height = rowBars[rowMax].offsetTop - top + rowBars[rowMax].offsetHeight;
 
         /** const tdLeft = table[0][col_min].element.offsetLeft
          const tdTop = table[row_min][0].element.offsetTop
@@ -483,7 +480,7 @@ class Selection extends EventEmitter2 {
       this.areaLeft = left;
       this.areaTop = top;
       this.reRenderSubEditor();
-      this.td = this.single ? table[row_min][col_min].element : null;
+      this.td = this.single ? table[rowMin][colMin].element : null;
     };
 
     this.showActiveBox = (left, top, height, width, actionPreview) => {
@@ -739,21 +736,21 @@ class Selection extends EventEmitter2 {
       const col_min = Math.min(col, col2);
       const col_max = Math.max(col, col2);
       return {
-        row_min,
-        row_max,
-        col_min,
-        col_max,
+        rowMin: row_min,
+        rowMax: row_max,
+        colMin: col_min,
+        colMax: col_max,
       };
     };
 
     this.getEffectRows = () => {
       if (!this.area) return;
-      const { row_min, row_max } = this.normalizeArea();
+      const { rowMin, rowMax } = this.normalizeArea();
       const table = this.tableModel.table;
-      let row_min_min = row_min;
-      let row_max_max = row_max;
-      const trMin = table[row_min];
-      const trMax = table[row_max];
+      let row_min_min = rowMin;
+      let row_max_max = rowMax;
+      const trMin = table[rowMin];
+      const trMax = table[rowMax];
       trMin.forEach((td) => {
         if (td.isEmpty) {
           const parentRow = td.parent.row;
@@ -770,7 +767,7 @@ class Selection extends EventEmitter2 {
         }
 
         if (td.isMulti) {
-          row_max_max = Math.max(row_max_max, row_max + td.rowSpan - 1);
+          row_max_max = Math.max(row_max_max, rowMax + td.rowSpan - 1);
         }
       });
       return {
@@ -784,17 +781,17 @@ class Selection extends EventEmitter2 {
       const table = tableModel.table;
       if (!area) return;
 
-      const { row_min, row_max, col_min, col_max } = this.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = this.normalizeArea();
       if (reverse) {
-        for (let r = row_max; r >= row_min; r--) {
-          for (let c = col_max; c >= col_min; c--) {
+        for (let r = rowMax; r >= rowMin; r--) {
+          for (let c = colMax; c >= colMin; c--) {
             const tdModel = table[r][c];
             fn(tdModel, r, c);
           }
         }
       } else {
-        for (let _r = row_min; _r <= row_max; _r++) {
-          for (let _c = col_min; _c <= col_max; _c++) {
+        for (let _r = rowMin; _r <= rowMax; _r++) {
+          for (let _c = colMin; _c <= colMax; _c++) {
             const _tdModel = table[_r][_c];
             fn(_tdModel, _r, _c);
           }
@@ -851,12 +848,12 @@ class Selection extends EventEmitter2 {
       const table = tableModel.table;
       const tableRoot = section.tableRoot;
       if (!area) return null;
-      const { row_min, row_max, col_min, col_max } = this.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = this.normalizeArea();
       const colsEl = tableRoot.find('col');
       const cols = [];
       let tableWidth = 0;
 
-      for (let c = col_min; c <= col_max; c++) {
+      for (let c = colMin; c <= colMax; c++) {
         cols.push('<col width="'.concat(colsEl[c].width, '" />'));
         tableWidth += parseInt(colsEl[c].width);
       }
@@ -864,10 +861,10 @@ class Selection extends EventEmitter2 {
       const colgroup = '<colgroup>'.concat(cols.join(''), '</colgroup>');
       const trHtml = [];
 
-      for (let r = row_min; r <= row_max; r++) {
+      for (let r = rowMin; r <= rowMax; r++) {
         const tdHtml = [];
 
-        for (let _c2 = col_min; _c2 <= col_max; _c2++) {
+        for (let _c2 = colMin; _c2 <= colMax; _c2++) {
           const tdModel = table[r][_c2];
           let rowRemain;
           let colRemain;
@@ -879,24 +876,24 @@ class Selection extends EventEmitter2 {
 
           if (tdModel.isMulti) {
             // 合并单元格尾部被选区切断的情况，需要重新计算合并单元格的跨度
-            rowRemain = Math.min(r + tdModel.rowSpan - 1, row_max) - r + 1;
-            colRemain = Math.min(_c2 + tdModel.colSpan - 1, col_max) - _c2 + 1;
+            rowRemain = Math.min(r + tdModel.rowSpan - 1, rowMax) - r + 1;
+            colRemain = Math.min(_c2 + tdModel.colSpan - 1, colMax) - _c2 + 1;
           }
 
           if (tdModel.isEmpty) {
             const parentTd = table[tdModel.parent.row][tdModel.parent.col];
             // 选区中含有合并单元格的一部分时，需要补充这一部分的dom结构，这种情况只会出现在行列选择时
             // 列选择时，切断合并单元格后，第一个和父单元格同行，并在选取左测第一个列的位置，补充此单元格
-            if (tdModel.parent.row === r && tdModel.parent.col < col_min && _c2 === col_min) {
-              const colCut = col_min - tdModel.parent.col;
-              colRemain = Math.min(parentTd.colSpan - colCut, col_max - col_min + 1);
+            if (tdModel.parent.row === r && tdModel.parent.col < colMin && _c2 === colMin) {
+              const colCut = colMin - tdModel.parent.col;
+              colRemain = Math.min(parentTd.colSpan - colCut, colMax - colMin + 1);
               rowRemain = parentTd.rowSpan;
               tdClone = parentTd.element.cloneNode(true);
             }
             // 行选择时，切断合并单元格后，第一个和父单元格同列，并在选取上测第一个行的位置，补充此单元格
-            if (tdModel.parent.col === _c2 && tdModel.parent.row < row_min && r === row_min) {
-              const rowCut = row_min - tdModel.parent.row;
-              rowRemain = Math.min(parentTd.rowSpan - rowCut, row_max - row_min + 1);
+            if (tdModel.parent.col === _c2 && tdModel.parent.row < rowMin && r === rowMin) {
+              const rowCut = rowMin - tdModel.parent.row;
+              rowRemain = Math.min(parentTd.rowSpan - rowCut, rowMax - rowMin + 1);
               colRemain = parentTd.colSpan;
               tdClone = parentTd.element.cloneNode(true);
             }
@@ -946,12 +943,12 @@ class Selection extends EventEmitter2 {
     this.getTdByMaskXY = (x, y) => {
       const { tableModel } = this;
       const template = this.section.template;
-      const { row_min, col_min } = this.normalizeArea();
+      const { rowMin, colMin } = this.normalizeArea();
       // const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS)
       // const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS)
 
-      let row = row_min;
-      let col = col_min;
+      let row = rowMin;
+      let col = colMin;
       // let w = colBars[col].offsetWidth
       // let h = rowBars[row].offsetHeight
       let w = tableModel.table[0][col].element.offsetWidth;
@@ -980,13 +977,13 @@ class Selection extends EventEmitter2 {
       if (!area) {
         return;
       }
-      const { row_min, col_min } = this.normalizeArea();
+      const { rowMin, colMin } = this.normalizeArea();
       switch (action) {
         case 'removeRow':
-          this.selectRow(Math.min(row_min, tableModel.rows - 1));
+          this.selectRow(Math.min(rowMin, tableModel.rows - 1));
           break;
         case 'removeCol':
-          this.selectCol(Math.min(col_min, tableModel.cols - 1));
+          this.selectCol(Math.min(colMin, tableModel.cols - 1));
           break;
         default:
           this.renderActiveBox();

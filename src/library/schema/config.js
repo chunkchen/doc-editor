@@ -2,15 +2,15 @@ export default [
   'cursor', 'anchor', 'focus',
   {
     section: {
-      type: /^[\w\-]+$/,
-      name: /^[\w\-]+$/,
+      type: /^[\w\\-]+$/,
+      name: /^[\w\\-]+$/,
       value: '*',
       focus: ['true', 'false'],
     },
   },
   {
     span: {
-      class: /^lake-fontsize-\d+$|itellyou\-section\-[\w\-]{1,100}/,
+      class: /^lake-fontsize-\d+$|itellyou\\-section\\-[\w\\-]{1,100}/,
       style: {
         color: '@color',
         'background-color': '@color',
@@ -20,38 +20,38 @@ export default [
   'strong', 'em', 'del', 'u',
   {
     h1: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   {
     h2: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   {
     h3: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   {
     h4: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   {
     h5: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   {
     h6: {
-      id: /^[\w\.\-]+$/,
+      id: /^[\w\\.-]+$/,
     },
   },
   'p', 'hr', 'code', 'mark',
   {
     pre: {
-      'data-lang': /^[\w\.\-]+$/,
+      'data-lang': /^[\w\\.-]+$/,
     },
   },
   {
@@ -180,7 +180,7 @@ export default [
   },
   {
     iframe: {
-      src: /^https?:\/\/(?:riddle\.alibaba\-inc\.com|\w{0,100}\.youku\.com|\w{0,100}\.bilibili\.com)\//,
+      src: /^https?:\/\/(?:riddle\.alibaba\\-inc\.com|\w{0,100}\.youku\.com|\w{0,100}\.bilibili\.com)\//,
       height: '@number',
       frameborder: ['yes', 'no'],
       allowtransparency: ['true', 'false'],

@@ -138,8 +138,8 @@ class Command extends EventEmitter2 {
         count = selection.isSingleArea() ? 1 : selection.colCount();
 
         if (area) {
-          const { col_min, col_max } = selection.normalizeArea();
-          colBase = isLeft ? col_min : col_max;
+          const { colMin, colMax } = selection.normalizeArea();
+          colBase = isLeft ? colMin : colMax;
         }
       }
 
@@ -411,7 +411,7 @@ class Command extends EventEmitter2 {
       const table = tableModel.table;
       const trs = tableRoot.find('tr');
 
-      const { row_min, row_max, col_min, col_max } = selection.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
       // 注意这里用倒序，见 selection.each 方法的最后一个参数传的时 true
       // 因为是倒序，所有空位一定先转换为 td, 这样在补齐切断的单元格时，需要考虑插入时的偏移量
 
@@ -420,27 +420,27 @@ class Command extends EventEmitter2 {
           tdModel.element.colSpan = 1;
           tdModel.element.rowSpan = 1; // 切左上角
 
-          if (r + tdModel.rowSpan - 1 > row_max) {
-            const insertRow = row_max + 1;
+          if (r + tdModel.rowSpan - 1 > rowMax) {
+            const insertRow = rowMax + 1;
             const insertCol = c;
             const insertIndex = selection.getTdIndex(insertRow, insertCol);
             const td = trs[insertRow].insertCell(insertIndex);
-            td.rowSpan = r + tdModel.rowSpan - 1 - row_max;
+            td.rowSpan = r + tdModel.rowSpan - 1 - rowMax;
             td.colSpan = tdModel.colSpan;
             copyCss(tdModel.element, td);
             td.innerHTML = template.EmptyCell;
           }
           // 切头
-          if (c + tdModel.colSpan - 1 > col_max) {
+          if (c + tdModel.colSpan - 1 > colMax) {
             const _insertRow = r;
 
-            const _insertCol = col_max + 1;
+            const _insertCol = colMax + 1;
 
             const _insertIndex = selection.getTdIndex(_insertRow, _insertCol); // 之前的空位都会变成td，这里要补齐偏移量
-            const emptyCount = col_max - c;
+            const emptyCount = colMax - c;
             const _td = trs[_insertRow].insertCell(_insertIndex + emptyCount);
-            _td.rowSpan = Math.min(tdModel.rowSpan, row_max - r + 1);
-            _td.colSpan = c + tdModel.colSpan - 1 - col_max;
+            _td.rowSpan = Math.min(tdModel.rowSpan, rowMax - r + 1);
+            _td.colSpan = c + tdModel.colSpan - 1 - colMax;
             copyCss(tdModel.element, _td);
             _td.innerHTML = template.EmptyCell;
           }
@@ -457,60 +457,60 @@ class Command extends EventEmitter2 {
           // 其中要考虑选区是否贯穿单元格的情况
           // 切左边
 
-          if (pRow < row_min) {
-            const cross = col_max >= pCol2;
-            parentTd.element.rowSpan = row_min - pRow;
-            parentTd.element.colSpan = cross ? parentTd.colSpan : col_max - pCol + 1; // 为了防止重复补充单元格，只在遍历到选区的右上角的位置进行补充单元格，
+          if (pRow < rowMin) {
+            const cross = colMax >= pCol2;
+            parentTd.element.rowSpan = rowMin - pRow;
+            parentTd.element.colSpan = cross ? parentTd.colSpan : colMax - pCol + 1; // 为了防止重复补充单元格，只在遍历到选区的右上角的位置进行补充单元格，
             // 未贯穿
-            if (!cross && c === col_max && r === row_min) {
-              const cutCol = col_max + 1;
+            if (!cross && c === colMax && r === rowMin) {
+              const cutCol = colMax + 1;
               const cutRow = pRow;
               const _insertIndex3 = selection.getTdIndex(cutRow, cutCol);
               const _td3 = trs[cutRow].insertCell(_insertIndex3);
               _td3.rowSpan = parentTd.rowSpan;
-              _td3.colSpan = pCol2 - col_max;
+              _td3.colSpan = pCol2 - colMax;
               copyCss(parentTd.element, _td3);
               _td3.innerHTML = template.EmptyCell;
             }
             // 切左边非左下角，下方需要补合并单元格的左下缺口
-            if (pRow2 > row_max && c === Math.min(pCol2, col_max) && r === row_min) {
-              const _insertRow2 = row_max + 1;
+            if (pRow2 > rowMax && c === Math.min(pCol2, colMax) && r === rowMin) {
+              const _insertRow2 = rowMax + 1;
 
               const _insertCol2 = pCol;
 
               const _insertIndex4 = selection.getTdIndex(_insertRow2, _insertCol2);
               const _td4 = trs[_insertRow2].insertCell(_insertIndex4);
-              _td4.rowSpan = pRow2 - row_max;
-              _td4.colSpan = cross ? parentTd.colSpan : col_max - pCol + 1;
+              _td4.rowSpan = pRow2 - rowMax;
+              _td4.colSpan = cross ? parentTd.colSpan : colMax - pCol + 1;
               copyCss(parentTd.element, _td4);
               _td4.innerHTML = template.EmptyCell;
             }
           }
           // 切上边
-          if (pCol < col_min) {
-            const _cross = row_max >= pRow2;
-            parentTd.element.colSpan = col_min - pCol;
-            parentTd.element.rowSpan = _cross ? parentTd.rowSpan : row_max - pRow + 1; // 为了防止重复补充单元格，只在遍历到选区的左下角的位置进行补充单元格，
+          if (pCol < colMin) {
+            const _cross = rowMax >= pRow2;
+            parentTd.element.colSpan = colMin - pCol;
+            parentTd.element.rowSpan = _cross ? parentTd.rowSpan : rowMax - pRow + 1; // 为了防止重复补充单元格，只在遍历到选区的左下角的位置进行补充单元格，
             // 非贯穿
-            if (!_cross && r === row_max && c === col_min) {
-              const _cutRow = row_max + 1;
+            if (!_cross && r === rowMax && c === colMin) {
+              const _cutRow = rowMax + 1;
               const _cutCol = pCol;
               const _insertIndex5 = selection.getTdIndex(_cutRow, _cutCol);
               const _td5 = trs[_cutRow].insertCell(_insertIndex5);
               _td5.colSpan = parentTd.colSpan;
-              _td5.rowSpan = pRow2 - row_max;
+              _td5.rowSpan = pRow2 - rowMax;
               copyCss(parentTd.element, _td5);
               _td5.innerHTML = template.EmptyCell;
             } // 非右上角，需要在选区右边再补一个合并单元格的右上缺口
 
 
-            if (pCol2 > col_max && r === Math.min(pRow2, row_max) && c === col_max) {
+            if (pCol2 > colMax && r === Math.min(pRow2, rowMax) && c === colMax) {
               const _insertRow3 = pRow;
-              const _insertCol3 = col_max + 1;
+              const _insertCol3 = colMax + 1;
               const _insertIndex6 = selection.getTdIndex(_insertRow3, _insertCol3);
               const _td6 = trs[_insertRow3].insertCell(_insertIndex6);
-              _td6.colSpan = pCol2 - col_max;
-              _td6.rowSpan = _cross ? parentTd.rowSpan : row_max - pRow + 1;
+              _td6.colSpan = pCol2 - colMax;
+              _td6.rowSpan = _cross ? parentTd.rowSpan : rowMax - pRow + 1;
               copyCss(parentTd.element, _td6);
               _td6.innerHTML = template.EmptyCell;
             }
@@ -602,8 +602,8 @@ class Command extends EventEmitter2 {
       const tableModel = selection.tableModel;
       if (!area) return;
 
-      const { row_min, col_min, row_max, col_max } = selection.normalizeArea();
-      const isSingleTd = row_min === row_max && col_min === col_max;
+      const { rowMin, colMin, rowMax, colMax } = selection.normalizeArea();
+      const isSingleTd = rowMin === rowMax && colMin === colMax;
       const isSingleArea = selection.isSingleArea();
       const html = data.html;
       const text = data.text;
@@ -619,7 +619,7 @@ class Command extends EventEmitter2 {
         const isPasteSingle = rowSpan === rowCount && colSpan === colCount;
 
         if (isPasteSingle && isSingleArea) {
-          copyTo(pasteTableModel.table[0][0].element, tableModel.table[row_min][col_min].element);
+          copyTo(pasteTableModel.table[0][0].element, tableModel.table[rowMin][colMin].element);
           this.emit('actioned', 'paste', silence);
           return;
         } // 只在选中一个非合并单元格的时候才会延伸平铺，遇到表格边界会自动增加行列
@@ -627,21 +627,21 @@ class Command extends EventEmitter2 {
 
 
         if (isSingleTd) {
-          if (colCount + col_min > tableModel.cols) {
-            const insertColCount = colCount + col_min - tableModel.cols;
+          if (colCount + colMin > tableModel.cols) {
+            const insertColCount = colCount + colMin - tableModel.cols;
             this.insertCol('end', insertColCount, true);
           }
 
-          if (rowCount + row_min > tableModel.rows) {
-            const insertRowCount = rowCount + row_min - tableModel.rows;
+          if (rowCount + rowMin > tableModel.rows) {
+            const insertRowCount = rowCount + rowMin - tableModel.rows;
             this.insertRow('end', insertRowCount, true);
           }
           // 选中和将要粘贴表格等大的区域
           selection.selectArea({
-            row: row_min,
-            col: col_min,
-            row2: row_min + rowCount - 1,
-            col2: col_min + colCount - 1,
+            row: rowMin,
+            col: colMin,
+            row2: rowMin + rowCount - 1,
+            col2: colMin + colCount - 1,
           });
         }
 
@@ -679,7 +679,7 @@ class Command extends EventEmitter2 {
         });
       } else {
         this.mergeCell(true);
-        const $td = $(tableModel.table[row_min][col_min].element);
+        const $td = $(tableModel.table[rowMin][colMin].element);
         this.section.createEditor($td, html || new TextParser(text).toHTML());
       }
       this.emit('actioned', 'paste', silence);
@@ -808,11 +808,11 @@ class Command extends EventEmitter2 {
     this.fill = (table) => {
       const selection = this.section.selection;
       const pasteTableModel = getTableModel(table[0]);
-      const { row_min, col_min } = selection.normalizeArea();
+      const { rowMin, colMin } = selection.normalizeArea();
 
       selection.each((tdModel, r, c) => {
-        const paste_r = r - row_min;
-        const paste_c = c - col_min;
+        const paste_r = r - rowMin;
+        const paste_c = c - colMin;
         const paste_td = pasteTableModel.table[paste_r][paste_c];
 
         if (!paste_td || !tdModel.element) {

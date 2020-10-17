@@ -102,7 +102,7 @@ class CodeBlock extends SectionBase {
     this.codeMirror.focus();
   };
 
-  loadOptions() {
+  loadOptions = () => {
     const options = localStorage.getItem('lake-codeblock');
     if (options) {
       try {
@@ -157,7 +157,8 @@ class CodeBlock extends SectionBase {
 
     if (Array.isArray(config.embed)) {
       return config.embed;
-    } if (typeof config.embed === 'object') {
+    }
+    if (typeof config.embed === 'object') {
       const embedArray = [];
       embed.forEach((item) => {
         if (config.embed[item.type] !== false) {
