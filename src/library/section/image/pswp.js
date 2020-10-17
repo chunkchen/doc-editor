@@ -137,7 +137,7 @@ class Pswp extends EventEmitter2 {
   }
 
   getCurrentZoomLevel() {
-    return this.currentZoom && +this.currentZoom.toFixed(2) || this.pswp && +this.pswp.getZoomLevel().toFixed(2);
+    return (this.currentZoom && +this.currentZoom.toFixed(2)) || (this.pswp && +this.pswp.getZoomLevel().toFixed(2));
   }
 
   zoomTo(zoom) {
@@ -198,7 +198,7 @@ class Pswp extends EventEmitter2 {
     const initialZoomLevel = this.getInitialZoomLevel();
     if (currentZoomLevel === 1) {
       root.addClass('pswp--zoomed-in');
-    } else if (initialZoomLevel === initialZoomLevel) {
+    } else if (currentZoomLevel === initialZoomLevel) {
       root.removeClass('pswp--zoomed-in');
     }
   }

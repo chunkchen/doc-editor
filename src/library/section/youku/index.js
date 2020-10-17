@@ -2,7 +2,7 @@ import EmbedUrl from '../embed/url';
 
 function getDocEmbedURL(url) {
   // 优酷
-  let match = url.match(/^https?:\/\/\w+\.youku\.com\/v_show\/id_([^\.]+)/i);
+  let match = url.match(/^https?:\/\/\w+\.youku\.com\/v_show\/id_([^\\.]+)/i);
   let id;
   if (match) {
     id = match[1];

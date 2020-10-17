@@ -1,4 +1,4 @@
-import Engine from '../../editor/engine';
+import Engine from 'doc-engine/lib';
 import ImageNode from './image-node';
 import { isBase64Image } from '../../utils/string';
 import SectionBase from '../base';

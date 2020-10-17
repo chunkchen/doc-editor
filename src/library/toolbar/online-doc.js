@@ -143,7 +143,9 @@ class OnlineDoc extends React.Component {
             </div>
           )}
         >
-          <iframe ref={this.iframe}
+          <iframe
+            ref={this.iframe}
+            title="online-doc"
             style={{ width: '100%', minHeight: '480px' }}
             frameBorder={0}
             allowFullScreen

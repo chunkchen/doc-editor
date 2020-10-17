@@ -1,5 +1,5 @@
-import locale_en from './locale/en';
-import locale_zh_cn from './locale/zh-cn';
+import localeEn from './locale/en';
+import localeZhCn from './locale/zh-cn';
 import toolbar from './toolbar';
 import toolbarMini from './toolbar-mini';
 import constants from './constants';
@@ -12,7 +12,7 @@ import Selection from './selection';
 import Scrollbar from '../../scrollbar';
 import schema from './schema';
 import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils';
-import Engine from '../../editor/engine';
+import Engine from 'doc-engine/lib';
 import schemaConfig from '../../schema/config';
 import { getHeight } from '../../utils/dom';
 import SectionBase from '../base';
@@ -30,8 +30,8 @@ const getKeys = (keyString) => {
 };
 
 const locale = {
-  en: locale_en,
-  'zh-cn': locale_zh_cn,
+  en: localeEn,
+  'zh-cn': localeZhCn,
 };
 
 class Table extends SectionBase {

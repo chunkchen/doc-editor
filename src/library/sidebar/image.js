@@ -116,7 +116,7 @@ class ImageSidebar extends React.Component {
     this.handleUpdateLink();
   }
 
-  componentWillReceiveProps(props) {
+  componentDidUpdate(props) {
     const data = props.data;
     const { width } = data;
     if (width !== this.props.data.width) {

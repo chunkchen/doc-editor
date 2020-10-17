@@ -10,7 +10,7 @@ function handleKeydownSlash(e) {
     block.empty();
   }
 
-  if (chars === '' || chars === '/' && safari || e.ctrlKey || e.metaKey) {
+  if (chars === '' || (chars === '/' && safari) || e.ctrlKey || e.metaKey) {
     range = this.change.getRange();
     if (range.collapsed) {
       e.preventDefault();

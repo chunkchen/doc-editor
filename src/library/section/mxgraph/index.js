@@ -127,22 +127,22 @@ class Visio extends Embed {
 
   onGraphMessage = (event) => {
     const msg = JSON.parse(event.data);
-    if (msg.event == 'configure') {
+    if (msg.event === 'configure') {
       this.setGraphMessage({
         action: 'configure',
         config: { defaultFonts: ['Humor Sans', 'Helvetica', 'Times New Roman'] },
       });
-    } else if (msg.event == 'init') {
+    } else if (msg.event === 'init') {
       this.setGraphMessage({ action: 'load', autosave: 1, xml: this.value.xml });
     } else if (msg.event === 'load') {
       this.setGraphMessage({ action: 'status' });
-    } else if (msg.event == 'autosave') {
+    } else if (msg.event === 'autosave') {
       this.setValue({
         draft: msg.xml,
       });
-    } else if (msg.event == 'save') {
+    } else if (msg.event === 'save') {
       this.setGraphMessage({ action: 'export', format: 'xmlsvg', xml: msg.xml, spin: 'Updating page' });
-    } else if (msg.event == 'export') {
+    } else if (msg.event === 'export') {
       const dataWidth = Math.ceil(msg.width / msg.scale);
       const dataHeight = Math.ceil(msg.height / msg.scale);
       this.setValue({
@@ -154,7 +154,7 @@ class Visio extends Embed {
         dataHeight,
       });
       this.hideGraphEditor();
-    } else if (msg.event == 'exit') {
+    } else if (msg.event === 'exit') {
       this.hideGraphEditor();
     }
   }

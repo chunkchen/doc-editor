@@ -1,6 +1,6 @@
 import { post } from '@itellyou/itellyou-request';
 import { isBase64Image, isRemoteImage } from '../../utils/string';
-import Engine from '../../editor/engine';
+import Engine from 'doc-engine/lib';
 import ImageCompress from './compress';
 
 // 上传图片 URL

@@ -46,7 +46,7 @@ class Embed extends SectionBase {
     }
   }
 
-  hitBlack() {
+  hitBlack = () => {
     return true;
   }
 
@@ -67,7 +67,7 @@ class Embed extends SectionBase {
     let height; let moveHeight; let
       dragBegin;
     const { minHeight } = this.options;
-    const controller = this.createResizeController({
+    this.resizeController = this.createResizeController({
       container: this.root,
       dragstart: () => {
         height = getHeight(this.iframe[0]);
@@ -93,7 +93,6 @@ class Embed extends SectionBase {
         moveHeight = undefined;
       },
     });
-    this.resizeController = controller;
     if (this.state.activated !== true) this.hideRisizeController();
   }
 
@@ -179,8 +178,7 @@ class Embed extends SectionBase {
 
   renderView() {
     const lang = this.getLang();
-    const locale = local[lang];
-    this.locale = locale;
+    this.locale = local[lang];
     const src = this.getUrl();
     this.clear();
     if (this.isError()) {

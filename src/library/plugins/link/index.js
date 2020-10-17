@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import { shrinkToElementNode } from 'doc-engine/lib/utils/range';
 import { escapeRegExp, sanitizeUrl } from 'doc-engine/lib/utils/string';
-import Engine from '../../editor/engine';
+import Engine from 'doc-engine/lib';
 import LinkEditor from './editor';
 import './index.css';
 

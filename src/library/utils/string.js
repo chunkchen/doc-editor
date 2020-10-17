@@ -1,9 +1,9 @@
-import Engine from '../editor/engine';
+import Engine from 'doc-engine/lib';
 
 export const DocVersion = 1;
 // mention：key 和 name 放到属性，方便服务端正则匹配
 export const addMentionAttrs = (value) => {
-  value = (function (value) {
+  value = ((value) => {
     return value.replace(/<section\s+([^>]+)>/g, (match0, match1) => {
       const attrs = Engine.StringUtils.getAttrMap(match0);
       let { name, value } = attrs;
@@ -21,8 +21,8 @@ export const addMentionAttrs = (value) => {
       }
       return match0;
     });
-  }(value));
-  return '<!doctype itellyou><meta name="doc-version" content="'.concat(DocVersion, '" />').concat(value);
+  });
+  return '<!doctype><meta name="doc-version" content="'.concat(DocVersion, '" />').concat(value);
 };
 
 export const getDocVersion = (doc) => {
@@ -33,7 +33,7 @@ export const getDocVersion = (doc) => {
 // 获取文件的预览地址
 export const getPreviewUrl = (url) => {
   const ext = Engine.UploadUtils.getFileExtname(url);
-  const path = url.replace(/^[http|https]?:\/\/[^\/]+/, '');
+  const path = url.replace(/^[http|https]?:\/\/[^\\/]+/, '');
   let filekey = path.replace(/^\/attachments\//, '');
 
   if (filekey.charAt(0) === '/') {
@@ -42,7 +42,8 @@ export const getPreviewUrl = (url) => {
 
   if (Engine.UploadUtils.isOffice(ext) || Engine.UploadUtils.isMacOffice(ext) || /\.mindnode\.zip$/i.test(filekey) || /\.xmind\.zip$/i.test(filekey)) {
     return '/office/'.concat(filekey);
-  } if (ext === 'pdf') {
+  }
+  if (ext === 'pdf') {
     return '/office/'.concat(filekey);
   }
   return '/preview/'.concat(filekey);

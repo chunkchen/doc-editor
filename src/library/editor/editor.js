@@ -1,16 +1,16 @@
 import React from 'react';
 import { message } from 'antd';
-import lang_en from '../lang/en';
-import lang_cn from '../lang/zh-cn';
+import langEn from '../lang/en';
+import langCn from '../lang/zh-cn';
 import { addMentionAttrs, DocVersion, getDocVersion } from '../utils/string';
 import HtmlParser from '../parser/html';
 import Migrate from '../helper/migrate';
-import schema_config from '../schema/config';
+import schemaConfig from '../schema/config';
 import Engine from './engine';
 
 const language = {
-  en: lang_en,
-  'zh-cn': lang_cn,
+  en: langEn,
+  'zh-cn': langCn,
 };
 
 const migrate = new Migrate();
@@ -61,7 +61,7 @@ class Editor extends React.Component {
     onEngineReady(this.engine);
   }
 
-  componentWillReceiveProps({ onSave, onChange }) {
+  componentDidUpdate({ onSave, onChange }) {
     this.engine.options = { ...this.engine.options, onSave, onChange };
   }
 
@@ -79,7 +79,7 @@ class Editor extends React.Component {
     options.parentNode = this.container.current.parentNode;
     const engine = Engine.create(this.container.current, options);
     const version = getDocVersion(defaultValue);
-    engine.schema.add(schema_config);
+    engine.schema.add(schemaConfig);
     engine.locale = this.locale;
     engine.on('change', (value) => {
       value = addMentionAttrs(value);

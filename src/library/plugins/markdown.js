@@ -3,8 +3,8 @@ import { Button, notification } from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/notification/style';
 import { post } from '@itellyou/itellyou-request';
+import Engine from 'doc-engine/lib';
 import { isMarkdown } from '../utils/string';
-import Engine from '../editor/engine';
 
 notification.config({
   top: 105,

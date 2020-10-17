@@ -5,7 +5,7 @@ import 'antd/lib/message/style';
 import Engine from 'doc-engine/lib';
 import './index.css';
 
-const msg_tip = {
+const msgTip = {
   'zh-cn': {
     copyMessage: '\u590d\u5236\u9519\u8bef\u4fe1\u606f',
     copySuccess: '\u590d\u5236\u6210\u529f\uff01',
@@ -16,7 +16,7 @@ const msg_tip = {
   },
 };
 
-const copy_message = msg_tip[window.appData && window.appData.locale !== 'zh-cn' ? 'en' : 'zh-cn'];
+const copyMessage = msgTip[window.appData && window.appData.locale !== 'zh-cn' ? 'en' : 'zh-cn'];
 
 class Error extends React.Component {
   render() {
@@ -39,7 +39,7 @@ class Error extends React.Component {
         {
           message ? (
             <Popover
-              title={copy_message.copyMessage}
+              title={copyMessage.copyMessage}
               placement="bottom"
             >
               <span
@@ -51,7 +51,7 @@ class Error extends React.Component {
                     id: 'Yf9WB',
                   };
                   Engine.ClipboardUtils.copyNode('<div data-section-type="block" data-section-key="codeblock" data-section-value="'.concat(Engine.StringUtils.encodeSectionValue(e), '"></div>'));
-                  antdMessage.success(copy_message.copySuccess);
+                  antdMessage.success(copyMessage.copySuccess);
                 }}
               />
             </Popover>

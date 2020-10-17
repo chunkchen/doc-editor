@@ -22,6 +22,7 @@ export default function (section) {
       plugin.name = `table:${plugin.name}`;
       return true;
     }
+    return false;
   });
   const fontsizeArray = [
     {

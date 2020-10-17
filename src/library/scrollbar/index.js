@@ -1,6 +1,6 @@
 import { EventEmitter2 } from 'eventemitter2';
 import { firefox, mobile } from 'doc-engine/lib/utils/user-agent';
-import Engine from '../editor/engine';
+import Engine from 'doc-engine/lib';
 
 class Scrollbar extends EventEmitter2 {
   /**

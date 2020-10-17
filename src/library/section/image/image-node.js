@@ -114,7 +114,7 @@ const template = (_ref) => {
   }
 
   let maximize = '<span data-role="maximize" class="lake-image-editor-maximize" style="display: none;"><span class="lake-icon lake-icon-maximize"></span></span>';
-  if (data.width && data.originWidth < 100 || typeof data.width === 'number' && data.width < 100 || mobile) {
+  if ((data.width && data.originWidth < 100) || (typeof data.width === 'number' && data.width < 100) || mobile) {
     maximize = '';
   }
   return '\n  <span class="lake-image">\n    <span class="lake-image-content lake-image-content-istmp">\n      <span data-role="detail" class="lake-image-detail">\n        <span class="lake-image-meta">\n          <span class="lake-image-warning" style="display: none;">\n            <i class="anticon anticon-exclamation-circle">\n              <svg viewBox="64 64 896 896" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zM488 576h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path>\n              </svg>\n            </i>\n          </span>\n          '.concat(imgHtml, '\n          ').concat(progressHtml, '\n          ').concat(maximize, '\n        </span>\n      </span>\n    </span>\n  </span>\n  ');
@@ -399,7 +399,7 @@ class ImageNode {
       this.image.css('height', ''.concat(height, 'px'));
     };
 
-    this.addToolbarDelete = function (itemList) {
+    this.addToolbarDelete = (itemList) => {
       itemList.push({
         type: 'button',
         name: 'delete',

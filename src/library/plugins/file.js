@@ -1,4 +1,4 @@
-import Engine from '../editor/engine';
+import Engine from 'doc-engine/lib';
 
 export default {
   initialize() {
