@@ -4,7 +4,7 @@ import { normalizeTable } from './utils';
 const { $ } = Engine;
 
 const TABLE_WRAPPER_CLASS = 'table-wrapper';
-const TABLE_CLASS = 'itellyou-table';
+const TABLE_CLASS = 'lake-table';
 const COLS_HEADER_CLASS = 'table-cols-header';
 const COLS_HEADER_ITEM_CLASS = 'table-cols-header-item';
 const COLS_HEADER_TRIGGER_CLASS = 'cols-trigger';
@@ -27,7 +27,7 @@ const MENUBAR_CLASS = 'table-menubar';
 const MENUBAR_ITEM_CLASS = 'table-menubar-item';
 const TABLE_TEXTAREA_CLASS = 'table-textarea';
 const VIEWPORT = 'table-viewport';
-const VIEWPORT_READER = 'itellyou-table-reader';
+const VIEWPORT_READER = 'lake-table-reader';
 const PLACEHOLDER_CLASS = 'table-placeholder';
 const MULTI_ADDITION_CLASS = 'multi-addition';
 const SHADOW_LEFT_CLASS = 'table-shadow-left';
@@ -86,11 +86,11 @@ export default function (section) {
       const colsAddition = '<div class="'.concat(COLS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n        <div class="').concat(COLS_ADDITION_CLASS, '"> + </div>\n      </div>');
       const rowsAddition = '<div class="'.concat(ROWS_ADDITION_CLASS, '">\n        <div class="plus"> + </div>\n      </div>');
       const rowsAdditionHead = '<div class="'.concat(ROWS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n      </div>');
-      const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="itellyou-icon itellyou-icon-arrow-up"></span></div>\n        <div class="down"><span class="itellyou-icon itellyou-icon-arrow-down"></span></div>\n      </div>');
+      const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="lake-icon lake-icon-arrow-up"></span></div>\n        <div class="down"><span class="lake-icon lake-icon-arrow-down"></span></div>\n      </div>');
 
-      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="col-dragger">\n                <span class="itellyou-icon itellyou-icon-drag"></span>\n                <p class="drag-info"></p>\n              </div>\n              <div class="').concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(cols), '\n          ').concat(colsAddition, '\n        </div>\n      ');
+      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"></span>\n                <p class="drag-info"></p>\n              </div>\n              <div class="').concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(cols), '\n          ').concat(colsAddition, '\n        </div>\n      ');
 
-      const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="itellyou-icon itellyou-icon-drag"></span>\n                <span class="drag-info"></span>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat(rowsAdditionHead, '\n        </div>\n      ');
+      const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="lake-icon lake-icon-drag"></span>\n                <span class="drag-info"></span>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat(rowsAdditionHead, '\n        </div>\n      ');
 
       const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
 
@@ -111,7 +111,7 @@ export default function (section) {
         if (menu.split) {
           return '<div class="split"></div>';
         }
-        return '<div class="'.concat(MENUBAR_ITEM_CLASS, '" data-action="').concat(menu.action, '">\n          <span class="itellyou-icon itellyou-icon-table-').concat(menu.icon, '"></span>\n          ').concat(menu.text, '\n        </div>');
+        return '<div class="'.concat(MENUBAR_ITEM_CLASS, '" data-action="').concat(menu.action, '">\n          <span class="lake-icon lake-icon-table-').concat(menu.icon, '"></span>\n          ').concat(menu.text, '\n        </div>');
       });
       menuBar = '<div class="'.concat(MENUBAR_CLASS, '">').concat(menuBar.join(''), '</div>');
 

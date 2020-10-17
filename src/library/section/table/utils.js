@@ -131,7 +131,7 @@ export const normalizeTable = (table) => {
   trimStartTr($table);
   fixNumberTr(table);
   normalizeTdContent($table);
-  $table.addClass('itellyou-table');
+  $table.addClass('lake-table');
   // 修正表格宽度为 pt 场景
   const width = $table.css('width');
 
@@ -396,24 +396,24 @@ export const normalizeTdContent = (table) => {
       let replacer;
       switch (node.name) {
         case 'h1':
-          replacer = $('<span class="itellyou-fontsize-18"></span>');
+          replacer = $('<span class="lake-fontsize-18"></span>');
           replacer.html(node.html());
           break;
 
         case 'h2':
-          replacer = $('<span class="itellyou-fontsize-16"></span>');
+          replacer = $('<span class="lake-fontsize-16"></span>');
           replacer.html(node.html());
           break;
 
         case 'h3':
         case 'h4':
-          replacer = $('<span class="itellyou-fontsize-14"></span>');
+          replacer = $('<span class="lake-fontsize-14"></span>');
           replacer.html(node.html());
           break;
 
         case 'h5':
         case 'h6':
-          replacer = $('<span class="itellyou-fontsize-12"></span>');
+          replacer = $('<span class="lake-fontsize-12"></span>');
           replacer.html(node.html());
           break;
 

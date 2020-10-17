@@ -93,8 +93,8 @@ export default class extends React.Component {
         content={(
           <Modal
             title={null}
-            className="itellyou-toolbar-uploader-modal"
-            getContainer="div[data-itellyou-element=toolbar]"
+            className="lake-toolbar-uploader-modal"
+            getContainer="div[data-lake-element=toolbar]"
             visible
             centered
             mask={false}
@@ -108,7 +108,7 @@ export default class extends React.Component {
             <Tabs>
               <Tabs.TabPane tab="本地上传" key="local-upload">
                 <div
-                  className="itellyou-toolbar-uploader"
+                  className="lake-toolbar-uploader"
                   onMouseDown={(event) => {
                     event.preventDefault();
                     event.stopPropagation();

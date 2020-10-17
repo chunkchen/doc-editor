@@ -64,11 +64,11 @@ class TextDiagramViewer extends React.Component {
             e.stopPropagation();
           }}
         />
-      ) : <span className="itellyou-icon itellyou-icon-loading" />);
+      ) : <span className="lake-icon lake-icon-loading" />);
 
     return (
       <div
-        className={'itellyou-text-diagram-viewer itellyou-text-diagram-'.concat(type, ' ').concat(className)}
+        className={'lake-text-diagram-viewer lake-text-diagram-'.concat(type, ' ').concat(className)}
       >
         {
         children

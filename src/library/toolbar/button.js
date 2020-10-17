@@ -84,7 +84,7 @@ export default class Button extends React.Component {
         <div style={{ textAlign: 'center' }}>
           {title}
           <br />
-          <span className="itellyou-button-hotkey">{hotkey}</span>
+          <span className="lake-button-hotkey">{hotkey}</span>
         </div>
       );
     }
@@ -101,9 +101,9 @@ export default class Button extends React.Component {
     const button = (
       <button
         accessbilityid={accessbilityid}
-        className={classnames('itellyou-button', className, {
-          'itellyou-button-active': active,
-          'itellyou-button-disabled': disabled,
+        className={classnames('lake-button', className, {
+          'lake-button-active': active,
+          'lake-button-disabled': disabled,
         })
         }
         onClick={this.onClick}
@@ -116,14 +116,14 @@ export default class Button extends React.Component {
           showContent && content
         }
         {
-          currentText && <span className="itellyou-button-inner-text">{currentText}</span>
+          currentText && <span className="lake-button-inner-text">{currentText}</span>
         }
         {
           this.getIcon()
         }
         {
           name !== 'emoji' && name !== 'table:emoji' && hasArrow
-          && <span className="itellyou-icon itellyou-icon-arrow" />
+          && <span className="lake-icon lake-icon-arrow" />
         }
       </button>
     );
@@ -134,7 +134,7 @@ export default class Button extends React.Component {
             title={title}
             placement="bottom"
             visible={visible}
-            overlayClassName="itellyou-toolbar-tooltip"
+            overlayClassName="lake-toolbar-tooltip"
           >
             {button}
           </Tooltip>

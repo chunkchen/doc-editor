@@ -21,7 +21,7 @@ const addUiCommand = (engine, name, getConfig, ui, autoSave) => {
       }
       // 判断一：以一个特殊属性，区分是否是 editor 拓展后的 engine
       // 判断二：以本地缓存区分是否该执行相应命令
-      return engine[ui].storeConfig && localStorage.getItem(`itellyou-${ui}`) === name;
+      return engine[ui].storeConfig && localStorage.getItem(`lake-${ui}`) === name;
     },
     execute: (force) => {
       if (force === true || !engine.command.queryState(name)) {

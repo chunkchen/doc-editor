@@ -87,22 +87,22 @@ export default class extends React.Component {
     let toolbarDesc = '';
     if (description) {
       toolbarDesc = (
-        <div className="itellyou-toolbar-collapse-description">
+        <div className="lake-toolbar-collapse-description">
           <div className="description" dangerouslySetInnerHTML={{ __html: description }} />
         </div>
       );
     }
     return (
       <div
-        className={classnames('itellyou-button-set-list', className, {
-          'itellyou-toolbar-collapse-no-header': data.length <= 1,
-          'itellyou-button-set-list-active': active,
+        className={classnames('lake-button-set-list', className, {
+          'lake-toolbar-collapse-no-header': data.length <= 1,
+          'lake-button-set-list-active': active,
         })}
         ref={this.listNode}
         data-aspm="section_selector"
       >
         {toolbarDesc}
-        <Collapse className="itellyou-toolbar-collapse" defaultActiveKey={activeKeys}>
+        <Collapse className="lake-toolbar-collapse" defaultActiveKey={activeKeys}>
           {data.map((row, index) => {
             return (
               <Panel showArrow={false} header={row.title} disabled key={index}>

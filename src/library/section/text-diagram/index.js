@@ -11,7 +11,7 @@ import './index.css';
 const { EDITOR_LAYOUT, TEXT_DIAGRAM_TYPES } = constants;
 const { $ } = Engine;
 const template = () => {
-  return '<div class="itellyou-text-diagram itellyou-text-diagram-root"></div>';
+  return '<div class="lake-text-diagram lake-text-diagram-root"></div>';
 };
 
 /**
@@ -230,7 +230,7 @@ class TextDiagram extends SectionBase {
       />,
       this.root[0],
       () => {
-        const diagram = this.root.find('.itellyou-text-diagram-editor');
+        const diagram = this.root.find('.lake-text-diagram-editor');
         const { height } = this.value;
         this.addResizeController(diagram);
         if (height) {
@@ -246,7 +246,7 @@ class TextDiagram extends SectionBase {
    */
   renderViewer(value) {
     ReactDOM.render(
-      <div className="itellyou-text-diagram-viewer">
+      <div className="lake-text-diagram-viewer">
         <TextDiagramViewer
           type={this.diagramType}
           code={value.code}
@@ -264,7 +264,7 @@ class TextDiagram extends SectionBase {
     }
 
     container.append(template());
-    this.root = this.container.find('.itellyou-text-diagram-root');
+    this.root = this.container.find('.lake-text-diagram-root');
     // section name 即为图的类别
     this.diagramType = this.getDiagramType(value);
     if (this.engine) {

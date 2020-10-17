@@ -20,7 +20,7 @@ const template = (value, locale) => {
 
     ReactDOM.render(
       <Error
-        sectionIcon='<span class="itellyou-svg-icon itellyou-svg-icon-error-file"></span>'
+        sectionIcon='<span class="lake-svg-icon lake-svg-icon-error-file"></span>'
         variableCo={value.message ? value.message : locale.invalid}
         fixedContent={value.name ? value.name : ''}
         message={value}
@@ -29,10 +29,10 @@ const template = (value, locale) => {
     );
     return messageElement;
   }
-  let iconHtml = '<span class="itellyou-icon itellyou-icon-attachment"></span>';
+  let iconHtml = '<span class="lake-icon lake-icon-attachment"></span>';
 
   if (value.status === 'uploading' || value.status === 'transfering') {
-    iconHtml = '\n    <i class="itellyou-anticon itellyou-anticon-loading">\n      <svg viewBox="0 0 1024 1024" class="itellyou-anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n        <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path>\n      </svg>\n    </i>\n    ';
+    iconHtml = '\n    <i class="lake-anticon lake-anticon-loading">\n      <svg viewBox="0 0 1024 1024" class="lake-anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n        <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path>\n      </svg>\n    </i>\n    ';
   }
 
   let fileSizeHtml = '';
@@ -42,7 +42,7 @@ const template = (value, locale) => {
   }
 
   if (fileSize) {
-    fileSizeHtml = '\n    <span class="itellyou-file-size">('.concat(
+    fileSizeHtml = '\n    <span class="lake-file-size">('.concat(
       Engine.StringUtils.escape(fileSize),
       ')</span>\n    ',
     );
@@ -52,10 +52,10 @@ const template = (value, locale) => {
   if (value.status === 'uploading') percent = '<span data-role="percent"></span> &nbsp;';
   else if (value.status === 'transfering') percent = '<span></span> &nbsp;';
 
-  return '\n  <span class="itellyou-file itellyou-file-'
-    .concat(value.status, '">\n    <span class="itellyou-file-icon">')
+  return '\n  <span class="lake-file lake-file-'
+    .concat(value.status, '">\n    <span class="lake-file-icon">')
     .concat(iconHtml, '</span>\n    ')
-    .concat(percent, '\n    <span class="itellyou-file-title">')
+    .concat(percent, '\n    <span class="lake-file-title">')
     .concat(Engine.StringUtils.escape(value.name), '</span>')
     .concat(fileSizeHtml, '\n  </span>\n  ');
 };
@@ -94,7 +94,7 @@ class File extends SectionBase {
     };
 
     this.updateMaxWidth = () => {
-      this.sectionRoot.find('.itellyou-file-title').css('max-width', `${this.maxWidth - 100}px`);
+      this.sectionRoot.find('.lake-file-title').css('max-width', `${this.maxWidth - 100}px`);
     };
 
     this.focusSection = () => {
@@ -164,11 +164,11 @@ class File extends SectionBase {
   }
 
   activate() {
-    this.container.find('itellyou-file').addClass('itellyou-file-active');
+    this.container.find('lake-file').addClass('lake-file-active');
   }
 
   unactivate() {
-    this.container.find('itellyou-file').removeClass('itellyou-file-active');
+    this.container.find('lake-file').removeClass('lake-file-active');
   }
 
   renderViewMode() {
@@ -180,7 +180,7 @@ class File extends SectionBase {
       list: config,
     });
     const toolbarRoot = embedToolbar.root;
-    toolbarRoot.addClass('itellyou-section-toolbar');
+    toolbarRoot.addClass('lake-section-toolbar');
     embedToolbar.render(this.sectionRoot.first());
     // 显示或隐藏工具栏
     let canHide = true;

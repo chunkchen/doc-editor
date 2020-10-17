@@ -44,11 +44,11 @@ export default {
     const lactions = page.getTextDomLactions();
     const zoom = page.getZoom();
     let search = '';
-    let mask = '<div class="itellyou-image-mask">';
+    let mask = '<div class="lake-image-mask">';
     lactions.forEach((laction) => {
       const { x, y, text, fontSize } = laction;
       const style = 'font-size: '.concat(fontSize * zoom, 'px;left: ').concat(x, 'px;top: ').concat(y, 'px;');
-      mask += '<p class="itellyou-image-mask-point" style="'.concat(style, '">').concat(text, '</p>');
+      mask += '<p class="lake-image-mask-point" style="'.concat(style, '">').concat(text, '</p>');
       search += ' '.concat(text);
     });
     this.searchContent = search;

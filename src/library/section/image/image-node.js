@@ -14,7 +14,7 @@ const errorTemplate = (data) => {
   const content = Engine.StringUtils.escape(data.message);
   const element = document.createElement('div');
   ReactDOM.render(<ErrorTips
-    sectionIcon='<span class="itellyou-svg-icon itellyou-svg-icon-error-image"></span>'
+    sectionIcon='<span class="lake-svg-icon lake-svg-icon-error-image"></span>'
     variableContent={content}
     message={data}
   />, element);
@@ -64,7 +64,7 @@ const template = (_ref) => {
     return errorTemplate(data);
   }
 
-  const progressHtml = '\n  <span data-role="progress" class="progress">\n    <i class="itellyou-anticon itellyou-anticon-loading">\n      <svg viewBox="0 0 1024 1024" class="itellyou-anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n        <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path>\n      </svg>\n    </i>\n    <span data-role="percent" class="percent">'.concat(Engine.StringUtils.escape(data.percent || 0), '%</span>\n  </span>\n  ');
+  const progressHtml = '\n  <span data-role="progress" class="progress">\n    <i class="lake-anticon lake-anticon-loading">\n      <svg viewBox="0 0 1024 1024" class="lake-anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n        <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path>\n      </svg>\n    </i>\n    <span data-role="percent" class="percent">'.concat(Engine.StringUtils.escape(data.percent || 0), '%</span>\n  </span>\n  ');
   src = convWebp(data.status !== 'uploading' ? onBeforeRenderImage(data.src) : src, isSupportWebp);
   let rawSrc = '';
   if (readonly) {
@@ -101,23 +101,23 @@ const template = (_ref) => {
       target = ' target="_blank"';
     }
     if (mobile) {
-      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" data-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad itellyou-drag-image"')
+      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" data-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"')
         .concat(altAttr, ' /></a>');
     } else {
-      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image itellyou-drag-image"')
+      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"')
         .concat(altAttr, ' /></a>');
     }
   } else if (mobile && readonly) {
-    imgHtml = '<img data-role="image" data-src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad itellyou-drag-image"').concat(altAttr, ' />');
+    imgHtml = '<img data-role="image" data-src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"').concat(altAttr, ' />');
   } else {
-    imgHtml = '<img data-role="image" src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image itellyou-drag-image"').concat(altAttr, ' />');
+    imgHtml = '<img data-role="image" src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"').concat(altAttr, ' />');
   }
 
-  let maximize = '<span data-role="maximize" class="itellyou-image-editor-maximize" style="display: none;"><span class="itellyou-icon itellyou-icon-maximize"></span></span>';
+  let maximize = '<span data-role="maximize" class="lake-image-editor-maximize" style="display: none;"><span class="lake-icon lake-icon-maximize"></span></span>';
   if (data.width && data.originWidth < 100 || typeof data.width === 'number' && data.width < 100 || mobile) {
     maximize = '';
   }
-  return '\n  <span class="itellyou-image">\n    <span class="itellyou-image-content itellyou-image-content-istmp">\n      <span data-role="detail" class="itellyou-image-detail">\n        <span class="itellyou-image-meta">\n          <span class="itellyou-image-warning" style="display: none;">\n            <i class="anticon anticon-exclamation-circle">\n              <svg viewBox="64 64 896 896" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zM488 576h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path>\n              </svg>\n            </i>\n          </span>\n          '.concat(imgHtml, '\n          ').concat(progressHtml, '\n          ').concat(maximize, '\n        </span>\n      </span>\n    </span>\n  </span>\n  ');
+  return '\n  <span class="lake-image">\n    <span class="lake-image-content lake-image-content-istmp">\n      <span data-role="detail" class="lake-image-detail">\n        <span class="lake-image-meta">\n          <span class="lake-image-warning" style="display: none;">\n            <i class="anticon anticon-exclamation-circle">\n              <svg viewBox="64 64 896 896" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zM488 576h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path>\n              </svg>\n            </i>\n          </span>\n          '.concat(imgHtml, '\n          ').concat(progressHtml, '\n          ').concat(maximize, '\n        </span>\n      </span>\n    </span>\n  </span>\n  ');
 };
 
 class ImageNode {
@@ -130,7 +130,7 @@ class ImageNode {
       if (this.readonly) {
         return;
       }
-      this.root.addClass('itellyou-image-active');
+      this.root.addClass('lake-image-active');
       if (this.status === 'done') {
         this.destroyEditor();
         this.renderEditor();
@@ -141,11 +141,11 @@ class ImageNode {
       if (this.readonly) {
         return;
       }
-      this.root.removeClass('itellyou-image-active');
+      this.root.removeClass('lake-image-active');
       if (this.status === 'done') {
         this.destroyEditor();
       }
-      Engine.$('div[data-itellyou-element=embed-tooltip]').remove();
+      Engine.$('div[data-lake-element=embed-tooltip]').remove();
     };
 
     this.getMaxWidth = function (sectionRoot) {
@@ -224,7 +224,7 @@ class ImageNode {
       this.engine.sidebar.set({
         name: 'image',
         title: this.locale.preferences,
-        className: 'itellyou-image-sidebar',
+        className: 'lake-image-sidebar',
         data: value,
         showCloseBtn: false,
       });
@@ -261,7 +261,7 @@ class ImageNode {
     this.changeDisplay = (sectionRoot, display) => {
       const value = this.getValue();
       if (display === 'block' && value.align) {
-        sectionRoot.addClass('itellyou-section-block');
+        sectionRoot.addClass('lake-section-block');
         if (value.display === 'inline' && this.engine) {
           const align = this.engine.command.queryState('alignment');
           if (align) {
@@ -270,7 +270,7 @@ class ImageNode {
           }
           this.engine.command.execute('alignment', '');
         }
-        sectionRoot.addClass('itellyou-image-'.concat(value.align));
+        sectionRoot.addClass('lake-image-'.concat(value.align));
       } else {
         if (value.display === 'block' && this.engine) {
           const align = this.engine.command.queryState('alignment');
@@ -279,11 +279,11 @@ class ImageNode {
             this.align = align;
           }
         }
-        sectionRoot.removeClass('itellyou-section-block');
-        sectionRoot.removeClass('itellyou-image-left');
-        sectionRoot.removeClass('itellyou-image-center');
-        sectionRoot.removeClass('itellyou-image-right');
-        sectionRoot.removeClass('itellyou-image-justify');
+        sectionRoot.removeClass('lake-section-block');
+        sectionRoot.removeClass('lake-image-left');
+        sectionRoot.removeClass('lake-image-center');
+        sectionRoot.removeClass('lake-image-right');
+        sectionRoot.removeClass('lake-image-justify');
         if (this.engine) {
           this.engine.command.execute('alignment', value.align);
         }
@@ -416,8 +416,8 @@ class ImageNode {
       }
 
       if (this.status === 'done') {
-        this.root.find('.itellyou-image-content').addClass('itellyou-image-content-isvalid');
-        this.root.find('.itellyou-image-content').removeClass('itellyou-image-content-istmp');
+        this.root.find('.lake-image-content').addClass('lake-image-content-isvalid');
+        this.root.find('.lake-image-content').removeClass('lake-image-content-istmp');
       }
 
       const img = this.image[0];
@@ -486,7 +486,7 @@ class ImageNode {
     if (config.docEmbedView) this.root.addClass('doc-embed-view');
     this.image = this.find('image');
     this.detail = this.find('detail');
-    this.detailInner = this.detail.find('.itellyou-image-meta');
+    this.detailInner = this.detail.find('.lake-image-meta');
     this.engine = config.engine;
     this.section = config.section;
 

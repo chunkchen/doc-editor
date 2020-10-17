@@ -87,7 +87,7 @@ class OnlineDoc extends React.Component {
   render() {
     const { visible } = this.state;
     const { item, index, engine } = this.props;
-    const activeClass = this.state.activated ? ' itellyou-collapse-list-item-active' : '';
+    const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     const style = item.subTitle ? {
       height: 'auto',
     } : {};
@@ -98,7 +98,7 @@ class OnlineDoc extends React.Component {
         data-index={index}
         data-aspm-click={''.concat(item.name)}
         accessbilityid={''.concat(item.name, '-section-button')}
-        className={'itellyou-collapse-list-item'.concat(activeClass)}
+        className={'lake-collapse-list-item'.concat(activeClass)}
         onClick={this.handleClick}
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}
@@ -106,28 +106,28 @@ class OnlineDoc extends React.Component {
         style={style}
       >
         <div
-          className="itellyou-collapse-item-icon"
+          className="lake-collapse-item-icon"
           dangerouslySetInnerHTML={{ __html: item.icon }}
         />
         <div
-          className="itellyou-collapse-item-text"
+          className="lake-collapse-item-text"
         >
-          <div className="itellyou-collapse-item-title">
+          <div className="lake-collapse-item-title">
             {item.title}
             {
-              item.subTitle && <span className="itellyou-collapse-item-sub-title">{item.subTitle}</span>
+              item.subTitle && <span className="lake-collapse-item-sub-title">{item.subTitle}</span>
             }
             {
-              item.subNew && <span className="itellyou-sub-new-tag">{item.subNew}</span>
+              item.subNew && <span className="lake-sub-new-tag">{item.subNew}</span>
             }
             {
-              item.isNew ? <span className="itellyou-svg-icon-new-section" /> : ''
+              item.isNew ? <span className="lake-svg-icon-new-section" /> : ''
             }
           </div>
         </div>
         <Modal
           title="嵌入文件"
-          getContainer="div[data-itellyou-element=toolbar]"
+          getContainer="div[data-lake-element=toolbar]"
           visible={visible}
           centered
           mask={false}

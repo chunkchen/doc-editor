@@ -67,8 +67,8 @@ class LineEditor extends React.Component {
     }(this.props));
 
     return (
-      <div className="itellyou-editor itellyou-line-editor">
-        <div className="itellyou-content-editor" ref={this.contentEditor}>
+      <div className="lake-editor lake-line-editor">
+        <div className="lake-content-editor" ref={this.contentEditor}>
           <Editor
             {...Object.assign(
               {
@@ -79,9 +79,9 @@ class LineEditor extends React.Component {
           />
         </div>
         {engine && (
-          <div className="itellyou-editor-bottom">
+          <div className="lake-editor-bottom">
             <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions)} />
-            {extra && <div className="itellyou-editor-extra">{extra}</div>}
+            {extra && <div className="lake-editor-extra">{extra}</div>}
           </div>
         )}
       </div>

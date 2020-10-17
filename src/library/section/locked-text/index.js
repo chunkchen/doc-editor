@@ -8,17 +8,17 @@ import Lock from './Lock';
 import Unlock from './Unlock';
 
 const template = (isTitle, locale) => {
-  return '\n    <div class="itellyou-lockedtext">\n      '
+  return '\n    <div class="lake-lockedtext">\n      '
     .concat(
       isTitle
-        ? '\n      <div class="itellyou-lockedtext-header">\n        <h5>'
+        ? '\n      <div class="lake-lockedtext-header">\n        <h5>'
           .concat(
             locale.title,
-            '</h5>\n        <span class="locktrigger">\n          <span class="itellyou-icon itellyou-icon-lock"></span>\n          <span class="text">',
+            '</h5>\n        <span class="locktrigger">\n          <span class="lake-icon lake-icon-lock"></span>\n          <span class="text">',
           )
           .concat(locale.setPassword, '</span>\n        </span>\n      </div>')
         : '',
-      '\n      <div class="itellyou-lockedtext-content">\n        <textarea class="lockedtext"></textarea>\n      </div>\n      <div class="unlock-container ',
+      '\n      <div class="lake-lockedtext-content">\n        <textarea class="lockedtext"></textarea>\n      </div>\n      <div class="unlock-container ',
     )
     .concat(
       isTitle ? 'editing' : 'reading',

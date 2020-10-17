@@ -194,7 +194,7 @@ class Visio extends Embed {
     const { container, value, options } = this;
     const height = this.getHeight();
     const { transition } = options;
-    const embedNode = Engine.$('\n      <div class="itellyou-embed itellyou-embed-active">\n   <div class="itellyou-embed-modal"></div>     <div class="itellyou-embed-content">\n          <div class="itellyou-embed-content-bg">\n            <span class="itellyou-icon itellyou-icon-loading"></span>\n          </div>\n          <iframe data-role="iframe" \n            class="itellyou-embed-content-frame" \n            frameborder="0" \n            allowfullscreen="true" \n            style="height: '.concat(height, 'px; transition: ').concat(transition, '"\n            >\n          </iframe>\n        </div>\n      </div>\n    '));
+    const embedNode = Engine.$('\n      <div class="lake-embed lake-embed-active">\n   <div class="lake-embed-modal"></div>     <div class="lake-embed-content">\n          <div class="lake-embed-content-bg">\n            <span class="lake-icon lake-icon-loading"></span>\n          </div>\n          <iframe data-role="iframe" \n            class="lake-embed-content-frame" \n            frameborder="0" \n            allowfullscreen="true" \n            style="height: '.concat(height, 'px; transition: ').concat(transition, '"\n            >\n          </iframe>\n        </div>\n      </div>\n    '));
 
     const iframe = embedNode.find('iframe');
 
@@ -203,12 +203,12 @@ class Visio extends Embed {
     }
 
     iframe.on('load', () => {
-      iframe.addClass('itellyou-embed-content-frame-loaded');
+      iframe.addClass('lake-embed-content-frame-loaded');
       window.addEventListener('message', this.onGraphMessage, false);
     });
     const url = this.getUrl();
-    this.warp = container.find('.itellyou-mxgraph-warp');
-    this.modal = embedNode.find('.itellyou-embed-modal');
+    this.warp = container.find('.lake-mxgraph-warp');
+    this.modal = embedNode.find('.lake-embed-modal');
     this.warp.append(embedNode);
     this.iframe = iframe;
     this.renderIframe(iframe, Engine.StringUtils.sanitizeUrl(url));
@@ -229,7 +229,7 @@ class Visio extends Embed {
         this.view = ref.view;
       }}
     />, this.container[0], () => {
-      this.root = this.container.find('.itellyou-mxgraph-preview');
+      this.root = this.container.find('.lake-mxgraph-preview');
       const { height } = this.value;
       this.addResizeController(this.root);
       if (!value.xml) {

@@ -44,15 +44,15 @@ class ToolbarPluginsMore extends React.Component {
   render() {
     const { children, width } = this.props;
     const { active } = this.state;
-    const moreIcon = '<span class="itellyou-icon itellyou-icon-more" />';
+    const moreIcon = '<span class="lake-icon lake-icon-more" />';
     return (
-      <div className={classnames('itellyou-toolbar-area', {
-        'itellyou-toolbar-area-hide': !children || !children.length,
+      <div className={classnames('lake-toolbar-area', {
+        'lake-toolbar-area-hide': !children || !children.length,
       })}
       >
-        <div className="itellyou-button-set">
-          <div className={classnames('itellyou-button-set-trigger', {
-            'itellyou-button-set-trigger-active': active,
+        <div className="lake-button-set">
+          <div className={classnames('lake-button-set-trigger', {
+            'lake-button-set-trigger-active': active,
           })}
           >
             <Button
@@ -64,8 +64,8 @@ class ToolbarPluginsMore extends React.Component {
               outerVisible={this.state.active}
             />
           </div>
-          <div className={classnames('itellyou-button-set-list', 'itellyou-button-set-list-hoz', {
-            'itellyou-button-set-list-active': active,
+          <div className={classnames('lake-button-set-list', 'lake-button-set-list-hoz', {
+            'lake-button-set-list-active': active,
           })}
             style={{ width: ''.concat(width, 'px') }}
           >

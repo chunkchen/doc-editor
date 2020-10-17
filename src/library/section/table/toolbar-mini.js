@@ -9,7 +9,7 @@ export default function (section) {
       name: 'table:emoji',
       type: 'dropdown',
       title: locale.emoji,
-      icon: '<span class="itellyou-icon itellyou-icon-emoji" />',
+      icon: '<span class="lake-icon lake-icon-emoji" />',
       data: emoji,
       onClick: (value) => {
         section.subEngine && section.subEngine.command.execute('emoji', value);
@@ -19,7 +19,7 @@ export default function (section) {
       name: 'table:bold',
       title: locale.bold,
       hotkey: macos ? '\u2318+B' : 'Ctrl+B',
-      icon: '<span class="itellyou-icon itellyou-icon-bold" />',
+      icon: '<span class="lake-icon lake-icon-bold" />',
       getDisabled: () => {
         return !section.selection.area;
       },
@@ -34,7 +34,7 @@ export default function (section) {
       name: 'table:italic',
       title: locale.italic,
       hotkey: macos ? '\u2318+I' : 'Ctrl+I',
-      icon: '<span class="itellyou-icon itellyou-icon-italic" />',
+      icon: '<span class="lake-icon lake-icon-italic" />',
       getDisabled: () => {
         return !section.selection.area;
       },
@@ -49,7 +49,7 @@ export default function (section) {
       name: 'table:strikethrough',
       title: locale.strikethrough,
       key: macos ? '\u2318+Shift+X' : 'Ctrl+Shift+X',
-      icon: '<span class="itellyou-icon itellyou-icon-strikethrough" />',
+      icon: '<span class="lake-icon lake-icon-strikethrough" />',
       getDisabled: () => {
         return !section.selection.area;
       },
@@ -64,7 +64,7 @@ export default function (section) {
       name: 'table:underline',
       title: locale.underline,
       key: macos ? '\u2318+U' : 'Ctrl+U',
-      icon: '<span class="itellyou-icon itellyou-icon-underline" />',
+      icon: '<span class="lake-icon lake-icon-underline" />',
       getDisabled: () => {
         return !section.selection.area;
       },
@@ -82,28 +82,28 @@ export default function (section) {
       name: 'table:alignment',
       type: 'dropdown',
       title: locale.align,
-      icon: '<span class="itellyou-icon itellyou-icon-align-left" />',
-      className: 'itellyou-button-icon-list',
+      icon: '<span class="lake-icon lake-icon-align-left" />',
+      className: 'lake-button-icon-list',
       data: [{
         key: 'left',
-        icon: '<span class="itellyou-icon itellyou-icon-align-left" />',
+        icon: '<span class="lake-icon lake-icon-align-left" />',
         title: locale.alignLeft,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }, {
         key: 'center',
-        icon: '<span class="itellyou-icon itellyou-icon-align-center" />',
+        icon: '<span class="lake-icon lake-icon-align-center" />',
         title: locale.alignCenter,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }, {
         key: 'right',
-        icon: '<span class="itellyou-icon itellyou-icon-align-right" />',
+        icon: '<span class="lake-icon lake-icon-align-right" />',
         title: locale.alignRight,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }, {
         key: 'justify',
-        icon: '<span class="itellyou-icon itellyou-icon-align-justify" />',
+        icon: '<span class="lake-icon lake-icon-align-justify" />',
         title: locale.alignJustify,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }],
       getActive: () => {
         return command.queryState('alignment');
@@ -116,23 +116,23 @@ export default function (section) {
       name: 'table:verticalAlignment',
       type: 'dropdown',
       title: locale.verticalAlign,
-      icon: '<span class="itellyou-icon itellyou-icon-align-top" />',
-      className: 'itellyou-button-icon-list',
+      icon: '<span class="lake-icon lake-icon-align-top" />',
+      className: 'lake-button-icon-list',
       data: [{
         key: 'top',
-        icon: '<span class="itellyou-icon itellyou-icon-align-top" />',
+        icon: '<span class="lake-icon lake-icon-align-top" />',
         title: locale.alignTop,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }, {
         key: 'middle',
-        icon: '<span class="itellyou-icon itellyou-icon-align-middle" />',
+        icon: '<span class="lake-icon lake-icon-align-middle" />',
         title: locale.alignMiddle,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }, {
         key: 'bottom',
-        icon: '<span class="itellyou-icon itellyou-icon-align-bottom" />',
+        icon: '<span class="lake-icon lake-icon-align-bottom" />',
         title: locale.alignBottom,
-        className: 'itellyou-button-set-list-item-icon',
+        className: 'lake-button-set-list-item-icon',
       }],
       getActive: () => {
         return command.queryState('alignment');
@@ -148,7 +148,7 @@ export default function (section) {
       name: 'table:unorderedlist',
       title: locale.unorderedList,
       hotkey: macos ? '\u2318+Shift+8' : 'Ctrl+Shift+8',
-      icon: '<span class="itellyou-icon itellyou-icon-unordered-list" />',
+      icon: '<span class="lake-icon lake-icon-unordered-list" />',
       getDisabled: () => {
         return !section.subEngine;
       },
@@ -163,7 +163,7 @@ export default function (section) {
       name: 'table:orderedlist',
       title: locale.orderedList,
       hotkey: macos ? '\u2318+Shift+7' : 'Ctrl+Shift+7',
-      icon: '<span class="itellyou-icon itellyou-icon-ordered-list" />',
+      icon: '<span class="lake-icon lake-icon-ordered-list" />',
       getDisabled: () => {
         return !section.subEngine;
       },
@@ -177,7 +177,7 @@ export default function (section) {
     {
       name: 'table:tasklist',
       title: locale.taskList,
-      icon: '<span class="itellyou-icon itellyou-icon-task-list" />',
+      icon: '<span class="lake-icon lake-icon-task-list" />',
       getDisabled: () => {
         return !section.subEngine;
       },
@@ -223,7 +223,7 @@ export default function (section) {
       name: 'table:image',
       type: 'upload',
       title: locale.image,
-      icon: '<span class="itellyou-icon itellyou-icon-image" />',
+      icon: '<span class="lake-icon lake-icon-image" />',
       getDisabled: () => {
         return !section.subEngine;
       },
@@ -232,14 +232,14 @@ export default function (section) {
       name: 'table:file',
       type: 'upload',
       title: locale.file,
-      icon: '<span class="itellyou-icon itellyou-icon-attachment" />',
+      icon: '<span class="lake-icon lake-icon-attachment" />',
       getDisabled: () => {
         return !section.subEngine;
       },
     },
     {
       name: 'table:label',
-      icon: '<span class="itellyou-icon itellyou-icon-label" />',
+      icon: '<span class="lake-icon lake-icon-label" />',
       title: locale.label,
       getDisabled: () => {
         return !section.subEngine;
@@ -251,9 +251,9 @@ export default function (section) {
     {
       name: 'table:link',
       title: locale.link,
-      className: 'itellyou-button-link',
+      className: 'lake-button-link',
       hotkey: macos ? '\u2318+K' : 'Ctrl+K',
-      icon: '<span class="itellyou-icon itellyou-icon-link" />',
+      icon: '<span class="lake-icon lake-icon-link" />',
       getDisabled: () => {
         return !section.subEngine;
       },

@@ -17,7 +17,7 @@ class Emoji extends SectionBase {
 
   render(container, value) {
     value = Engine.StringUtils.sanitizeUrl(value);
-    const img = '<img class="itellyou-emoji" src="'.concat(Engine.StringUtils.escape(value), '" />');
+    const img = '<img class="lake-emoji" src="'.concat(Engine.StringUtils.escape(value), '" />');
     container.append(img);
 
     if (this.readonly) {

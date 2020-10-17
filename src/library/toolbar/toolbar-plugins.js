@@ -112,8 +112,8 @@ class ToolbarPlugins extends React.Component {
     }
 
     return (
-      <div className={classnames('itellyou-toolbar-content-plugins', {
-        'itellyou-toolbar-content-plugins-hide': !this.state.elementWidths,
+      <div className={classnames('lake-toolbar-content-plugins', {
+        'lake-toolbar-content-plugins-hide': !this.state.elementWidths,
       })}
         ref={this.rootRef}
       >

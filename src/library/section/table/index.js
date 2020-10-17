@@ -349,7 +349,7 @@ class Table extends SectionBase {
     };
 
     this.prevent = (e) => {
-      const table = Engine.$(e.target).closest('.itellyou-table');
+      const table = Engine.$(e.target).closest('.lake-table');
       if (table[0]) {
         e.preventDefault();
       }
@@ -479,7 +479,7 @@ class Table extends SectionBase {
     else {
       const { container } = this;
       if (container[0].childNodes.length > 0) {
-        container.addClass('itellyou-table-selected');
+        container.addClass('lake-table-selected');
       }
     }
   }
@@ -490,7 +490,7 @@ class Table extends SectionBase {
     } else {
       const { container } = this;
       if (container[0].childNodes.length > 0) {
-        container.removeClass('itellyou-table-selected');
+        container.removeClass('lake-table-selected');
       }
     }
   }

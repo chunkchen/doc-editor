@@ -37,7 +37,7 @@ class Label extends SectionBase {
     if (this.state.readonly) return;
     this.editorContainer.hide();
     this.setValue({}, true);
-    this.labelContainer.removeClass('itellyou-label-selected');
+    this.labelContainer.removeClass('lake-label-selected');
     this.engine.readonly(false);
     removeScrollAndResizeEventListener(this);
   }
@@ -51,18 +51,18 @@ class Label extends SectionBase {
   activate() {
     if (this.state.readonly) return;
     this.editorContainer.show();
-    this.labelContainer.addClass('itellyou-label-selected');
+    this.labelContainer.addClass('lake-label-selected');
     this.updateEditorPosition();
     addScrollAndResizeEventListener(this);
   }
 
   select() {
-    this.labelContainer.addClass('itellyou-label-selected');
+    this.labelContainer.addClass('lake-label-selected');
   }
 
   unselect() {
     if (!this.state.activated || this.state.readonly) {
-      this.labelContainer.removeClass('itellyou-label-selected');
+      this.labelContainer.removeClass('lake-label-selected');
     }
   }
 
@@ -86,12 +86,12 @@ class Label extends SectionBase {
     this.labelContainer.css('background', backgroundColors[colorIndex][0]);
     this.labelContainer.css('color', color);
     this.labelContainer.css('opacity', opacity);
-    this.state.activated ? this.labelContainer.addClass('itellyou-label-selected') : this.labelContainer.removeClass('itellyou-label-selected');
+    this.state.activated ? this.labelContainer.addClass('lake-label-selected') : this.labelContainer.removeClass('lake-label-selected');
     this.labelContainer.html(text);
   }
 
   renderView() {
-    this.labelContainer = Engine.$('\n      <span class="itellyou-section-label-container"></span>\n    ');
+    this.labelContainer = Engine.$('\n      <span class="lake-section-label-container"></span>\n    ');
     this.container.append(this.labelContainer);
     this.updateLabel();
     if (!this.state.readonly) {
@@ -101,7 +101,7 @@ class Label extends SectionBase {
 
   renderEditor() {
     const { container, value, engine, sectionRoot } = this;
-    const editorContainer = Engine.$('<div class="itellyou-section-label-editor"></div>');
+    const editorContainer = Engine.$('<div class="lake-section-label-editor"></div>');
     this.editorContainer = editorContainer;
     container.append(editorContainer);
     bindKeydownEvent({

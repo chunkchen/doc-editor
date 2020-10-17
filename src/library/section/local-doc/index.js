@@ -15,7 +15,7 @@ class LocalDoc extends Upload {
     this.engine.sidebar.set({
       name: 'localdoc',
       title: lang.preferences,
-      className: 'itellyou-localdoc-sidebar',
+      className: 'lake-localdoc-sidebar',
       data: this.value,
     });
   }

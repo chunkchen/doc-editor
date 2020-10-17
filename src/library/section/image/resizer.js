@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
 
 const template = (data) => {
-  return '\n  <div class="itellyou-image-editor">\n    <img data-role="image-bg" class="itellyou-image-editor-bg itellyou-image-editor-bg-active" src="'.concat(data.src, '">\n    <div data-role="holder-45" class="itellyou-image-editor-holder itellyou-image-editor-holder-45"></div>\n    <div data-role="holder-135" class="itellyou-image-editor-holder itellyou-image-editor-holder-135"></div>\n    <div data-role="holder-225" class="itellyou-image-editor-holder itellyou-image-editor-holder-225"></div>\n    <div data-role="holder-315" class="itellyou-image-editor-holder itellyou-image-editor-holder-315"></div>\n    <span data-role="number" class="itellyou-image-editor-number"></span>\n  </div>\n  '); //    <span data-role="maximize" class="itellyou-image-editor-maximize"><span class="itellyou-icon itellyou-icon-full-screen"></span></span>
+  return '\n  <div class="lake-image-editor">\n    <img data-role="image-bg" class="lake-image-editor-bg lake-image-editor-bg-active" src="'.concat(data.src, '">\n    <div data-role="holder-45" class="lake-image-editor-holder lake-image-editor-holder-45"></div>\n    <div data-role="holder-135" class="lake-image-editor-holder lake-image-editor-holder-135"></div>\n    <div data-role="holder-225" class="lake-image-editor-holder lake-image-editor-holder-225"></div>\n    <div data-role="holder-315" class="lake-image-editor-holder lake-image-editor-holder-315"></div>\n    <span data-role="number" class="lake-image-editor-number"></span>\n  </div>\n  '); //    <span data-role="maximize" class="lake-image-editor-maximize"><span class="lake-icon lake-icon-full-screen"></span></span>
 };
 
 class Resizer {
@@ -20,7 +20,7 @@ class Resizer {
       };
       this.angle = angle;
       this.resizing = true;
-      this.find('number')[0].className = 'itellyou-image-editor-number itellyou-image-editor-number-'.concat(angle, ' itellyou-image-editor-number-active');
+      this.find('number')[0].className = 'lake-image-editor-number lake-image-editor-number-'.concat(angle, ' lake-image-editor-number-active');
       this.image.show();
       document.addEventListener('mousemove', this.onMouseMove);
       document.addEventListener('mouseup', this.onMouseUp);
@@ -47,7 +47,7 @@ class Resizer {
       this.height = this.root[0].clientHeight;
       this.angle = 0;
       this.resizing = false;
-      this.find('number')[0].className = 'itellyou-image-editor-number';
+      this.find('number')[0].className = 'lake-image-editor-number';
       document.removeEventListener('mousemove', this.onMouseMove);
       document.removeEventListener('mouseup', this.onMouseUp);
 
@@ -90,7 +90,7 @@ class Resizer {
     };
 
     this.closeZoom = () => {
-      const container = Engine.$('#itellyou-image-zoom-container');
+      const container = Engine.$('#lake-image-zoom-container');
       if (container[0]) {
         ReactDOM.unmountComponentAtNode(container[0]);
       }

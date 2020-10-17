@@ -81,7 +81,7 @@ export default {
     ReactDom.render(
       <div>
         <span
-          className="itellyou-icon itellyou-icon-zoom-out"
+          className="lake-icon lake-icon-zoom-out"
           onClick={this._clickZoomDown.bind(this)}
         />
         <Dropdown
@@ -99,7 +99,7 @@ export default {
           </span>
         </Dropdown>
         <span
-          className="itellyou-icon itellyou-icon-zoom-in"
+          className="lake-icon lake-icon-zoom-in"
           onClick={this._clickZoomUp.bind(this)}
         />
       </div>,

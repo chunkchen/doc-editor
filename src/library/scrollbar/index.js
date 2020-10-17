@@ -160,22 +160,22 @@ class Scrollbar extends EventEmitter2 {
       const children = this.container.children();
       let hasScrollbar = false;
       children.each((child) => {
-        if (Engine.$(child).hasClass('itellyou-scrollbar')) {
+        if (Engine.$(child).hasClass('lake-scrollbar')) {
           hasScrollbar = true;
         }
       });
       if (!hasScrollbar) {
         this.container.css('position', 'relative');
-        this.container.addClass('itellyou-scrollable');
+        this.container.addClass('lake-scrollable');
         if (this.option.x) {
-          this.scrollBarX = Engine.$('<div class="itellyou-scrollbar itellyou-scrollbar-x "><div class="itellyou-scrollbar-trigger"></div></div>');
-          this.slideX = this.scrollBarX.find('.itellyou-scrollbar-trigger');
+          this.scrollBarX = Engine.$('<div class="lake-scrollbar lake-scrollbar-x "><div class="lake-scrollbar-trigger"></div></div>');
+          this.slideX = this.scrollBarX.find('.lake-scrollbar-trigger');
           this.container.append(this.scrollBarX);
           this.container.addClass('scroll-x');
         }
         if (this.option.y) {
-          this.scrollBarY = Engine.$('<div class="itellyou-scrollbar itellyou-scrollbar-y "><div class="itellyou-scrollbar-trigger"></div></div>');
-          this.slideY = this.scrollBarY.find('.itellyou-scrollbar-trigger');
+          this.scrollBarY = Engine.$('<div class="lake-scrollbar lake-scrollbar-y "><div class="lake-scrollbar-trigger"></div></div>');
+          this.slideY = this.scrollBarY.find('.lake-scrollbar-trigger');
           this.container.append(this.scrollBarY);
           this.container.addClass('scroll-y');
         }

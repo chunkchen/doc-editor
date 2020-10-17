@@ -77,7 +77,7 @@ class YouKu extends EmbedUrl {
 
   renderError() {
     this.container.append(
-      '\n      <div class="youku-error">\n        <p><span class="itellyou-icon itellyou-icon-warning"></span></p>\n        <p>'.concat(
+      '\n      <div class="youku-error">\n        <p><span class="lake-icon lake-icon-warning"></span></p>\n        <p>'.concat(
         this.locale.wechatAlert,
         '</p>\n      </div>\n    ',
       ),

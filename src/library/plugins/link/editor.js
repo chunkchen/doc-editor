@@ -23,7 +23,7 @@ class LinkEditor extends React.Component {
   setContainerPosition() {
     const { container, target } = this.props;
     const { bottom } = target.getBoundingClientRect();
-    container.className = 'itellyou-prevent-section-activated';
+    container.className = 'lake-prevent-section-activated';
     container.style.top = ''.concat(+window.pageYOffset + bottom + 4, 'px');
     container.style.left = ''.concat(window.pageXOffset, 'px');
     container.style.position = 'absolute';
@@ -69,7 +69,7 @@ class LinkEditor extends React.Component {
         const { target } = event;
         if (this.preventScrollCancel) {
           event.preventDefault();
-        } else if (!target.className || target.className.indexOf('itellyou-link') === -1) {
+        } else if (!target.className || target.className.indexOf('lake-link') === -1) {
           this.cancel();
         }
       },
@@ -164,29 +164,29 @@ class LinkEditor extends React.Component {
 
     const linkContainer = link ? (
       shouldTargetBlank(link) ? (
-        <a className="itellyou-link-editor-link-container" href={sanitizeUrl(link)} target="_blank">
+        <a className="lake-link-editor-link-container" href={sanitizeUrl(link)} target="_blank">
           {text}
         </a>
       ) : (
-        <a className="itellyou-link-editor-link-container" href={sanitizeUrl(link)}>
+        <a className="lake-link-editor-link-container" href={sanitizeUrl(link)}>
           {text}
         </a>
       )
     ) : (
-      <span className="itellyou-link-editor-link-empty">{text}</span>
+      <span className="lake-link-editor-link-empty">{text}</span>
     );
 
     return (
       <div
-        className="itellyou-link-editor itellyou-link-editor-preview"
+        className="lake-link-editor lake-link-editor-preview"
         ref={ref => (this.containerDom = ref)}
       >
-        <span className="itellyou-icon itellyou-icon-link" />
+        <span className="lake-icon lake-icon-link" />
         {linkContainer}
-        <span className="itellyou-link-editor-slash" />
+        <span className="lake-link-editor-slash" />
         <Tooltip title={locale.editLink}>
           <a
-            className="itellyou-icon itellyou-icon-edit itellyou-link-editor-button"
+            className="lake-icon lake-icon-edit lake-link-editor-button"
             onClick={() => {
               this.setState({
                 type: 'edit',
@@ -196,7 +196,7 @@ class LinkEditor extends React.Component {
         </Tooltip>
         <Tooltip title={locale.deleteLink}>
           <a
-            className="itellyou-icon itellyou-icon-unlink itellyou-link-editor-button"
+            className="lake-icon lake-icon-unlink lake-link-editor-button"
             onClick={onDeleteLink}
           />
         </Tooltip>
@@ -216,13 +216,13 @@ class LinkEditor extends React.Component {
 
     return (
       <div
-        className="itellyou-link-editor itellyou-link-editor-edit"
+        className="lake-link-editor lake-link-editor-edit"
         ref={element => (this.containerDom = element)}
       >
         <p>{locale.text}</p>
         <p>
           <Input
-            className="itellyou-link-text-input"
+            className="lake-link-text-input"
             defaultValue={text}
             ref={(element) => {
               this.preventScrollCancel = true;
@@ -241,7 +241,7 @@ class LinkEditor extends React.Component {
         <p>{locale.link}</p>
         <p>
           <Input
-            className="itellyou-link-text-input"
+            className="lake-link-text-input"
             defaultValue={link}
             ref={(element) => {
               if (element) {
@@ -259,13 +259,13 @@ class LinkEditor extends React.Component {
           />
         </p>
         {invalidLink && link !== '' ? (
-          <p className="itellyou-link-invalid-link">{locale.pleaseEnterCorrectLink}</p>
+          <p className="lake-link-invalid-link">{locale.pleaseEnterCorrectLink}</p>
         ) : (
           ''
         )}
         <p>
           <Button
-            className="itellyou-link-confirm-button"
+            className="lake-link-confirm-button"
             onClick={() => {
               this.confirm();
             }}

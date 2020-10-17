@@ -71,8 +71,8 @@ class CollapseButton extends React.Component {
       return String(index);
     });
     return (
-      <div className="itellyou-button-set itellyou-collapse-button" ref={this.buttonArea}>
-        <div className={classnames('itellyou-button-set-trigger', { 'itellyou-button-set-trigger-active': active })}>
+      <div className="lake-button-set lake-collapse-button" ref={this.buttonArea}>
+        <div className={classnames('lake-button-set-trigger', { 'lake-button-set-trigger-active': active })}>
           <Button {...buttonProps} />
         </div>
         <Collapse {...collapseProps} />

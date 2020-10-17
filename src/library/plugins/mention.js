@@ -24,7 +24,7 @@ function handleKeydownAt(e) {
   component.renderSuggestion();
   this.history.start(); // 焦点移动到 A 标签输入区域，用于继续输入搜索关键词
 
-  const input = sectionRoot.find('.itellyou-mention-at');
+  const input = sectionRoot.find('.lake-mention-at');
   range.selectNodeContents(input[0]);
   range.collapse(false);
   this.change.select(range);

@@ -65,12 +65,12 @@ class MobileEditor extends React.Component {
     }(this.props));
 
     return (
-      <div className="itellyou-editor itellyou-mobile-editor">
+      <div className="lake-editor lake-mobile-editor">
         {engine && (
           <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions, { mobile: true })} />
         )}
-        <div className="itellyou-content-editor" ref={this.contentEditor}>
-          <div className="itellyou-content-editor-extra">{header}</div>
+        <div className="lake-content-editor" ref={this.contentEditor}>
+          <div className="lake-content-editor-extra">{header}</div>
           <Editor
             {...Object.assign(
               {

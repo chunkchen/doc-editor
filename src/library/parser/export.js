@@ -112,25 +112,25 @@ class ExportParser extends Engine.ExportParser {
               mode,
             }),
           );
-          const content = section.find('.itellyou-codeblock-content');
+          const content = section.find('.lake-codeblock-content');
           content.css({
             border: '1px solid #e8e8e8',
             'max-width': '750px',
           });
           setMode(content, mode, value.code);
-          content.addClass('itellyou-engine-view');
+          content.addClass('lake-engine-view');
           content.hide();
           document.body.appendChild(content[0]);
           setStyle(content, ['color', 'margin', 'padding', 'background']);
-          section.find('.itellyou-codeblock').remove();
+          section.find('.lake-codeblock').remove();
           content.show();
           content.css('background', '#f9f9f9');
           section.append(content);
-          content.removeClass('itellyou-engine-view');
+          content.removeClass('lake-engine-view');
         }
       },
       emoji: (section) => {
-        const emoji = section.find('.itellyou-emoji');
+        const emoji = section.find('.lake-emoji');
         section.empty();
         if (emoji.length > 0) {
           emoji.attr('width', '18');
@@ -152,7 +152,7 @@ class ExportParser extends Engine.ExportParser {
         }
       },
       label: (section) => {
-        const label = section.find('.itellyou-section-label-container');
+        const label = section.find('.lake-section-label-container');
         section.empty();
         if (label.length > 0) {
           label.css({

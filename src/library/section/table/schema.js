@@ -1,6 +1,6 @@
 export default [{
   table: {
-    class: 'itellyou-table',
+    class: 'lake-table',
     style: {
       width: '@length',
     },

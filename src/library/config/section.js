@@ -6,14 +6,14 @@ export default (engine) => {
     {
       name: 'image',
       type: 'upload',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-image" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-image" />',
       title: locale.section.image,
       pinyin: 'tupian,image',
       description: locale.section.imageDescription,
     },
     {
       name: 'table',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-table" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-table" />',
       title: locale.section.table,
       pinyin: 'biaoge,table',
       description: locale.section.tableDescription,
@@ -30,14 +30,14 @@ export default (engine) => {
     {
       name: 'video',
       type: 'video',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-video" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-video" />',
       title: locale.section.video,
       pinyin: 'bendishipin,video',
       description: locale.section.videoDescription,
     },
     {
       name: 'youku',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-youku" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-youku" />',
       title: locale.section.youku,
       subTitle: locale.section.youkuSubTitle,
       pinyin: 'zaixianshipin,youku,bilibili',
@@ -62,7 +62,7 @@ export default (engine) => {
     },
     {
       name: 'codeblock',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-codeblock" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-codeblock" />',
       title: locale.section.codeblock,
       pinyin: 'daimakuai,code',
       description: locale.section.codeblockDescription,
@@ -73,14 +73,14 @@ export default (engine) => {
     {
       name: 'file',
       type: 'upload',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-file" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-file" />',
       title: locale.section.file,
       pinyin: 'fujian,file,attachment',
       description: locale.section.fileDescription,
     },
     {
       name: 'math',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-math" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-math" />',
       title: locale.section.math,
       pinyin: 'gongshi,formula,math,latex',
       description: locale.section.mathDescription,
@@ -90,7 +90,7 @@ export default (engine) => {
     },
     {
       name: 'mindmap',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-mindmap" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-mindmap" />',
       title: locale.section.mindmap,
       pinyin: 'siweinaotu,mindmap',
       description: locale.section.mindmapDescription,
@@ -100,7 +100,7 @@ export default (engine) => {
     },
     {
       name: 'diagram',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-puml" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-puml" />',
       title: locale.section.diagram,
       subTitle: locale.section.diagramSubTitle,
       pinyin: 'huitu,wenbenhuitu,puml,graphviz,mermaid,flowchart',
@@ -133,7 +133,7 @@ export default (engine) => {
     },
     {
       name: 'lockedtext',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-lockedtext" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-lockedtext" />',
       title: locale.section.lockedtextTitle,
       pinyin: 'jiamiwenben,lockedtext',
       description: locale.section.lockedtextDescription,
@@ -143,7 +143,7 @@ export default (engine) => {
     },
     {
       name: 'onlinedoc',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-onlinedoc" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-onlinedoc" />',
       title: locale.section.onlinedoc,
       pinyin: 'onlinewendang,onlinedoc',
       description: locale.section.onlineDescription,
@@ -153,7 +153,7 @@ export default (engine) => {
     },
     {
       name: 'website',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-website" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-website" />',
       title: locale.section.website,
       pinyin: 'qianruwangzhi,website',
       description: locale.section.websiteDescription,
@@ -164,7 +164,7 @@ export default (engine) => {
     {
       name: 'localdoc',
       type: 'upload',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-insert-localdoc" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-insert-localdoc" />',
       tooltip: [
         /** {
                 name: locale.section.mindmapFile,
@@ -220,7 +220,7 @@ export default (engine) => {
     },
     {
       name: 'label',
-      icon: '<span class="itellyou-svg-icon itellyou-svg-icon-label" />',
+      icon: '<span class="lake-svg-icon lake-svg-icon-label" />',
       title: locale.section.label,
       pinyin: 'zhuangtai,status',
       description: locale.section.labelDescription,
@@ -230,7 +230,7 @@ export default (engine) => {
     },
     {
       name: 'mxgraph',
-      icon: '<span class="itellyou-icon itellyou-icon-liuchengtu" />',
+      icon: '<span class="lake-icon lake-icon-liuchengtu" />',
       title: '流程图绘制',
       pinyin: 'mxgraph',
       description: 'mxgraph',

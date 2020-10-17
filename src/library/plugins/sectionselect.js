@@ -19,7 +19,7 @@ function handleKeydownSlash(e) {
       this.change.activateSection(section);
       range = this.change.getRange();
       this.history.start();
-      const node = section.find('.itellyou-sectionselect-keyword');
+      const node = section.find('.lake-sectionselect-keyword');
       range.selectNodeContents(node[0]);
       range.collapse(false);
       this.change.select(range);

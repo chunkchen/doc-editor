@@ -13,7 +13,7 @@ export default {
     this.on('paste:schema', (schema) => {
       schema.add([{
         img: {
-          class: 'itellyou-emoji',
+          class: 'lake-emoji',
         },
       }, {
         span: {
@@ -26,7 +26,7 @@ export default {
     });
     this.on('paste:each', (node) => {
       // 只复制了 emoji 图片
-      if (node.name === 'img' && node.hasClass('itellyou-emoji')) {
+      if (node.name === 'img' && node.hasClass('lake-emoji')) {
         const match = /((https|http)?:\/\/.+?\.svg)/i.exec(node[0].outerHTML);
         if (match) {
           this.section.replaceNode(node, 'emoji', match[1]);

@@ -22,19 +22,19 @@ class Error extends React.Component {
   render() {
     const { variableContent, fixedContent, message, block, docWidth, sectionIcon } = this.props;
     return (
-      <div className="itellyou-error-tips" style={{ width: block ? '100%' : 'auto' }}>
-        <div className="itellyou-error-tips-section-icon"
+      <div className="lake-error-tips" style={{ width: block ? '100%' : 'auto' }}>
+        <div className="lake-error-tips-section-icon"
           dangerouslySetInnerHTML={{
             __html: sectionIcon,
           }}
         />
-        <div className="itellyou-error-tips-info">
-          <span className="itellyou-error-tips-variable-content"
+        <div className="lake-error-tips-info">
+          <span className="lake-error-tips-variable-content"
             style={{ maxWidth: block ? ''.concat(docWidth - 200, 'px') : '220px' }}
           >
             {variableContent}
           </span>
-          <span className="itellyou-error-tips-fixed-content">{fixedContent}</span>
+          <span className="lake-error-tips-fixed-content">{fixedContent}</span>
         </div>
         {
           message ? (
@@ -43,7 +43,7 @@ class Error extends React.Component {
               placement="bottom"
             >
               <span
-                className="itellyou-svg-icon itellyou-svg-icon-alert"
+                className="lake-svg-icon lake-svg-icon-alert"
                 onClick={() => {
                   const e = {
                     mode: 'json',

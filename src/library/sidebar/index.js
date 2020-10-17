@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
       }
       const { engine } = this.props;
       this.setState(state);
-      localStorage.setItem('itellyou-sidebar', state.name);
+      localStorage.setItem('lake-sidebar', state.name);
       engine.toolbar.updateState();
       engine.sidebar.activate = state.name;
     };
@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
       this.setState({
         name: 'none',
       });
-      localStorage.setItem('itellyou-sidebar', 'none');
+      localStorage.setItem('lake-sidebar', 'none');
     };
 
     this.store = (config) => {
@@ -74,26 +74,26 @@ class Sidebar extends React.Component {
     };
     return name === 'none' ? null : (
       <div
-        className={classnames('itellyou-sidebar', 'itellyou-sidebar-active', 'itellyou-common-sidebar', className)}
-        data-itellyou-element="sidebar"
+        className={classnames('lake-sidebar', 'lake-sidebar-active', 'lake-common-sidebar', className)}
+        data-lake-element="sidebar"
         ref={e => this.current = e}
       >
-        <div className="itellyou-sidebar-title">
+        <div className="lake-sidebar-title">
           {title}
           {
             showCloseBtn !== false
             && (
             <div
-              className="itellyou-sidebar-close"
+              className="lake-sidebar-close"
               onClick={this.close}
             >
-              <span className="itellyou-icon itellyou-icon-close" />
+              <span className="lake-icon lake-icon-close" />
             </div>
             )
           }
         </div>
         <div
-          className="itellyou-sidebar-content"
+          className="lake-sidebar-content"
           ref={this.contentNode}
         >
           {name === 'toc' && <Toc {...contentProps} />}

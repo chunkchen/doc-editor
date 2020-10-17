@@ -74,7 +74,7 @@ class Zoom extends React.Component {
         mouseEnterDelay={1}
       >
         <span onClick={onClick}
-          className={'itellyou-pswp-'.concat(zoomClass, ' btn ').concat(status)}
+          className={'lake-pswp-'.concat(zoomClass, ' btn ').concat(status)}
         />
       </Tooltip>
     ) : '';
@@ -85,7 +85,7 @@ class Zoom extends React.Component {
     const { prevStatus, nextStatus, zoomInStatus, zoomOutStatus, originSizeStatus, bestSizeStatus } = this.state;
     return (
       <div
-        className="itellyou-pswp-tool-bar"
+        className="lake-pswp-tool-bar"
       >
         <div ref={e => this.tooltipContainer = e} />
         <div
@@ -96,7 +96,7 @@ class Zoom extends React.Component {
               if (prevStatus !== 'disable') imageBrowser.prev();
             })
           }
-          <span className="itellyou-pswp-counter" />
+          <span className="lake-pswp-counter" />
           {
             this.renderBtn('arrow-right', lang.next, nextStatus, () => {
               if (nextStatus !== 'disable') imageBrowser.next();

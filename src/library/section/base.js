@@ -36,14 +36,14 @@ class SectionBase {
   select() {
     const { container } = this;
     if (container[0].childNodes.length > 0) {
-      container.addClass(this.constructor.selectStyleType === 'background' ? 'itellyou-selected-background' : 'itellyou-selected-outline');
+      container.addClass(this.constructor.selectStyleType === 'background' ? 'lake-selected-background' : 'lake-selected-outline');
     }
   }
 
   unselect() {
     const { container } = this;
     if (container[0].childNodes.length > 0) {
-      container.removeClass(this.constructor.selectStyleType === 'background' ? 'itellyou-selected-background' : 'itellyou-selected-outline');
+      container.removeClass(this.constructor.selectStyleType === 'background' ? 'lake-selected-background' : 'lake-selected-outline');
     }
   }
 

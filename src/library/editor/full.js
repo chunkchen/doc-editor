@@ -50,11 +50,11 @@ class FullEditor extends React.Component {
         this.bindScrollEvent();
 
         engine.on('maximizesection', () => {
-          engine.container.closest('.itellyou-editor').addClass('itellyou-maximize-section');
+          engine.container.closest('.lake-editor').addClass('lake-maximize-section');
         });
 
         engine.on('restoresection', () => {
-          engine.container.closest('.itellyou-editor').removeClass('itellyou-maximize-section');
+          engine.container.closest('.lake-editor').removeClass('lake-maximize-section');
         });
 
         this.props.onLoad(engine);
@@ -64,9 +64,9 @@ class FullEditor extends React.Component {
 
   handleScroll = () => {
     if (this.itellyouFullEditorWrapperContent[0].scrollTop > 16) {
-      this.itellyouToolbar.addClass('itellyou-toolbar-active');
+      this.itellyouToolbar.addClass('lake-toolbar-active');
     } else {
-      this.itellyouToolbar.removeClass('itellyou-toolbar-active');
+      this.itellyouToolbar.removeClass('lake-toolbar-active');
     }
   };
 
@@ -81,8 +81,8 @@ class FullEditor extends React.Component {
   }
 
   bindScrollEvent() {
-    this.itellyouToolbar = Engine.$('.itellyou-toolbar');
-    this.itellyouFullEditorWrapperContent = Engine.$('.itellyou-max-editor-wrapper-content');
+    this.itellyouToolbar = Engine.$('.lake-toolbar');
+    this.itellyouFullEditorWrapperContent = Engine.$('.lake-max-editor-wrapper-content');
     this.itellyouFullEditorWrapperContent.on('scroll', this.handleScroll);
     Engine.$(document.body).css({
       'overscroll-behavior-x': 'none',
@@ -100,21 +100,22 @@ class FullEditor extends React.Component {
       locale: this.locale,
     };
 
-    const editorOptions = (function (props) {
-      const options = Object.assign({}, props);
+    const editorOptions = () => {
+      const options = Object.assign({}, this.props);
       const { onLoad, header, type, toolbar, ...editorOptions } = options;
       return editorOptions;
-    }(this.props));
+    };
+
     return (
-      <div className="itellyou-editor itellyou-max-editor">
-        <div className="itellyou-max-editor-wrapper">
+      <div className="lake-editor lake-max-editor">
+        <div className="lake-max-editor-wrapper">
           {engine && <Dialog engine={engine} />}
           {engine && <Toolbar {...Object.assign({ hasMore: false }, toolbarOptions)} />}
           {engine && <Sidebar engine={engine} />}
-          <div className="itellyou-max-editor-wrapper-content">
-            <div className="itellyou-max-editor-content">
-              <div className="itellyou-content-editor" ref={this.contentEditor}>
-                {header && <div className="itellyou-content-editor-extra">{header}</div>}
+          <div className="lake-max-editor-wrapper-content">
+            <div className="lake-max-editor-content">
+              <div className="lake-content-editor" ref={this.contentEditor}>
+                {header && <div className="lake-content-editor-extra">{header}</div>}
                 <Editor
                   {...Object.assign(
                     {

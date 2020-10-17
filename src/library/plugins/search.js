@@ -8,7 +8,7 @@ function getConfig() {
   return {
     name: PLUGIN_NAME,
     title: locale.title,
-    className: `itellyou-dialog-${PLUGIN_NAME}`, // data: {},
+    className: `lake-dialog-${PLUGIN_NAME}`, // data: {},
   };
 }
 

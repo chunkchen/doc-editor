@@ -17,8 +17,8 @@ class Toolbar extends React.Component {
     this.handleH5Scroll = () => {
       const { engine, mobile } = this.props;
       if (mobile) {
-        document.body.appendChild(Engine.$('.itellyou-toolbar')[0]);
-        this.toolbarEl = Engine.$('.itellyou-toolbar');
+        document.body.appendChild(Engine.$('.lake-toolbar')[0]);
+        this.toolbarEl = Engine.$('.lake-toolbar');
         engine.on('select', () => {
           this.toolbarEl.css({
             position: 'absolute',
@@ -96,12 +96,12 @@ class Toolbar extends React.Component {
 
     this.show = () => {
       const { engine } = this.props;
-      engine.container.closest('.itellyou-editor').removeClass('itellyou-toolbar-hidden');
+      engine.container.closest('.lake-editor').removeClass('lake-toolbar-hidden');
     };
 
     this.hide = () => {
       const { engine } = this.props;
-      engine.container.closest('.itellyou-editor').addClass('itellyou-toolbar-hidden');
+      engine.container.closest('.lake-editor').addClass('lake-toolbar-hidden');
     };
 
     this.updateState = () => {
@@ -149,7 +149,7 @@ class Toolbar extends React.Component {
   }
 
   componentWillUnmount() {
-    const toolbar = Engine.$('.itellyou-toolbar');
+    const toolbar = Engine.$('.lake-toolbar');
     const toolbarElement = toolbar ? toolbar[0] : null;
     if (toolbarElement) {
       toolbarElement.remove();
@@ -338,10 +338,10 @@ class Toolbar extends React.Component {
     });
     return (
       <div
-        className={classnames('itellyou-toolbar', {
-          'itellyou-mobile-toolbar': !!mobile,
+        className={classnames('lake-toolbar', {
+          'lake-mobile-toolbar': !!mobile,
         })}
-        data-itellyou-element="toolbar"
+        data-lake-element="toolbar"
         onMouseDown={(e) => {
           e.preventDefault();
           // fix：在搜狗浏览器上丢失选中状态
@@ -360,7 +360,7 @@ class Toolbar extends React.Component {
         }}
       >
         {pluginToolbar.length === 0 && (
-          <div className="itellyou-toolbar-content itellyou-toolbar-content-active">
+          <div className="lake-toolbar-content lake-toolbar-content-active">
             <ToolbarPlugins hasMore={hasMore} toolbarLength={toolbarLength}>
               {toolbar.map((subToolbar, index) => {
                 return (
@@ -383,7 +383,7 @@ class Toolbar extends React.Component {
           </div>
         )}
         {pluginToolbar.length > 0 && (
-          <div className="itellyou-toolbar-content itellyou-toolbar-content-active">
+          <div className="lake-toolbar-content lake-toolbar-content-active">
             <ToolbarPlugins hasMore={hasMore} toolbarLength={pluginToolbarLength}>
               {pluginToolbar.map((subToolbar, index) => {
                 return (

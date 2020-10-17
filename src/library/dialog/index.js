@@ -26,7 +26,7 @@ class Dialog extends React.Component {
       }
       const { engine } = this.props;
       this.setState(state);
-      localStorage.setItem('itellyou-dialog', state.name);
+      localStorage.setItem('lake-dialog', state.name);
       engine.toolbar.updateState();
     };
 
@@ -34,7 +34,7 @@ class Dialog extends React.Component {
       this.setState({
         name: 'none',
       });
-      localStorage.setItem('itellyou-dialog', 'none');
+      localStorage.setItem('lake-dialog', 'none');
     };
 
     this.store = (config) => {
@@ -66,7 +66,7 @@ class Dialog extends React.Component {
     return name === 'none' ? null
       : (
         <div
-          className="itellyou-dialog"
+          className="lake-dialog"
         >
           {name === 'search' && <Search {...this.props} onClose={this.close} />}
         </div>

@@ -51,7 +51,7 @@ class CollapseItem extends React.PureComponent {
 
   renderCommon() {
     const { item, index, itemOnClick } = this.props;
-    const activeClass = this.state.activated ? ' itellyou-collapse-list-item-active' : '';
+    const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     const style = item.subTitle
       ? {
         height: 'auto',
@@ -64,21 +64,21 @@ class CollapseItem extends React.PureComponent {
         data-index={index}
         data-aspm-click={''.concat(item.name)}
         accessbilityid={''.concat(item.name, '-section-button')}
-        className={'itellyou-collapse-list-item'.concat(activeClass)}
+        className={'lake-collapse-list-item'.concat(activeClass)}
         onClick={itemOnClick}
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}
         style={style}
       >
         {this.getIcon()}
-        <div className="itellyou-collapse-item-text">
-          <div className="itellyou-collapse-item-title">
+        <div className="lake-collapse-item-text">
+          <div className="lake-collapse-item-title">
             {item.title}
             {item.subTitle && (
-              <span className="itellyou-collapse-item-sub-title">{item.subTitle}</span>
+              <span className="lake-collapse-item-sub-title">{item.subTitle}</span>
             )}
-            {item.subNew && <span className="itellyou-sub-new-tag">{item.subNew}</span>}
-            {item.isNew ? <span className="itellyou-svg-icon-new-section" /> : ''}
+            {item.subNew && <span className="lake-sub-new-tag">{item.subNew}</span>}
+            {item.isNew ? <span className="lake-svg-icon-new-section" /> : ''}
           </div>
         </div>
       </div>
@@ -93,31 +93,31 @@ class CollapseItem extends React.PureComponent {
     const { icon } = this.props.item;
     if (icon && typeof icon === 'string') {
       return (
-        <div className="itellyou-collapse-item-icon" dangerouslySetInnerHTML={{ __html: icon }} />
+        <div className="lake-collapse-item-icon" dangerouslySetInnerHTML={{ __html: icon }} />
       );
     }
     if (icon) {
-      return <div className="itellyou-collapse-item-icon">{icon}</div>;
+      return <div className="lake-collapse-item-icon">{icon}</div>;
     }
     return null;
   };
 
   renderVideo() {
     const { item, index } = this.props;
-    const activeClass = this.state.activated ? ' itellyou-collapse-list-item-active' : '';
+    const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     return (
       <div
         key={index}
         data-index={index}
         data-aspm-click={''.concat(item.name)}
-        className={'itellyou-collapse-list-item'.concat(activeClass)}
+        className={'lake-collapse-list-item'.concat(activeClass)}
         onClick={this.onVideoTriggerClick.bind(this)}
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}
       >
         {this.getIcon()}
-        <div className="itellyou-collapse-item-text">
-          <div className="itellyou-collapse-item-title">{item.title}</div>
+        <div className="lake-collapse-item-text">
+          <div className="lake-collapse-item-title">{item.title}</div>
         </div>
         <input
           ref={e => (this.videoTrigger = e)}

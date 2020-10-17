@@ -22,7 +22,7 @@ class MindMap extends GraphSection {
       name: 'save',
       title: locale.save,
       hotkey: userAgent.macos ? '⌘+S' : 'Ctrl+S',
-      icon: '<span class="itellyou-icon itellyou-icon-save" />',
+      icon: '<span class="lake-icon lake-icon-save" />',
       onClick: () => {
         engine.command.execute('save');
       },
@@ -30,7 +30,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:undo',
       title: locale.undo,
       hotkey: userAgent.macos ? '⌘+Z' : 'Ctrl+Z',
-      icon: '<span class="itellyou-icon itellyou-icon-undo" />',
+      icon: '<span class="lake-icon lake-icon-undo" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('undo');
       },
@@ -41,7 +41,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:redo',
       title: locale.redo,
       hotkey: userAgent.macos ? '⌘+Y' : 'Ctrl+Y',
-      icon: '<span class="itellyou-icon itellyou-icon-redo" />',
+      icon: '<span class="lake-icon lake-icon-redo" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('redo');
       },
@@ -54,7 +54,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:append',
       title: locale.insertSibling,
       hotkey: 'Enter',
-      icon: '<span class="itellyou-icon itellyou-icon-sister-node" />',
+      icon: '<span class="lake-icon lake-icon-sister-node" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('append');
       },
@@ -65,7 +65,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:appendChild',
       title: locale.insertChild,
       hotkey: 'Tab',
-      icon: '<span class="itellyou-icon itellyou-icon-sub-node" />',
+      icon: '<span class="lake-icon lake-icon-sub-node" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('appendChild');
       },
@@ -76,7 +76,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:collapse',
       title: locale.collapse,
       hotkey: userAgent.macos ? '⌘+/' : 'Ctrl+/',
-      icon: '<span class="itellyou-icon itellyou-icon-collapse-subtree" />',
+      icon: '<span class="lake-icon lake-icon-collapse-subtree" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('collapse');
       },
@@ -87,7 +87,7 @@ class MindMap extends GraphSection {
       name: 'mindmap:expand',
       title: locale.expand,
       hotkey: userAgent.macos ? '⌘+/' : 'Ctrl+/',
-      icon: '<span class="itellyou-icon itellyou-icon-expand-subtree" />',
+      icon: '<span class="lake-icon lake-icon-expand-subtree" />',
       getDisabled: () => {
         return !graphEditor.commandEnable('expand');
       },

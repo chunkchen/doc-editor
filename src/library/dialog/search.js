@@ -116,10 +116,10 @@ class DialogSearch extends React.Component {
       <Tabs
         defaultActiveKey="search"
         animated={false}
-        className="itellyou-search"
+        className="lake-search"
         style={{ padding: '0 2px' }}
         tabBarExtraContent={(
-          <span className="itellyou-icon itellyou-icon-close"
+          <span className="lake-icon lake-icon-close"
             accessbilityid="searchreplace-close-button"
             onClick={() => onClose()}
           />

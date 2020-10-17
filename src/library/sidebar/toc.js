@@ -10,7 +10,7 @@ class TocSidebar extends React.Component {
       const engine = this.props.engine;
       e.preventDefault();
       const root = Engine.$(this.root.current);
-      const currentItem = Engine.$(e.target).closest('.itellyou-toc-item');
+      const currentItem = Engine.$(e.target).closest('.lake-toc-item');
       const itemList = root.find('a[href="#'.concat(id, '"]'));
       let itemIndex = 0;
       itemList.each((item, index) => {
@@ -19,11 +19,11 @@ class TocSidebar extends React.Component {
           return false;
         }
       });
-      root.find('.itellyou-toc-item-active').removeClass('itellyou-toc-item-active');
-      itemList.eq(itemIndex).addClass('itellyou-toc-item-active');
+      root.find('.lake-toc-item-active').removeClass('lake-toc-item-active');
+      itemList.eq(itemIndex).addClass('lake-toc-item-active');
       const block = engine.container.find('[id="'.concat(id, '"]')).eq(itemIndex);
-      const contentArea = engine.container.closest('.itellyou-max-editor-wrapper-content');
-      const toolbarArea = engine.container.closest('.itellyou-max-editor').find('.itellyou-toolbar');
+      const contentArea = engine.container.closest('.lake-max-editor-wrapper-content');
+      const toolbarArea = engine.container.closest('.lake-max-editor').find('.lake-toolbar');
       // 需要减掉工具栏和上面元素的高度
       contentArea[0].scrollTop += block.offset().top - toolbarArea.offset().top - toolbarArea[0].clientHeight;
     };
@@ -33,14 +33,14 @@ class TocSidebar extends React.Component {
 
   render() {
     return (
-      <div className="itellyou-toc" ref={this.root}>
+      <div className="lake-toc" ref={this.root}>
         {
           this.props.data.map((data, index) => {
             return (
               <a
                 key={index}
                 href={`#${data.id}`}
-                className={classnames('itellyou-toc-item', 'itellyou-toc-item-'.concat(data.depth))}
+                className={classnames('lake-toc-item', 'lake-toc-item-'.concat(data.depth))}
                 onClick={(e) => {
                   return this.handleClick(e, data.id);
                 }}

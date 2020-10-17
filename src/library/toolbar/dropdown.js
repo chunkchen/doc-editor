@@ -17,7 +17,7 @@ class Dropdown extends React.Component {
     let { name, data, active, currentValue, className, engine } = this.props;
     const withDot = name !== 'emoji' && name !== 'table:emoji';
     const emoji = name === 'emoji' || name === 'table:emoji';
-    const isIconList = className === 'itellyou-button-icon-list';
+    const isIconList = className === 'lake-button-icon-list';
 
     const options = engine.options.emoji || {};
     const emojiUrl = options.action || '/emoji/';
@@ -27,10 +27,10 @@ class Dropdown extends React.Component {
     }
 
     return (
-      <div className={classnames('itellyou-button-set-list', {
-        'itellyou-button-set-list-active': active,
-        'itellyou-button-set-list-with-dot': withDot,
-        'itellyou-button-set-list-emoji-mini': emoji,
+      <div className={classnames('lake-button-set-list', {
+        'lake-button-set-list-active': active,
+        'lake-button-set-list-with-dot': withDot,
+        'lake-button-set-list-emoji-mini': emoji,
       })}
       >
         {
@@ -39,7 +39,7 @@ class Dropdown extends React.Component {
               return (
                 <a
                   key={index}
-                  className={classnames('itellyou-button-set-list-item', row.className)}
+                  className={classnames('lake-button-set-list-item', row.className)}
                   onClick={(e) => {
                     return this.onSelect(e, row.point);
                   }}
@@ -57,12 +57,12 @@ class Dropdown extends React.Component {
                   placement="right"
                 >
                   <a
-                    className={classnames('itellyou-button-set-list-item', row.className)}
+                    className={classnames('lake-button-set-list-item', row.className)}
                     onClick={(e) => {
                       return this.onSelect(e, row.key);
                     }}
                   >
-                    {currentValue.indexOf(row.key) >= 0 && <span className="itellyou-icon itellyou-icon-dot" />}
+                    {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
                     <span dangerouslySetInnerHTML={{ __html: row.icon }} />
                     <span style={{ fontSize: 12 }}>{row.title}</span>
                   </a>
@@ -73,12 +73,12 @@ class Dropdown extends React.Component {
             return (
               <a
                 key={index}
-                className={classnames('itellyou-button-set-list-item', row.className)}
+                className={classnames('lake-button-set-list-item', row.className)}
                 onClick={(e) => {
                   return this.onSelect(e, row.key);
                 }}
               >
-                {currentValue.indexOf(row.key) >= 0 && <span className="itellyou-icon itellyou-icon-dot" />}
+                {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
                 <span>{row.value}</span>
               </a>
             );

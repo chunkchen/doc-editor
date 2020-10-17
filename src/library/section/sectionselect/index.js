@@ -6,7 +6,7 @@ import ToolbarCollapse from '../../toolbar/collapse';
 import toolbarConfig from '../../config/toolbar';
 import SectionBase from '../base';
 
-const SCOPE_NAME = 'itellyou-plugin-sectionselect';
+const SCOPE_NAME = 'lake-plugin-sectionselect';
 
 class SectionSelect extends SectionBase {
   constructor(_engine) {
@@ -21,7 +21,7 @@ class SectionSelect extends SectionBase {
     };
 
     this.getClickNode = (listRoot) => {
-      let node = listRoot.find('.itellyou-collapse-list-item-active');
+      let node = listRoot.find('.lake-collapse-list-item-active');
       const uploadNode = node.closest('div.ant-upload-select');
 
       if (uploadNode.length > 0) {
@@ -32,9 +32,9 @@ class SectionSelect extends SectionBase {
     };
 
     this.scrollItem = (direction) => {
-      const listRoot = this.container.find('.itellyou-toolbar-collapse');
-      const nodeList = listRoot.find('.itellyou-collapse-list-item');
-      const activeNode = listRoot.find('.itellyou-collapse-list-item-active');
+      const listRoot = this.container.find('.lake-toolbar-collapse');
+      const nodeList = listRoot.find('.lake-collapse-list-item');
+      const activeNode = listRoot.find('.lake-collapse-list-item-active');
       let activeIndex = 0;
       nodeList.each((node, index) => {
         if (node === activeNode[0]) {
@@ -61,9 +61,9 @@ class SectionSelect extends SectionBase {
     };
 
     this.selectItem = (node) => {
-      const listRoot = this.container.find('.itellyou-toolbar-collapse');
-      listRoot.find('.itellyou-collapse-list-item-active').removeClass('itellyou-collapse-list-item-active');
-      node.addClass('itellyou-collapse-list-item-active');
+      const listRoot = this.container.find('.lake-toolbar-collapse');
+      listRoot.find('.lake-collapse-list-item-active').removeClass('lake-collapse-list-item-active');
+      node.addClass('lake-collapse-list-item-active');
     };
 
     this.searchData = (keyword) => {
@@ -124,7 +124,7 @@ class SectionSelect extends SectionBase {
     };
 
     this.removeSectionSelect = () => {
-      const sectionSelectNode = this.container.find('.itellyou-sectionselect-list');
+      const sectionSelectNode = this.container.find('.lake-sectionselect-list');
 
       if (sectionSelectNode.length > 0) {
         unmountComponentAtNode(sectionSelectNode[0]);
@@ -167,7 +167,7 @@ class SectionSelect extends SectionBase {
       this.unbindEvents();
       const engine = this.engine;
       this.removeSectionSelect();
-      const sectionSelectNode = Engine.$('<div class="itellyou-sectionselect-list" />');
+      const sectionSelectNode = Engine.$('<div class="lake-sectionselect-list" />');
 
       this.container.append(sectionSelectNode);
       const classArray = [];
@@ -175,14 +175,14 @@ class SectionSelect extends SectionBase {
       const editorHeader = Engine.$('.lark-editor-header');
       let height = 0;
       if (editorHeader.length > 0) {
-        const toolbarElement = engine.container.closest('.itellyou-editor').find('.itellyou-toolbar');
+        const toolbarElement = engine.container.closest('.lake-editor').find('.lake-toolbar');
         if (toolbarElement.length > 0) height = editorHeader[0].clientHeight + toolbarElement[0].clientHeight;
       }
       if (rootOffset.top - height > 482) {
-        classArray.push('itellyou-button-set-list-to-top');
+        classArray.push('lake-button-set-list-to-top');
       }
       if (data[0].title === '') {
-        classArray.push('itellyou-button-set-list-search');
+        classArray.push('lake-button-set-list-search');
       }
 
       const collapseProps = {
@@ -203,7 +203,7 @@ class SectionSelect extends SectionBase {
         onAfterUpload: this.handleAfterUpload,
       };
       ReactDOM.render(<ToolbarCollapse {...collapseProps} />, sectionSelectNode[0]);
-      const listItem = sectionSelectNode.find('.itellyou-collapse-list-item');
+      const listItem = sectionSelectNode.find('.lake-collapse-list-item');
       if (listItem.length > 0) {
         this.selectItem(listItem.eq(0));
       }
@@ -270,7 +270,7 @@ class SectionSelect extends SectionBase {
       }
 
       e.preventDefault();
-      const listRoot = this.container.find('.itellyou-toolbar-collapse');
+      const listRoot = this.container.find('.lake-toolbar-collapse');
 
       const node = this.getClickNode(listRoot);
       const fileInput = node.find('input[type=file]');
@@ -319,10 +319,10 @@ class SectionSelect extends SectionBase {
     this.sectionRoot.attr('data-transient', 'true');
     this.sectionRoot.attr('contenteditable', false);
     // 编辑模式
-    container.append('\n      <span class="itellyou-sectionselect-keyword" contenteditable="true">/</span>\n      <span class="itellyou-sectionselect-placeholder" style="\n        color: rgba(0,0,0,0.25);\n        pointer-events: none;\n        position: absolute;\n        width: 76px;\n        left: 7px;\n      ">'.concat(this.engine.locale.section.placeholder, '</span>\n    '));
-    const keywordNode = container.find('.itellyou-sectionselect-keyword');
+    container.append('\n      <span class="lake-sectionselect-keyword" contenteditable="true">/</span>\n      <span class="lake-sectionselect-placeholder" style="\n        color: rgba(0,0,0,0.25);\n        pointer-events: none;\n        position: absolute;\n        width: 76px;\n        left: 7px;\n      ">'.concat(this.engine.locale.section.placeholder, '</span>\n    '));
+    const keywordNode = container.find('.lake-sectionselect-keyword');
     this.keywordNode = keywordNode;
-    this.placeholder = container.find('.itellyou-sectionselect-placeholder');
+    this.placeholder = container.find('.lake-sectionselect-placeholder');
     // 监听输入事件
     keywordNode.on('keydown', (e) => {
       if (Engine.isHotkey('enter', e)) {

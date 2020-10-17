@@ -68,10 +68,10 @@ class ColorPickerItem extends React.Component {
     }
     return (
       <span
-        className={classnames('itellyou-colorboard-group-item', {
-          'itellyou-colorboard-group-item-border': needborder,
-          'itellyou-colorboard-group-item-active': active,
-          'itellyou-colorboard-group-item-special': special,
+        className={classnames('lake-colorboard-group-item', {
+          'lake-colorboard-group-item-border': needborder,
+          'lake-colorboard-group-item-active': active,
+          'lake-colorboard-group-item-special': special,
         })}
         onClick={this.onSelect.bind(this, color)}
       >
@@ -91,7 +91,7 @@ class ColorPickerGroup extends React.Component {
     const { activeColors, defaultColor, onSelect, setStroke } = this.props;
 
     return (
-      <span className="itellyou-colorboard-group">
+      <span className="lake-colorboard-group">
         {
               data.map((c) => {
                 return (
@@ -117,7 +117,7 @@ class ColorPicker extends React.Component {
     let { colors } = this.props;
     if (!colors) colors = Palette.getColors();
     return (
-      <div className="itellyou-colorboard">
+      <div className="lake-colorboard">
         {
           colors.map((data, index) => {
             return (

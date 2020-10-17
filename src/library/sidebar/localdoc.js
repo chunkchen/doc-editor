@@ -35,7 +35,7 @@ class LocalDoc extends React.Component {
     return (
       <div>
         <Checkbox
-          className="itellyou-content-view-download"
+          className="lake-content-view-download"
           onChange={(event) => {
             this.handleUpdateDownload(event.target.checked);
           }}

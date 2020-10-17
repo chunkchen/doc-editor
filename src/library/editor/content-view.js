@@ -75,7 +75,7 @@ class ContentView extends React.Component {
       node = Engine.$(node);
       const id = node.attr('id');
       if (id) {
-        node.prepend('<a class="itellyou-anchor" href="#'.concat(id, '"></a>'));
+        node.prepend('<a class="lake-anchor" href="#'.concat(id, '"></a>'));
       }
     });
   }
@@ -164,7 +164,7 @@ class ContentView extends React.Component {
     const prepend = document.createElement('div');
     this.viewArea.current.prepend(prepend);
     ReactDOM.render(<div
-      className="itellyou-embed-outline"
+      className="lake-embed-outline"
     >
       <h3>{language[this.props.lang].toc.title}</h3>
       <ul>
@@ -172,7 +172,7 @@ class ContentView extends React.Component {
           outline.map((item) => {
             return (
               <li
-                className={'itellyou-embed-outline itellyou-embed-outline-'.concat(item.depth)}
+                className={'lake-embed-outline lake-embed-outline-'.concat(item.depth)}
                 key={item.id}
               >
                 <a href={'#'.concat(encodeURIComponent(item.id))}>
@@ -202,7 +202,7 @@ class ContentView extends React.Component {
     const content = this.adaptContent(this.props.content);
     return (
       <div
-        className="itellyou-engine-view"
+        className="lake-engine-view"
         ref={this.viewArea}
         dangerouslySetInnerHTML={{ __html: content }}
       />

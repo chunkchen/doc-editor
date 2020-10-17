@@ -116,22 +116,22 @@ class Upload extends Embed {
     const url = this.getUrl();
     const ext = this.getAcceptExt();
     const size = value.size
-      ? '<span class="itellyou-embed-upload-collapse-file-size">'.concat(
+      ? '<span class="lake-embed-upload-collapse-file-size">'.concat(
         Engine.StringUtils.escape(Engine.UploadUtils.getFileSize(value.size)),
         '</span>\n',
       )
       : '';
     const root = this.container.append(
-      '\n      <div class="itellyou-embed itellyou-embed-upload itellyou-embed-upload-collapse" style="position: relative">\n        <div class="itellyou-embed-upload-file-icon itellyou-svg-icon-'
+      '\n      <div class="lake-embed lake-embed-upload lake-embed-upload-collapse" style="position: relative">\n        <div class="lake-embed-upload-file-icon lake-svg-icon-'
         .concat(
           Engine.StringUtils.escape(ext),
-          '"></div>\n        <div class="itellyou-embed-upload-collapse-body">\n          <div class="itellyou-embed-upload-collapse-name" >\n            <a href="',
+          '"></div>\n        <div class="lake-embed-upload-collapse-body">\n          <div class="lake-embed-upload-collapse-name" >\n            <a href="',
         )
         .concat(url, '" target="_blank">')
         .concat(Engine.StringUtils.escape(value.name), '</a>\n ')
         .concat(
           size,
-          '</div>\n        </div>\n        <a class="itellyou-embed-upload-icon itellyou-svg-icon-preview" href="',
+          '</div>\n        </div>\n        <a class="lake-embed-upload-icon lake-svg-icon-preview" href="',
         )
         .concat(url, '" target="_blank"></a>\n      </div>\n    '),
     );
@@ -148,19 +148,19 @@ class Upload extends Embed {
     const height = this.getHeight();
     const url = this.getUrl();
     const { transition } = options;
-    const readonlyClass = this.state.readonly ? ' itellyou-section-readonly' : '';
+    const readonlyClass = this.state.readonly ? ' lake-section-readonly' : '';
     const tips = this.getStatusTips();
     const acceptExt = this.getAcceptExt();
     const root = Engine.$(
-      '\n      <div class="itellyou-embed itellyou-embed-upload'
+      '\n      <div class="lake-embed lake-embed-upload'
         .concat(
           readonlyClass,
-          '">\n        <div class="itellyou-embed-upload-header">\n          <span class="itellyou-embed-upload-icon itellyou-embed-upload-file-icon itellyou-svg-icon-',
+          '">\n        <div class="lake-embed-upload-header">\n          <span class="lake-embed-upload-icon lake-embed-upload-file-icon lake-svg-icon-',
         )
         .concat(Engine.StringUtils.escape(acceptExt), '"></span>\n          <a href="')
         .concat(
           url,
-          '" target="_blank">\n            <span class="itellyou-embed-upload-file-name" style="max-width: calc(100% - 60px)"> ',
+          '" target="_blank">\n            <span class="lake-embed-upload-file-name" style="max-width: calc(100% - 60px)"> ',
         )
         .concat(
           Engine.StringUtils.escape(value.name),
@@ -168,16 +168,16 @@ class Upload extends Embed {
         )
         .concat(
           tips,
-          '</span> <span data-role="percent"></span>\n          </a>\n          <a class="itellyou-embed-upload-icon itellyou-svg-icon-preview" href="',
+          '</span> <span data-role="percent"></span>\n          </a>\n          <a class="lake-embed-upload-icon lake-svg-icon-preview" href="',
         )
         .concat(
           url,
-          '" target="_blank"></a>\n        </div>\n        <div class="itellyou-embed-upload-body">\n          <div class="itellyou-embed-content-bg">\n            <span class="itellyou-icon itellyou-icon-loading"></span>\n          </div>\n          <iframe\n            frameborder="0"\n            allowfullscreen="true"\n            style="height: ',
+          '" target="_blank"></a>\n        </div>\n        <div class="lake-embed-upload-body">\n          <div class="lake-embed-content-bg">\n            <span class="lake-icon lake-icon-loading"></span>\n          </div>\n          <iframe\n            frameborder="0"\n            allowfullscreen="true"\n            style="height: ',
         )
         .concat(Engine.StringUtils.escape(height), 'px; transition: ')
         .concat(
           Engine.StringUtils.escape(transition),
-          '"\n          ></iframe>\n          <div class="itellyou-embed-mask"></div>\n        </div>\n      </div>\n    ',
+          '"\n          ></iframe>\n          <div class="lake-embed-mask"></div>\n        </div>\n      </div>\n    ',
         ),
     );
 
@@ -186,9 +186,9 @@ class Upload extends Embed {
     this.root = root;
     this.iframe = iframe;
     iframe.on('load', () => {
-      root.find('.itellyou-embed-content-bg').hide();
+      root.find('.lake-embed-content-bg').hide();
     });
-    this.mask = root.find('.itellyou-embed-mask');
+    this.mask = root.find('.lake-embed-mask');
     if (value.height) {
       iframe.attr('data-height', height);
     }
@@ -227,7 +227,7 @@ class Upload extends Embed {
   getEmbedEmbedTitle() {
     const ext = this.getAcceptExt();
     const value = this.value;
-    return '\n        <span class="itellyou-svg-icon-'
+    return '\n        <span class="lake-svg-icon-'
       .concat(
         Engine.StringUtils.escape(ext),
         '" style="\n          float: left;\n          margin-top: 5px;\n          margin-right: 6px;\n          width: 12.6px;\n          height: 13.5px;\n          background-size: 12.6px 13.5px;\n        "></span>\n        ',
@@ -252,7 +252,7 @@ class Upload extends Embed {
     const { value, container } = this;
     ReactDOM.render(
       <Error
-        sectionIcon={'<span class="itellyou-svg-icon itellyou-svg-icon-error-file"></span>'}
+        sectionIcon={'<span class="lake-svg-icon lake-svg-icon-error-file"></span>'}
         variableContent={`${value.message ? value.message : this.locale.invalid} ${value.name}`}
         fixedContent={value.ext ? value.ext : ''}
         message={value}

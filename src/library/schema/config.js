@@ -10,7 +10,7 @@ export default [
   },
   {
     span: {
-      class: /^itellyou-fontsize-\d+$|itellyou\-section\-[\w\-]{1,100}/,
+      class: /^lake-fontsize-\d+$|itellyou\-section\-[\w\-]{1,100}/,
       style: {
         color: '@color',
         'background-color': '@color',
@@ -57,12 +57,12 @@ export default [
   {
     blockquote: {
       class: [
-        'itellyou-alert',
-        'itellyou-alert-info',
-        'itellyou-alert-warning',
-        'itellyou-alert-danger',
-        'itellyou-alert-success',
-        'itellyou-alert-tips',
+        'lake-alert',
+        'lake-alert-info',
+        'lake-alert-warning',
+        'lake-alert-danger',
+        'lake-alert-success',
+        'lake-alert-tips',
       ],
     },
   },
@@ -108,29 +108,29 @@ export default [
       href: '@url',
       target: ['_blank', '_parent', '_top'],
       ref: '*',
-      class: ['itellyou-video-link'],
+      class: ['lake-video-link'],
     },
   },
   {
     ul: {
-      class: ['itellyou-list'],
-      'data-itellyou-indent': '@number',
+      class: ['lake-list'],
+      'data-lake-indent': '@number',
     },
   },
   {
     ol: {
       start: '@number',
-      'data-itellyou-indent': '@number',
+      'data-lake-indent': '@number',
     },
   },
   {
     li: {
-      class: ['itellyou-list-node', 'itellyou-list-task'],
+      class: ['lake-list-node', 'lake-list-task'],
     },
   },
   {
     table: {
-      class: 'itellyou-table',
+      class: 'lake-table',
       style: {
         width: '@length',
         height: '@length',

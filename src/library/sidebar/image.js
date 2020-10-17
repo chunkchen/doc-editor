@@ -133,25 +133,25 @@ class ImageSidebar extends React.Component {
     const locale = engine.locale.image;
     return (
       <div>
-        <div className="itellyou-sidebar-group">
-          <div className="itellyou-sidebar-group-title">{locale.sizeTitle}</div>
-          <div className="itellyou-sidebar-group-item">
-            <div className="itellyou-sidebar-size-input">
+        <div className="lake-sidebar-group">
+          <div className="lake-sidebar-group-title">{locale.sizeTitle}</div>
+          <div className="lake-sidebar-group-item">
+            <div className="lake-sidebar-size-input">
               <Input
                 type="text"
                 size="small"
-                className="itellyou-sidebar-width"
+                className="lake-sidebar-width"
                 defaultValue={width}
                 value={width}
                 onKeyPress={this.handleSizeKeyPress}
                 onBlur={this.handleUpdateSize}
                 onChange={this.handleChangeWidth}
               />
-              <span className="itellyou-sidebar-lock"> </span>
+              <span className="lake-sidebar-lock"> </span>
               <Input
                 type="text"
                 size="small"
-                className="itellyou-sidebar-height"
+                className="lake-sidebar-height"
                 defaultValue={height}
                 value={height}
                 onKeyPress={this.handleSizeKeyPress}
@@ -159,14 +159,14 @@ class ImageSidebar extends React.Component {
                 onChange={this.handleChangeHeight}
               />
             </div>
-            <div className="itellyou-sidebar-size-title">
-              <span className="itellyou-sidebar-width-title">{locale.width}</span>
-              <span className="itellyou-sidebar-lock" />
-              <span className="itellyou-sidebar-height-title">{locale.height}</span>
+            <div className="lake-sidebar-size-title">
+              <span className="lake-sidebar-width-title">{locale.width}</span>
+              <span className="lake-sidebar-lock" />
+              <span className="lake-sidebar-height-title">{locale.height}</span>
             </div>
           </div>
           <div
-            className="itellyou-sidebar-group-item itellyou-sidebar-image-percent"
+            className="lake-sidebar-group-item lake-sidebar-image-percent"
             style={
               { marginBottom: '14px' }
             }
@@ -210,7 +210,7 @@ class ImageSidebar extends React.Component {
               </Button>
             </Group>
           </div>
-          <div className="itellyou-sidebar-group-item itellyou-sidebar-image-100">
+          <div className="lake-sidebar-group-item lake-sidebar-image-100">
             <Button
               size="small"
               style={{
@@ -224,13 +224,13 @@ class ImageSidebar extends React.Component {
               {locale.originSize}
             </Button>
           </div>
-          <div className="itellyou-sidebar-group">
-            <div className="itellyou-sidebar-group-title">{locale.linkTitle}</div>
-            <div className="itellyou-sidebar-group-item">
+          <div className="lake-sidebar-group">
+            <div className="lake-sidebar-group-title">{locale.linkTitle}</div>
+            <div className="lake-sidebar-group-item">
               <Input
                 type="text"
                 size="small"
-                className="itellyou-sidebar-link"
+                className="lake-sidebar-link"
                 placeholder={locale.linkPlaceholder}
                 defaultValue={link}
                 value={link}

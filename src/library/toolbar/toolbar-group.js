@@ -14,9 +14,9 @@ class ToolbarGroup extends React.Component {
     return (
       <React.Fragment>
         {
-          !isFirstGroup && <div className="itellyou-toolbar-split" />
+          !isFirstGroup && <div className="lake-toolbar-split" />
         }
-        <div className="itellyou-toolbar-area">
+        <div className="lake-toolbar-area">
           {
             toolbar.map((name, index) => {
               // 配置参数

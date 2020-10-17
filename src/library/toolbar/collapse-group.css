@@ -1,4 +1,4 @@
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container {
+.lake-section-tooltip-container .lake-section-tooltip-content-container {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.65);
   max-width: 354px;
@@ -6,12 +6,12 @@
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container p {
+.lake-section-tooltip-container .lake-section-tooltip-content-container p {
   margin-bottom: 8px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-svg-icon {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-svg-icon {
   background-size: 24px 24px;
   width: 24px;
   height: 24px;
@@ -19,52 +19,52 @@
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-title {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-title {
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 12px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-flat-cell {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-flat-cell {
   display: inline-block;
   margin-right: 12px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-flat-cell .itellyou-svg-icon {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-flat-cell .lake-svg-icon {
   margin-top: 10px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-hierarchy-cell .itellyou-section-tooltip-hierarchy-name-container {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-hierarchy-cell .lake-section-tooltip-hierarchy-name-container {
   margin-bottom: 8px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-hierarchy-cell .itellyou-section-tooltip-hierarchy-name-container .itellyou-section-tooltip-hierarchy-name {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-hierarchy-cell .lake-section-tooltip-hierarchy-name-container .lake-section-tooltip-hierarchy-name {
   font-size: 14px;
 
 }
 
-.itellyou-section-tooltip-container .itellyou-section-tooltip-content-container .itellyou-section-tooltip-hierarchy-cell .itellyou-section-tooltip-hierarchy-name-container .itellyou-section-tooltip-hierarchy-sub-name {
+.lake-section-tooltip-container .lake-section-tooltip-content-container .lake-section-tooltip-hierarchy-cell .lake-section-tooltip-hierarchy-name-container .lake-section-tooltip-hierarchy-sub-name {
   color: rgba(0, 0, 0, 0.45);
 
 }
 
-.itellyou-section-tooltip-container .ant-tooltip {
+.lake-section-tooltip-container .ant-tooltip {
   max-width: 390px;
 
 }
 
-.itellyou-section-tooltip-container .ant-tooltip .ant-tooltip-inner {
+.lake-section-tooltip-container .ant-tooltip .ant-tooltip-inner {
   background-color: white;
   padding: 14px;
   display: inline-block;
 
 }
 
-.itellyou-section-tooltip-container .ant-tooltip .ant-tooltip-arrow {
+.lake-section-tooltip-container .ant-tooltip .ant-tooltip-arrow {
   border-bottom-color: white;
   border-left-color: white;
 

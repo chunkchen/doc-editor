@@ -47,9 +47,9 @@ const getCodeMirrorMode = (mode) => {
 export const template = (data) => {
   const escape = StringUtils.escape;
   const mode = data.mode;
-  return '\n  <div class="itellyou-codeblock itellyou-codeblock-'.concat(
+  return '\n  <div class="lake-codeblock lake-codeblock-'.concat(
     escape(mode),
-    '">\n    <div class="itellyou-codeblock-header"></div>\n    <div class="itellyou-codeblock-content"></div>\n  </div>\n  ',
+    '">\n    <div class="lake-codeblock-header"></div>\n    <div class="lake-codeblock-content"></div>\n  </div>\n  ',
   );
 };
 
@@ -103,7 +103,7 @@ class CodeBlock extends SectionBase {
   };
 
   loadOptions() {
-    const options = localStorage.getItem('itellyou-codeblock');
+    const options = localStorage.getItem('lake-codeblock');
     if (options) {
       try {
         return JSON.parse(options);
@@ -114,7 +114,7 @@ class CodeBlock extends SectionBase {
   }
 
   setOptions(options) {
-    localStorage.setItem('itellyou-codeblock', JSON.stringify(options));
+    localStorage.setItem('lake-codeblock', JSON.stringify(options));
   }
 
   embedToolbar() {
@@ -202,7 +202,7 @@ class CodeBlock extends SectionBase {
    * @return {string} 归一化后的合法代码格式
    */
   renderToolbar() {
-    this.blockHeader = this.container.find('.itellyou-codeblock-header');
+    this.blockHeader = this.container.find('.lake-codeblock-header');
 
     if (!this.engine) {
       this.blockHeader.remove();
@@ -313,14 +313,14 @@ class CodeBlock extends SectionBase {
 
   // 阅读模式渲染代码
   renderCode(code) {
-    this.codeArea = this.container.find('.itellyou-codeblock-content');
+    this.codeArea = this.container.find('.lake-codeblock-content');
     setMode(this.codeArea, this.mode, code);
   }
 
   // 编辑模式渲染编辑器
   renderEditor(code) {
     this.sectionRoot = this.section.closest(this.container);
-    this.codeArea = this.container.find('.itellyou-codeblock-content');
+    this.codeArea = this.container.find('.lake-codeblock-content');
     const mode = getCodeMirrorMode(this.mode);
     const cfg = this.getCfg(code, mode);
     this.createCodeEditor(mode, code || '', cfg);

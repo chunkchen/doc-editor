@@ -3,18 +3,18 @@ import Keymaster from 'keymaster';
 import Engine from 'doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 
-const SCOPE_NAME = 'itellyou-plugin-mention';
+const SCOPE_NAME = 'lake-plugin-mention';
 
 const suggestionItemTemplate = function (data) {
   let depHtml = '';
   if (data.dep) {
     const dep = data.dep && data.dep.split('-')[0];
-    depHtml = '<span class="itellyou-mention-item-dep">'.concat(Engine.StringUtils.escape(dep), '</span><span class="itellyou-mention-item-split">-</span>');
+    depHtml = '<span class="lake-mention-item-dep">'.concat(Engine.StringUtils.escape(dep), '</span><span class="lake-mention-item-split">-</span>');
   }
   const avatar = data.avatar ? Engine.StringUtils.escape(data.avatar) : 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTcxNTU3NjI5NTIzIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9Ijk2ODciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDgiIGhlaWdodD0iNDgiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwQzIyOS42NzQ2NjcgMCAwIDIyOS42NzQ2NjcgMCA1MTJzMjI5LjY3NDY2NyA1MTIgNTEyIDUxMiA1MTItMjI5LjY3NDY2NyA1MTItNTEyUzc5NC4zMjUzMzMgMCA1MTIgMHpNNTIzLjIyMTMzMyAxNTIuMTcwNjY3YzE5My42IDAgMTkzLjkyIDE0OC4xMTczMzMgMTkzLjkyIDIzMS40MjRzLTc3LjU2OCAyMzguMDgtMTkzLjkyIDIzOC4yNzJjLTExNi4zNTIgMC4xNzA2NjctMTkzLjkyLTE1NC45NDQtMTkzLjkyLTIzOC4yNTA2NjdDMzI5LjMwMTMzMyAzMDAuMzA5MzMzIDMyOS42NDI2NjcgMTUyLjE3MDY2NyA1MjMuMjIxMzMzIDE1Mi4xNzA2Njd6TTUxMiA5OTUuNzc2Yy0xNDguMTYgMC0yODAuNjgyNjY3LTY2LjY4OC0zNjkuNDI5MzMzLTE3MS41ODQgMTEuNjQ4LTMyLjIxMzMzMyAyOC42OTMzMzMtNjcuMTE0NjY3IDUxLjczMzMzMy04NS4wMzQ2NjcgNDkuNTM2LTM4LjU0OTMzMyAxOTIuMjk4NjY3LTEwMi42MTMzMzMgMTkyLjI5ODY2Ny0xMDIuNjEzMzMzbDkwLjEzMzMzMyAxNzEuNDEzMzMzIDE2LjM4NC00MS41NTczMzMtMjUuNDA4LTUxLjI0MjY2NyA1MC43OTQ2NjctNTEuMjY0IDUwLjc3MzMzMyA1MS4yNjQtMjUuMzY1MzMzIDUxLjI0MjY2NyAxMy43Mzg2NjcgNDAuNTk3MzMzIDkyLjcxNDY2Ny0xNzAuNDUzMzMzYzAgMCAxNDIuNzg0IDY0LjA2NCAxOTIuMzIgMTAyLjYxMzMzMyAyMi41NzA2NjcgMTcuNTc4NjY3IDM4LjQyMTMzMyA0NC44NjQgNDkuNTc4NjY3IDcxLjcyMjY2N0M4MDMuNjkwNjY3IDkyMy4zOTIgNjY2LjMyNTMzMyA5OTUuNzc2IDUxMiA5OTUuNzc2eiIgZmlsbD0iIzhhOGE4YSIgcC1pZD0iOTY4OCI+PC9wYXRoPjwvc3ZnPg==';
-  return '\n  <div class="itellyou-mention-item" data-index="'.concat(Engine.StringUtils.escape(data.index), '" data-key="').concat(Engine.StringUtils.escape(data.key), '" data-name="').concat(Engine.StringUtils.escape(data.name), '">\n    <span class="itellyou-mention-item-avatar">\n      <img src="').concat(avatar, '">\n    </span>\n    <span class="itellyou-mention-item-text">\n      <span class="itellyou-mention-item-text-item">\n        <span class="itellyou-mention-item-name">')
-    .concat(Engine.StringUtils.escape(data.name), '</span>\n      </span>\n      <span class="itellyou-mention-item-text-item" style="font-size: 12px;">\n        ')
-    .concat(depHtml, '<span class="itellyou-mention-item-id">')
+  return '\n  <div class="lake-mention-item" data-index="'.concat(Engine.StringUtils.escape(data.index), '" data-key="').concat(Engine.StringUtils.escape(data.key), '" data-name="').concat(Engine.StringUtils.escape(data.name), '">\n    <span class="lake-mention-item-avatar">\n      <img src="').concat(avatar, '">\n    </span>\n    <span class="lake-mention-item-text">\n      <span class="lake-mention-item-text-item">\n        <span class="lake-mention-item-name">')
+    .concat(Engine.StringUtils.escape(data.name), '</span>\n      </span>\n      <span class="lake-mention-item-text-item" style="font-size: 12px;">\n        ')
+    .concat(depHtml, '<span class="lake-mention-item-id">')
     .concat(Engine.StringUtils.escape(data.key), '</span>\n      </span>\n    </span>\n  </div>\n  ');
 };
 
@@ -65,7 +65,7 @@ class Mention {
 
   handleItemClick = (e) => {
     e.preventDefault();
-    const node = Engine.$(e.target).closest('.itellyou-mention-item');
+    const node = Engine.$(e.target).closest('.lake-mention-item');
     this.updateSection(node);
   }
 
@@ -106,14 +106,14 @@ class Mention {
 
   activate() {
     if (this.status !== 'done') {
-      this.container.find('.itellyou-mention-list').show();
+      this.container.find('.lake-mention-list').show();
       this.bindEvents();
     }
   }
 
   unactivate() {
     if (this.status !== 'done') {
-      this.container.find('.itellyou-mention-list').hide();
+      this.container.find('.lake-mention-list').hide();
       this.unbindEvents();
     }
   }
@@ -135,7 +135,7 @@ class Mention {
         return;
       }
       e.preventDefault();
-      const node = this.container.find('.itellyou-mention-list').find('.itellyou-mention-item-selected');
+      const node = this.container.find('.lake-mention-list').find('.lake-mention-item-selected');
       this.updateSection(node);
     });
     Keymaster('up', SCOPE_NAME, (e) => {
@@ -158,8 +158,8 @@ class Mention {
   }
 
   scrollItem(direction) {
-    const mentionList = this.container.find('.itellyou-mention-list');
-    const node = mentionList.find('.itellyou-mention-item-selected');
+    const mentionList = this.container.find('.lake-mention-list');
+    const node = mentionList.find('.lake-mention-item-selected');
     const nextNode = direction === 'up' ? node.prevElement() : node.nextElement();
     if (!nextNode) {
       return;
@@ -172,8 +172,8 @@ class Mention {
   }
 
   selectItem(node) {
-    this.container.find('.itellyou-mention-list').find('.itellyou-mention-item-selected').removeClass('itellyou-mention-item-selected');
-    node.addClass('itellyou-mention-item-selected');
+    this.container.find('.lake-mention-list').find('.lake-mention-item-selected').removeClass('lake-mention-item-selected');
+    node.addClass('lake-mention-item-selected');
   }
 
   updateSection(node) {
@@ -187,18 +187,18 @@ class Mention {
   renderSuggestion(dataList) {
     dataList = dataList || this.default;
     this.unbindEvents();
-    this.container.find('.itellyou-mention-list').remove();
+    this.container.find('.lake-mention-list').remove();
     if (dataList.length === 0) {
       return;
     }
 
-    const mentionList = Engine.$('<div class="itellyou-mention-list" />');
+    const mentionList = Engine.$('<div class="lake-mention-list" />');
     dataList.forEach((data, index) => {
       data.index = index;
       data.avatar = data.avatar_url || data.avatar;
       const itemNode = Engine.$(suggestionItemTemplate(data));
       if (index === 0) {
-        itemNode.addClass('itellyou-mention-item-selected');
+        itemNode.addClass('lake-mention-item-selected');
       }
 
       itemNode.on('click', (e) => {
@@ -223,9 +223,9 @@ class Mention {
       const { key, name } = value;
 
       if (key) {
-        container.append('<a class="itellyou-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));
+        container.append('<a class="lake-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));
       } else {
-        container.append('<a class="itellyou-mention-at">@'.concat(Engine.StringUtils.escape(name), '</a>'));
+        container.append('<a class="lake-mention-at">@'.concat(Engine.StringUtils.escape(name), '</a>'));
       }
       return;
     }
@@ -234,17 +234,17 @@ class Mention {
       const { key, name } = value;
 
       if (key) {
-        container.append('<a class="itellyou-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));
+        container.append('<a class="lake-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));
       } else {
-        container.append('<a class="itellyou-mention-at">@'.concat(Engine.StringUtils.escape(name), '</a>'));
+        container.append('<a class="lake-mention-at">@'.concat(Engine.StringUtils.escape(name), '</a>'));
       }
       this.status = 'done';
     } else {
-      container.append('<a class="itellyou-mention-at" contenteditable="true">@</a>');
+      container.append('<a class="lake-mention-at" contenteditable="true">@</a>');
       this.status = 'inputting';
     }
 
-    const mentionNode = container.find('.itellyou-mention-at');
+    const mentionNode = container.find('.lake-mention-at');
     mentionNode.on('click', (e) => {
       // 禁止跳转
       e.preventDefault();

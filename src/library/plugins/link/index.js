@@ -113,18 +113,18 @@ export default {
         }
         this.history.stop();
         this.change.unwrapInline('<a />');
-        this.change.wrapInline('<a href="" target="_blank" class="itellyou-link-marker" />');
+        this.change.wrapInline('<a href="" target="_blank" class="lake-link-marker" />');
         shrinkToElementNode(range);
         this.change.select(range);
         this.history.save();
         let root = Engine.$(range.commonAncestorContainer);
         if (TAG_NAME !== root.name) {
-          root = root.find('.itellyou-link-marker');
+          root = root.find('.lake-link-marker');
           if (root.length === 0) {
             root = Engine.$(range.commonAncestorContainer).closest(TAG_NAME);
           }
         }
-        root.removeClass('itellyou-link-marker');
+        root.removeClass('lake-link-marker');
         if (root[0]) {
           go.call(this, root[0], 'edit', true);
         }

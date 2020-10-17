@@ -13,7 +13,7 @@ const locale = {
 }[window.appData && window.appData.locale === 'en' ? 'en' : 'zh-cn'];
 
 const tooltipContainer = document.createElement('div');
-tooltipContainer.setAttribute('class', 'itellyou-section-tooltip-container');
+tooltipContainer.setAttribute('class', 'lake-section-tooltip-container');
 tooltipContainer.addEventListener('click', (e) => {
   e.stopPropagation();
   e.preventDefault();
@@ -26,16 +26,16 @@ class CollapseGroup extends React.Component {
       const children = item.children.map((child, child_key) => {
         return (
           <span
-            className={'itellyou-svg-icon itellyou-svg-icon-'.concat(child.icon)}
+            className={'lake-svg-icon lake-svg-icon-'.concat(child.icon)}
             key={''.concat(key).concat(child_key)}
           />
         );
       });
       return (
-        <div key={''.concat(key)} className="itellyou-section-tooltip-hierarchy-cell">
-          <p className="itellyou-section-tooltip-hierarchy-name-container">
-            <span className="itellyou-section-tooltip-hierarchy-name">{item.name}</span>
-            <span className="itellyou-section-tooltip-hierarchy-sub-name">{item.subName}</span>
+        <div key={''.concat(key)} className="lake-section-tooltip-hierarchy-cell">
+          <p className="lake-section-tooltip-hierarchy-name-container">
+            <span className="lake-section-tooltip-hierarchy-name">{item.name}</span>
+            <span className="lake-section-tooltip-hierarchy-sub-name">{item.subName}</span>
           </p>
           <p>{children}</p>
         </div>
@@ -46,10 +46,10 @@ class CollapseGroup extends React.Component {
   renderFlat(data) {
     return data[0].children.map((item, index) => {
       return (
-        <div key={'0'.concat(index)} className="itellyou-section-tooltip-flat-cell">
+        <div key={'0'.concat(index)} className="lake-section-tooltip-flat-cell">
           <span>{item.name}</span>
           <br />
-          <span className={'itellyou-svg-icon itellyou-svg-icon-'.concat(item.icon)} />
+          <span className={'lake-svg-icon lake-svg-icon-'.concat(item.icon)} />
         </div>
       );
     });
@@ -59,8 +59,8 @@ class CollapseGroup extends React.Component {
     const { data } = this.props;
     const tooltip = data.length > 1 ? this.renderHierarchy(data) : this.renderFlat(data);
     return (
-      <div className="itellyou-section-tooltip-content-container">
-        <p className="itellyou-section-tooltip-title">{locale.supportFollowingExts}</p>
+      <div className="lake-section-tooltip-content-container">
+        <p className="lake-section-tooltip-title">{locale.supportFollowingExts}</p>
         {tooltip}
       </div>
     );

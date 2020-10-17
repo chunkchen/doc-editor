@@ -16,8 +16,8 @@ class Toolbar extends React.Component {
             onChange(event.target.value);
           }}
         />
-        <div className="itellyou-math-editor-toolbar">
-          <div className="itellyou-math-editor-toolbar-tips">
+        <div className="lake-math-editor-toolbar">
+          <div className="lake-math-editor-toolbar-tips">
             {
               options && options.help && (
                 <a
@@ -25,16 +25,16 @@ class Toolbar extends React.Component {
                   href={options.help.href}
                   target="_blank"
                 >
-                  <span className="itellyou-icon itellyou-icon-question" />
+                  <span className="lake-icon lake-icon-question" />
                   {Engine.StringUtils.escape(options.help.text)}
                 </a>
               )
             }
 
           </div>
-          <div className="itellyou-embed-toolbar itellyou-embed-toolbar-inline itellyou-embed-toolbar-active">
+          <div className="lake-embed-toolbar lake-embed-toolbar-inline lake-embed-toolbar-active">
             <Tooltip title={locale.enterTooltips}>
-              <a className="itellyou-embed-toolbar-btn" data-role="save">
+              <a className="lake-embed-toolbar-btn" data-role="save">
                 <span className="text">
                   {Engine.StringUtils.escape(locale.save)}
                 </span>

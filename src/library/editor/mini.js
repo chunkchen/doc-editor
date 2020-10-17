@@ -31,11 +31,11 @@ class MiniEditor extends React.Component {
           helper(engine, 'iframeHelper');
 
           engine.on('maximizesection', () => {
-            engine.container.closest('.itellyou-editor').addClass('itellyou-maximize-section');
+            engine.container.closest('.lake-editor').addClass('lake-maximize-section');
           });
 
           engine.on('restoresection', () => {
-            engine.container.closest('.itellyou-editor').removeClass('itellyou-maximize-section');
+            engine.container.closest('.lake-editor').removeClass('lake-maximize-section');
           });
 
           this.props.onLoad(engine);
@@ -75,9 +75,9 @@ class MiniEditor extends React.Component {
     }(this.props));
 
     return (
-      <div className="itellyou-editor itellyou-mini-editor">
+      <div className="lake-editor lake-mini-editor">
         {engine && <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions)} />}
-        <div className="itellyou-content-editor" ref={this.contentEditor}>
+        <div className="lake-content-editor" ref={this.contentEditor}>
           <Editor
             {...Object.assign(
               {

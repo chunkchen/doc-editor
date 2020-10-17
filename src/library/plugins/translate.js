@@ -7,7 +7,7 @@ function getConfig() {
   return {
     name: PLUGIN_NAME,
     title: locale.title,
-    className: `itellyou-${PLUGIN_NAME}-sidebar`,
+    className: `lake-${PLUGIN_NAME}-sidebar`,
     data: null,
   };
 }

@@ -28,10 +28,10 @@ class Header extends React.PureComponent {
   render() {
     return (
       <Select
-        className={classNames('itellyou-codeblock-header-select', {
-          'itellyou-codeblock-header-select-open': this.state.open,
+        className={classNames('lake-codeblock-header-select', {
+          'lake-codeblock-header-select-open': this.state.open,
         })}
-        dropdownClassName="itellyou-codeblock-header-dropdown"
+        dropdownClassName="lake-codeblock-header-dropdown"
         showSearch
         size="small"
         style={{

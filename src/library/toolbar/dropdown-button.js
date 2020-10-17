@@ -30,7 +30,7 @@ class DropdownButton extends React.Component {
     if (name === 'alignment') {
       currentValue = getActive();
     }
-    Engine.$('div[data-itellyou-element=toolbar]').attr('style', 'z-index:202');
+    Engine.$('div[data-lake-element=toolbar]').attr('style', 'z-index:202');
     document.addEventListener('click', this.hideDropdown);
     this.setState({
       active: true,
@@ -39,7 +39,7 @@ class DropdownButton extends React.Component {
   }
 
   hideDropdown = () => {
-    Engine.$('div[data-itellyou-element=toolbar]').removeAttr('style');
+    Engine.$('div[data-lake-element=toolbar]').removeAttr('style');
     document.removeEventListener('click', this.hideDropdown);
     this.setState({
       active: false,
@@ -58,11 +58,11 @@ class DropdownButton extends React.Component {
     delete buttonProps.active;
     return (
       <div
-        className="itellyou-button-set"
+        className="lake-button-set"
         onClick={this.toggleDropdown}
       >
-        <div className={classnames('itellyou-button-set-trigger', {
-          'itellyou-button-set-trigger-active': active,
+        <div className={classnames('lake-button-set-trigger', {
+          'lake-button-set-trigger-active': active,
         })}
         >
           <Button {...Object.assign({}, { active }, buttonProps)} />

@@ -42,13 +42,13 @@ class Pswp extends EventEmitter2 {
   }
 
   _initRoot() {
-    const root = Engine.$('\n    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n        <div class="pswp__bg"></div>\n        <div class="pswp__scroll-wrap">\n            <div class="pswp__container">\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n            </div>\n            <div class="pswp__ui pswp__ui--hidden">\n                <button class="pswp__button itellyou-pswp-button-close" title="Close (Esc)"></button>\n                <div class="itellyou-pswp-custom-top-bar"></div>\n            </div>\n        </div>\n    </div>\n    ');
-    const toolbarContainer = root.find('.itellyou-pswp-custom-top-bar');
-    const closeBtnContainer = root.find('.itellyou-pswp-button-close');
+    const root = Engine.$('\n    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n        <div class="pswp__bg"></div>\n        <div class="pswp__scroll-wrap">\n            <div class="pswp__container">\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n            </div>\n            <div class="pswp__ui pswp__ui--hidden">\n                <button class="pswp__button lake-pswp-button-close" title="Close (Esc)"></button>\n                <div class="lake-pswp-custom-top-bar"></div>\n            </div>\n        </div>\n    </div>\n    ');
+    const toolbarContainer = root.find('.lake-pswp-custom-top-bar');
+    const closeBtnContainer = root.find('.lake-pswp-button-close');
     this.root = root;
     this.toolbarContainer = toolbarContainer;
     this.closeBtnContainer = closeBtnContainer;
-    root.addClass(mobile ? 'itellyou-pswp-mobile' : 'itellyou-pswp-pc');
+    root.addClass(mobile ? 'lake-pswp-mobile' : 'lake-pswp-pc');
     Engine.$(document.body).append(root);
     ReactDOM.render(<Zoom
       imageBrowser={this}
@@ -114,7 +114,7 @@ class Pswp extends EventEmitter2 {
           this.afterZoom();
         }, 366);
       }
-      if (target.hasClass('pswp__bg') || target.hasClass('itellyou-pswp-tool-bar')) {
+      if (target.hasClass('pswp__bg') || target.hasClass('lake-pswp-tool-bar')) {
         this.close();
       }
     });
@@ -133,7 +133,7 @@ class Pswp extends EventEmitter2 {
 
   renderCounter() {
     const { pswp } = this;
-    this.toolbarContainer.find('.itellyou-pswp-counter').html(''.concat(pswp.getCurrentIndex() + 1, ' / ').concat(pswp.items.length));
+    this.toolbarContainer.find('.lake-pswp-counter').html(''.concat(pswp.getCurrentIndex() + 1, ' / ').concat(pswp.items.length));
   }
 
   getCurrentZoomLevel() {

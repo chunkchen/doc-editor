@@ -34,7 +34,7 @@ class TableSelector extends React.Component {
     const tds = [];
     const _loop = (c) => {
       const cls = classnames({
-        'itellyou-toolbar-table-selector-td': true,
+        'lake-toolbar-table-selector-td': true,
         actived: r < selectedRows && c < selectedCols,
       });
       tds.push(<div
@@ -59,7 +59,7 @@ class TableSelector extends React.Component {
   renderTable = (rows, cols) => {
     const trs = [];
     for (let r = 0; r < rows; r++) {
-      trs.push(<div className="itellyou-toolbar-table-selector-tr" key={r}>{this.renderTr(r, cols)}</div>);
+      trs.push(<div className="lake-toolbar-table-selector-tr" key={r}>{this.renderTr(r, cols)}</div>);
     }
     return trs;
   }
@@ -69,9 +69,9 @@ class TableSelector extends React.Component {
     const selectedRows = this.state.selectedRows === undefined ? 0 : this.state.selectedRows;
     const selectedCols = this.state.selectedCols === undefined ? 0 : this.state.selectedCols;
     return (
-      <div className="itellyou-toolbar-table-selector" data-itellyou-element="table-selector">
+      <div className="lake-toolbar-table-selector" data-lake-element="table-selector">
         {this.renderTable(currentRows, currentCols)}
-        <div className="itellyou-toolbar-table-selector-info">
+        <div className="lake-toolbar-table-selector-info">
           {selectedRows}
           " x "
           {selectedCols}

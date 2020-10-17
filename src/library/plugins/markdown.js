@@ -12,7 +12,7 @@ notification.config({
 
 function openConfirm(text, prevValue) {
   const locale = this.locale.markdown || {};
-  const key = 'itellyou-paste-markdown';
+  const key = 'lake-paste-markdown';
   const { markdown } = this.options;
   const serviceUrl = markdown ? markdown.action : null;
   if (!serviceUrl) return;

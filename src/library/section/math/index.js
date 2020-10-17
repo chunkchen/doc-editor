@@ -104,7 +104,7 @@ class Math extends SectionBase {
   renderPureText(text) {
     const maxWidth = this.getMaxWidth();
     this.viewContainer.html(
-      '<span class="itellyou-math-content-tmp" style="max-width: '
+      '<span class="lake-math-content-tmp" style="max-width: '
         .concat(maxWidth, 'px">')
         .concat(text, '</span>'),
     );
@@ -142,7 +142,7 @@ class Math extends SectionBase {
   renderView() {
     const { value, container, locale } = this;
     const { src, code, width, height } = value;
-    const mathContainer = Engine.$('<span class="itellyou-math-container"></span>');
+    const mathContainer = Engine.$('<span class="lake-math-container"></span>');
     container.append(mathContainer);
     this.viewContainer = mathContainer;
     if (src) {
@@ -183,7 +183,7 @@ class Math extends SectionBase {
 
   renderEditor() {
     const { container, value, engine, sectionRoot, locale } = this;
-    const editorContainer = Engine.$('<div class="itellyou-section-math-editor"></div>');
+    const editorContainer = Engine.$('<div class="lake-section-math-editor"></div>');
     this.editorContainer = editorContainer;
     container.append(editorContainer);
     bindKeydownEvent({

@@ -190,7 +190,6 @@ export default {
     preferences: '\u56fe\u7247\u8bbe\u7f6e',
     replace: '\u66ff\u6362',
     delete: '\u5220\u9664',
-    preferences: '\u56fe\u7247\u8bbe\u7f6e',
     inlineMode: '嵌入行内',
     blockMode: '独占一行',
   },

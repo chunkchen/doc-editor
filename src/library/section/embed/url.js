@@ -66,7 +66,7 @@ class Url extends Upload {
 
   unactivate() {
     super.unactivate.call(this);
-    this.container.find('.itellyou-embed-content').removeClass('itellyou-embed-content-active');
+    this.container.find('.lake-embed-content').removeClass('lake-embed-content-active');
   }
 
   find(role) {
@@ -88,10 +88,10 @@ class Url extends Upload {
 
   renderInput() {
     const embedNode = Engine.$(
-      '\n    <div class="itellyou-embed itellyou-embed-active">\n      <div class="itellyou-embed-form">\n        <span class="itellyou-embed-editor">\n          <input data-role="url" placeholder="'
+      '\n    <div class="lake-embed lake-embed-active">\n      <div class="lake-embed-form">\n        <span class="lake-embed-editor">\n          <input data-role="url" placeholder="'
         .concat(
           this.getPlaceHolder(),
-          '" spellcheck="false" class="itellyou-embed-input" value="" autocomplete="off"/>\n        </span>\n        <span class="itellyou-embed-button"><button class="itellyou-ui-button" data-role="submit"><span>',
+          '" spellcheck="false" class="lake-embed-input" value="" autocomplete="off"/>\n        </span>\n        <span class="lake-embed-button"><button class="lake-ui-button" data-role="submit"><span>',
         )
         .concat(
           Engine.StringUtils.escape(this.locale.submit),

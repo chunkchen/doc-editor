@@ -240,18 +240,18 @@ class ColorButton extends React.Component {
       name = name.split(':')[1];
     }
 
-    const buttonContent = <span className="itellyou-icon itellyou-icon-svgs">{this.getIcon(name)}</span>;
-    const moreContent = <span className="itellyou-icon" />;
+    const buttonContent = <span className="lake-icon lake-icon-svgs">{this.getIcon(name)}</span>;
+    const moreContent = <span className="lake-icon" />;
     return (
-      <div className="itellyou-button-set">
-        <div className={classnames('itellyou-button-set-trigger itellyou-button-set-trigger-double', {
-          'itellyou-button-set-trigger-active': active,
+      <div className="lake-button-set">
+        <div className={classnames('lake-button-set-trigger lake-button-set-trigger-double', {
+          'lake-button-set-trigger-active': active,
         }, {
-          'itellyou-button-set-trigger-double-active': active,
+          'lake-button-set-trigger-double-active': active,
         })}
         >
           <Button
-            className="itellyou-button-current"
+            className="lake-button-current"
             name={name}
             content={buttonContent}
             onClick={this.handleClick}
@@ -259,7 +259,7 @@ class ColorButton extends React.Component {
             disabled={disabled}
           />
           <Button
-            className="itellyou-button-dropdown"
+            className="lake-button-dropdown"
             content={moreContent}
             onClick={this.toggleDropdown}
             name={''.concat(name, '-dropdown')}
@@ -268,8 +268,8 @@ class ColorButton extends React.Component {
             disabled={disabled}
           />
         </div>
-        <div className={classnames('itellyou-button-set-list itellyou-button-set-list-colorboard', {
-          'itellyou-button-set-list-active': active,
+        <div className={classnames('lake-button-set-list lake-button-set-list-colorboard', {
+          'lake-button-set-list-active': active,
         })}
         >
           <ColorPicker {...Object.assign({}, this.props, { onSelect: this.handleSelect })} />

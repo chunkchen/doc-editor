@@ -154,7 +154,7 @@ class TextDiagramEditor extends React.PureComponent {
     this.renderDiagramSelect = () => {
       return (
         <Select
-          className="itellyou-diagram-select"
+          className="lake-diagram-select"
           showSearch
           defaultValue={this.props.type}
           size="small"
@@ -286,7 +286,7 @@ class TextDiagramEditor extends React.PureComponent {
     let height = null;
 
     if (mode === EDITOR_MODE.PREVIEW) {
-      node = body.querySelector('.itellyou-text-diagram-preview');
+      node = body.querySelector('.lake-text-diagram-preview');
       height = node.scrollHeight;
       body.style.height = `${height}px`;
     } else {
@@ -333,8 +333,8 @@ class TextDiagramEditor extends React.PureComponent {
     return (
       <div
         className={classnames([
-          'itellyou-text-diagram-stage',
-          'itellyou-text-diagram-layout-'.concat(layout),
+          'lake-text-diagram-stage',
+          'lake-text-diagram-layout-'.concat(layout),
         ])}
         onKeyDown={(event) => {
           if ((event.metaKey || event.ctrlKey) && event.keyCode === 80) {
@@ -344,7 +344,7 @@ class TextDiagramEditor extends React.PureComponent {
         }}
         ref={this.rootRef}
       >
-        <div className="itellyou-text-diagram-nav">
+        <div className="lake-text-diagram-nav">
           {this.props.canChangeType ? (
             this.renderDiagramSelect()
           ) : (
@@ -370,8 +370,8 @@ class TextDiagramEditor extends React.PureComponent {
             </Tooltip>
           </div>
         </div>
-        <div className="itellyou-text-diagram-editor-wrap" ref={this.bodyRef}>
-          <div className="itellyou-text-diagram-editor">
+        <div className="lake-text-diagram-editor-wrap" ref={this.bodyRef}>
+          <div className="lake-text-diagram-editor">
             <textarea
               value={this.props.code}
               ref={this.editorRef}
@@ -381,7 +381,7 @@ class TextDiagramEditor extends React.PureComponent {
             />
           </div>
           <div
-            className="itellyou-text-diagram-preview"
+            className="lake-text-diagram-preview"
             style={{ display: this.needShowPreviewPanel() ? 'block' : 'none' }}
           >
             {this.renderPreview()}
