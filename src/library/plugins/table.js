@@ -21,7 +21,7 @@ function handleKeydownEnter(e) {
   if (options.items.indexOf('table') < 0) return;
 
   const chars = ChangeUtils.getBlockLeftText(block, range);
-  const match = /^\|(?:(?:[^\|]+?)\|){2,}$/.exec(chars);
+  const match = /^\|(?:(?:[^\\|]+?)\|){2,}$/.exec(chars);
 
   if (match) {
     e.preventDefault();

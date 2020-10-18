@@ -86,11 +86,18 @@ export default function (section) {
       const colsAddition = '<div class="'.concat(COLS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n        <div class="').concat(COLS_ADDITION_CLASS, '"> + </div>\n      </div>');
       const rowsAddition = '<div class="'.concat(ROWS_ADDITION_CLASS, '">\n        <div class="plus"> + </div>\n      </div>');
       const rowsAdditionHead = '<div class="'.concat(ROWS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n      </div>');
-      const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="lake-icon lake-icon-arrow-up"></span></div>\n        <div class="down"><span class="lake-icon lake-icon-arrow-down"></span></div>\n      </div>');
+      const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="lake-icon lake-icon-arrow-up" /></div>\n        <div class="down"><span class="lake-icon lake-icon-arrow-down"/></div>\n      </div>');
 
-      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"></span>\n                <p class="drag-info"></p>\n              </div>\n              <div class="').concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(cols), '\n          ').concat(colsAddition, '\n        </div>\n      ');
+      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  <div class="table-col-header-btns">\n'
+        + '              <a class="table-control-icon-btn table-header-delete-btn">\n'
+        + '                <span class="lake-icon lake-icon-delete" />\n'
+        + '              </a>\n'
+        + '              <a class="table-control-icon-btn table-header-add-btn">\n'
+        + '                  <span class="lake-icon lake-icon-plus"/>\n'
+        + '              </a>\n'
+        + '            </div>           <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <p class="drag-info"/>\n              </div>\n              <div class="').concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(cols), '\n          ').concat('\n        </div>\n      ');
 
-      const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="lake-icon lake-icon-drag"></span>\n                <span class="drag-info"></span>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat(rowsAdditionHead, '\n        </div>\n      ');
+      const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <span class="drag-info"/>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat('\n        </div>\n      ');
 
       const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
 
@@ -133,7 +140,6 @@ export default function (section) {
       const sectionHTML = '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n          <div class="').concat(VIEWPORT, '">\n            ').concat(colsHeader, '\n            ')
         .concat(activeBox, '\n            ')
         .concat(table, '\n            ')
-        .concat(rowsAddition, '\n            ')
         .concat(placeholder, '\n            ')
         .concat(shadowLeft, '\n            ')
         .concat(shadowRight, '\n          </div>\n          ')
