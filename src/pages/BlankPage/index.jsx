@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Container from '../../components/Container';
 import { FullEditor } from '../../library';
 
+import tempContent from './tempContent';
+
 export default class BlankPage extends Component {
   static displayName = 'BlankPage';
 
@@ -11,15 +13,13 @@ export default class BlankPage extends Component {
     super(props);
     this.state = {
       type: null,
-      content: '',
+      content: tempContent,
     };
   }
 
   onEditorLoaded = (engine) => {
     this.engine = engine;
     engine.focusToEnd();
-    const { type } = this.state;
-    console.log(`${type} loaded `);
   };
 
   onEditorChange = (content) => {

@@ -121,7 +121,7 @@ class FullEditor extends React.Component {
                     {
                       onEngineReady: this.onEngineReady,
                     },
-                    editorOptions,
+                    editorOptions(),
                   )}
                 />
               </div>

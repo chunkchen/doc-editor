@@ -81,16 +81,22 @@ class Editor extends React.Component {
     const version = getDocVersion(defaultValue);
     engine.schema.add(schemaConfig);
     engine.locale = this.locale;
-    engine.on('change', (value) => {
-      value = addMentionAttrs(value);
+    engine.on('change', (val) => {
+      let pageContentHeight = 0;
+      this.container.current.childNodes.forEach(node => pageContentHeight += node.offsetHeight);
+      console.log(pageContentHeight);
+      if (pageContentHeight > 601) {
+        console.log('分页');
+      }
+      value = addMentionAttrs(val);
       this.engine.options.onChange(value);
       this.engine.toolbar.updateState();
     });
     engine.on('select', () => {
       this.engine.toolbar.updateState();
     });
-    engine.setDefaultValue = (defaultValue) => {
-      let value = (`${defaultValue || ''}`).trim();
+    engine.setDefaultValue = () => {
+      value = (`${defaultValue || ''}`).trim();
       value = Engine.StringUtils.removeBookmarkTags(value);
       this.engine.history.stop();
       this.engine.setValue(value || '<p><br /></p>');
@@ -104,7 +110,11 @@ class Editor extends React.Component {
   }
 
   render() {
-    return <div ref={this.container} className="lake-content-editor-core lake-typography-classic" />;
+    return (
+      <div className="lake-typography-row">
+        <div ref={this.container} className="lake-content-editor-core" />
+      </div>
+    );
   }
 }
 
