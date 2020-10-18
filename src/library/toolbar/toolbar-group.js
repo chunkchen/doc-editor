@@ -13,9 +13,6 @@ class ToolbarGroup extends React.Component {
 
     return (
       <React.Fragment>
-        {
-          !isFirstGroup && <div className="lake-toolbar-split" />
-        }
         <div className="lake-toolbar-area">
           {
             toolbar.map((name, index) => {

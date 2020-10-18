@@ -86,9 +86,9 @@ class ColorButton extends React.Component {
 
     return (
       <svg
-        width="14px"
-        height="14px"
-        viewBox="0 0 14 14"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
         version="1.1"
       >
         <title>highlight</title>
@@ -144,9 +144,9 @@ class ColorButton extends React.Component {
 
     return (
       <svg
-        width="14px"
-        height="14px"
-        viewBox="0 0 14 14"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
         version="1.1"
       >
         <title>color-bg</title>
@@ -198,9 +198,9 @@ class ColorButton extends React.Component {
 
     return (
       <svg
-        width="14px"
-        height="14px"
-        viewBox="0 0 14 14"
+        width="16px"
+        height="16px"
+        viewBox="0 0 16 16"
       >
         <title>color-font</title>
         <desc>Created with Sketch.</desc>

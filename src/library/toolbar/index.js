@@ -193,9 +193,9 @@ class Toolbar extends React.Component {
           if (item.name === 'section') {
             const data = [];
             if (typeof item.items === 'object' && item.items.length > 0) {
-              configMap.data.forEach((group) => {
+              configMap.data.forEach((dataItem) => {
                 const items = [];
-                group.items.forEach((sectionItem) => {
+                dataItem.items.forEach((sectionItem) => {
                   const childItem = item.items.find(
                     temp => (typeof temp === 'string' && temp === sectionItem.name)
                       || (typeof temp === 'object' && temp.name === sectionItem.name),
@@ -210,7 +210,7 @@ class Toolbar extends React.Component {
                 });
                 if (items && items.length > 0) {
                   data.push({
-                    title: group.title,
+                    title: dataItem.title,
                     items,
                   });
                 }
@@ -232,7 +232,7 @@ class Toolbar extends React.Component {
           ) {
             const data = [];
             if (typeof item.items === 'object' && item.items.length > 0) {
-              configMap.data.map((dataItem) => {
+              configMap.data.forEach((dataItem) => {
                 const childItem = item.items.find(
                   temp => (typeof temp === 'string' && temp === dataItem.key)
                     || (typeof temp === 'object' && temp.name === dataItem.key),

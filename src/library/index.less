@@ -73,7 +73,7 @@
 .lake-scrollable .lake-scrollbar.lake-scrollbar-x {
   width: 100%;
   height: 8px;
-  bottom: 0px;
+  bottom: 0;
 }
 
 .lake-scrollable .lake-scrollbar.lake-scrollbar-x .lake-scrollbar-trigger {
@@ -85,7 +85,7 @@
   top: 0;
   width: 8px;
   height: 100%;
-  right: 0px;
+  right: 0;
 }
 
 .lake-scrollable .lake-scrollbar.lake-scrollbar-y .lake-scrollbar-trigger {
@@ -565,11 +565,15 @@
 .lake-toolbar {
   position: relative;
   width: 100%;
-  padding: 8px 0;
-  background-color: #fcfcfc;
+  height: 40px;
+  padding: 0;
+  line-height: 1.5;
+  background: #fcfcfc;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  transition: all 0.25s cubic-bezier(0.3, 1.2, 0.2, 1);
   z-index: 200;
-  border-top: 1px solid rgba(0, 0, 0, .05);
-  border-bottom: 1px solid rgba(0, 0, 0, .05);
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -580,6 +584,7 @@
   display: none;
   text-align: center;
   width: 100%;
+  height: 38px;
 }
 
 .lake-toolbar-content-active {
@@ -597,25 +602,19 @@
 }
 
 .lake-toolbar-area {
-  padding: 0 6px;
+  padding: 4px 8px;
+  height: 38px;
   width: auto;
   display: inline-block;
+  border-left: 1px solid #e8e8e8;
+
+  &:nth-child(1) {
+    border-left: none;
+  }
 }
 
 .lake-toolbar-area-hide {
   display: none;
-}
-
-.lake-toolbar-area-first-group {
-  border-left: none;
-}
-
-.lake-toolbar-split {
-  width: 1px;
-  height: 13px;
-  background-color: rgba(0, 0, 0, .05);
-  cursor: none;
-  display: inline-block;
 }
 
 .lake-toolbar-active {
@@ -710,6 +709,8 @@
   padding-top: 16px;
   overflow: hidden;
   display: none;
+  min-width: 220px;
+  max-width: 480px;
 }
 
 .lake-sidebar .lake-sidebar-close {
@@ -728,14 +729,14 @@
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: bold;
-  padding: 0 2px;
-  padding-bottom: 8px;
+  padding: 0 2px 8px 0;
   border-bottom: 1px solid #e8e8e8;
 }
 
 .lake-common-sidebar {
-  width: 203px;
-  left: calc(50% + 451px);
+  width: calc(50% - 454px);
+  left: calc(50% + 436px);
+  padding-left: 28px;
 }
 
 .lake-common-sidebar .lake-sidebar-content {
@@ -809,29 +810,40 @@
 }
 
 .lake-button {
+  transition: all 0.3s ease-in;
   display: inline-block;
+  height: 30px;
+  line-height: 30px;
   width: auto;
-  min-width: 24px;
+  min-width: 30px;
+  margin: 0;
   text-align: center;
-  padding: 0 4px;
-  margin: 0 4px;
+  padding: 0 7px;
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 3px 3px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   color: #595959;
   outline: none;
-  transition: all 0.3s ease-in;
+
+  &:hover {
+    border: 1px solid transparent;
+    background-color: #f5f5f5;
+  }
+
+  .uploader {
+    display: none;
+  }
 }
 
-.lake-button:hover {
-  border: 1px solid transparent;
-  background-color: #f5f5f5;
+.lake-button-icon-list > span > .lake-icon {
+  margin-right: 5px;
 }
 
-.lake-button .uploader {
-  display: none;
+.lake-button-heading {
+  font-weight: bold;
+  min-width: 73px;
 }
 
 .lake-mini-editor .lake-button {
@@ -919,6 +931,8 @@
 
 .lake-button-inner-text {
   font-size: 12px;
+  margin-left: 2px;
+  vertical-align: top;
 }
 
 .lake-button-hotkey {
@@ -943,6 +957,12 @@
 }
 
 .lake-button-set-trigger .lake-button {
+  padding: 0 12px 0 7px;
+}
+
+.lake-max-editor .lake-toolbar .lake-button-fontsize {
+  font-weight: bold;
+  width: 58px;
   padding-right: 20px;
 }
 
@@ -952,8 +972,8 @@
 
 .lake-button-set-trigger .lake-icon-arrow {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 6px;
+  top: 14px;
   width: 8px;
   height: 8px;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjhweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCA4IDUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+DQogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA1Mi41ICg2NzQ2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPkdyb3VwIENvcHkgNjwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGcgaWQ9IlN5bWJvbHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIG9wYWNpdHk9IjAuNDUiPg0KICAgICAgICA8ZyBpZD0idG9vbGJhciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMyOC4wMDAwMDAsIC0xOC4wMDAwMDApIj4NCiAgICAgICAgICAgIDxnIGlkPSJwYXJhZ3JhcGgtc3R5bGUiPg0KICAgICAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIyNi4wMDAwMDAsIDQuMDAwMDAwKSI+DQogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cC1Db3B5LTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwMi4wMDAwMDAsIDEyLjAwMDAwMCkiPg0KICAgICAgICAgICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjgiIGhlaWdodD0iOCI+PC9yZWN0Pg0KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTAuNTk2MDkzNzUsMi41NTcwMzEyNSBMMy43NDUzMTI1LDYuMzc4MTI1IEMzLjg3NzM0Mzc1LDYuNTI1NzgxMjUgNC4xMDg1OTM3NSw2LjUyNTc4MTI1IDQuMjQwNjI1LDYuMzc4MTI1IEw3LjQwNTQ2ODc1LDIuNTU3MDMxMjUgQzcuNTk2MDkzNzUsMi4zNDI5Njg3NSA3LjQ0NDUzMTI1LDIuMDAzOTA2MjUgNy4xNTc4MTI1LDIuMDAzOTA2MjUgTDAuODQ0NTMxMjUsMi4wMDM5MDYyNSBDMC41NTcwMzEyNSwyLjAwMzkwNjI1IDAuNDA0Njg3NSwyLjM0Mjk2ODc1IDAuNTk2MDkzNzUsMi41NTcwMzEyNSBaIiBpZD0iU2hhcGUiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPg0KICAgICAgICAgICAgICAgICAgICA8L2c+DQogICAgICAgICAgICAgICAgPC9nPg0KICAgICAgICAgICAgPC9nPg0KICAgICAgICA8L2c+DQogICAgPC9nPg0KPC9zdmc+');
@@ -965,12 +985,21 @@
   top: 12px;
 }
 
+.lake-button-set-trigger-double {
+  padding: 0 2px;
+}
+
 .lake-button-set-trigger-double .lake-button {
   padding: 0;
+
+  &:first-child {
+    width: 26px;
+  }
 }
 
 .lake-button-set-trigger-double .lake-button-current {
   margin-right: 0;
+  min-width: 26px;
   border-radius: 3px 0 0 3px;
 }
 
@@ -987,7 +1016,7 @@
 }
 
 .lake-button-set-trigger-double .lake-button-dropdown .lake-icon-arrow {
-  right: 9px;
+  right: 5px;
 }
 
 .lake-button-set-trigger-double .lake-button-dropdown:hover,
@@ -1035,6 +1064,7 @@
   color: #595959;
   text-align: left;
   position: relative;
+  white-space: nowrap;
 }
 
 .lake-button-set-list-item-split {
@@ -1056,7 +1086,7 @@
 .lake-button-set-list-item .lake-icon-dot {
   position: absolute;
   top: 50%;
-  right: 0;
+  left: 8px;
   margin-top: -7px;
   width: 14px;
   height: 14px;
@@ -1127,8 +1157,8 @@
 }
 
 .lake-button-set-list-with-dot .lake-button-set-list-item {
-  padding-left: 24px;
-  padding-right: 60px;
+  padding-left: 30px;
+  padding-right: 16px;
   white-space: nowrap;
 }
 
@@ -1216,7 +1246,7 @@
 }
 
 .lake-icon-svgs svg {
-  margin-bottom: -1px;
+  margin-bottom: -2px;
 }
 
 .lake-colorboard-group {
@@ -2399,6 +2429,19 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   margin: 0 auto;
   background-color: #f9f9f9;
   padding: 16px 0 64px 0;
+
+  .show-return-tag {
+    p {
+      br {
+        display: none;
+      }
+      &:after {
+        content: "↵";
+        color: #bfbfbf;
+        width: 0;
+      }
+    }
+  }
 }
 
 .lake-max-editor-wrapper-content .lake-content-editor {
@@ -2408,7 +2451,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .lake-max-editor-wrapper-content .lake-content-editor-extra {
   position: relative;
-  padding: 48px 60px 0 60px;
+  padding: 32px 60px 0 60px;
 }
 
 .lake-max-editor-wrapper-content .lake-content-editor-extra .lake-meta {
@@ -2472,14 +2515,36 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .lake-content-editor {
   position: relative;
-  margin: 0px auto;
+  margin: 0 auto;
   background: #ffffff;
-  width: 874px;
+  width: fit-content;
   font-family: 'Tahoma For Number', 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #262626;
   cursor: text;
   white-space: normal;
+
+  .lake-content-editor-core {
+    position: relative;
+    background-color: transparent;
+    height: 100%;
+    cursor: text;
+    overflow: hidden;
+  }
+
+  // 默认纵向
+  .lake-typography-classic {
+    width: 21cm;
+    height: 29.7cm;
+    padding: 2.54cm 3.18cm;
+  }
+
+  // 横向
+  .lake-typography-row {
+    height: 21cm;
+    width: 29.7cm;
+    padding: 2.54cm 3.18cm;
+  }
 }
 
 .lake-mobile-editor {

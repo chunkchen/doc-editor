@@ -104,7 +104,7 @@ class Editor extends React.Component {
   }
 
   render() {
-    return <div ref={this.container} />;
+    return <div ref={this.container} className="lake-content-editor-core lake-typography-classic" />;
   }
 }
 

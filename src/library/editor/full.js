@@ -63,10 +63,10 @@ class FullEditor extends React.Component {
   };
 
   handleScroll = () => {
-    if (this.itellyouFullEditorWrapperContent[0].scrollTop > 16) {
-      this.itellyouToolbar.addClass('lake-toolbar-active');
+    if (this.lakeFullEditorWrapperContent[0].scrollTop > 16) {
+      this.lakeToolbar.addClass('lake-toolbar-active');
     } else {
-      this.itellyouToolbar.removeClass('lake-toolbar-active');
+      this.lakeToolbar.removeClass('lake-toolbar-active');
     }
   };
 
@@ -81,9 +81,9 @@ class FullEditor extends React.Component {
   }
 
   bindScrollEvent() {
-    this.itellyouToolbar = Engine.$('.lake-toolbar');
-    this.itellyouFullEditorWrapperContent = Engine.$('.lake-max-editor-wrapper-content');
-    this.itellyouFullEditorWrapperContent.on('scroll', this.handleScroll);
+    this.lakeToolbar = Engine.$('.lake-toolbar');
+    this.lakeFullEditorWrapperContent = Engine.$('.lake-max-editor-wrapper-content');
+    this.lakeFullEditorWrapperContent.on('scroll', this.handleScroll);
     Engine.$(document.body).css({
       'overscroll-behavior-x': 'none',
       'overflow-y': 'hidden',
@@ -114,7 +114,7 @@ class FullEditor extends React.Component {
           {engine && <Sidebar engine={engine} />}
           <div className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
-              <div className="lake-content-editor" ref={this.contentEditor}>
+              <div className="lake-content-editor show-return-tag" ref={this.contentEditor}>
                 {header && <div className="lake-content-editor-extra">{header}</div>}
                 <Editor
                   {...Object.assign(
