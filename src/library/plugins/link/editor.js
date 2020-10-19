@@ -34,7 +34,7 @@ class LinkEditor extends React.Component {
     const { container, target } = this.props;
     const { top, left, bottom } = target.getBoundingClientRect();
     const { height, width } = container.getBoundingClientRect();
-    const styleLeft = left + width > window.innerWidth - 20
+    const styleLeft = (left + width) > window.innerWidth - 20
       ? window.pageXOffset + window.innerWidth - width - 20
       : left - window.pageXOffset < 20
         ? window.pageXOffset + 20

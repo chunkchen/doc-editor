@@ -162,10 +162,7 @@ class Embed extends SectionBase {
   getiframeOverLimitSectionViewTips() {
     const engine = this.getViewEngine();
     if (engine.iframeHelper) {
-      return this.locale.iframeOverLimitSectionView.replace(
-        '${limit}',
-        engine.iframeHelper.options.limit,
-      );
+      return this.locale.iframeOverLimitSectionView.replace('${limit}', engine.iframeHelper.options.limit);
     }
   }
 

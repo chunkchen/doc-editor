@@ -9,7 +9,7 @@ import Button from './button';
 
 class ToolbarGroup extends React.Component {
   render() {
-    const { engine, locale, toolbar, toolbarState, mobile, isFirstGroup } = this.props;
+    const { engine, locale, toolbar, toolbarState, mobile } = this.props;
 
     return (
       <React.Fragment>

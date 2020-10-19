@@ -391,7 +391,6 @@ class Toolbar extends React.Component {
                     {...Object.assign(
                       {
                         key: index,
-                        isFirstGroup: index === 0,
                       },
                       this.props,
                       {

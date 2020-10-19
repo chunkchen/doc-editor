@@ -88,21 +88,30 @@ export default function (section) {
       const rowsAdditionHead = '<div class="'.concat(ROWS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n      </div>');
       const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="lake-icon lake-icon-arrow-up" /></div>\n        <div class="down"><span class="lake-icon lake-icon-arrow-down"/></div>\n      </div>');
 
-      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  <div class="table-col-header-btns">\n'
-        + '              <a class="table-control-icon-btn table-header-delete-btn">\n'
-        + '                <span class="lake-icon lake-icon-delete" />\n'
-        + '              </a>\n'
-        + '              <a class="table-control-icon-btn table-header-add-btn">\n'
-        + '                  <span class="lake-icon lake-icon-plus"/>\n'
-        + '              </a>\n'
-        + '            </div>           <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <p class="drag-info"/>\n              </div>\n              <div class="').concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(cols), '\n          ').concat('\n        </div>\n      ');
+      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ')
+        .concat('<div class="'
+          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  <div class="table-col-header-btns">\n'
+            + '              <a class="table-control-icon-btn table-header-delete-btn">\n'
+            + '                <span class="lake-icon lake-icon-delete" />\n'
+            + '              </a>\n'
+            + '              <a class="table-control-icon-btn table-header-add-btn">\n'
+            + '                  <span class="lake-icon lake-icon-plus"/>\n'
+            + '              </a>\n'
+            + '            </div>           <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <p class="drag-info"/>\n              </div>\n              <div class="')
+          .concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>')
+          .repeat(cols), '\n          ')
+        .concat('\n        </div>\n      ');
 
       const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <span class="drag-info"/>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat('\n        </div>\n      ');
 
       const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
 
       const textArea = '<textarea class="'.concat(TABLE_TEXTAREA_CLASS, '"></textarea>');
-      const activeBox = '<div class="'.concat(ACTIVE_TD_CLASS, '">\n        ').concat(textArea, '\n        <div class="').concat(COL_MASK, '"></div>\n        <div class="').concat(ROW_MASK, '"></div>\n        <div class="l"></div>\n        <div class="r"></div>\n        <div class="t"></div>\n        <div class="b"></div>\n        <div class="')
+      const activeBox = '<div class="'
+        .concat(ACTIVE_TD_CLASS, '">\n        ')
+        .concat(textArea, '\n        <div class="')
+        .concat(COL_MASK, '"></div>\n        <div class="')
+        .concat(ROW_MASK, '"></div>\n        <div class="l"></div>\n        <div class="r"></div>\n        <div class="t"></div>\n        <div class="b"></div>\n        <div class="')
         .concat(AREA_MASK, '"></div>\n        <div class="nw ')
         .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_nw"></div>\n        <div class="se ')
         .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_se"></div>\n        <div class="n ')
@@ -137,7 +146,7 @@ export default function (section) {
       const table = html || '\n        <table class="'.concat(TABLE_CLASS, '">\n          ').concat(colgroup, '\n          ').concat(trs, '\n        </table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      const sectionHTML = '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n          <div class="').concat(VIEWPORT, '">\n            ').concat(colsHeader, '\n            ')
+      return '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n          <div class="').concat(VIEWPORT, '">\n            ').concat(colsHeader, '\n            ')
         .concat(activeBox, '\n            ')
         .concat(table, '\n            ')
         .concat(placeholder, '\n            ')
@@ -146,7 +155,6 @@ export default function (section) {
         .concat(rowsHeader, '\n          ')
         .concat(multiAddition, '\n          ')
         .concat(menuBar, '\n        </div>');
-      return sectionHTML;
     },
     htmlView: (value) => {
       const html = value.html;

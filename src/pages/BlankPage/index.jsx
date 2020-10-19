@@ -23,8 +23,6 @@ export default class BlankPage extends Component {
   };
 
   onEditorChange = (content) => {
-    const { type } = this.state;
-    console.log(`${type} change: ${content} `);
     this.setState({
       content,
     });
