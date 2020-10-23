@@ -111,7 +111,6 @@ class FullEditor extends React.Component {
         <div className="lake-max-editor-wrapper">
           {engine && <Dialog engine={engine} />}
           {engine && <Toolbar {...Object.assign({ hasMore: false }, toolbarOptions)} />}
-          {engine && <Sidebar engine={engine} />}
           <div className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
               <div className="lake-content-editor show-return-tag" ref={this.contentEditor}>
@@ -126,6 +125,7 @@ class FullEditor extends React.Component {
                 />
               </div>
             </div>
+            {engine && <Sidebar engine={engine} />}
           </div>
         </div>
       </div>

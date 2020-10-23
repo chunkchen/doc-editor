@@ -80,7 +80,6 @@ class Toolbar extends React.Component {
       const { engine } = this.props;
       if (!engine.isDestroyed) {
         exclude = exclude || ['save', 'undo', 'redo', 'toc'];
-
         const toolbarState = Object.assign({}, this.state.toolbarState);
         Object.keys(toolbarState).forEach((name) => {
           if (exclude.indexOf(name) < 0) {
@@ -117,6 +116,7 @@ class Toolbar extends React.Component {
         );
         if (Object.keys(toolbarState).length !== 0) {
           let modified = false;
+          console.log('====>', toolbarState);
           Object.keys(toolbarState).forEach((name) => {
             if (this.executeGetter(toolbarState[name])) {
               if (!modified) {
@@ -261,8 +261,7 @@ class Toolbar extends React.Component {
             setItemObject(item);
           }
         } else {
-          const config = toolbarConfigMap[item] || {};
-          toolbarState[item] = config;
+          toolbarState[item] = toolbarConfigMap[item] || {};
           this.executeGetter(toolbarState[item]);
         }
       });

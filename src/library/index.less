@@ -703,13 +703,16 @@
 }
 
 .lake-sidebar {
-  position: absolute;
-  top: 40px;
-  padding-top: 16px;
+  float: right;
+  height: 100%;
+  padding: 16px;
   overflow: hidden;
   display: none;
   min-width: 220px;
   max-width: 480px;
+  background: #fcfcfc;
+  border-left: 1px solid #e8e8e8;
+  transition: all 0.25s cubic-bezier(0.3, 1.2, 0.2, 1);
 }
 
 .lake-sidebar .lake-sidebar-close {
@@ -733,9 +736,7 @@
 }
 
 .lake-common-sidebar {
-  width: calc(50% - 454px);
-  left: calc(50% + 436px);
-  padding-left: 28px;
+  width: 230px;
 }
 
 .lake-common-sidebar .lake-sidebar-content {
@@ -2277,7 +2278,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .lake-toc-sidebar .lake-sidebar-content {
   overflow: auto;
-  height: calc(100vh - 164px);
 }
 
 .lake-toc-sidebar .lake-toc-item {
@@ -2418,10 +2418,12 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 .lake-max-editor-wrapper-content .lake-max-editor-content {
-  width: 100%;
+  width: calc(100% - 230px);
+  height: fit-content;
   margin: 0 auto;
   background-color: #f9f9f9;
-  padding: 16px 0 64px 0;
+  padding: 16px 16px 64px;
+  overflow: auto;
 
   .show-return-tag {
     p {
@@ -2571,18 +2573,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 @media only screen and (max-width: 1440px) {
   .lake-max-editor {
     min-width: 1280px;
-  }
-
-  .lake-common-sidebar {
-    width: 176px;
-  }
-
-  .lake-common-sidebar .ant-btn-sm {
-    padding: 0 5px;
-  }
-
-  .lake-toc-sidebar {
-    width: 171px;
   }
 }
 
@@ -4297,7 +4287,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .lake-search input {
   width: 325px;
-  height: 49px;
 }
 
 .lake-search button {

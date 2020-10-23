@@ -57,6 +57,7 @@ class DialogSearch extends React.Component {
     const locale = engine.locale.search;
     const { searchValue, replacement } = this.state;
     const count = search.count();
+    console.log(count);
     const searchInput = (
       <p style={{ marginBottom: '12px' }}>
         <Input
@@ -84,6 +85,7 @@ class DialogSearch extends React.Component {
     const replacementInput = (
       <p style={{ marginBottom: '16px' }}>
         <Input
+          style={{ width: '100%' }}
           accessbilityid="replace-input"
           placeholder={locale.pleaseEnter}
           onChange={(e) => {
@@ -139,8 +141,7 @@ class DialogSearch extends React.Component {
           tab={locale.replace}
           key="replace"
         >
-
-          <p style={{ textAlign: 'right' }}>{locale.search}</p>
+          <p style={{ textAlign: 'left' }}>{locale.search}</p>
           {searchInput}
           <p>{locale.replaceTo}</p>
           {replacementInput}
