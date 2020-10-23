@@ -164,7 +164,11 @@ class LinkEditor extends React.Component {
 
     const linkContainer = link ? (
       shouldTargetBlank(link) ? (
-        <a className="lake-link-editor-link-container" href={sanitizeUrl(link)} target="_blank" rel="noopener noreferrer">
+        <a className="lake-link-editor-link-container"
+          href={sanitizeUrl(link)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {text}
         </a>
       ) : (
@@ -204,7 +208,7 @@ class LinkEditor extends React.Component {
     );
   }
 
-  isInvalidLink =(link) => {
+  isInvalidLink = (link) => {
     return !link || (link && !link.match(/^[\x00-\x7F]/)) || link.startsWith('javascript:');
   }
 

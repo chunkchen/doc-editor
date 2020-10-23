@@ -736,7 +736,7 @@
 }
 
 .lake-common-sidebar {
-  width: 230px;
+  width: 300px;
 }
 
 .lake-common-sidebar .lake-sidebar-content {
@@ -1643,11 +1643,11 @@
 }
 
 .lake-zoom-center-iszooming {
-           cursor: grab;
+  cursor: grab;
 }
 
 .lake-zoom-center-isdraging {
-           cursor: grabbing;
+  cursor: grabbing;
 }
 
 .lake-zoom-content {
@@ -2415,14 +2415,14 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   width: 100%;
   height: calc(100% - 40px);
   overflow: auto;
+  display: flex;
 }
 
 .lake-max-editor-wrapper-content .lake-max-editor-content {
-  width: calc(100% - 230px);
-  height: fit-content;
+  height: 100%;
   margin: 0 auto;
-  background-color: #f9f9f9;
   padding: 16px 16px 64px;
+  background-color: #f9f9f9;
   overflow: auto;
 
   .show-return-tag {
@@ -2430,6 +2430,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
       br {
         display: none;
       }
+
       &:after {
         content: "↵";
         color: #bfbfbf;
@@ -2572,7 +2573,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 @media only screen and (max-width: 1440px) {
   .lake-max-editor {
-    min-width: 1280px;
+    min-width: 1156px;
   }
 }
 
@@ -2937,7 +2938,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .table-wrapper.editing .table-viewport {
   margin-bottom: 0;
-  padding-bottom: 8px;
+  margin-top: 18px;
 }
 
 .table-wrapper .table-textarea {
@@ -3035,8 +3036,9 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 .table-wrapper .table-cols-header {
-  position: relative;
-  height: 18px;
+  position: absolute;
+  left: 3px;
+  height: 14px;
   display: none;
   width: 100%;
   cursor: default;
@@ -3057,7 +3059,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   background: #fff;
   cursor: pointer;
 
-  &:last-child{
+  &:last-child {
     border-right: 1px solid #E8E8E8;
   }
 }
@@ -3391,9 +3393,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 .table-wrapper .table-viewport {
   position: relative;
   overflow: hidden;
-  padding: 0 3px;
-  margin-left: -3px;
-  margin-right: -3px;
+  padding: 3px;
 }
 
 .table-wrapper-mini .table-viewport {
@@ -3401,7 +3401,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 [data-section-key="table"].lake-activated.lake-section-block-max .table-wrapper-mini .table-viewport {
-  padding: 0 3px;
+  padding: 3px;
 }
 
 [data-section-key="table"].lake-activated .lake-table.lake-no-border {

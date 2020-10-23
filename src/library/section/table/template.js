@@ -146,7 +146,7 @@ export default function (section) {
       const table = html || '\n        <table class="'.concat(TABLE_CLASS, '">\n          ').concat(colgroup, '\n          ').concat(trs, '\n        </table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      return '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n          <div class="').concat(VIEWPORT, '">\n            ').concat(colsHeader, '\n            ')
+      return '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n         ').concat(colsHeader, '\n            <div class="').concat(VIEWPORT, '">\n            ')
         .concat(activeBox, '\n            ')
         .concat(table, '\n            ')
         .concat(placeholder, '\n            ')

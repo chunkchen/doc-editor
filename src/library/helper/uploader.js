@@ -33,11 +33,14 @@ class Uploader extends EventEmitter2 {
   getAccept(itemName) {
     if (itemName === 'image') {
       return android ? 'image/*' : Engine.EXTS.IMAGE_EXT_STR;
-    } if (itemName === 'file') {
+    }
+    if (itemName === 'file') {
       return Engine.EXTS.FILE_EXT_STR;
-    } if (itemName === 'localdoc') {
+    }
+    if (itemName === 'localdoc') {
       return Engine.EXTS.OFFICE_EXT_STR; // + ", " + Engine.EXTS.MAC_OFFICE_STR
-    } return undefined;
+    }
+    return undefined;
   }
 
   getAllowedExtensions(itemName) {

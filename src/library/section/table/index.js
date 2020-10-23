@@ -1,3 +1,4 @@
+import Engine from 'doc-engine/lib';
 import localeEn from './locale/en';
 import localeZhCn from './locale/zh-cn';
 import toolbar from './toolbar';
@@ -12,7 +13,6 @@ import Selection from './selection';
 import Scrollbar from '../../scrollbar';
 import schema from './schema';
 import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils';
-import Engine from 'doc-engine/lib';
 import schemaConfig from '../../schema/config';
 import { getHeight } from '../../utils/dom';
 import SectionBase from '../base';
@@ -104,7 +104,8 @@ class Table extends SectionBase {
 
       if (Array.isArray(config.embed)) {
         return config.embed;
-      } if (typeof config.embed === 'object') {
+      }
+      if (typeof config.embed === 'object') {
         const embedArray = [];
         embed.forEach((item) => {
           if (config.embed[item.type] !== false) {
@@ -511,7 +512,7 @@ class Table extends SectionBase {
 
   getTableHeight() {
     const height = getHeight(this.tableRoot[0]);
-    return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height;
+    return this.options.type === 'mini' && !this.state.maximize ? height + 9 : height;
   }
 
   onTableSizeChange() {

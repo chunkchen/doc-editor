@@ -67,10 +67,10 @@ class Zoom extends React.Component {
       <Tooltip
         title={title}
         getPopupContainer={
-        () => {
-          return tooltipContainer;
+          () => {
+            return tooltipContainer;
+          }
         }
-      }
         mouseEnterDelay={1}
       >
         <span onClick={onClick}

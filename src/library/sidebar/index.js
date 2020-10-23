@@ -83,12 +83,12 @@ class Sidebar extends React.Component {
           {
             showCloseBtn !== false
             && (
-            <div
-              className="lake-sidebar-close"
-              onClick={this.close}
-            >
-              <span className="lake-icon lake-icon-close" />
-            </div>
+              <div
+                className="lake-sidebar-close"
+                onClick={this.close}
+              >
+                <span className="lake-icon lake-icon-close" />
+              </div>
             )
           }
         </div>

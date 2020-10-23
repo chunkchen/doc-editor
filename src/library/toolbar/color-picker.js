@@ -93,19 +93,19 @@ class ColorPickerGroup extends React.Component {
     return (
       <span className="lake-colorboard-group">
         {
-              data.map((c) => {
-                return (
-                  <ColorPickerItem
-                    color={c}
-                    key={c}
-                    activeColors={activeColors}
-                    defaultColor={defaultColor}
-                    onSelect={onSelect}
-                    setStroke={setStroke}
-                  />
-                );
-              })
-            }
+          data.map((c) => {
+            return (
+              <ColorPickerItem
+                color={c}
+                key={c}
+                activeColors={activeColors}
+                defaultColor={defaultColor}
+                onSelect={onSelect}
+                setStroke={setStroke}
+              />
+            );
+          })
+        }
       </span>
     );
   }

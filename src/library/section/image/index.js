@@ -91,7 +91,8 @@ class Image extends SectionBase {
     const config = options.image || {};
     if (Array.isArray(config.embed)) {
       return config.embed;
-    } if (typeof config.embed === 'object') {
+    }
+    if (typeof config.embed === 'object') {
       const embedArray = [];
       items.forEach((item) => {
         if (config.embed[item.type] !== false) {

@@ -71,8 +71,8 @@ class TextDiagramViewer extends React.Component {
         className={'lake-text-diagram-viewer lake-text-diagram-'.concat(type, ' ').concat(className)}
       >
         {
-        children
-      }
+          children
+        }
       </div>
     );
   }

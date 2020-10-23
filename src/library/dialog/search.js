@@ -78,7 +78,8 @@ class DialogSearch extends React.Component {
           }}
           ref={element => this.inputRef = element}
           value={searchValue}
-          suffix={count === 0 ? <span className="count">0</span> : <span className="count">{count[0] / count[1]}</span>}
+          suffix={count === 0 ? <span className="count">0</span>
+            : <span className="count">{`${count[0]}/${count[1]}`}</span>}
         />
       </p>
     );
@@ -125,7 +126,7 @@ class DialogSearch extends React.Component {
             accessbilityid="searchreplace-close-button"
             onClick={() => onClose()}
           />
-)}
+        )}
       >
         <TabPane
           tab={locale.search}

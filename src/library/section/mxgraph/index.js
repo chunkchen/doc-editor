@@ -28,7 +28,8 @@ class Visio extends Embed {
     ];
     if (Array.isArray(config.embed)) {
       return config.embed;
-    } if (typeof config.embed === 'object') {
+    }
+    if (typeof config.embed === 'object') {
       const embedArray = [];
       embed.forEach((item) => {
         if (config.embed[item.type] !== false) {

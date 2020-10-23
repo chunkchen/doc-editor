@@ -82,7 +82,9 @@ class SectionBase {
   }
 
   addResizeController(container) {
-    let height; let start; let
+    let height;
+    let start;
+    let
       cssHeight;
     this.resizeController = this.createResizeController({
       container: this.container,

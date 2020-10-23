@@ -64,7 +64,9 @@ class Embed extends SectionBase {
   }
 
   renderResizeController() {
-    let height; let moveHeight; let
+    let height;
+    let moveHeight;
+    let
       dragBegin;
     const { minHeight } = this.options;
     this.resizeController = this.createResizeController({

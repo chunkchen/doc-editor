@@ -337,9 +337,9 @@ export default {
     sizeError: '上传失败，视频大小限制为 2G',
   },
   toc: {
-    title: '大纲',
-    open: '打开大纲',
-    close: '关闭大纲',
+    title: '导航',
+    open: '打开导航',
+    close: '关闭导航',
   },
   section: {
     mindmapFile: '脑图',

@@ -34,7 +34,8 @@ const template = function (data, locale) {
         Engine.StringUtils.escape(data.percent),
         '%</span>\n            </div>\n          </div>\n        </div>\n      </div>\n    ',
       );
-  } if (data.status === 'uploaded') {
+  }
+  if (data.status === 'uploaded') {
     return '\n      <div class="lake-video">\n        <div class="lake-video-content lake-video-uploaded">\n          <div class="lake-video-center">\n            '
       .concat(icons.video, '\n            <div class="lake-video-name">')
       .concat(Engine.StringUtils.escape(data.name), ' (')
@@ -47,7 +48,8 @@ const template = function (data, locale) {
         Engine.StringUtils.escape(locale.transcoding),
         '</span>\n            </div>\n          </div>\n        </div>\n      </div>\n    ',
       );
-  } if (data.status === 'error') {
+  }
+  if (data.status === 'error') {
     let message = '';
     /**
      * 错误码:
@@ -244,7 +246,8 @@ class Video extends SectionBase {
     const config = options.video || {};
     if (Array.isArray(config.embed)) {
       return config.embed;
-    } if (typeof config.embed === 'object') {
+    }
+    if (typeof config.embed === 'object') {
       const embedArray = [];
       embed.forEach((item) => {
         if (config.embed[item.type] !== false) {
