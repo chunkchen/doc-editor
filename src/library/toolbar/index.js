@@ -42,10 +42,6 @@ class Toolbar extends React.Component {
     };
 
     this.set = (config) => {
-      const { engine, type } = this.props;
-      // if(type === "mini"){
-      //    engine.toolbar.disable(true)
-      // }else{
       const nameList = [];
       let subNameList = [];
       config.forEach((item) => {
@@ -60,19 +56,14 @@ class Toolbar extends React.Component {
         nameList.push(subNameList);
       }
       this.setToolbar(nameList, config, true);
-      // }
     };
 
     this.restore = () => {
-      const { engine, type } = this.props;
+      const { engine } = this.props;
       if (!engine.isDestroyed) {
-        // if( type === "mini" ) {
-        //    engine.toolbar.disable(false)
-        // }else{
         this.setState({
           pluginToolbar: [],
         });
-        // }
       }
     };
 

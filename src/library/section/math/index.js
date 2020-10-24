@@ -35,11 +35,11 @@ class Math extends SectionBase {
   }
 
   exConvertToPx(svg) {
-    const regWidth = /width="([\d\.]+ex)"/;
+    const regWidth = /width="([\d\\.]+ex)"/;
     const widthMaths = regWidth.exec(svg);
     const exWidth = widthMaths ? widthMaths[1] : null;
 
-    const regHeight = /height="([\d\.]+ex)"/;
+    const regHeight = /height="([\d\\.]+ex)"/;
     const heightMaths = regHeight.exec(svg);
     const exHeight = heightMaths ? heightMaths[1] : null;
 

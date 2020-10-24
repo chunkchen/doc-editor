@@ -335,7 +335,7 @@ class SectionSelect extends SectionBase {
       // 在 Windows 上使用中文输入法，在 keydown 事件里无法阻止用户的输入，所以在这里删除用户的输入
       if (Date.now() - renderTime < 100) {
         const textNode = keywordNode.first();
-        if (textNode && textNode.isText() && textNode[0].nodeValue === '/、' || textNode[0].nodeValue === '//') {
+        if ((textNode && textNode.isText() && textNode[0].nodeValue === '/、') || textNode[0].nodeValue === '//') {
           const rightTextNode = textNode[0].splitText(1);
           Engine.$(rightTextNode).remove();
         }

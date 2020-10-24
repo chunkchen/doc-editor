@@ -1,10 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { EventEmitter2 } from 'eventemitter2';
-import { InputNumber } from 'antd';
 import 'antd/lib/input-number/style';
 import Engine from 'doc-engine/lib';
-import { fixDragEvent, getContentArea } from './utils';
+import { fixDragEvent } from './utils';
 
 const { $ } = Engine;
 
@@ -173,7 +170,7 @@ class ControllBar extends EventEmitter2 {
       this.showPlaceHolder(dropCol);
     };
 
-    // 拖动行
+    // 正在拖动行 dragging
     this.onDragRow = (e) => {
       e.stopPropagation();
       if (!this.rowDragging) return;
@@ -217,7 +214,7 @@ class ControllBar extends EventEmitter2 {
     this.showPlaceHolder = (dropIndex) => {
       if (this.colDragging) {
         if (dropIndex === this.dropCol) return;
-        if (this.colDraggingIndex.col_min <= dropIndex && dropIndex <= this.colDraggingIndex.col_max + 1) {
+        if (this.colDraggingIndex.colMin <= dropIndex && dropIndex <= this.colDraggingIndex.colMax + 1) {
           delete this.dropCol;
           this.placeholder.css('display', 'none');
           return;
@@ -242,7 +239,7 @@ class ControllBar extends EventEmitter2 {
 
       if (this.rowDragging) {
         if (dropIndex === this.dropRow) return;
-        if (this.rowDraggingIndex.row_min <= dropIndex && dropIndex <= this.rowDraggingIndex.row_max + 1) {
+        if (this.rowDraggingIndex.rowMin <= dropIndex && dropIndex <= this.rowDraggingIndex.rowMax + 1) {
           delete this.dropRow;
           this.placeholder.css('display', 'none');
           return;
@@ -253,7 +250,7 @@ class ControllBar extends EventEmitter2 {
         this.placeholder.css('height', '3px');
         this.placeholder.css('width', `${this.width}px`);
         this.placeholder.css('left', '3px');
-        this.placeholder.css('top', `${21 + top}px`);
+        this.placeholder.css('top', `${top}px`);
         this.placeholder.css('display', 'block');
       }
     };
@@ -291,7 +288,7 @@ class ControllBar extends EventEmitter2 {
       delete this.dropCol;
     };
 
-    // 拖动到行末尾
+    // 拖动行-事件结束
     this.onDragRowEnd = () => {
       this.unBindDragRowEvent();
       if (!this.rowDragging || this.dropRow === undefined) return;

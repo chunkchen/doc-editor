@@ -1,7 +1,7 @@
-import { EventEmitter2 } from 'eventemitter2';
-import { message } from 'antd';
+import {EventEmitter2} from 'eventemitter2';
+import {message} from 'antd';
 import Engine from 'doc-engine/lib';
-import { isBase64Image } from '../utils/string';
+import {isBase64Image} from '../utils/string';
 import Request from './request';
 
 const { android } = Engine.userAgent;

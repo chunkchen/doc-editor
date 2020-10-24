@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input, message } from 'antd';
 
-const w = /[^a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\_\+\-\=\{\}\|\[\]\\\:\"\;\'\<\>\?\,\.\/]/;
+const w = /[^a-zA-Z0-9`~!@#$%\\^&*()_+-={}|\\[\\]\\:";'<>?,\.\/]/;
 
 class Lock extends React.Component {
   changeLockPassword = (e) => {

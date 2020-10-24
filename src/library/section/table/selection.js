@@ -1,7 +1,7 @@
-import { EventEmitter2 } from 'eventemitter2';
+import {EventEmitter2} from 'eventemitter2';
 import Keymaster from 'keymaster';
 import Engine from 'doc-engine/lib';
-import { copyCss, getTableModel } from './utils';
+import {copyCss, getTableModel} from './utils';
 
 const { $ } = Engine;
 
@@ -944,13 +944,14 @@ class Selection extends EventEmitter2 {
       const { tableModel } = this;
       const template = this.section.template;
       const { rowMin, colMin } = this.normalizeArea();
-      // const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS)
-      // const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS)
+      const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
+      const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
 
       let row = rowMin;
       let col = colMin;
-      // let w = colBars[col].offsetWidth
-      // let h = rowBars[row].offsetHeight
+      const w1 = colBars[col].offsetWidth;
+      const h1 = rowBars[row].offsetHeight;
+      console.log(w1, h1);
       let w = tableModel.table[0][col].element.offsetWidth;
       let h = tableModel.table[row][0].element.offsetHeight;
       while (w < x) {

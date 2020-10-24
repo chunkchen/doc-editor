@@ -25,7 +25,7 @@ export default {
         }
       });
       graph.behaviourOn('dragstart', (ev) => {
-        if (ev.button !== 2 && !bool || !ev.shape || ev.item && ev.item.dragable === false && !page.getSignal('dragEdge')) {
+        if ((ev.button !== 2 && !bool) || !ev.shape || (ev.item && ev.item.dragable === false && !page.getSignal('dragEdge'))) {
           startPoint = {
             x: ev.domX,
             y: ev.domY,

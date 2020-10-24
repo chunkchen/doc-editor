@@ -114,9 +114,7 @@ class Editor extends React.Component {
   render() {
     const { pageSize } = this.props;
     return (
-      <div className={`lake-typography-${pageSize}`}>
-        <div ref={this.container} className="lake-content-editor-core" />
-      </div>
+      <div ref={this.container} className={'lake-content-editor-core ' + `lake-typography-${pageSize}`} />
     );
   }
 }

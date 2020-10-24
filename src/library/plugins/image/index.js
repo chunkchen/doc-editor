@@ -166,7 +166,7 @@ function handleKeydownEnter(e) {
   // ![name|center|250x200](url)
   // ![|center](url)
 
-  const match = /^!\[([^\]]{0,})\]\(([http|https]?:\/\/[^\)]{5,})\)$/.exec(chars);
+  const match = /^!\[([^\]]{0,})\\]\(([http|https]?:\/\/[^\\)]{5,})\)$/.exec(chars);
   if (!match) return;
   e.preventDefault();
   Engine.ChangeUtils.removeBlockLeftText(block, range);

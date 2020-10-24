@@ -16,7 +16,7 @@ Page.registerBehaviour('startPanItem', (page) => {
     }
   });
   graph.behaviourOn('dragstart', (ev) => {
-    if (ev.button === 2 || !ev.item || !ev.item.isNode && !ev.item.isGroup) {
+    if (ev.button === 2 || !ev.item || (!ev.item.isNode && !ev.item.isGroup)) {
       return;
     }
 

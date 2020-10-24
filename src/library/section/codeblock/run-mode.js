@@ -17,7 +17,7 @@ export default (string, modespec, callback, options) => {
   const ie_lt9 = ie && (document.documentMode == null || document.documentMode < 9);
 
   if (callback.appendChild) {
-    const tabSize = options && options.tabSize || CodeMirror.defaults.tabSize;
+    const tabSize = (options && options.tabSize) || CodeMirror.defaults.tabSize;
     const node = callback;
     let col = 0;
     node.innerHTML = '';
@@ -66,7 +66,7 @@ export default (string, modespec, callback, options) => {
   }
 
   const lines = CodeMirror.splitLines(string);
-  const state = options && options.state || CodeMirror.startState(mode);
+  const state = (options && options.state) || CodeMirror.startState(mode);
 
   for (let i = 0, e = lines.length; i < e; ++i) {
     if (i) callback('\n');

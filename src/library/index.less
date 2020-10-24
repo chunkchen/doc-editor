@@ -2543,14 +2543,14 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   // 默认A4 纵向
   .lake-typography-a4 {
     width: 21cm;
-    height: 29.7cm;
+    min-height: 29.7cm;
     padding: 2.54cm 3.18cm;
   }
 
   // A4 横向
   .lake-typography-a4_row {
-    height: 21cm;
     width: 29.7cm;
+    min-height: 21cm;
     padding: 2.54cm 3.18cm;
   }
 }
@@ -3433,12 +3433,12 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .table-wrapper .table-rows-header .table-rows-header-item .row-dragger .drag-info {
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
 }
 
-.table-wrapper .table-rows-header.dragging .table-rows-header-item .rows-trigger {
-  display: none;
+.table-wrapper .table-rows-header .table-rows-header-item.dragging .rows-trigger {
+  display: flex;
 }
 
 .table-wrapper .table-rows-header.resize .table-rows-header-item {
