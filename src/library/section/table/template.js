@@ -8,13 +8,9 @@ const TABLE_CLASS = 'lake-table';
 const COLS_HEADER_CLASS = 'table-cols-header';
 const COLS_HEADER_ITEM_CLASS = 'table-cols-header-item';
 const COLS_HEADER_TRIGGER_CLASS = 'cols-trigger';
-const COLS_ADDITION_CLASS = 'cols-addition';
-const COLS_ADDITION_HEADER_CLASS = 'cols-addition-header';
 const ROWS_HEADER_CLASS = 'table-rows-header';
 const ROWS_HEADER_ITEM_CLASS = 'table-rows-header-item';
 const ROWS_HEADER_TRIGGER_CLASS = 'rows-trigger';
-const ROWS_ADDITION_CLASS = 'rows-addition';
-const ROWS_ADDITION_HEADER_CLASS = 'rows-addition-header';
 const HEADER_CLASS = 'table-header';
 const ACTIVE_TD_CLASS = 'table-active-td';
 const ACTIVE_TD_TRIGGER_CLASS = 'table-active-td-trigger';
@@ -29,7 +25,6 @@ const TABLE_TEXTAREA_CLASS = 'table-textarea';
 const VIEWPORT = 'table-viewport';
 const VIEWPORT_READER = 'lake-table-reader';
 const PLACEHOLDER_CLASS = 'table-placeholder';
-const MULTI_ADDITION_CLASS = 'multi-addition';
 const SHADOW_LEFT_CLASS = 'table-shadow-left';
 const SHADOW_RIGHT_CLASS = 'table-shadow-right';
 
@@ -40,13 +35,9 @@ export default function (section) {
     COLS_HEADER_CLASS: '.'.concat(COLS_HEADER_CLASS),
     COLS_HEADER_ITEM_CLASS: '.'.concat(COLS_HEADER_ITEM_CLASS),
     COLS_HEADER_TRIGGER_CLASS: '.'.concat(COLS_HEADER_TRIGGER_CLASS),
-    COLS_ADDITION_CLASS: '.'.concat(COLS_ADDITION_CLASS),
-    COLS_ADDITION_HEADER_CLASS: '.'.concat(COLS_ADDITION_HEADER_CLASS),
     ROWS_HEADER_CLASS: '.'.concat(ROWS_HEADER_CLASS),
     ROWS_HEADER_ITEM_CLASS: '.'.concat(ROWS_HEADER_ITEM_CLASS),
     ROWS_HEADER_TRIGGER_CLASS: '.'.concat(ROWS_HEADER_TRIGGER_CLASS),
-    ROWS_ADDITION_CLASS: '.'.concat(ROWS_ADDITION_CLASS),
-    ROWS_ADDITION_HEADER_CLASS: '.'.concat(ROWS_ADDITION_HEADER_CLASS),
     HEADER_CLASS: '.'.concat(HEADER_CLASS),
     ACTIVE_TD_CLASS: '.'.concat(ACTIVE_TD_CLASS),
     ACTIVE_TD_TRIGGER_CLASS: '.'.concat(ACTIVE_TD_TRIGGER_CLASS),
@@ -61,7 +52,6 @@ export default function (section) {
     VIEWPORT: '.'.concat(VIEWPORT),
     VIEWPORT_READER: '.'.concat(VIEWPORT_READER),
     PLACEHOLDER_CLASS: '.'.concat(PLACEHOLDER_CLASS),
-    MULTI_ADDITION_CLASS: '.'.concat(MULTI_ADDITION_CLASS),
     SHADOW_LEFT_CLASS: '.'.concat(SHADOW_LEFT_CLASS),
     SHADOW_RIGHT_CLASS: '.'.concat(SHADOW_RIGHT_CLASS),
     EmptyCell: '<p><br /></p>',
@@ -83,53 +73,89 @@ export default function (section) {
       const trs = '<tr>'.concat(tds, '</tr>').repeat(rows);
       const col = '<col />'.repeat(cols);
       const colgroup = '<colgroup>'.concat(col, '</colgroup>');
-      const colsAddition = '<div class="'.concat(COLS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n        <div class="').concat(COLS_ADDITION_CLASS, '"> + </div>\n      </div>');
-      const rowsAddition = '<div class="'.concat(ROWS_ADDITION_CLASS, '">\n        <div class="plus"> + </div>\n      </div>');
-      const rowsAdditionHead = '<div class="'.concat(ROWS_ADDITION_HEADER_CLASS, '">\n        <div class="multi-trigger"></div>\n      </div>');
-      const multiAddition = '<div class="'.concat(MULTI_ADDITION_CLASS, '">\n        <div class="number">1</div>\n        <div class="up"><span class="lake-icon lake-icon-arrow-up" /></div>\n        <div class="down"><span class="lake-icon lake-icon-arrow-down"/></div>\n      </div>');
 
-      const colsHeader = '\n        <div class="'.concat(COLS_HEADER_CLASS, '">\n          ')
+      // 列头
+      const colsHeader = '\n        <div class="'
+        .concat(COLS_HEADER_CLASS, '">\n          ')
         .concat('<div class="'
-          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  <div class="table-col-header-btns">\n'
-            + '              <a class="table-control-icon-btn table-header-delete-btn">\n'
-            + '                <span class="lake-icon lake-icon-delete" />\n'
-            + '              </a>\n'
-            + '              <a class="table-control-icon-btn table-header-add-btn">\n'
-            + '                  <span class="lake-icon lake-icon-plus"/>\n'
-            + '              </a>\n'
-            + '            </div>           <div class="col-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <p class="drag-info"/>\n              </div>\n              <div class="')
-          .concat(COLS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>')
-          .repeat(cols), '\n          ')
-        .concat('\n        </div>\n      ');
+          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  '
+            + '<div class="table-col-header-btns">'
+            + '   <a class="table-control-icon-btn table-header-delete-btn">'
+            + '       <span class="lake-icon lake-icon-delete" />'
+            + '   </a>'
+            + '   <a class="table-control-icon-btn table-header-add-btn">'
+            + '       <span class="lake-icon lake-icon-plus"/>'
+            + '   </a>'
+            + '</div>'
+            + '<div class="col-dragger">'
+            + '   <span class="lake-icon lake-icon-drag"/>'
+            + '   <p class="drag-info"/>'
+            + '</div>'
+            + '<div class="')
+          .concat(COLS_HEADER_TRIGGER_CLASS, '"></div></div>')
+          .repeat(cols), '\n ')
+        .concat('\n </div>\n ');
 
-      const rowsHeader = '\n        <div class="'.concat(ROWS_HEADER_CLASS, '">\n          ').concat('<div class="'.concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n              <div class="row-dragger">\n                <span class="lake-icon lake-icon-drag"/>\n                <span class="drag-info"/>\n              </div>\n              <div class="').concat(ROWS_HEADER_TRIGGER_CLASS, '"></div>\n            </div>').repeat(rows), '\n          ').concat('\n        </div>\n      ');
+      // 行头
+      const rowsHeader = '\n        <div class="'
+        .concat(ROWS_HEADER_CLASS, '">\n          ')
+        .concat('<div class="'
+          .concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n '
+            + '<div class="table-row-header-btns">\n'
+            + '    <a class="table-control-icon-btn table-header-delete-btn">'
+            + '       <span class="lake-icon lake-icon-delete" />'
+            + '    </a>'
+            + '    <a class="table-control-icon-btn table-header-add-btn">'
+            + '       <span class="lake-icon lake-icon-plus"/>'
+            + '    </a>'
+            + '</div>          '
+            + '<div class="row-dragger">   '
+            + '    <span class="lake-icon lake-icon-drag"/>'
+            + '    <span class="drag-info"/>'
+            + '</div>'
+            + '<div class="')
+          .concat(ROWS_HEADER_TRIGGER_CLASS, '"></div></div>')
+          .repeat(rows), '\n  ')
+        .concat('\n </div>\n  ');
 
+      // 整个表 锚点
       const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
 
-      const textArea = '<textarea class="'.concat(TABLE_TEXTAREA_CLASS, '"></textarea>');
+      // 当前激活单元格
+      const textArea = '<textarea class="'
+        .concat(TABLE_TEXTAREA_CLASS, '"></textarea>');
       const activeBox = '<div class="'
         .concat(ACTIVE_TD_CLASS, '">\n        ')
         .concat(textArea, '\n        <div class="')
-        .concat(COL_MASK, '"></div>\n        <div class="')
-        .concat(ROW_MASK, '"></div>\n        <div class="l"></div>\n        <div class="r"></div>\n        <div class="t"></div>\n        <div class="b"></div>\n        <div class="')
-        .concat(AREA_MASK, '"></div>\n        <div class="nw ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_nw"></div>\n        <div class="se ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_se"></div>\n        <div class="n ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_n"></div>\n        <div class="w ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_w"></div>\n        <div class="s ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_s"></div>\n        <div class="e ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_e"></div>\n        ')
+        .concat(COL_MASK, '"></div>\n <div class="')
+        .concat(ROW_MASK, '"></div>\n <div class="l"></div>\n <div class="r"></div>\n <div class="t"></div>\n  <div class="b"></div>\n <div class="')
+        .concat(AREA_MASK, '"></div>\n <div class="nw ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_nw"></div>\n <div class="se ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_se"></div>\n <div class="n ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_n"></div>\n <div class="w ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_w"></div>\n <div class="s ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_s"></div>\n  <div class="e ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_e"></div>\n ')
         .concat(this.SubEditor, '\n      </div>');
+
       const placeholder = '<div class="'.concat(PLACEHOLDER_CLASS, '"></div>');
       const shadowLeft = '<div class="'.concat(SHADOW_LEFT_CLASS, '"></div>');
       const shadowRight = '<div class="'.concat(SHADOW_RIGHT_CLASS, '"></div>');
+
+      // 右键菜单
       let menuBar = section.constants.MENU.map((menu) => {
         if (menu.split) {
           return '<div class="split"></div>';
         }
-        return '<div class="'.concat(MENUBAR_ITEM_CLASS, '" data-action="').concat(menu.action, '">\n          <span class="lake-icon lake-icon-table-').concat(menu.icon, '"></span>\n          ').concat(menu.text, '\n        </div>');
+        return '<div class="'
+          .concat(MENUBAR_ITEM_CLASS, '" data-action="')
+          .concat(menu.action, '">\n          <span class="lake-icon lake-icon-table-')
+          .concat(menu.icon, '"></span>\n          ')
+          .concat(menu.text, '\n </div>');
       });
-      menuBar = '<div class="'.concat(MENUBAR_CLASS, '">').concat(menuBar.join(''), '</div>');
+      menuBar = '<div class="'
+        .concat(MENUBAR_CLASS, '">')
+        .concat(menuBar.join(''), '</div>');
 
       if (html) {
         const hasColGroup = html.includes('<colgroup>');
@@ -143,18 +169,20 @@ export default function (section) {
         html = normalizeTable($(html)[0]).outerHTML;
       }
 
-      const table = html || '\n        <table class="'.concat(TABLE_CLASS, '">\n          ').concat(colgroup, '\n          ').concat(trs, '\n        </table>');
+      const table = html || '\n  <table class="'
+        .concat(TABLE_CLASS, '">\n ')
+        .concat(colgroup, '\n ')
+        .concat(trs, '\n </table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      return '\n        <div class="'.concat(sectionClass, '">\n          ').concat(tableHeader, '\n         ').concat(colsHeader, '\n            <div class="').concat(VIEWPORT, '">\n            ')
-        .concat(activeBox, '\n            ')
-        .concat(table, '\n            ')
-        .concat(placeholder, '\n            ')
-        .concat(shadowLeft, '\n            ')
-        .concat(shadowRight, '\n          </div>\n          ')
-        .concat(rowsHeader, '\n          ')
-        .concat(multiAddition, '\n          ')
-        .concat(menuBar, '\n        </div>');
+      return '\n        <div class="'.concat(sectionClass, '">\n ').concat(tableHeader, '\n  <div class=" ').concat(VIEWPORT, '">\n ').concat(colsHeader, '\n ')
+        .concat(activeBox, '\n ')
+        .concat(table, '\n ')
+        .concat(placeholder, '\n ')
+        .concat(shadowLeft, '\n ')
+        .concat(shadowRight, '\n </div>\n ')
+        .concat(rowsHeader, '\n ')
+        .concat(menuBar, '\n </div>');
     },
     htmlView: (value) => {
       const html = value.html;

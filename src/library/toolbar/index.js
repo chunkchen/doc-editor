@@ -116,7 +116,6 @@ class Toolbar extends React.Component {
         );
         if (Object.keys(toolbarState).length !== 0) {
           let modified = false;
-          console.log('====>', toolbarState);
           Object.keys(toolbarState).forEach((name) => {
             if (this.executeGetter(toolbarState[name])) {
               if (!modified) {

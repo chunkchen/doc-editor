@@ -78,7 +78,7 @@ export const getWidth = (el, defaultValue) => {
  * @param  {Number} defaultValue - 默认值
  * @return {Number} 高度
  */
-export const getHeight = (el, defaultValue) => {
+export const getHeight = (el, defaultValue = 50) => {
   let height = getStyle(el, 'height', defaultValue);
 
   if (height === 'auto') {

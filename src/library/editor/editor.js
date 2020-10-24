@@ -83,11 +83,13 @@ class Editor extends React.Component {
     engine.locale = this.locale;
     engine.on('change', (val) => {
       let pageContentHeight = 0;
-      this.container.current.childNodes.forEach(node => pageContentHeight += node.offsetHeight);
-      console.log(pageContentHeight);
-      if (pageContentHeight > 601) {
-        console.log('分页');
-      }
+      this.container.current.childNodes.forEach((node) => {
+        pageContentHeight += node.offsetHeight;
+        console.log(pageContentHeight);
+        if (pageContentHeight > 601) {
+          console.log('分页');
+        }
+      });
       value = addMentionAttrs(val);
       this.engine.options.onChange(value);
       this.engine.toolbar.updateState();
@@ -110,8 +112,9 @@ class Editor extends React.Component {
   }
 
   render() {
+    const { pageSize } = this.props;
     return (
-      <div className="lake-typography-row">
+      <div className={`lake-typography-${pageSize}`}>
         <div ref={this.container} className="lake-content-editor-core" />
       </div>
     );
@@ -119,6 +122,7 @@ class Editor extends React.Component {
 }
 
 Editor.defaultProps = {
+  pageSize: 'a4',
   lang: 'zh-cn',
   onChange: () => {
   },

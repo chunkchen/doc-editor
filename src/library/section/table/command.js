@@ -293,7 +293,7 @@ class Command extends EventEmitter2 {
       this.section.onTableSizeChange();
     };
 
-    this.insertRow = function (position) {
+    this.insertRow = (position) => {
       let count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       const silence = arguments.length > 2 ? arguments[2] : undefined;
       const selection = this.section.selection;

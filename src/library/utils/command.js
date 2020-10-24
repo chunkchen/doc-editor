@@ -45,11 +45,10 @@ export const addDialogCommand = (engine, name, getConfig) => {
 
 export const addIframeSection = (engine, name, value) => {
   const { locale, iframeHelper } = engine;
-  const iframeHelperClone = iframeHelper;
   if (iframeHelper.canAdd()) {
     engine.command.execute(name, value);
   } else {
-    const limit = iframeHelperClone.options.limit;
+    const limit = iframeHelper.options.limit;
     engine.messageError(locale.section.iframeOverLimit.replace('${limit}', limit));
   }
 };

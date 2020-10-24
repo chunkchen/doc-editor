@@ -512,7 +512,8 @@ class Table extends SectionBase {
 
   getTableHeight() {
     const height = getHeight(this.tableRoot[0]);
-    return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height + 6;
+    return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height;
+
   }
 
   onTableSizeChange() {

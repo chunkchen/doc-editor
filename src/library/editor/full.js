@@ -122,6 +122,7 @@ class FullEditor extends React.Component {
                     },
                     editorOptions(),
                   )}
+                  pageSize="a4_row"
                 />
               </div>
             </div>

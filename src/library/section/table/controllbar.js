@@ -130,10 +130,9 @@ class ControllBar extends EventEmitter2 {
         $(rowBars[renderIndex]).css('height', `${trs[renderIndex].offsetHeight}px`);
       }
       this.height = tableRoot[0].offsetHeight;
-      this.rowsAddition.css('width', `${tableRoot[0].offsetWidth}px`);
-      this.colsAddition.css('height', `${this.height}px`);
     };
 
+    // 拖动列
     this.onDragCol = (e) => {
       e.stopPropagation();
       if (!this.colDragging) return;
@@ -174,6 +173,7 @@ class ControllBar extends EventEmitter2 {
       this.showPlaceHolder(dropCol);
     };
 
+    // 拖动行
     this.onDragRow = (e) => {
       e.stopPropagation();
       if (!this.rowDragging) return;
@@ -258,6 +258,7 @@ class ControllBar extends EventEmitter2 {
       }
     };
 
+    // 拖动到列末尾
     this.onDragColEnd = () => {
       this.unBindDragColEvent();
       if (!this.colDragging || this.dropCol === undefined) return;
@@ -290,6 +291,7 @@ class ControllBar extends EventEmitter2 {
       delete this.dropCol;
     };
 
+    // 拖动到行末尾
     this.onDragRowEnd = () => {
       this.unBindDragRowEvent();
       if (!this.rowDragging || this.dropRow === undefined) return;
@@ -572,7 +574,6 @@ class ControllBar extends EventEmitter2 {
     this.hide = () => {
       this.tableWrapper.removeClass('editing');
       this.hideContextMenu();
-      this.hideMultiAddition();
     };
 
     this.show = () => {
@@ -586,9 +587,11 @@ class ControllBar extends EventEmitter2 {
       colBars.removeClass('active');
       colBars.removeClass('selected');
       colBars.removeClass('no-dragger');
+      colBars.removeClass('multi-selected');
       rowBars.removeClass('active');
       rowBars.removeClass('selected');
       rowBars.removeClass('no-dragger');
+      rowBars.removeClass('multi-selected');
       this.tableHeader.removeClass('selected');
     };
 
@@ -606,19 +609,25 @@ class ControllBar extends EventEmitter2 {
         if (total_row || total_table) {
           $(rowBars[r]).addClass('selected');
         }
-
+        if (total_row && (rowMin !== rowMax)) {
+          $(rowBars[r]).addClass('multi-selected');
+        }
         if (total_table) {
           $(rowBars[r]).addClass('no-dragger');
+          $(rowBars[r]).addClass('multi-selected');
         }
       }
-
       for (let c = colMin; c <= colMax; c++) {
         $(colBars[c]).addClass('active');
         if (total_col || total_table) {
           $(colBars[c]).addClass('selected');
         }
+        if (total_col && (colMin !== colMax)) {
+          $(colBars[c]).addClass('multi-selected');
+        }
         if (total_table) {
           $(colBars[c]).addClass('no-dragger');
+          $(colBars[c]).addClass('multi-selected');
         }
       }
       const table_select = rowMin === 0 && rowMax === tableModel.rows - 1 && colMin === 0 && colMax === tableModel.cols - 1;
@@ -678,7 +687,6 @@ class ControllBar extends EventEmitter2 {
         this.showContextMenu(e);
       } else {
         this.hideContextMenu();
-        this.hideMultiAddition();
       }
     };
 
@@ -815,61 +823,6 @@ class ControllBar extends EventEmitter2 {
       this.section.selection.clear();
     };
 
-    this.showMultiAddition = (e, type) => {
-      const trigger = $(e.target).closest('.multi-trigger');
-      if (!trigger[0]) return;
-      const { offsetX, offsetY, clientX, clientY } = e;
-      this.section.selection.clear();
-      const { row, col } = getContentArea(this.section.selection.tableModel);
-      this.contentRow = row;
-      this.contentCol = col;
-      let left;
-      let top;
-      let count;
-      let min;
-      let max;
-
-      if (type === 'row') {
-        left = clientX - offsetX - 44;
-        top = clientY - offsetY;
-        count = this.section.selection.tableModel.rows;
-        min = row + 1;
-        max = Math.max(min + 50, count);
-      }
-
-      if (type === 'col') {
-        left = clientX - offsetX - 28;
-        top = clientY - offsetY - 17;
-        count = this.section.selection.tableModel.cols;
-        min = col + 1;
-        max = Math.max(min + 10, count);
-      }
-
-      left = Math.max(0, left);
-      this.multiAddition.css('left', `${left}px`);
-      this.multiAddition.css('top', `${top}px`);
-      this.multiAddition.css('display', 'block');
-      this.multiAdditionVisible = true;
-      ReactDOM.unmountComponentAtNode(this.multiAddition[0]);
-      ReactDOM.render(<InputNumber
-        defaultValue={count}
-        min={min}
-        max={max}
-        step={1}
-        onChange={(value) => {
-          this.onMultiChangeRowCol(Math.max(min, Math.min(max, value)), type);
-        }}
-      />, this.multiAddition[0]);
-    };
-
-    this.hideMultiAddition = () => {
-      if (!this.multiAdditionVisible) {
-        return;
-      }
-      this.multiAdditionVisible = false;
-      this.multiAddition.css('display', 'none');
-    };
-
     this.refresh = (action) => {
       this.hideContextMenu();
       this.render(action);
@@ -882,18 +835,12 @@ class ControllBar extends EventEmitter2 {
       this.colsHeader.on('mousedown', this.onMouseDownColsHeader).on('click', this.clickColsHeader).on('dragstart', this.onDragStartColsHeader);
       this.rowsHeader.on('mousedown', this.onMouseDownRowsHeader).on('click', this.clickRowsHeader).on('dragstart', this.onDragStartRowsHeader);
       this.tableHeader.on('click', this.clickTableHeader);
-      this.rowsAddition.on('click', () => {
-        this.section.command.insertRow();
-      });
-      this.colsAddition.on('click', () => {
-        this.section.command.insertCol();
-      });
-      this.rowsAdditionHeader.on('click', (e) => {
-        this.showMultiAddition(e, 'row');
-      });
-      this.colsAdditionHeader.on('click', (e) => {
-        this.showMultiAddition(e, 'col');
-      });
+      // this.rowsAddition.on('click', () => {
+      //   this.section.command.insertRow();
+      // });
+      // this.colsAddition.on('click', () => {
+      //   this.section.command.insertCol();
+      // });
       this.section.container.on('mousedown', this.handleClickContainer);
       this.section.container.on('dragover', (e) => {
         return e.stopPropagation();
@@ -924,14 +871,9 @@ class ControllBar extends EventEmitter2 {
 
   init() {
     const { container, template } = this.section;
+    this.tableHeader = container.find(template.HEADER_CLASS);
     this.colsHeader = container.find(template.COLS_HEADER_CLASS);
     this.rowsHeader = container.find(template.ROWS_HEADER_CLASS);
-    this.rowsAddition = container.find(template.ROWS_ADDITION_CLASS);
-    this.colsAddition = container.find(template.COLS_ADDITION_CLASS);
-    this.rowsAdditionHeader = container.find(template.ROWS_ADDITION_HEADER_CLASS);
-    this.colsAdditionHeader = container.find(template.COLS_ADDITION_HEADER_CLASS);
-    this.multiAddition = container.find(template.MULTI_ADDITION_CLASS);
-    this.tableHeader = container.find(template.HEADER_CLASS);
     this.menuBar = container.find(template.MENUBAR_CLASS);
     this.textArea = container.find(template.TABLE_TEXTAREA_CLASS);
     this.viewport = container.find(template.VIEWPORT);
