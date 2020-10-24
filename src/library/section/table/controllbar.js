@@ -251,7 +251,7 @@ class ControllBar extends EventEmitter2 {
         this.placeholder.css('height', '3px');
         this.placeholder.css('width', `${this.width}px`);
         this.placeholder.css('left', '3px');
-        this.placeholder.css('top', `${top}px`);
+        this.placeholder.css('top', `${38 + top}px`);
         this.placeholder.css('display', 'block');
       }
     };
