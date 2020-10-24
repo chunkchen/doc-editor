@@ -189,7 +189,6 @@ class Command extends EventEmitter2 {
               const colRemoved = Math.min(count, tdModel.parent.col + parentTd.colSpan - col_min);
               parentTd.element.colSpan = parentTd.colSpan - colRemoved;
             }
-            continue;
           } else {
             if (tdModel.isMulti) {
               // 合并单元格的头部被切掉，要生成尾部单元格补充到行内
