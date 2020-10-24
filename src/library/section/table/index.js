@@ -122,7 +122,6 @@ class Table extends SectionBase {
       if (this.engine) {
         this.fullscreen = true;
         this.setSectionValue();
-        this.controllBar.hideMultiAddition();
       }
       if (this.options.type === 'mini') {
         const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS);
@@ -138,7 +137,6 @@ class Table extends SectionBase {
       if (this.engine) {
         this.fullscreen = false;
         this.history.clear();
-        this.controllBar.hideMultiAddition();
       }
       if (this.options.type === 'mini') {
         this.onTableSizeChange();

@@ -232,9 +232,9 @@ class ControllBar extends EventEmitter2 {
           this.viewport[0].scrollLeft = left - offsetWidth + 5;
         }
         this.placeholder.css('width', '3px');
-        this.placeholder.css('height', `${this.height + (this.section.options.type === 'mini' && !this.section.state.maximize ? 0 : 24)}px`);
+        this.placeholder.css('height', `${this.height}px`);
         this.placeholder.css('left', `${left}px`);
-        this.placeholder.css('top', `${0}px`);
+        this.placeholder.css('top', `${40}px`);
         this.placeholder.css('display', 'block');
       }
 
