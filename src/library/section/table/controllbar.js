@@ -211,6 +211,7 @@ class ControllBar extends EventEmitter2 {
       this.showPlaceHolder(dropRow);
     };
 
+    // 显示即将 放置的位置
     this.showPlaceHolder = (dropIndex) => {
       if (this.colDragging) {
         if (dropIndex === this.dropCol) return;
@@ -255,7 +256,7 @@ class ControllBar extends EventEmitter2 {
       }
     };
 
-    // 拖动到列末尾
+    // 拖动列-事件结束
     this.onDragColEnd = () => {
       this.unBindDragColEvent();
       if (!this.colDragging || this.dropCol === undefined) return;
