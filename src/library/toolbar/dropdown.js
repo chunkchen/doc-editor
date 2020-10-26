@@ -44,7 +44,7 @@ class Dropdown extends React.Component {
                     return this.onSelect(e, row.point);
                   }}
                 >
-                  <img src={`${emojiUrl + row.point}.svg`} />
+                  <img src={`${emojiUrl + row.point}.svg`} alt="" />
                 </a>
               );
             }

@@ -18,7 +18,7 @@ class ToolbarGroup extends React.Component {
             toolbar.map((name, index) => {
               // 配置参数
               if (typeof name === 'object') {
-                if (name.items && name.items.length === 0) return;
+                if (name.items && name.items.length === 0) return null;
                 name = name.name;
               }
 

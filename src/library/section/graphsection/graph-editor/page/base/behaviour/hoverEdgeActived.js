@@ -3,7 +3,7 @@ import Page from '../page';
 Page.registerBehaviour('hoverEdgeActived', (page) => {
   const graph = page.getGraph();
   graph.behaviourOn('edge:mouseenter', (ev) => {
-    if (page.getSignal('panningItem') || ev.item && ev.item.isSelected || page.getSignal('dragEdge')) {
+    if (page.getSignal('panningItem') || (ev.item && ev.item.isSelected) || page.getSignal('dragEdge')) {
       return;
     }
 

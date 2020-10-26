@@ -22,7 +22,7 @@ export default {
             if (!src || !ext || sizeNode.length === 0) {
               return;
             }
-            const size = sizeNode.text().replace(/^.+?([\d\.]+)\s*(kb|mb).*$/i, (match0, size, unit) => {
+            const size = sizeNode.text().replace(/^.+?([\d\\.]+)\s*(kb|mb).*$/i, (match0, size, unit) => {
               // 注意：这里必须用 1000，不能用 1024
               if (unit.toLowerCase() === 'kb') {
                 return size * 1000;

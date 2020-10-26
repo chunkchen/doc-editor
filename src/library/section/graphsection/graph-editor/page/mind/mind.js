@@ -776,7 +776,7 @@ class Mind extends Page {
         });
       }
 
-      if (!child.children || child.children.length === 0 || child.children.length === 1 && child.children[0].isPlaceholder) {
+      if (!child.children || child.children.length === 0 || (child.children.length === 1 && child.children[0].isPlaceholder)) {
         const dx = 100;
         const _dy = 0;
         let box;

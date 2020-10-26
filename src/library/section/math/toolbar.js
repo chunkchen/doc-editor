@@ -24,6 +24,7 @@ class Toolbar extends React.Component {
                   className="text"
                   href={options.help.href}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span className="lake-icon lake-icon-question" />
                   {Engine.StringUtils.escape(options.help.text)}

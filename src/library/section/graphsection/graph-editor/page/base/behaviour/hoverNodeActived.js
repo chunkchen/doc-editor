@@ -4,7 +4,7 @@ Page.registerBehaviour('hoverNodeActived', (page) => {
   const graph = page.getGraph();
   let hoverItem;
   graph.behaviourOn('node:mouseenter', (ev) => {
-    if (page.getSignal('panningItem') || page.getSignal('dragEdge') || ev.item && ev.item.isSelected) {
+    if (page.getSignal('panningItem') || page.getSignal('dragEdge') || (ev.item && ev.item.isSelected)) {
       return;
     }
 
@@ -18,7 +18,7 @@ Page.registerBehaviour('hoverNodeActived', (page) => {
       return;
     }
 
-    if (toShape && toShape.isAnchor && toShape.getItem() === hoverItem || page.getSignal('dragEdge')) {
+    if ((toShape && toShape.isAnchor && toShape.getItem() === hoverItem) || page.getSignal('dragEdge')) {
       return;
     }
 
