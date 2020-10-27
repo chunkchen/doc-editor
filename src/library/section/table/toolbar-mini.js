@@ -1,20 +1,9 @@
 import Engine from 'doc-engine/lib';
-import emoji from '../../config/emoji';
 
 const { userAgent: { macos } } = Engine;
 export default function (section) {
   const { command, locale } = section;
   return [
-    {
-      name: 'table:emoji',
-      type: 'dropdown',
-      title: locale.emoji,
-      icon: '<span class="lake-icon lake-icon-emoji" />',
-      data: emoji,
-      onClick: (value) => {
-        section.subEngine && section.subEngine.command.execute('emoji', value);
-      },
-    },
     {
       name: 'table:bold',
       title: locale.bold,

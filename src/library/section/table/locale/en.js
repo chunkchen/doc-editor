@@ -44,7 +44,6 @@ export default {
   fontsizeTitle: 'Font',
   file: 'Attachment',
   fileDescription: 'Upload one or more files',
-  emoji: 'Emoji',
   indent: {
     buttonTitle: 'Indent',
     decrease: 'Decrease indent',

@@ -104,9 +104,6 @@ export default {
     copySuccess: 'Successful copy!',
   },
   color: backgroundOrColor,
-  emoji: {
-    buttonTitle: 'Emoji',
-  },
   localdoc: {
     ...uploadLocale,
     formatError: 'The file embed preview is not supported',

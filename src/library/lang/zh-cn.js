@@ -106,9 +106,6 @@ export default {
     copySuccess: '复制成功！',
   },
   color: backgroundOrColor,
-  emoji: {
-    buttonTitle: 'Emoji 表情',
-  },
   localdoc: {
     ...uploadLocale,
     formatError: '不支持该文件嵌入预览',

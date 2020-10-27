@@ -49,8 +49,7 @@ class ExportParser extends Engine.ExportParser {
   getDocUrl() {
     if (this.options.docUrl) return this.options.docUrl;
     const location = window.location;
-    const url = location.origin + location.pathname.replace('/edit', '');
-    return url;
+    return location.origin + location.pathname.replace('/edit', '');
   }
 
   getDefaultSectionParsers() {
@@ -127,28 +126,6 @@ class ExportParser extends Engine.ExportParser {
           content.css('background', '#f9f9f9');
           section.append(content);
           content.removeClass('lake-engine-view');
-        }
-      },
-      emoji: (section) => {
-        const emoji = section.find('.lake-emoji');
-        section.empty();
-        if (emoji.length > 0) {
-          emoji.attr('width', '18');
-          emoji.attr('height', '18');
-          emoji.css({
-            display: 'inline-block',
-            width: '18px',
-            height: '18px',
-            'vertical-align': 'middle',
-            'background-size': 'contain',
-            'background-position': '0 0',
-            'background-repeat': 'no-repeat',
-            'margin-top': '-3px',
-            'margin-left': '1px',
-            'margin-right': '1px',
-            border: '1px solid transparent',
-          });
-          section.append(emoji);
         }
       },
       label: (section) => {

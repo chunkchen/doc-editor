@@ -44,7 +44,6 @@ export default {
   fontsizeTitle: '字号',
   file: '附件',
   fileDescription: '上传单个或多个文件',
-  emoji: 'Emoji 表情',
   indent: {
     buttonTitle: '缩进',
     decrease: '减少缩进',

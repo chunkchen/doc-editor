@@ -114,7 +114,7 @@ class Editor extends React.Component {
   render() {
     const { pageSize } = this.props;
     return (
-      <div ref={this.container} className={'lake-content-editor-core ' + `lake-typography-${pageSize}`} />
+      <div ref={this.container} className={`lake-content-editor-core lake-typography-${pageSize}`} />
     );
   }
 }
@@ -131,9 +131,6 @@ Editor.defaultProps = {
   },
   mxgraph: {
     url: 'http://www.draw.io/?embed=1&ui=atlas&spin=1&proto=json&configure=1&lang=zh',
-  },
-  emoji: {
-    action: 'https://cdn-object.itellyou.com/emoji/',
   },
   lockedtext: {
     action: '/api/crypto',

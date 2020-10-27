@@ -1,7 +1,6 @@
 import React from 'react';
 import section from './section';
 import hotkey from './hotkey';
-import emoji from './emoji';
 import { getHotkeyText } from '../utils/string';
 import { addIframeSection } from '../utils/command';
 
@@ -247,16 +246,6 @@ const getToolbarConfig = (engine) => {
       icon: '<span class="lake-icon lake-icon-clean" />',
       onClick: () => {
         engine.command.execute('removeformat');
-      },
-    },
-    {
-      name: 'emoji',
-      type: 'dropdown',
-      title: locale.emoji.buttonTitle,
-      icon: '<span class="lake-icon lake-icon-emoji" />',
-      data: emoji,
-      onClick: (value) => {
-        engine.command.execute('emoji', value);
       },
     },
     {

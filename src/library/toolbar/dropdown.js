@@ -14,13 +14,9 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    let { name, data, active, currentValue, className, engine } = this.props;
-    const withDot = name !== 'emoji' && name !== 'table:emoji';
-    const emoji = name === 'emoji' || name === 'table:emoji';
+    let { data, active, currentValue, className } = this.props;
     const isIconList = className === 'lake-button-icon-list';
 
-    const options = engine.options.emoji || {};
-    const emojiUrl = options.action || '/emoji/';
 
     if (!Array.isArray(currentValue)) {
       currentValue = [currentValue];
@@ -29,26 +25,11 @@ class Dropdown extends React.Component {
     return (
       <div className={classnames('lake-button-set-list', {
         'lake-button-set-list-active': active,
-        'lake-button-set-list-with-dot': withDot,
-        'lake-button-set-list-emoji-mini': emoji,
+        'lake-button-set-list-with-dot': true,
       })}
       >
         {
           data.map((row, index) => {
-            if (emoji) {
-              return (
-                <a
-                  key={index}
-                  className={classnames('lake-button-set-list-item', row.className)}
-                  onClick={(e) => {
-                    return this.onSelect(e, row.point);
-                  }}
-                >
-                  <img src={`${emojiUrl + row.point}.svg`} alt="" />
-                </a>
-              );
-            }
-
             if (isIconList) {
               return (
                 <Tooltip

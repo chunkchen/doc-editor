@@ -297,10 +297,9 @@ class Table extends SectionBase {
       };
 
       this.subEngine = Engine.create(this.selection.editAreaContent, {
-        plugins: ['bold', 'italic', 'fontcolor', 'fontsize', 'strikethrough', 'underline', 'backcolor', 'removeformat', 'code', 'file', 'label', 'list', 'link', 'image', 'tasklist', 'indent', 'emoji'],
+        plugins: ['bold', 'italic', 'fontcolor', 'fontsize', 'strikethrough', 'underline', 'backcolor', 'removeformat', 'code', 'file', 'label', 'list', 'link', 'image', 'tasklist', 'indent'],
         lang: this.engine.options.lang,
         image: imageOptions,
-        emoji: this.engine.options.emoji,
         onBeforeRenderImage: this.engine.options.onBeforeRenderImage,
         file: this.engine.options.file,
       });

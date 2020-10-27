@@ -318,9 +318,8 @@ class TextDiagramEditor extends React.PureComponent {
           </Menu>
         )}
       >
-        <a className="diagram-template-selector">
+        <a className="diagram-template-selector" rel="noopener noreferrer">
           {locale.template}
-          {' '}
           <DownOutlined />
         </a>
       </Dropdown>

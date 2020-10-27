@@ -97,7 +97,7 @@ MiniEditor.defaultProps = {
   type: 'mini',
   tabIndex: 2,
   toolbar: [
-    ['emoji', 'heading', 'bold', 'italic', 'strikethrough', 'quote'],
+    ['heading', 'bold', 'italic', 'strikethrough', 'quote'],
     ['codeblock', 'table', 'math'],
     ['orderedlist', 'unorderedlist', 'tasklist'],
     ['alignment'],

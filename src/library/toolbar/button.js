@@ -122,8 +122,7 @@ export default class Button extends React.Component {
           this.getIcon()
         }
         {
-          name !== 'emoji' && name !== 'table:emoji' && hasArrow
-          && <span className="lake-icon lake-icon-arrow" />
+          hasArrow && <span className="lake-icon lake-icon-arrow" />
         }
       </button>
     );

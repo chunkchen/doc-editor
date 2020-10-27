@@ -1,6 +1,5 @@
 import Engine from 'doc-engine/lib';
 import getSections from '../../config/section';
-import emoji from '../../config/emoji';
 
 const {
   userAgent: { macos },
@@ -177,16 +176,6 @@ export default function (section) {
       },
       onClick: (value) => {
         section.command.execute('fontsize', value);
-      },
-    },
-    {
-      name: 'table:emoji',
-      type: 'dropdown',
-      title: locale.emoji,
-      icon: '<span class="lake-icon lake-icon-emoji" />',
-      data: emoji,
-      onClick: (value) => {
-        section.subEngine && section.subEngine.command.execute('emoji', value);
       },
     },
     {

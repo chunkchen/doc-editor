@@ -534,11 +534,6 @@
   display: flex;
 }
 
-.lake-mini-editor .lake-toolbar .lake-button-set-list-emoji-mini {
-  transform: translateY(2px);
-  white-space: normal;
-}
-
 .lake-mini-editor .lake-toolbar .lake-toolbar-area {
   padding: 3px 0 3px 4px;
 }
@@ -976,10 +971,6 @@
   padding-right: 20px;
 }
 
-.lake-button-set-trigger .lake-button[accessbilityid=main-emoji-button], .lake-button-set-trigger .lake-button[accessbilityid="main-table:emoji-button"] {
-  padding-right: 4px;
-}
-
 .lake-button-set-trigger .lake-icon-arrow {
   position: absolute;
   right: 6px;
@@ -1174,27 +1165,6 @@
 
 .lake-button-set-list-colorboard {
   padding: 12px 10px;
-}
-
-.lake-button-set-list-emoji-mini {
-  width: 338px;
-  padding: 5px 8px;
-}
-
-.lake-button-set-list-emoji-mini .lake-button-set-list-item {
-  width: 30px;
-  height: 30px;
-  padding: 5px 5px;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 1px;
-}
-
-.lake-button-set-list-emoji-mini .lake-button-set-list-item img {
-  display: block;
-  margin: 0 auto;
-  height: 20px;
-  width: 20px;
 }
 
 .lake-button-set-emode {
@@ -1700,63 +1670,6 @@
 .lake-engine div[data-section-type="table"] > div[data-section-element="body"] > .lake-card-dnd {
   left: -38px;
   top: -4px;
-}
-
-.lake-engine [data-section-type][data-section-key="emoji"] *::-moz-selection {
-  background: rgba(27, 162, 227, 0.2) !important;
-}
-
-.lake-engine [data-section-type][data-section-key="emoji"] *::selection {
-  background: rgba(27, 162, 227, 0.2) !important;
-}
-
-.lake-emoji {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  line-height: inherit;
-  vertical-align: middle;
-  background-size: contain;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  margin-top: -3px;
-  margin-left: 1px;
-  margin-right: 1px;
-  border: 1px solid transparent;
-}
-
-.lake-emoji-portal {
-  position: absolute;
-  background: #ffffff;
-  border: 1px solid #e8e8e8;
-  border-radius: 3px 3px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-  height: auto;
-  width: 175px;
-  padding: 5px 5px;
-  z-index: 1;
-}
-
-.lake-emoji-portal-list-item {
-  width: 30px;
-  height: 30px;
-  padding: 5px 5px;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 1px;
-}
-
-.lake-emoji-portal-list-item img {
-  display: block;
-  margin: 0 auto;
-  height: 20px;
-  width: 20px;
-}
-
-.lake-emoji-portal-list-item:hover,
-.lake-emoji-portal-list-item-active {
-  background: #f5f5f5;
-  cursor: pointer;
 }
 
 @-webkit-keyframes lake-plugin-loading {

@@ -93,7 +93,7 @@ LineEditor.defaultProps = {
   lang: 'zh-cn',
   type: 'line',
   tabIndex: 2,
-  toolbar: [['emoji', 'image']],
+  toolbar: [['image']],
   markdown: {
     action: '/api/document/convert',
     items: [],
