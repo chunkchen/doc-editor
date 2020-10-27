@@ -113,7 +113,7 @@ export default {
         }
         this.history.stop();
         this.change.unwrapInline('<a />');
-        this.change.wrapInline('<a href="" target="_blank" class="lake-link-marker" />');
+        this.change.wrapInline('<a href="" target="_blank" class="lake-link-marker" rel="noopener noreferrer"  />');
         shrinkToElementNode(range);
         this.change.select(range);
         this.history.save();

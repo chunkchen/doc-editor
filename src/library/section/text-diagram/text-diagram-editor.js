@@ -351,7 +351,7 @@ class TextDiagramEditor extends React.PureComponent {
           )}
           <div className="diagram-actions">
             {this.renderTemplates()}
-            <a className="diagram-help" href={this.getHelpUrl()} target="_blank">
+            <a className="diagram-help" href={this.getHelpUrl()} target="_blank" rel="noopener noreferrer" >
               {locale.help}
             </a>
             <Tooltip title={macos ? locale.macPreviewTooltip : locale.winPreviewTooltip}>

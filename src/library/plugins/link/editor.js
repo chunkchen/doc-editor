@@ -189,7 +189,7 @@ class LinkEditor extends React.Component {
         {linkContainer}
         <span className="lake-link-editor-slash" />
         <Tooltip title={locale.editLink}>
-          <a
+          <span
             className="lake-icon lake-icon-edit lake-link-editor-button"
             onClick={() => {
               this.setState({
@@ -199,7 +199,7 @@ class LinkEditor extends React.Component {
           />
         </Tooltip>
         <Tooltip title={locale.deleteLink}>
-          <a
+          <span
             className="lake-icon lake-icon-unlink lake-link-editor-button"
             onClick={onDeleteLink}
           />

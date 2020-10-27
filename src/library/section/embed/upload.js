@@ -127,13 +127,13 @@ class Upload extends Embed {
           Engine.StringUtils.escape(ext),
           '"></div>\n        <div class="lake-embed-upload-collapse-body">\n          <div class="lake-embed-upload-collapse-name" >\n            <a href="',
         )
-        .concat(url, '" target="_blank">')
+        .concat(url, '" target="_blank" rel="noopener noreferrer" >')
         .concat(Engine.StringUtils.escape(value.name), '</a>\n ')
         .concat(
           size,
           '</div>\n        </div>\n        <a class="lake-embed-upload-icon lake-svg-icon-preview" href="',
         )
-        .concat(url, '" target="_blank"></a>\n      </div>\n    '),
+        .concat(url, '" target="_blank" rel="noopener noreferrer" ></a>\n      </div>\n    '),
     );
     this.root = root;
   }

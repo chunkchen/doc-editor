@@ -39,7 +39,7 @@ class GraphView extends React.Component {
         }
         <div className="lake-mxgraph-preview">
           {
-            value.data && value.format === 'svg' && <img src={value.data} />
+            value.data && value.format === 'svg' && <img src={value.data} alt="" />
           }
         </div>
         <div className="lake-mxgraph-warp" />
