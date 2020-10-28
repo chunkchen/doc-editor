@@ -110,13 +110,12 @@ export const getTableModel = (table) => {
       }
     }
   });
-  const result = {
+  return {
     rows: model.length,
     cols: MaxColCount,
     width: table.offsetWidth,
     table: model,
   };
-  return result;
 };
 /**
  * table 结构标准化，补齐丢掉的单元格和行
@@ -396,24 +395,24 @@ export const normalizeTdContent = (table) => {
       let replacer;
       switch (node.name) {
         case 'h1':
-          replacer = $('<span class="lake-fontsize-18"></span>');
+          replacer = $('<span class="lake-fontsize-18"/>');
           replacer.html(node.html());
           break;
 
         case 'h2':
-          replacer = $('<span class="lake-fontsize-16"></span>');
+          replacer = $('<span class="lake-fontsize-16"/>');
           replacer.html(node.html());
           break;
 
         case 'h3':
         case 'h4':
-          replacer = $('<span class="lake-fontsize-14"></span>');
+          replacer = $('<span class="lake-fontsize-14"/>');
           replacer.html(node.html());
           break;
 
         case 'h5':
         case 'h6':
-          replacer = $('<span class="lake-fontsize-12"></span>');
+          replacer = $('<span class="lake-fontsize-12"/>');
           replacer.html(node.html());
           break;
 
@@ -437,10 +436,10 @@ export const normalizeTdContent = (table) => {
 };
 // firefox 下的拖拽需要这样处理
 // clearData 是为了防止新开 tab
-// hack: 如果不 setData, firefox 不会触发拖拽事件，但设置 data 之后，又会开新 tab, 这里设置一个 firefox 不识别的 mimetype: itellyou
+// hack: 如果不 setData, firefox 不会触发拖拽事件，但设置 data 之后，又会开新 tab, 这里设置一个 firefox 不识别的 mimetype: lake
 export const fixDragEvent = (e) => {
   e.dataTransfer.clearData();
-  e.dataTransfer.setData('itellyou', null);
+  e.dataTransfer.setData('lake', null);
 };
 
 /**
@@ -494,10 +493,7 @@ const isTdEmpty = (table, row, col) => {
     td = tdModel.element;
   }
 
-  if (td && (td.innerText.trim() !== '' || $(td).find('img')[0])) {
-    return false;
-  }
-  return true;
+  return !(td && (td.innerText.trim() !== '' || $(td).find('img')[0]));
 };
 
 const fixNumberTr = (table) => {

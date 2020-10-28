@@ -85,10 +85,10 @@ class Editor extends React.Component {
       let pageContentHeight = 0;
       this.container.current.childNodes.forEach((node) => {
         pageContentHeight += node.offsetHeight;
-        console.log(pageContentHeight);
-        if (pageContentHeight > 601) {
-          console.log('分页');
-        }
+        // console.log(pageContentHeight);
+        // if (pageContentHeight > 601) {
+        //   console.log('分页');
+        // }
       });
       value = addMentionAttrs(val);
       this.engine.options.onChange(value);

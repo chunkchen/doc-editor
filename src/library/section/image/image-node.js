@@ -113,7 +113,7 @@ const template = (_ref) => {
     imgHtml = '<img data-role="image" src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"').concat(altAttr, ' />');
   }
 
-  let maximize = '<span data-role="maximize" class="lake-image-editor-maximize" style="display: none;"><span class="lake-icon lake-icon-maximize"></span></span>';
+  let maximize = '<span data-role="maximize" class="lake-image-editor-maximize" style="display: none;"><span class="lake-icon lake-icon-maximize"/></span>';
   if ((data.width && data.originWidth < 100) || (typeof data.width === 'number' && data.width < 100) || mobile) {
     maximize = '';
   }

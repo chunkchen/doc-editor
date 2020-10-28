@@ -1,7 +1,7 @@
 import Engine from 'doc-engine/lib';
-import { normalizeTable } from './utils';
+import {normalizeTable} from './utils';
 
-const { $ } = Engine;
+const {$} = Engine;
 
 const TABLE_WRAPPER_CLASS = 'table-wrapper';
 const TABLE_CLASS = 'lake-table';
@@ -75,10 +75,10 @@ export default function (section) {
       const colgroup = '<colgroup>'.concat(col, '</colgroup>');
 
       // 列头
-      const colsHeader = '\n        <div class="'
-        .concat(COLS_HEADER_CLASS, '">\n          ')
+      const colsHeader = '       <div class="'
+        .concat(COLS_HEADER_CLASS, '">         ')
         .concat('<div class="'
-          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">\n  '
+          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true"> '
             + '<div class="table-col-header-btns">'
             + '   <a class="table-control-icon-btn table-header-delete-btn">'
             + '       <span class="lake-icon lake-icon-delete" />'
@@ -93,14 +93,14 @@ export default function (section) {
             + '</div>'
             + '<div class="')
           .concat(COLS_HEADER_TRIGGER_CLASS, '"></div></div>')
-          .repeat(cols), '\n ')
-        .concat('\n </div>\n ');
+          .repeat(cols), '')
+        .concat('</div>');
 
       // 行头
-      const rowsHeader = '\n        <div class="'
-        .concat(ROWS_HEADER_CLASS, '">\n          ')
+      const rowsHeader = '       <div class="'
+        .concat(ROWS_HEADER_CLASS, '">         ')
         .concat('<div class="'
-          .concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">\n '
+          .concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">'
             + '<div class="table-row-header-btns">\n'
             + '    <a class="table-control-icon-btn table-header-delete-btn">'
             + '       <span class="lake-icon lake-icon-delete" />'
@@ -115,8 +115,8 @@ export default function (section) {
             + '</div>'
             + '<div class="')
           .concat(ROWS_HEADER_TRIGGER_CLASS, '"></div></div>')
-          .repeat(rows), '\n  ')
-        .concat('\n </div>\n  ');
+          .repeat(rows), ' ')
+        .concat('</div> ');
 
       // 整个表 锚点
       const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
@@ -125,18 +125,18 @@ export default function (section) {
       const textArea = '<textarea class="'
         .concat(TABLE_TEXTAREA_CLASS, '"></textarea>');
       const activeBox = '<div class="'
-        .concat(ACTIVE_TD_CLASS, '">\n        ')
-        .concat(textArea, '\n        <div class="')
-        .concat(COL_MASK, '"></div>\n <div class="')
-        .concat(ROW_MASK, '"></div>\n <div class="l"></div>\n <div class="r"></div>\n <div class="t"></div>\n  <div class="b"></div>\n <div class="')
-        .concat(AREA_MASK, '"></div>\n <div class="nw ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_nw"></div>\n <div class="se ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_se"></div>\n <div class="n ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_n"></div>\n <div class="w ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_w"></div>\n <div class="s ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_s"></div>\n  <div class="e ')
-        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_e"></div>\n ')
-        .concat(this.SubEditor, '\n      </div>');
+        .concat(ACTIVE_TD_CLASS, '">')
+        .concat(textArea, '<div class="')
+        .concat(COL_MASK, '"></div><div class="')
+        .concat(ROW_MASK, '"></div><div class="l"></div><div class="r"></div><div class="t"></div><div class="b"></div><div class="')
+        .concat(AREA_MASK, '"></div><div class="nw ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_nw"></div><div class="se ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_se"></div><div class="n ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_n"></div><div class="w ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_w"></div><div class="s ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_s"></div> <div class="e ')
+        .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_e"></div>')
+        .concat(this.SubEditor, '     </div>');
 
       const placeholder = '<div class="'.concat(PLACEHOLDER_CLASS, '"></div>');
       const shadowLeft = '<div class="'.concat(SHADOW_LEFT_CLASS, '"></div>');
@@ -149,9 +149,9 @@ export default function (section) {
         }
         return '<div class="'
           .concat(MENUBAR_ITEM_CLASS, '" data-action="')
-          .concat(menu.action, '">\n          <span class="lake-icon lake-icon-table-')
-          .concat(menu.icon, '"></span>\n          ')
-          .concat(menu.text, '\n </div>');
+          .concat(menu.action, '"><span class="lake-icon lake-icon-table-')
+          .concat(menu.icon, '"></span>')
+          .concat(menu.text, '</div>');
       });
       menuBar = '<div class="'
         .concat(MENUBAR_CLASS, '">')
@@ -169,24 +169,24 @@ export default function (section) {
         html = normalizeTable($(html)[0]).outerHTML;
       }
 
-      const table = html || '\n  <table class="'
-        .concat(TABLE_CLASS, '">\n ')
-        .concat(colgroup, '\n ')
-        .concat(trs, '\n </table>');
+      const table = html || ' <table class="'
+        .concat(TABLE_CLASS, '">')
+        .concat(colgroup, '')
+        .concat(trs, '</table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      return '\n        <div class="'.concat(sectionClass, '">\n ').concat(tableHeader, '\n  <div class=" ').concat(VIEWPORT, '">\n ').concat(colsHeader, '\n ')
-        .concat(activeBox, '\n ')
-        .concat(table, '\n ')
-        .concat(placeholder, '\n ')
-        .concat(shadowLeft, '\n ')
-        .concat(shadowRight, '\n </div>\n ')
-        .concat(rowsHeader, '\n ')
-        .concat(menuBar, '\n </div>');
+      return '       <div class="'.concat(sectionClass, '">').concat(tableHeader, ' <div class=" ').concat(VIEWPORT, '">').concat(colsHeader, '')
+        .concat(activeBox, '')
+        .concat(table, '')
+        .concat(placeholder, '')
+        .concat(shadowLeft, '')
+        .concat(shadowRight, '</div>')
+        .concat(rowsHeader, '')
+        .concat(menuBar, '</div>');
     },
     htmlView: (value) => {
       const html = value.html;
-      return '<div class="'.concat(VIEWPORT_READER, '">\n        ').concat(html, '\n      </div>');
+      return '<div class="'.concat(VIEWPORT_READER, '">       ').concat(html, '     </div>');
     },
   };
 }

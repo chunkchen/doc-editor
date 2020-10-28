@@ -7,6 +7,7 @@ export default {
   splitCell: '拆分单元格',
   removeCol: '删除选中列',
   removeRow: '删除选中行',
+  noBorder: '无边框',
   removeTable: '删除表格',
   copy: '复制',
   cut: '剪切',
