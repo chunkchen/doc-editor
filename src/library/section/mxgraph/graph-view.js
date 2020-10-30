@@ -23,14 +23,14 @@ class GraphView extends React.Component {
   }
 
   render() {
-    const { maximize } = this.state;
-    const { value, showGraphEditor } = this.props;
+    const {maximize} = this.state;
+    const {value, showGraphEditor} = this.props;
     return (
       <div className={`lake-mxgraph${maximize ? ' lake-mxgraph-maximize' : ''}`}>
         {
           showGraphEditor && (
             <div className="lake-mxgraph-nav">
-              <div />
+              <div/>
               <div className="mxgraph-actions">
                 <button size="small" onClick={showGraphEditor}>编辑</button>
               </div>
@@ -39,10 +39,10 @@ class GraphView extends React.Component {
         }
         <div className="lake-mxgraph-preview">
           {
-            value.data && value.format === 'svg' && <img src={value.data} alt="" />
+            value.data && value.format === 'svg' && <img src={value.data} alt=""/>
           }
         </div>
-        <div className="lake-mxgraph-warp" />
+        <div className="lake-mxgraph-warp"/>
       </div>
     );
   }

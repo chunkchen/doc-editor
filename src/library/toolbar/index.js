@@ -4,7 +4,7 @@ import Engine from 'doc-engine/lib';
 import toolbarConfig from '../config/toolbar';
 import ToolbarPlugins from './toolbar-plugins';
 import ToolbarGroup from './toolbar-group';
-import { getHotkeyText } from '../utils/string';
+import {getHotkeyText} from '../utils/string';
 
 class Toolbar extends React.Component {
   state = {
@@ -15,7 +15,7 @@ class Toolbar extends React.Component {
   constructor() {
     super();
     this.handleH5Scroll = () => {
-      const { engine, mobile } = this.props;
+      const {engine, mobile} = this.props;
       if (mobile) {
         document.body.appendChild(Engine.$('.lake-toolbar')[0]);
         this.toolbarEl = Engine.$('.lake-toolbar');
@@ -59,7 +59,7 @@ class Toolbar extends React.Component {
     };
 
     this.restore = () => {
-      const { engine } = this.props;
+      const {engine} = this.props;
       if (!engine.isDestroyed) {
         this.setState({
           pluginToolbar: [],
@@ -68,7 +68,7 @@ class Toolbar extends React.Component {
     };
 
     this.disable = (disabled, exclude) => {
-      const { engine } = this.props;
+      const {engine} = this.props;
       if (!engine.isDestroyed) {
         exclude = exclude || ['save', 'undo', 'redo', 'toc'];
         const toolbarState = Object.assign({}, this.state.toolbarState);
@@ -85,17 +85,17 @@ class Toolbar extends React.Component {
     };
 
     this.show = () => {
-      const { engine } = this.props;
+      const {engine} = this.props;
       engine.container.closest('.lake-editor').removeClass('lake-toolbar-hidden');
     };
 
     this.hide = () => {
-      const { engine } = this.props;
+      const {engine} = this.props;
       engine.container.closest('.lake-editor').addClass('lake-toolbar-hidden');
     };
 
     this.updateState = () => {
-      const { type, engine } = this.props;
+      const {type, engine} = this.props;
       if (!engine.isDestroyed) {
         if (type === 'mobile') {
           this.restore();
@@ -116,7 +116,7 @@ class Toolbar extends React.Component {
           });
           if (modified) {
             this.setState(
-              isPluginToolbar ? { pluginToolbarState: toolbarState } : { toolbarState },
+              isPluginToolbar ? {pluginToolbarState: toolbarState} : {toolbarState},
             );
           }
         }
@@ -125,7 +125,7 @@ class Toolbar extends React.Component {
   }
 
   componentDidMount() {
-    const { toolbar, engine } = this.props;
+    const {toolbar, engine} = this.props;
     this.setToolbar(toolbar, toolbarConfig(engine));
     engine.toolbar = {
       set: this.set,
@@ -314,8 +314,8 @@ class Toolbar extends React.Component {
   }
 
   render() {
-    const { engine, toolbar, hasMore, mobile } = this.props;
-    const { toolbarState, pluginToolbar, pluginToolbarState } = this.state;
+    const {engine, toolbar, hasMore, mobile} = this.props;
+    const {toolbarState, pluginToolbar, pluginToolbarState} = this.state;
 
     let toolbarLength = 0;
     let pluginToolbarLength = 0;

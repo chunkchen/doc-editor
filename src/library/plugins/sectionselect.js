@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 
-const { userAgent: { safari } } = Engine;
+const {userAgent: {safari}} = Engine;
 
 function handleKeydownSlash(e) {
   let range = this.change.getRange();

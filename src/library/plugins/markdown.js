@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, notification } from 'antd';
+import {Button, notification} from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/notification/style';
-import { post } from '@itellyou/itellyou-request';
+import {post} from '@itellyou/itellyou-request';
 import Engine from 'doc-engine/lib';
-import { isMarkdown } from '../utils/string';
+import {isMarkdown} from '../utils/string';
 
 notification.config({
   top: 105,
@@ -13,7 +13,7 @@ notification.config({
 function openConfirm(text, prevValue) {
   const locale = this.locale.markdown || {};
   const key = 'lake-paste-markdown';
-  const { markdown } = this.options;
+  const {markdown} = this.options;
   const serviceUrl = markdown ? markdown.action : null;
   if (!serviceUrl) return;
   const onOk = () => {

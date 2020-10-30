@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input } from 'antd';
+import {Input} from 'antd';
 import 'antd/lib/input/style';
 import 'antd/lib/icon/style';
-import { UnlockOutlined } from '@ant-design/icons';
+import {UnlockOutlined} from '@ant-design/icons';
 
 class Unlock extends React.Component {
   changeUnlockPassword = (e) => {
@@ -20,7 +20,7 @@ class Unlock extends React.Component {
   render() {
     return (
       <div className="unlock-panel">
-        <div className="lock-icon" />
+        <div className="lock-icon"/>
         <p>
           <Input
             type="password"
@@ -29,7 +29,7 @@ class Unlock extends React.Component {
             onPressEnter={this.onPressEnter}
             addonAfter={(
               <span className="unlock-btn" onClick={this.unLock}>
-                <UnlockOutlined />
+                <UnlockOutlined/>
                 {this.props.locale.unlock}
               </span>
             )}

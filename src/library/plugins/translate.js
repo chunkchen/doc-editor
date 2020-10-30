@@ -1,4 +1,4 @@
-import { addSidebarCommand } from '../utils/command';
+import {addSidebarCommand} from '../utils/command';
 
 const PLUGIN_NAME = 'translate';
 

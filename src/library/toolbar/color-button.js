@@ -233,7 +233,7 @@ class ColorButton extends React.Component {
   }
 
   render() {
-    let { name, title, moreTitle, disabled } = this.props;
+    let {name, title, moreTitle, disabled} = this.props;
     const active = this.state.active;
 
     if (name.indexOf(':') >= 0) {
@@ -241,7 +241,7 @@ class ColorButton extends React.Component {
     }
 
     const buttonContent = <span className="lake-icon lake-icon-svgs">{this.getIcon(name)}</span>;
-    const moreContent = <span className="lake-icon" />;
+    const moreContent = <span className="lake-icon"/>;
     return (
       <div className="lake-button-set">
         <div className={classnames('lake-button-set-trigger lake-button-set-trigger-double', {
@@ -272,7 +272,7 @@ class ColorButton extends React.Component {
           'lake-button-set-list-active': active,
         })}
         >
-          <ColorPicker {...Object.assign({}, this.props, { onSelect: this.handleSelect })} />
+          <ColorPicker {...Object.assign({}, this.props, {onSelect: this.handleSelect})} />
         </div>
       </div>
     );

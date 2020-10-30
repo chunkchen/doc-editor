@@ -54,14 +54,14 @@ class CollapseButton extends React.Component {
   }
 
   render() {
-    const { active } = this.state;
+    const {active} = this.state;
     // button component
 
-    const buttonProps = { ...this.props };
+    const buttonProps = {...this.props};
     buttonProps.active = active;
     buttonProps.onClick = this.toggleDropdown;
     // collapse component
-    const collapseProps = { ...this.props };
+    const collapseProps = {...this.props};
     collapseProps.active = active;
     collapseProps.onClick = this.toggleDropdown;
     collapseProps.hideDropdown = this.hideDropdown;
@@ -72,7 +72,7 @@ class CollapseButton extends React.Component {
     });
     return (
       <div className="lake-button-set lake-collapse-button" ref={this.buttonArea}>
-        <div className={classnames('lake-button-set-trigger', { 'lake-button-set-trigger-active': active })}>
+        <div className={classnames('lake-button-set-trigger', {'lake-button-set-trigger-active': active})}>
           <Button {...buttonProps} />
         </div>
         <Collapse {...collapseProps} />

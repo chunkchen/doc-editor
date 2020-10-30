@@ -1,10 +1,10 @@
-import { EventEmitter2 } from 'eventemitter2';
+import {EventEmitter2} from 'eventemitter2';
 import isArray from 'lodash/isArray';
 import isNumber from 'lodash/isNumber';
 import Engine from 'doc-engine/lib';
-import { copyCss, copyHTML, copyTo, getCopyData, getTableModel, normalizeTable, trimBlankSpan } from './utils';
+import {copyCss, copyHTML, copyTo, getCopyData, getTableModel, normalizeTable, trimBlankSpan} from './utils';
 
-const { HTMLParser, StringUtils, ChangeUtils, ClipboardUtils, TextParser, $ } = Engine;
+const {HTMLParser, StringUtils, ChangeUtils, ClipboardUtils, TextParser, $} = Engine;
 
 class Command extends EventEmitter2 {
   constructor(section) {
@@ -27,7 +27,7 @@ class Command extends EventEmitter2 {
     };
 
     this.insertColAt = (colIndex, count, isLeft, silence, widths) => {
-      const { container, selection, tableRoot, template } = this.section;
+      const {container, selection, tableRoot, template} = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       // 第一行插在前面，其他行插在后面
@@ -138,7 +138,7 @@ class Command extends EventEmitter2 {
         count = selection.isSingleArea() ? 1 : selection.colCount();
 
         if (area) {
-          const { colMin, colMax } = selection.normalizeArea();
+          const {colMin, colMax} = selection.normalizeArea();
           colBase = isLeft ? colMin : colMax;
         }
       }
@@ -154,12 +154,12 @@ class Command extends EventEmitter2 {
     };
 
     this.removeCol = (silence) => {
-      const { selection, tableRoot, controllBar, template } = this.section;
+      const {selection, tableRoot, controllBar, template} = this.section;
       const area = selection.area;
       const tableModel = selection.tableModel;
       if (!area) return;
       const table = tableModel.table;
-      const { col, col2 } = area;
+      const {col, col2} = area;
       const count = selection.colCount();
       const col_min = Math.min(col, col2);
       const col_max = Math.max(col, col2);
@@ -222,7 +222,7 @@ class Command extends EventEmitter2 {
       const count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       let isUp = arguments.length > 2 ? arguments[2] : undefined;
       const silence = arguments.length > 3 ? arguments[3] : undefined;
-      const { container, selection, tableRoot, template } = this.section;
+      const {container, selection, tableRoot, template} = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       isUp = rowIndex === 0 || isUp;
@@ -296,7 +296,7 @@ class Command extends EventEmitter2 {
       let count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       const silence = arguments.length > 2 ? arguments[2] : undefined;
       const selection = this.section.selection;
-      const { area, tableModel } = selection;
+      const {area, tableModel} = selection;
       const isUp = position === 'up';
       const isEnd = position === 'end' || !position;
       let baseRow = tableModel.rows - 1;
@@ -305,7 +305,7 @@ class Command extends EventEmitter2 {
         count = selection.isSingleArea() ? 1 : selection.rowCount();
 
         if (area) {
-          const { row, row2 } = area;
+          const {row, row2} = area;
           baseRow = isUp ? Math.min(row, row2) : Math.max(row, row2);
         }
       }
@@ -314,11 +314,11 @@ class Command extends EventEmitter2 {
     };
 
     this.removeRow = (silence) => {
-      const { selection, tableRoot, controllBar, template } = this.section;
-      const { area, tableModel } = selection;
+      const {selection, tableRoot, controllBar, template} = this.section;
+      const {area, tableModel} = selection;
       if (!area) return;
       const table = tableModel.table;
-      const { row, row2 } = area;
+      const {row, row2} = area;
       const count = selection.rowCount();
       const row_min = Math.min(row, row2);
       const row_max = Math.max(row, row2);
@@ -374,7 +374,7 @@ class Command extends EventEmitter2 {
       if (!area) return;
 
       this.splitCell();
-      const { row, col, row2, col2 } = area;
+      const {row, col, row2, col2} = area;
       const row_min = Math.min(row, row2);
       const col_min = Math.min(col, col2);
       const row_count = selection.rowCount();
@@ -403,14 +403,14 @@ class Command extends EventEmitter2 {
     };
 
     this.splitCell = (silence) => {
-      const { selection, tableRoot, template } = this.section;
+      const {selection, tableRoot, template} = this.section;
       const area = selection.area;
       const tableModel = selection.tableModel;
       if (!area) return;
       const table = tableModel.table;
       const trs = tableRoot.find('tr');
 
-      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
+      const {rowMin, rowMax, colMin, colMax} = selection.normalizeArea();
       // 注意这里用倒序，见 selection.each 方法的最后一个参数传的时 true
       // 因为是倒序，所有空位一定先转换为 td, 这样在补齐切断的单元格时，需要考虑插入时的偏移量
 
@@ -527,7 +527,7 @@ class Command extends EventEmitter2 {
     };
 
     this.clear = () => {
-      const { selection, subEngine, template } = this.section;
+      const {selection, subEngine, template} = this.section;
       const area = selection.area;
       if (!area || subEngine) return;
 
@@ -601,7 +601,7 @@ class Command extends EventEmitter2 {
       const tableModel = selection.tableModel;
       if (!area) return;
 
-      const { rowMin, colMin, rowMax, colMax } = selection.normalizeArea();
+      const {rowMin, colMin, rowMax, colMax} = selection.normalizeArea();
       const isSingleTd = rowMin === rowMax && colMin === colMax;
       const isSingleArea = selection.isSingleArea();
       const html = data.html;
@@ -614,7 +614,7 @@ class Command extends EventEmitter2 {
         const pasteTableModel = getTableModel(element[0]);
         const rowCount = pasteTableModel.rows;
         const colCount = pasteTableModel.cols;
-        const { rowSpan, colSpan } = pasteTableModel.table[0][0];
+        const {rowSpan, colSpan} = pasteTableModel.table[0][0];
         const isPasteSingle = rowSpan === rowCount && colSpan === colCount;
 
         if (isPasteSingle && isSingleArea) {
@@ -779,7 +779,7 @@ class Command extends EventEmitter2 {
     };
 
     this.queryState = (status) => {
-      const { selection, engine, subEngine } = this.section;
+      const {selection, engine, subEngine} = this.section;
       if (subEngine) {
         return subEngine.command.queryState(status);
       }
@@ -807,7 +807,7 @@ class Command extends EventEmitter2 {
     this.fill = (table) => {
       const selection = this.section.selection;
       const pasteTableModel = getTableModel(table[0]);
-      const { rowMin, colMin } = selection.normalizeArea();
+      const {rowMin, colMin} = selection.normalizeArea();
 
       selection.each((tdModel, r, c) => {
         const paste_r = r - rowMin;
@@ -825,7 +825,7 @@ class Command extends EventEmitter2 {
 
     this.execute = function () {
       let _engine$command;
-      const { selection, sectionRoot, engine, subEngine, state } = this.section;
+      const {selection, sectionRoot, engine, subEngine, state} = this.section;
       if (state.readonly) return;
       if (subEngine) {
         let _subEngine$command;

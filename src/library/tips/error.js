@@ -1,5 +1,5 @@
 import React from 'react';
-import { message as antdMessage, Popover } from 'antd';
+import {message as antdMessage, Popover} from 'antd';
 import 'antd/lib/popover/style';
 import 'antd/lib/message/style';
 import Engine from 'doc-engine/lib';
@@ -20,17 +20,17 @@ const copyMessage = msgTip[window.appData && window.appData.locale !== 'zh-cn' ?
 
 class Error extends React.Component {
   render() {
-    const { variableContent, fixedContent, message, block, docWidth, sectionIcon } = this.props;
+    const {variableContent, fixedContent, message, block, docWidth, sectionIcon} = this.props;
     return (
-      <div className="lake-error-tips" style={{ width: block ? '100%' : 'auto' }}>
+      <div className="lake-error-tips" style={{width: block ? '100%' : 'auto'}}>
         <div className="lake-error-tips-section-icon"
-          dangerouslySetInnerHTML={{
-            __html: sectionIcon,
-          }}
+             dangerouslySetInnerHTML={{
+               __html: sectionIcon,
+             }}
         />
         <div className="lake-error-tips-info">
           <span className="lake-error-tips-variable-content"
-            style={{ maxWidth: block ? ''.concat(docWidth - 200, 'px') : '220px' }}
+                style={{maxWidth: block ? ''.concat(docWidth - 200, 'px') : '220px'}}
           >
             {variableContent}
           </span>

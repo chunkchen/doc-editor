@@ -1,11 +1,11 @@
-import { EventEmitter2 } from 'eventemitter2';
+import {EventEmitter2} from 'eventemitter2';
 import Engine from 'doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 
-const { NodeUtils, $ } = Engine;
+const {NodeUtils, $} = Engine;
 
 class Translate extends EventEmitter2 {
-  constructor({ engine }) {
+  constructor({engine}) {
     super();
     this.engine = engine;
   }
@@ -28,7 +28,7 @@ class Translate extends EventEmitter2 {
   }
 
   _getSourceText(_ref) {
-    const { childNodes, isCrossRow } = _ref;
+    const {childNodes, isCrossRow} = _ref;
     let rst = '';
 
     if (isCrossRow) {
@@ -47,7 +47,7 @@ class Translate extends EventEmitter2 {
   }
 
   _translateFragment(_ref) {
-    const { isCrossRow, targetPlainText, fragment } = _ref;
+    const {isCrossRow, targetPlainText, fragment} = _ref;
 
     if (isCrossRow) {
       const textSplit = targetPlainText.split('\n');

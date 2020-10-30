@@ -1,8 +1,8 @@
 import React from 'react';
 import section from './section';
 import hotkey from './hotkey';
-import { getHotkeyText } from '../utils/string';
-import { addIframeSection } from '../utils/command';
+import {getHotkeyText} from '../utils/string';
+import {addIframeSection} from '../utils/command';
 
 const getSections = (engine) => {
   const locale = engine.locale;
@@ -69,7 +69,7 @@ export const setToolbarHotkey = (customList, keyList) => {
             const childConfig = hotkeyMap[childName];
             if (!childItem.hotkey && childConfig && childConfig.keyValue) {
               if (typeof childItem === 'object') childItem.hotkey = childConfig.keyValue;
-              else childItem = { name: childName, hotkey: childConfig.keyValue };
+              else childItem = {name: childName, hotkey: childConfig.keyValue};
             }
             return childItem;
           });
@@ -77,7 +77,7 @@ export const setToolbarHotkey = (customList, keyList) => {
           item.items = [];
           hotkeyGroupMap[item.name].forEach((child) => {
             const config = hotkeyMap[child];
-            const childObj = { name: child };
+            const childObj = {name: child};
             if (config && config.keyValue) {
               childObj.hotkey = config.keyValue;
             }
@@ -87,10 +87,10 @@ export const setToolbarHotkey = (customList, keyList) => {
           item.hotkey = hotkeyMap[item.name].keyValue;
         }
       } else if (hotkeyGroupMap[item]) {
-        item = { name: item, items: [] };
+        item = {name: item, items: []};
         hotkeyGroupMap[item.name].forEach((child) => {
           const config = hotkeyMap[child];
-          const childObj = { name: child };
+          const childObj = {name: child};
           if (config && config.keyValue) {
             childObj.hotkey = config.keyValue;
           }
@@ -99,7 +99,7 @@ export const setToolbarHotkey = (customList, keyList) => {
       } else {
         const config = hotkeyMap[item];
         if (config && config.keyValue) {
-          item = { name: item, hotkey: config.keyValue };
+          item = {name: item, hotkey: config.keyValue};
         }
       }
       return item;
@@ -184,7 +184,7 @@ const getToolbarConfig = (engine) => {
   return [
     {
       name: 'section',
-      title: <span dangerouslySetInnerHTML={{ __html: locale.section.buttonTitle }} />,
+      title: <span dangerouslySetInnerHTML={{__html: locale.section.buttonTitle}}/>,
       type: 'collapse',
       icon: '<span class="lake-icon lake-icon-section" />',
       data: getSections(engine),

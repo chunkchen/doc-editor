@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover } from 'antd';
+import {Popover} from 'antd';
 import 'antd/lib/popover/style';
 import Button from './button';
 import TableSelector from './table-selector';

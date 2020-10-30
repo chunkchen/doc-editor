@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 
-const { $ } = Engine;
+const {$} = Engine;
 /**
  * @fileOverview 阅读态
  */

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ConfigProvider } from 'antd';
-import { shrinkToElementNode } from 'doc-engine/lib/utils/range';
-import { escapeRegExp, sanitizeUrl } from 'doc-engine/lib/utils/string';
+import {ConfigProvider} from 'antd';
+import {shrinkToElementNode} from 'doc-engine/lib/utils/range';
+import {escapeRegExp, sanitizeUrl} from 'doc-engine/lib/utils/string';
 import Engine from 'doc-engine/lib';
 import LinkEditor from './editor';
 import './index.css';
@@ -15,7 +15,7 @@ function shouldTargetBlank(href) {
 }
 
 function getLink(linkUrl) {
-  const { location } = window;
+  const {location} = window;
   const url = escapeRegExp(location.origin + location.pathname.replace('/edit', ''));
   const reg = RegExp('^'.concat(url, '#'));
   linkUrl.replace(reg, '#').trim();
@@ -37,7 +37,7 @@ function go(node) {
       this.change.unwrapInline('<a />');
     });
   };
-  const { body } = document;
+  const {body} = document;
   body.appendChild(container);
   ReactDOM.render(
     <ConfigProvider autoInsertSpaceInButton={false}>

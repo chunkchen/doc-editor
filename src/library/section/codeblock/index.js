@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
 import CodeMirror from 'codemirror';
 import debounce from 'lodash/debounce';
-import { message } from 'antd';
+import {message} from 'antd';
 import runMode from './run-mode';
 import Header from './header';
 import modeConfig from './mode-config';
@@ -11,7 +11,7 @@ import 'antd/lib/message/style';
 import SectionBase from '../base';
 import './index.css';
 
-const { StringUtils, $ } = Engine;
+const {StringUtils, $} = Engine;
 // Map: 代码块支持的模式 -> 名称
 
 const qa = [

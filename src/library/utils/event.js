@@ -20,7 +20,7 @@ export const setCursor = (instance) => {
 };
 
 export const bindKeydownEvent = (instance) => {
-  const { editorContainer, engine, sectionRoot } = instance;
+  const {editorContainer, engine, sectionRoot} = instance;
   const callback = instance.callback === undefined ? (event) => {
     return [13, 27].indexOf(event.keyCode) !== -1;
   } : instance.callback;

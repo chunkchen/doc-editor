@@ -1,5 +1,5 @@
 import Engine from 'doc-engine/lib';
-import { loadImage } from '../../utils/dom';
+import {loadImage} from '../../utils/dom';
 
 const URL = window.URL || window.webkitURL;
 
@@ -20,7 +20,7 @@ class ImageCompress {
   }
 
   async compress(files) {
-    const { isOverSize } = this.options;
+    const {isOverSize} = this.options;
     const fileArray = [];
 
     for (let i = 0; i < files.length; i++) {

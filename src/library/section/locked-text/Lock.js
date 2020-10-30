@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, message } from 'antd';
+import {Button, Input, message} from 'antd';
 
 const w = /[^a-zA-Z0-9`~!@#$%\\^&*()_+-={}|\\[\\]\\:";'<>?,\.\/]/;
 
@@ -21,7 +21,7 @@ class Lock extends React.Component {
   render() {
     return (
       <div className="lock-panel">
-        <div className="lock-icon" />
+        <div className="lock-icon"/>
         <p className="lock-title">{this.props.locale.lockInputTitle}</p>
         <p>
           <Input

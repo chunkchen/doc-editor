@@ -1,9 +1,9 @@
-import { EventEmitter2 } from 'eventemitter2';
+import {EventEmitter2} from 'eventemitter2';
 import 'antd/lib/input-number/style';
 import Engine from 'doc-engine/lib';
-import { fixDragEvent } from './utils';
+import {fixDragEvent} from './utils';
 
-const { $ } = Engine;
+const {$} = Engine;
 
 class ControllBar extends EventEmitter2 {
   constructor(section) {
@@ -44,7 +44,7 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.renderColBars = () => {
-      const { tableRoot, selection, template } = this.section;
+      const {tableRoot, selection, template} = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
@@ -113,7 +113,7 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.renderRowBars = (opts) => {
-      const { tableRoot, template } = this.section;
+      const {tableRoot, template} = this.section;
       const trs = tableRoot[0].rows;
       const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
 
@@ -152,7 +152,7 @@ class ControllBar extends EventEmitter2 {
       }
       const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
       const colSpan = td[0].colSpan;
-      const { col } = this.section.selection.getTdRowCol(td[0]);
+      const {col} = this.section.selection.getTdRowCol(td[0]);
       let dropCol = col;
       let _passWidth = 0;
 
@@ -193,7 +193,7 @@ class ControllBar extends EventEmitter2 {
       }
       const rowBars = this.rowsHeader.find(this.section.template.ROWS_HEADER_ITEM_CLASS);
       const rowSpan = td[0].rowSpan;
-      const { row } = this.section.selection.getTdRowCol(td[0]);
+      const {row} = this.section.selection.getTdRowCol(td[0]);
       let dropRow = row;
       let _passHeight = 0;
 
@@ -224,7 +224,7 @@ class ControllBar extends EventEmitter2 {
         this.dropCol = dropIndex;
         const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
         const left = this.dropCol !== colBars.length ? colBars[this.dropCol].offsetLeft + 2 : colBars[this.dropCol - 1].offsetLeft + colBars[this.dropCol - 1].offsetWidth + 2;
-        const { scrollLeft, offsetWidth } = this.viewport[0];
+        const {scrollLeft, offsetWidth} = this.viewport[0];
         if (left < scrollLeft) {
           this.viewport[0].scrollLeft = left - 5;
         }
@@ -260,8 +260,8 @@ class ControllBar extends EventEmitter2 {
     this.onDragColEnd = () => {
       this.unBindDragColEvent();
       if (!this.colDragging || this.dropCol === undefined) return;
-      const { command, selection } = this.section;
-      const { colMin, colMax } = selection.normalizeArea();
+      const {command, selection} = this.section;
+      const {colMin, colMax} = selection.normalizeArea();
       const colBars = this.section.container.find(this.section.template.COLS_HEADER_ITEM_CLASS);
       const widths = [];
       for (let c = colMin; c <= colMax; c++) {
@@ -293,8 +293,8 @@ class ControllBar extends EventEmitter2 {
     this.onDragRowEnd = () => {
       this.unBindDragRowEvent();
       if (!this.rowDragging || this.dropRow === undefined) return;
-      const { command, selection } = this.section;
-      const { rowMin, rowMax } = selection.normalizeArea();
+      const {command, selection} = this.section;
+      const {rowMin, rowMax} = selection.normalizeArea();
       command.mockCopy();
       if (rowMin > this.dropRow) {
         command.insertRowAt(this.dropRow, this.dragCount, false, true);
@@ -353,7 +353,7 @@ class ControllBar extends EventEmitter2 {
       const colBar = $(e.target).closest(this.section.template.COLS_HEADER_ITEM_CLASS);
       if (!colBar[0]) return;
       const dragCol = colBar.index();
-      const { colMin, colMax } = this.section.selection.normalizeArea();
+      const {colMin, colMax} = this.section.selection.normalizeArea();
       if (dragCol < colMin || dragCol > colMax) return;
       this.colDragging = true;
       this.dragBar = colBar;
@@ -377,7 +377,7 @@ class ControllBar extends EventEmitter2 {
       if (!rowBar[0]) return;
       const dragRow = rowBar.index();
 
-      const { rowMin, rowMax } = this.section.selection.normalizeArea();
+      const {rowMin, rowMax} = this.section.selection.normalizeArea();
       if (dragRow < rowMin || dragRow > rowMax) return;
       this.rowDragging = true;
       this.dragBar = rowBar;
@@ -394,7 +394,7 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.onMouseDownColsHeader = (e) => {
-      const { template, selection } = this.section;
+      const {template, selection} = this.section;
       this.trigger = $(e.target).closest(template.COLS_HEADER_TRIGGER_CLASS);
       if (!this.trigger[0]) {
         if (e.button === 2) {
@@ -403,7 +403,7 @@ class ControllBar extends EventEmitter2 {
           const col = colHeader.index();
           let currentColSelected = false;
           if (selection.area && selection.area.total_col) {
-            const { colMin, colMax } = selection.normalizeArea();
+            const {colMin, colMax} = selection.normalizeArea();
             if (col >= colMin && col <= colMax) {
               currentColSelected = true;
             }
@@ -433,7 +433,7 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.onMouseDownRowsHeader = (e) => {
-      const { template, selection } = this.section;
+      const {template, selection} = this.section;
       this.trigger = $(e.target).closest(template.ROWS_HEADER_TRIGGER_CLASS);
       if (!this.trigger[0]) {
         if (e.button === 2) {
@@ -442,7 +442,7 @@ class ControllBar extends EventEmitter2 {
           const row = rowHeader.index();
           let currentRowSelected = false;
           if (selection.area && selection.area.total_row) {
-            const { rowMin, rowMax } = selection.normalizeArea();
+            const {rowMin, rowMax} = selection.normalizeArea();
             if (row >= rowMin && row <= rowMax) {
               currentRowSelected = true;
             }
@@ -594,14 +594,14 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.activeHeader = () => {
-      const { selection, template } = this.section;
-      const { area, tableModel } = selection;
+      const {selection, template} = this.section;
+      const {area, tableModel} = selection;
       this.clearActiveStatus();
       if (!area) return;
       const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
       const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
-      const { total_col, total_row, total_table } = area;
-      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
+      const {total_col, total_row, total_table} = area;
+      const {rowMin, rowMax, colMin, colMax} = selection.normalizeArea();
       for (let r = rowMin; r <= rowMax; r++) {
         $(rowBars[r]).addClass('active');
         if (total_row || total_table) {
@@ -799,7 +799,7 @@ class ControllBar extends EventEmitter2 {
     };
 
     this.onMultiChangeRowCol = (value, type) => {
-      const { rows, cols } = this.section.selection.tableModel;
+      const {rows, cols} = this.section.selection.tableModel;
       if (type === 'row') {
         value = Math.max(this.contentRow + 1, value);
         if (value > rows) {
@@ -868,7 +868,7 @@ class ControllBar extends EventEmitter2 {
   }
 
   init() {
-    const { container, template } = this.section;
+    const {container, template} = this.section;
     this.tableHeader = container.find(template.HEADER_CLASS);
     this.colsHeader = container.find(template.COLS_HEADER_CLASS);
     this.rowsHeader = container.find(template.ROWS_HEADER_CLASS);

@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom';
-import { message } from 'antd';
+import {message} from 'antd';
 import SectionBase from '../base';
 import 'antd/lib/message/style';
-import { getHeight } from '../../utils/dom';
+import {getHeight} from '../../utils/dom';
 import local from './local';
 
 class Embed extends SectionBase {
@@ -68,7 +68,7 @@ class Embed extends SectionBase {
     let moveHeight;
     let
       dragBegin;
-    const { minHeight } = this.options;
+    const {minHeight} = this.options;
     this.resizeController = this.createResizeController({
       container: this.root,
       dragstart: () => {

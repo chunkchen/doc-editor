@@ -102,12 +102,12 @@ class File extends SectionBase {
     };
 
     this.previewFile = () => {
-      const { preview, src } = this.value;
+      const {preview, src} = this.value;
       window.open(Engine.StringUtils.sanitizeUrl(preview || src));
     };
 
     this.downloadFile = () => {
-      const { download, src } = this.value;
+      const {download, src} = this.value;
       window.open(Engine.StringUtils.sanitizeUrl(download || src));
     };
 

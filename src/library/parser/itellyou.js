@@ -1,7 +1,7 @@
 import Engine from 'doc-engine/lib';
 import schema_config from '../schema/config';
 import lang_cn from '../lang/zh-cn';
-import { addMentionAttrs } from '../utils/string';
+import {addMentionAttrs} from '../utils/string';
 import HtmlParser from './html';
 
 export default (text) => {

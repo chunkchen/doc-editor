@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from 'antd';
+import {Tooltip} from 'antd';
 import 'antd/lib/tooltip/style';
 import lang from './lang';
 
@@ -14,7 +14,7 @@ class Zoom extends React.Component {
   }
 
   afterZoom() {
-    const { imageBrowser } = this.props;
+    const {imageBrowser} = this.props;
     const currentLevel = imageBrowser.getCurrentZoomLevel();
     const initLevel = imageBrowser.getInitialZoomLevel();
     let status;
@@ -41,7 +41,7 @@ class Zoom extends React.Component {
   }
 
   componentDidMount() {
-    const { imageBrowser } = this.props;
+    const {imageBrowser} = this.props;
     imageBrowser.on('afterzoom', () => {
       this.afterZoom();
     });
@@ -62,7 +62,7 @@ class Zoom extends React.Component {
   }
 
   renderBtn(zoomClass, title, status, onClick) {
-    const { tooltipContainer } = this.state;
+    const {tooltipContainer} = this.state;
     return tooltipContainer ? (
       <Tooltip
         title={title}
@@ -74,20 +74,20 @@ class Zoom extends React.Component {
         mouseEnterDelay={1}
       >
         <span onClick={onClick}
-          className={'lake-pswp-'.concat(zoomClass, ' btn ').concat(status)}
+              className={'lake-pswp-'.concat(zoomClass, ' btn ').concat(status)}
         />
       </Tooltip>
     ) : '';
   }
 
   render() {
-    const { imageBrowser } = this.props;
-    const { prevStatus, nextStatus, zoomInStatus, zoomOutStatus, originSizeStatus, bestSizeStatus } = this.state;
+    const {imageBrowser} = this.props;
+    const {prevStatus, nextStatus, zoomInStatus, zoomOutStatus, originSizeStatus, bestSizeStatus} = this.state;
     return (
       <div
         className="lake-pswp-tool-bar"
       >
-        <div ref={e => this.tooltipContainer = e} />
+        <div ref={e => this.tooltipContainer = e}/>
         <div
           className="pswp-toolbar-content"
         >
@@ -96,13 +96,13 @@ class Zoom extends React.Component {
               if (prevStatus !== 'disable') imageBrowser.prev();
             })
           }
-          <span className="lake-pswp-counter" />
+          <span className="lake-pswp-counter"/>
           {
             this.renderBtn('arrow-right', lang.next, nextStatus, () => {
               if (nextStatus !== 'disable') imageBrowser.next();
             })
           }
-          <span className="separation" />
+          <span className="separation"/>
           {
             this.renderBtn('zoom-in', lang.zoomIn, zoomInStatus, () => {
               if (zoomInStatus !== 'disable') imageBrowser.zoomIn();

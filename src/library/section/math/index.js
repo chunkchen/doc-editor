@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
 import debounce from 'lodash/debounce';
-import { preview } from '../../utils/image-generator';
+import {preview} from '../../utils/image-generator';
 import Toolbar from './toolbar';
 import {
   addScrollAndResizeEventListener,
@@ -21,7 +21,7 @@ class Math extends SectionBase {
   renderImage(ele) {
     const maxWidth = this.getMaxWidth();
     const node = ele[0];
-    const { naturalWidth, naturalHeight } = node;
+    const {naturalWidth, naturalHeight} = node;
 
     const width = parseInt((14 / 17.4) * naturalWidth);
     const height = parseInt((14 / 17.4) * naturalHeight);
@@ -140,8 +140,8 @@ class Math extends SectionBase {
   }
 
   renderView() {
-    const { value, container, locale } = this;
-    const { src, code, width, height } = value;
+    const {value, container, locale} = this;
+    const {src, code, width, height} = value;
     const mathContainer = Engine.$('<span class="lake-math-container"></span>');
     container.append(mathContainer);
     this.viewContainer = mathContainer;
@@ -182,7 +182,7 @@ class Math extends SectionBase {
   }
 
   renderEditor() {
-    const { container, value, engine, sectionRoot, locale } = this;
+    const {container, value, engine, sectionRoot, locale} = this;
     const editorContainer = Engine.$('<div class="lake-section-math-editor"></div>');
     this.editorContainer = editorContainer;
     container.append(editorContainer);

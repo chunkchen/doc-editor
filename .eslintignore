@@ -4,7 +4,7 @@ tests/
 demo/
 library/
 
-/node-modules
+/node_modules
 
 # node 覆盖率文件
 coverage/

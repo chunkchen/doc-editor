@@ -30,7 +30,7 @@ class TableSelector extends React.Component {
   }
 
   renderTr = (r, cols) => {
-    const { selectedRows, selectedCols } = this.state;
+    const {selectedRows, selectedCols} = this.state;
     const tds = [];
     const _loop = (c) => {
       const cls = classnames({
@@ -38,15 +38,15 @@ class TableSelector extends React.Component {
         actived: r < selectedRows && c < selectedCols,
       });
       tds.push(<div
-        className={cls}
-        key={c}
-        onMouseDown={(e) => {
-          return this.onSelect(e, r, c);
-        }}
-        onMouseOver={() => {
-          return this.onHover(r, c);
-        }}
-      />
+          className={cls}
+          key={c}
+          onMouseDown={(e) => {
+            return this.onSelect(e, r, c);
+          }}
+          onMouseOver={() => {
+            return this.onHover(r, c);
+          }}
+        />
       );
     };
 
@@ -65,7 +65,7 @@ class TableSelector extends React.Component {
   }
 
   render() {
-    const { currentCols, currentRows } = this.state;
+    const {currentCols, currentRows} = this.state;
     const selectedRows = this.state.selectedRows === undefined ? 0 : this.state.selectedRows;
     const selectedCols = this.state.selectedCols === undefined ? 0 : this.state.selectedCols;
     return (

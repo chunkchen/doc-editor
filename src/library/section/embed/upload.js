@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
-import { sanitizeUrl } from 'doc-engine/lib/utils/string';
+import {sanitizeUrl} from 'doc-engine/lib/utils/string';
 import Embed from './embed';
 import Error from '../../tips/error';
 
@@ -97,12 +97,12 @@ class Upload extends Embed {
   }
 
   getUrl() {
-    const { preview, src } = this.value;
+    const {preview, src} = this.value;
     return sanitizeUrl(preview || src);
   }
 
   getAcceptExt() {
-    let { ext, name } = this.value;
+    let {ext, name} = this.value;
     if (name && /\.mindnode\.zip$/.test(name)) {
       ext = 'mindnode';
     } else if (name && /\.xmind\.zip$/.test(name)) {
@@ -143,11 +143,11 @@ class Upload extends Embed {
   }
 
   renderExpand() {
-    const { value, options } = this;
-    const { status, ext } = value;
+    const {value, options} = this;
+    const {status, ext} = value;
     const height = this.getHeight();
     const url = this.getUrl();
-    const { transition } = options;
+    const {transition} = options;
     const readonlyClass = this.state.readonly ? ' lake-section-readonly' : '';
     const tips = this.getStatusTips();
     const acceptExt = this.getAcceptExt();
@@ -249,7 +249,7 @@ class Upload extends Embed {
   }
 
   renderError() {
-    const { value, container } = this;
+    const {value, container} = this;
     ReactDOM.render(
       <Error
         sectionIcon={'<span class="lake-svg-icon lake-svg-icon-error-file"></span>'}
@@ -264,8 +264,8 @@ class Upload extends Embed {
   }
 
   render(_, value) {
-    value = { ...this.value, value };
-    const { collapsed } = value;
+    value = {...this.value, value};
+    const {collapsed} = value;
     this.value = value;
     value.status = value.status || 'done';
     this.state.collapsed = undefined !== collapsed && collapsed;

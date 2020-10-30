@@ -1,4 +1,4 @@
-import { post } from '@itellyou/itellyou-request';
+import {post} from '@itellyou/itellyou-request';
 
 /**
  * 生成 latex/puml svg 图片内容

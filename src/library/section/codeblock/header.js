@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import {Select} from 'antd';
 import 'antd/lib/select/style';
 import classNames from 'classnames';
 import modeConfig from './mode-config';

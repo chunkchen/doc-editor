@@ -11,7 +11,7 @@ import ExportParser from './parser/export';
 import WordExportParser from './parser/word';
 import PdfExportParser from './parser/pdf';
 import DoNothingExportParser from './parser/do-nothing';
-import { DocVersion } from './utils/string';
+import {DocVersion} from './utils/string';
 import htmlToITellYou from './parser/itellyou';
 import './index.less';
 

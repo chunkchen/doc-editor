@@ -6,7 +6,7 @@ import lang_en from '../lang/en';
 import lang_zh_cn from '../lang/zh-cn';
 import schema_config from '../schema/config';
 import IFrameHelper from '../helper/iframe';
-import { getDocVersion } from '../utils/string';
+import {getDocVersion} from '../utils/string';
 import Outline from '../utils/outline';
 
 const linkDomain = ['itellyou.com'];
@@ -88,7 +88,7 @@ class ContentView extends React.Component {
   }
 
   renderContent = () => {
-    const { lang, onBeforeRenderImage, customMaximizeRestore, customMaximize, autoMaximizeSection, renderParser, content, genAnchor, genOutline, onLoad, ...options } = this.props;
+    const {lang, onBeforeRenderImage, customMaximizeRestore, customMaximize, autoMaximizeSection, renderParser, content, genAnchor, genOutline, onLoad, ...options} = this.props;
     const view = Engine.$(this.viewArea.current);
     const contentViewEngine = Engine.ContentView.create(view, {
       lang,
@@ -204,7 +204,7 @@ class ContentView extends React.Component {
       <div
         className="lake-engine-view"
         ref={this.viewArea}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{__html: content}}
       />
     );
   }

@@ -1,7 +1,7 @@
 import Engine from 'doc-engine/lib';
 import ExportParser from './export';
-import { loadImage } from '../utils/dom';
-import { lists } from './utils';
+import {loadImage} from '../utils/dom';
+import {lists} from './utils';
 
 class WordParser extends ExportParser {
   async after(element) {

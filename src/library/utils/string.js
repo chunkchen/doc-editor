@@ -6,12 +6,12 @@ export const addMentionAttrs = (value) => {
   value = ((value) => {
     return value.replace(/<section\s+([^>]+)>/g, (match0, match1) => {
       const attrs = Engine.StringUtils.getAttrMap(match0);
-      let { name, value } = attrs;
+      let {name, value} = attrs;
 
       if (name === 'mention' && value) {
         value = Engine.StringUtils.unescape(value);
         const valueObj = Engine.StringUtils.decodeSectionValue(value);
-        let { key, name } = valueObj;
+        let {key, name} = valueObj;
 
         if (key && name) {
           key = Engine.StringUtils.escape(key);

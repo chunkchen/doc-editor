@@ -121,7 +121,7 @@ class Resizer {
   }
 
   render(container) {
-    const { width, height } = this.config;
+    const {width, height} = this.config;
     this.root.css({
       width: ''.concat(width, 'px'),
       height: ''.concat(height, 'px'),

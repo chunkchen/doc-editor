@@ -50,7 +50,7 @@ class ColorPickerItem extends React.Component {
   }
 
   render() {
-    const { color, activeColors, defaultColor, setStroke } = this.props;
+    const {color, activeColors, defaultColor, setStroke} = this.props;
     const needborder = ['#FFFFFF', '#FAFAFA'].indexOf(color) >= 0;
     const active = activeColors.indexOf(color) >= 0;
     const special = color === defaultColor;
@@ -77,7 +77,7 @@ class ColorPickerItem extends React.Component {
       >
         <span style={styls.block}>
           <svg style={styls.check} viewBox="0 0 18 18">
-            <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+            <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
           </svg>
         </span>
       </span>
@@ -88,7 +88,7 @@ class ColorPickerItem extends React.Component {
 class ColorPickerGroup extends React.Component {
   render() {
     const data = this.props.data === void 0 ? [] : this.props.data;
-    const { activeColors, defaultColor, onSelect, setStroke } = this.props;
+    const {activeColors, defaultColor, onSelect, setStroke} = this.props;
 
     return (
       <span className="lake-colorboard-group">
@@ -113,8 +113,8 @@ class ColorPickerGroup extends React.Component {
 
 class ColorPicker extends React.Component {
   render() {
-    const { activeColors, defaultColor, onSelect, setStroke } = this.props;
-    let { colors } = this.props;
+    const {activeColors, defaultColor, onSelect, setStroke} = this.props;
+    let {colors} = this.props;
     if (!colors) colors = Palette.getColors();
     return (
       <div className="lake-colorboard">

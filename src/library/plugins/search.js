@@ -1,5 +1,5 @@
 import Engine from 'doc-engine/lib';
-import { addDialogCommand } from '../utils/command';
+import {addDialogCommand} from '../utils/command';
 
 const PLUGIN_NAME = 'search';
 

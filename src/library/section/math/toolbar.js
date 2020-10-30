@@ -1,11 +1,11 @@
 import React from 'react';
 import Engine from 'doc-engine/lib';
-import { Tooltip } from 'antd';
+import {Tooltip} from 'antd';
 import 'antd/lib/tooltip/style';
 
 class Toolbar extends React.Component {
   render() {
-    const { locale, onChange, onFocus, onBlur, code, options } = this.props;
+    const {locale, onChange, onFocus, onBlur, code, options} = this.props;
     return (
       <div>
         <textarea
@@ -26,7 +26,7 @@ class Toolbar extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="lake-icon lake-icon-question" />
+                  <span className="lake-icon lake-icon-question"/>
                   {Engine.StringUtils.escape(options.help.text)}
                 </a>
               )

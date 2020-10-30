@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Checkbox, Input } from 'antd';
+import {Button, Checkbox, Input} from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/input/style';
 import 'antd/lib/checkbox/style';
 
-const { Group } = Button;
+const {Group} = Button;
 
 class ImageSidebar extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class ImageSidebar extends React.Component {
 
     this.handleUpdateSize = () => {
       const engine = this.props.engine;
-      const { width, height } = this.state;
+      const {width, height} = this.state;
       const sectionRoot = engine.change.activeSection;
       if (!sectionRoot) {
         return;
@@ -77,7 +77,7 @@ class ImageSidebar extends React.Component {
 
     this.handleUpdateLink = () => {
       const engine = this.props.engine;
-      const { link, linkTarget } = this.state;
+      const {link, linkTarget} = this.state;
       const sectionRoot = engine.change.activeSection;
 
       if (!sectionRoot) {
@@ -118,7 +118,7 @@ class ImageSidebar extends React.Component {
 
   componentDidUpdate(props) {
     const data = props.data;
-    const { width } = data;
+    const {width} = data;
     if (width !== this.props.data.width) {
       this.setState({
         width,
@@ -129,7 +129,7 @@ class ImageSidebar extends React.Component {
 
   render() {
     const engine = this.props.engine;
-    const { width, height, link, linkTarget } = this.state;
+    const {width, height, link, linkTarget} = this.state;
     const locale = engine.locale.image;
     return (
       <div>
@@ -161,14 +161,14 @@ class ImageSidebar extends React.Component {
             </div>
             <div className="lake-sidebar-size-title">
               <span className="lake-sidebar-width-title">{locale.width}</span>
-              <span className="lake-sidebar-lock" />
+              <span className="lake-sidebar-lock"/>
               <span className="lake-sidebar-height-title">{locale.height}</span>
             </div>
           </div>
           <div
             className="lake-sidebar-group-item lake-sidebar-image-percent"
             style={
-              { marginBottom: '14px' }
+              {marginBottom: '14px'}
             }
           >
             <Group>

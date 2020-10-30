@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 import Outline from '../utils/outline';
-import { addSidebarCommand } from '../utils/command';
+import {addSidebarCommand} from '../utils/command';
 
 const PLUGIN_NAME = 'toc';
 

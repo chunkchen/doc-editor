@@ -12,9 +12,9 @@ import History from './history';
 import Selection from './selection';
 import Scrollbar from '../../scrollbar';
 import schema from './schema';
-import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils';
+import {tableInnerSchema, unWrapperTable, unWrapperTableHTML} from './utils';
 import schemaConfig from '../../schema/config';
-import { getHeight } from '../../utils/dom';
+import {getHeight} from '../../utils/dom';
 import SectionBase from '../base';
 
 const getKeys = (keyString) => {
@@ -475,7 +475,7 @@ class Table extends SectionBase {
   select() {
     if (this.state.readonly) super.select.call(this);
     else {
-      const { container } = this;
+      const {container} = this;
       if (container[0].childNodes.length > 0) {
         container.addClass('lake-table-selected');
       }
@@ -486,7 +486,7 @@ class Table extends SectionBase {
     if (this.state.readonly) {
       super.unselect.call(this);
     } else {
-      const { container } = this;
+      const {container} = this;
       if (container[0].childNodes.length > 0) {
         container.removeClass('lake-table-selected');
       }
@@ -494,14 +494,14 @@ class Table extends SectionBase {
   }
 
   selectByOther(color) {
-    const { container } = this;
+    const {container} = this;
     if (container[0].childNodes.length > 0) {
       container.css('outline', `2px solid ${color}`);
     }
   }
 
   unselectByOther() {
-    const { container } = this;
+    const {container} = this;
     if (container[0].childNodes.length > 0) {
       container.css('outline', '');
     }

@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 
-const { NodeUtils, $ } = Engine;
+const {NodeUtils, $} = Engine;
 
 const PLUGIN_NAME = 'math';
 export default {

@@ -87,4 +87,4 @@ class YouKu extends EmbedUrl {
 
 YouKu.type = 'block';
 export default YouKu;
-export { hitBlack, getDocEmbedURL };
+export {hitBlack, getDocEmbedURL};

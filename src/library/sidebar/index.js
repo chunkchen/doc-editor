@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
       if (!state) {
         this.close();
       }
-      const { engine } = this.props;
+      const {engine} = this.props;
       this.setState(state);
       localStorage.setItem('lake-sidebar', state.name);
       engine.toolbar.updateState();
@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
     };
 
     this.store = (config) => {
-      const { engine } = this.props;
+      const {engine} = this.props;
       this.storeConfig = config;
       engine.sidebar.storeConfig = config;
     };
@@ -54,7 +54,7 @@ class Sidebar extends React.Component {
   }
 
   componentDidMount() {
-    const { engine } = this.props;
+    const {engine} = this.props;
     this.extends();
     engine.command.execute('toc', true);
   }
@@ -66,8 +66,8 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { name, title, data, className, showCloseBtn } = this.state;
-    const { engine } = this.props;
+    const {name, title, data, className, showCloseBtn} = this.state;
+    const {engine} = this.props;
     const contentProps = {
       engine,
       data,
@@ -87,7 +87,7 @@ class Sidebar extends React.Component {
                 className="lake-sidebar-close"
                 onClick={this.close}
               >
-                <span className="lake-icon lake-icon-close" />
+                <span className="lake-icon lake-icon-close"/>
               </div>
             )
           }

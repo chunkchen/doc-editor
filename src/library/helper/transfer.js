@@ -1,4 +1,4 @@
-import { post } from '@itellyou/itellyou-request';
+import {post} from '@itellyou/itellyou-request';
 import Engine from 'doc-engine/lib';
 
 class Transfer {
@@ -14,7 +14,7 @@ class Transfer {
 
   _getAttachmentCopyAction() {
     const fileOptions = this.options.engine.options.file || {};
-    const { copyAction, action } = fileOptions;
+    const {copyAction, action} = fileOptions;
     if (copyAction) return copyAction;
     if (action) {
       return action.replace(/token=[^&]+&/, '');
@@ -23,7 +23,7 @@ class Transfer {
   }
 
   _transferFile(node, value) {
-    const { engine } = this.options;
+    const {engine} = this.options;
     post(this.action, {
       attachments: [value.refSrc.replace(/(.*?)attachments\//, '')],
     }).then((res) => {
@@ -43,7 +43,7 @@ class Transfer {
   }
 
   bindEvent() {
-    const { engine, needTransferSections } = this.options;
+    const {engine, needTransferSections} = this.options;
     engine.on('paste:each', (node) => {
       const data = node.attr('data-ready-section');
       if (needTransferSections.indexOf(data) > -1) {

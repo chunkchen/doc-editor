@@ -44,7 +44,7 @@ export const addDialogCommand = (engine, name, getConfig) => {
 };
 
 export const addIframeSection = (engine, name, value) => {
-  const { locale, iframeHelper } = engine;
+  const {locale, iframeHelper} = engine;
   if (iframeHelper.canAdd()) {
     engine.command.execute(name, value);
   } else {

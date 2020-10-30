@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
-import { MODE_NAME_MAP, setMode, template as codeblockTemplate } from '../section/codeblock';
-import { getPreviewUrl } from '../utils/string';
+import {MODE_NAME_MAP, setMode, template as codeblockTemplate} from '../section/codeblock';
+import {getPreviewUrl} from '../utils/string';
 
 const locale = {
   'zh-cn': {

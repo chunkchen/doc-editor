@@ -9,7 +9,7 @@ import Button from './button';
 
 class ToolbarGroup extends React.Component {
   render() {
-    const { engine, locale, toolbar, toolbarState, mobile } = this.props;
+    const {engine, locale, toolbar, toolbarState, mobile} = this.props;
 
     return (
       <React.Fragment>
@@ -34,30 +34,30 @@ class ToolbarGroup extends React.Component {
               }
               buttonProps.locale = locale;
               if (name === 'table') {
-                return <TableButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <TableButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
               if (type === 'collapse') {
-                return <CollapseButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <CollapseButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
 
               if (type === 'dropdown') {
-                return <DropdownButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <DropdownButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
 
               if (type === 'color') {
                 buttonProps.activeColors = [buttonProps.active];
-                return <ColorButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <ColorButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
 
               if (type === 'upload') {
-                return <UploadButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <UploadButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
 
               if (type === 'video') {
-                return <VideoButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <VideoButton {...Object.assign({}, {key: index}, buttonProps)} />;
               }
 
-              return <Button {...Object.assign({}, { key: index }, buttonProps)} />;
+              return <Button {...Object.assign({}, {key: index}, buttonProps)} />;
             })
           }
         </div>

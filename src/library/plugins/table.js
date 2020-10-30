@@ -1,8 +1,8 @@
 import Engine from 'doc-engine/lib';
-import { getTableModel, normalizeTable, unWrapperTableBI } from '../section/table/utils';
+import {getTableModel, normalizeTable, unWrapperTableBI} from '../section/table/utils';
 import schema from '../section/table/schema';
 
-const { ChangeUtils, StringUtils, NodeUtils, $ } = Engine;
+const {ChangeUtils, StringUtils, NodeUtils, $} = Engine;
 
 function handleKeydownEnter(e) {
   const range = this.change.getRange();
@@ -56,7 +56,7 @@ function handleKeydownEnter(e) {
   }
 }
 
-export { handleKeydownEnter };
+export {handleKeydownEnter};
 
 export default {
   initialize() {

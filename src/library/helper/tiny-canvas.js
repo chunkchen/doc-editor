@@ -58,8 +58,8 @@ class TinyCanvas {
   }
 
   _handleSingleRect(options) {
-    const { x, y, index, width, height, callback } = options;
-    const { limitHeight } = this.options;
+    const {x, y, index, width, height, callback} = options;
+    const {limitHeight} = this.options;
     const canvas = this._getCanvas(index);
     if (canvas) {
       const context = canvas.getContext('2d');
@@ -74,7 +74,7 @@ class TinyCanvas {
   }
 
   _drawRect(options) {
-    const { x, y, fill, width, height, stroke } = options;
+    const {x, y, fill, width, height, stroke} = options;
     const callback = (opt) => {
       opt.context.fillStyle = fill === undefined ? '#FFEC3D' : fill;
       opt.context.strokeStyle = stroke === undefined ? '#FFEC3D' : stroke;
@@ -90,9 +90,9 @@ class TinyCanvas {
   }
 
   _handleRect(options) {
-    const { x, y, width, height, callback } = options;
+    const {x, y, width, height, callback} = options;
 
-    const { limitHeight } = this.options;
+    const {limitHeight} = this.options;
     const min = {
       x,
       y,
@@ -128,8 +128,8 @@ class TinyCanvas {
   }
 
   getImageData(options) {
-    const { x, y, width, height } = options;
-    const { limitHeight } = this.options;
+    const {x, y, width, height} = options;
+    const {limitHeight} = this.options;
     const count = Math.ceil(y / limitHeight);
     const lastCanvas = this._getCanvas(count);
     const context = lastCanvas.getContext('2d');
@@ -141,7 +141,7 @@ class TinyCanvas {
   }
 
   clearRect(options) {
-    const { x, y, width, height } = options;
+    const {x, y, width, height} = options;
     const callback = (opt) => {
       opt.context.clearRect(opt.x, opt.y, opt.width, opt.height);
     };

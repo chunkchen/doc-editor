@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
 import TextDiagramEditor from './text-diagram-editor';
 import TextDiagramViewer from './text-diagram-render';
-import { preview } from '../../utils/image-generator';
+import {preview} from '../../utils/image-generator';
 import SectionBase from '../base';
 import constants from './constants';
 import './index.css';
 
-const { EDITOR_LAYOUT, TEXT_DIAGRAM_TYPES } = constants;
-const { $ } = Engine;
+const {EDITOR_LAYOUT, TEXT_DIAGRAM_TYPES} = constants;
+const {$} = Engine;
 const template = () => {
   return '<div class="lake-text-diagram lake-text-diagram-root"></div>';
 };
@@ -232,7 +232,7 @@ class TextDiagram extends SectionBase {
       this.root[0],
       () => {
         const diagram = this.root.find('.lake-text-diagram-editor');
-        const { height } = this.value;
+        const {height} = this.value;
         this.addResizeController(diagram);
         if (height) {
           diagram.css('height', `${height}px`);

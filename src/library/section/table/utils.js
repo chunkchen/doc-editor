@@ -2,7 +2,7 @@ import isInteger from 'lodash/isInteger';
 import isObject from 'lodash/isObject';
 import Engine from 'doc-engine/lib';
 
-const { $, StringUtils, NodeUtils } = Engine;
+const {$, StringUtils, NodeUtils} = Engine;
 
 /**
  * 提取表格数据模型，由于合并单元格的存在，html 结构不利于操作
@@ -36,7 +36,7 @@ export const getTableModel = (table) => {
 
     for (let c = 0; c < cellCount; c++) {
       const td = cells[c];
-      let { rowSpan, colSpan } = td;
+      let {rowSpan, colSpan} = td;
       rowSpan = rowSpan === void 0 ? 1 : rowSpan;
       colSpan = colSpan === void 0 ? 1 : colSpan;
       const isMulti = rowSpan > 1 || colSpan > 1;
@@ -446,7 +446,7 @@ export const fixDragEvent = (e) => {
  * 获得一个表格内包含内容的最大行列数
  */
 export const getContentArea = (tableModel) => {
-  const { table, cols, rows } = tableModel;
+  const {table, cols, rows} = tableModel;
   let row = rows - 1;
   let col = cols - 1;
   let rowHasContent = false;
@@ -513,7 +513,7 @@ const fixNumberTr = (table) => {
     let cellCountThisRow = 0;
 
     for (let c = 0; c < cells.length; c++) {
-      const { rowSpan, colSpan } = cells[c];
+      const {rowSpan, colSpan} = cells[c];
       totalCellCounts += rowSpan * colSpan;
       cellCountThisRow += colSpan;
       if (rowSpan > 1) {
@@ -553,7 +553,7 @@ const fixNumberTr = (table) => {
           }
 
           for (let _c2 = 0; _c2 < _cells.length; _c2++) {
-            const { rowSpan, colSpan } = _cells[_c2];
+            const {rowSpan, colSpan} = _cells[_c2];
             if (rowSpan > 1) {
               for (let rr = 1; rr < rowSpan; rr++) {
                 colCounts[realRow + rr] = (colCounts[realRow + rr] || 0) + colSpan;

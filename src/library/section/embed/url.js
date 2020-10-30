@@ -31,7 +31,7 @@ class Url extends Upload {
   }
 
   getUrl() {
-    const { src, url } = this.value;
+    const {src, url} = this.value;
     return url || src;
   }
 

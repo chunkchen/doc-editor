@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Select } from 'antd';
+import {Button, Select} from 'antd';
 import 'antd/lib/select/style';
 import 'antd/lib/button/style';
 
@@ -34,7 +34,7 @@ class Translate extends React.Component {
   // 移除事件
   _removeEvent() {
     this.events.forEach((_ref) => {
-      const { element, type, callback } = _ref;
+      const {element, type, callback} = _ref;
       element.off(type, callback);
     });
   }
@@ -67,7 +67,7 @@ class Translate extends React.Component {
     });
 
     this._bindEvent(translate, 'success', (_ref) => {
-      const { targetPlainText, fragment } = _ref;
+      const {targetPlainText, fragment} = _ref;
       this.fragment = fragment;
 
       this.setState({
@@ -100,7 +100,7 @@ class Translate extends React.Component {
     return (
       <div>
         <span>{locale.subTitle}</span>
-        <br />
+        <br/>
         <Select
           style={{
             width: '100%',
@@ -116,7 +116,7 @@ class Translate extends React.Component {
           {zhOption}
           {enOption}
         </Select>
-        <br />
+        <br/>
         <Select
           style={{
             width: '100%',
@@ -131,12 +131,12 @@ class Translate extends React.Component {
           {zhOption}
           {enOption}
         </Select>
-        <p style={{ margin: '14px 0px' }}>
+        <p style={{margin: '14px 0px'}}>
           {locale.translation}
           ：
         </p>
-        <pre style={{ color: isTargetPlainTextEmpty ? 'rgba(0,0,0,0.25)' : 'inherit' }}>{targetPlainText}</pre>
-        {errorMsg && <p style={{ marginBottom: '8px', color: '#CF1322' }}>{errorMsg}</p>}
+        <pre style={{color: isTargetPlainTextEmpty ? 'rgba(0,0,0,0.25)' : 'inherit'}}>{targetPlainText}</pre>
+        {errorMsg && <p style={{marginBottom: '8px', color: '#CF1322'}}>{errorMsg}</p>}
         <Button
           onClick={() => {
             this.fragment && engine.change.insertFragment(this.fragment.cloneNode(true));

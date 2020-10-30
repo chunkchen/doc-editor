@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Tooltip } from 'antd';
+import {Tooltip} from 'antd';
 import 'antd/lib/tooltip/style';
 
 class Dropdown extends React.Component {
@@ -14,7 +14,7 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    let { data, active, currentValue, className } = this.props;
+    let {data, active, currentValue, className} = this.props;
     const isIconList = className === 'lake-button-icon-list';
 
 
@@ -43,9 +43,9 @@ class Dropdown extends React.Component {
                       return this.onSelect(e, row.key);
                     }}
                   >
-                    {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
-                    <span dangerouslySetInnerHTML={{ __html: row.icon }} />
-                    <span style={{ fontSize: 12 }}>{row.title}</span>
+                    {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot"/>}
+                    <span dangerouslySetInnerHTML={{__html: row.icon}}/>
+                    <span style={{fontSize: 12}}>{row.title}</span>
                   </a>
                 </Tooltip>
               );
@@ -59,7 +59,7 @@ class Dropdown extends React.Component {
                   return this.onSelect(e, row.key);
                 }}
               >
-                {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
+                {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot"/>}
                 <span>{row.value}</span>
               </a>
             );

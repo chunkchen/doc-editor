@@ -1,8 +1,8 @@
 import Engine from 'doc-engine/lib';
 
-const { userAgent: { macos } } = Engine;
+const {userAgent: {macos}} = Engine;
 export default function (section) {
-  const { command, locale } = section;
+  const {command, locale} = section;
   return [
     {
       name: 'table:bold',

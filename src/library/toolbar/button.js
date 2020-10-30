@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from 'antd';
+import {Tooltip} from 'antd';
 import 'antd/lib/tooltip/style';
 import classnames from 'classnames';
 
@@ -9,7 +9,7 @@ export default class Button extends React.Component {
   }
 
   onClick = (event) => {
-    const { name, onClick, isPrevent, disabled } = this.props;
+    const {name, onClick, isPrevent, disabled} = this.props;
 
     if (isPrevent !== false) {
       event.preventDefault();
@@ -25,7 +25,7 @@ export default class Button extends React.Component {
   }
 
   onMouseOver = (event) => {
-    const { onMouseOver, disabled } = this.props;
+    const {onMouseOver, disabled} = this.props;
     if (disabled) return;
     onMouseOver && onMouseOver();
     event.preventDefault();
@@ -33,7 +33,7 @@ export default class Button extends React.Component {
 
   onMouseDown = (event) => {
     event.preventDefault();
-    const { name, onMouseDown, disabled } = this.props;
+    const {name, onMouseDown, disabled} = this.props;
     if (disabled) return;
     // fix：避免执行工具栏的 mousedown 事件里的 engine.focus()，这个会导致格式刷功能失效
     if (name === 'paintformat' || name === 'video') {
@@ -43,7 +43,7 @@ export default class Button extends React.Component {
   }
 
   onMouseEnter = (event) => {
-    const { outerVisible, onMouseEnter } = this.props;
+    const {outerVisible, onMouseEnter} = this.props;
     if (onMouseEnter) {
       onMouseEnter(event);
     }
@@ -55,7 +55,7 @@ export default class Button extends React.Component {
   }
 
   onMouseLeave = (event) => {
-    const { outerVisible, onMouseLeave } = this.props;
+    const {outerVisible, onMouseLeave} = this.props;
     if (onMouseLeave) {
       onMouseLeave(event);
     }
@@ -67,9 +67,9 @@ export default class Button extends React.Component {
   }
 
   getIcon = () => {
-    const { icon } = this.props;
+    const {icon} = this.props;
     if (icon && typeof icon === 'string') {
-      return <span dangerouslySetInnerHTML={{ __html: icon }} />;
+      return <span dangerouslySetInnerHTML={{__html: icon}}/>;
     }
     if (icon) {
       return icon;
@@ -78,12 +78,12 @@ export default class Button extends React.Component {
   }
 
   render() {
-    let { name, className, title, hotkey, active, disabled, hasArrow, currentText, content, mobile, contentVisible, tooltip } = this.props;
+    let {name, className, title, hotkey, active, disabled, hasArrow, currentText, content, mobile, contentVisible, tooltip} = this.props;
     if (hotkey) {
       title = (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{textAlign: 'center'}}>
           {title}
-          <br />
+          <br/>
           <span className="lake-button-hotkey">{hotkey}</span>
         </div>
       );
@@ -122,7 +122,7 @@ export default class Button extends React.Component {
           this.getIcon()
         }
         {
-          hasArrow && <span className="lake-icon lake-icon-arrow" />
+          hasArrow && <span className="lake-icon lake-icon-arrow"/>
         }
       </button>
     );

@@ -26,7 +26,7 @@ class Mention {
 
   handleSearch = (keyword) => {
     const config = this.engine.options.mention || {};
-    const { action, paramName } = config;
+    const {action, paramName} = config;
 
     if (this.ajax) {
       this.ajax.abort();
@@ -220,7 +220,7 @@ class Mention {
       if (!value) {
         return;
       }
-      const { key, name } = value;
+      const {key, name} = value;
 
       if (key) {
         container.append('<a class="lake-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));
@@ -231,7 +231,7 @@ class Mention {
     }
     // 编辑模式
     if (value && value.name) {
-      const { key, name } = value;
+      const {key, name} = value;
 
       if (key) {
         container.append('<a class="lake-mention-at" href="/'.concat(Engine.StringUtils.escape(key), '">@').concat(Engine.StringUtils.escape(name), '(').concat(Engine.StringUtils.escape(key), ')</a>'));

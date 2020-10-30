@@ -1,5 +1,5 @@
-import { EventEmitter2 } from 'eventemitter2';
-import { firefox, mobile } from 'doc-engine/lib/utils/user-agent';
+import {EventEmitter2} from 'eventemitter2';
+import {firefox, mobile} from 'doc-engine/lib/utils/user-agent';
 import Engine from 'doc-engine/lib';
 
 class Scrollbar extends EventEmitter2 {
@@ -113,8 +113,8 @@ class Scrollbar extends EventEmitter2 {
 
     this.bindEvents = () => {
       this.container.on('scroll', (event) => {
-        const { target } = event;
-        const { scrollTop, scrollLeft } = target;
+        const {target} = event;
+        const {scrollTop, scrollLeft} = target;
         this.reRenderX(scrollLeft);
         this.reRenderY(scrollTop);
       });
@@ -124,7 +124,7 @@ class Scrollbar extends EventEmitter2 {
 
     this.refresh = () => {
       if (!firefox && !mobile) {
-        const { offsetWidth, offsetHeight, scrollWidth, scrollHeight, scrollLeft, scrollTop } = this.container[0];
+        const {offsetWidth, offsetHeight, scrollWidth, scrollHeight, scrollLeft, scrollTop} = this.container[0];
 
         this.oWidth = offsetWidth;
         this.oHeight = offsetHeight;

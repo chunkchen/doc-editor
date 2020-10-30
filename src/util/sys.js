@@ -63,7 +63,7 @@ export function getBreadNamesByPathname(pathname) {
     return ['首页'];
   }
   const paths = pathname.split('/').slice(1);
-  console.log(paths)
+  console.log(paths);
   if (paths.length > 0) {
     result = result.concat(recursiveGetName(paths, rs.routerConfig));
   }

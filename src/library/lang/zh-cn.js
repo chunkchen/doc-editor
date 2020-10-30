@@ -1,4 +1,4 @@
-import { macos } from 'doc-engine/lib/utils/user-agent';
+import {macos} from 'doc-engine/lib/utils/user-agent';
 
 const CTRL = macos ? '⌘' : 'Ctrl';
 const backgroundOrColor = {

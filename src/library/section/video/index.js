@@ -129,7 +129,7 @@ class Video extends SectionBase {
         data: {
           video_id: this.value.videoId,
         },
-        success: ({ result, data }) => {
+        success: ({result, data}) => {
           // debug('第 %d 次查询结果: %j', this.num, this.value);
           // 设置状态前先清除状态
           this.value.coverUrl = null;

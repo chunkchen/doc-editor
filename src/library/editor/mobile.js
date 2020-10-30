@@ -12,7 +12,7 @@ const language = {
 
 class MobileEditor extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       engine: null,
       toolbar: props.toolbar,
@@ -28,7 +28,7 @@ class MobileEditor extends React.Component {
         engine,
       },
       () => {
-        const { image, file } = engine.options;
+        const {image, file} = engine.options;
         helper(engine, 'uploader', {
           actions: {
             image: image ? image.action : '',
@@ -49,8 +49,8 @@ class MobileEditor extends React.Component {
   }
 
   render() {
-    const { engine, toolbar } = this.state;
-    const { type, header } = this.props;
+    const {engine, toolbar} = this.state;
+    const {type, header} = this.props;
     const toolbarOptions = {
       type,
       engine,
@@ -60,14 +60,14 @@ class MobileEditor extends React.Component {
 
     const editorOptions = (function (props) {
       const options = Object.assign({}, props);
-      const { onLoad, header, toolbar, ...editorOptions } = options;
+      const {onLoad, header, toolbar, ...editorOptions} = options;
       return editorOptions;
     }(this.props));
 
     return (
       <div className="lake-editor lake-mobile-editor">
         {engine && (
-          <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions, { mobile: true })} />
+          <Toolbar {...Object.assign({hasMore: true}, toolbarOptions, {mobile: true})} />
         )}
         <div className="lake-content-editor" ref={this.contentEditor}>
           <div className="lake-content-editor-extra">{header}</div>

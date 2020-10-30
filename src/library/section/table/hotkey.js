@@ -1,7 +1,7 @@
 import Keymaster from 'keymaster';
 import Engine from 'doc-engine/lib';
 
-const { $ } = Engine;
+const {$} = Engine;
 
 const hotkey = {
   handler: {},

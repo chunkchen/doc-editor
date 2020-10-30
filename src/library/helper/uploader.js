@@ -4,7 +4,7 @@ import Engine from 'doc-engine/lib';
 import {isBase64Image} from '../utils/string';
 import Request from './request';
 
-const { android } = Engine.userAgent;
+const {android} = Engine.userAgent;
 const request = new Request();
 const ajax = (options) => {
   return request.ajax(options);
@@ -62,8 +62,8 @@ class Uploader extends EventEmitter2 {
   }
 
   async request(type, files, options) {
-    const { engine } = this.options;
-    const { onBeforeUpload, onAfterUpload } = options;
+    const {engine} = this.options;
+    const {onBeforeUpload, onAfterUpload} = options;
 
     const uidList = files.map((file, index) => {
       if (!file.uid) {
@@ -119,9 +119,9 @@ class Uploader extends EventEmitter2 {
           url: action,
           data: formData,
           dataType: 'json',
-          success: ({ result, data, message }) => {
+          success: ({result, data, message}) => {
             if (result) {
-              const { url, preview, download, size, width, height } = data;
+              const {url, preview, download, size, width, height} = data;
               this.handleChange(type, 'done', {
                 uid: file.uid,
                 uidList,
@@ -194,13 +194,13 @@ class Uploader extends EventEmitter2 {
   }
 
   handleBeforeUpload(type, file, files, options) {
-    const { onBeforeInsertSection } = options;
-    const { engine } = this.options;
-    const { iframeHelper } = engine;
-    const { uid, name, size } = file;
+    const {onBeforeInsertSection} = options;
+    const {engine} = this.options;
+    const {iframeHelper} = engine;
+    const {uid, name, size} = file;
     const fileType = file.type;
     const extension = this.parseExtension(file);
-    let { sizeError } = engine.locale[type];
+    let {sizeError} = engine.locale[type];
     if (type === 'localdoc' && !iframeHelper.canAdd()) {
       engine.messageError(
         engine.locale.section.iframeOverLimit.replace('${limit}', iframeHelper.options.limit),
@@ -278,10 +278,10 @@ class Uploader extends EventEmitter2 {
 
   handleChange(type, status, data) {
     const options = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {};
-    const { engine } = this.options;
-    const { uid, uidList } = data;
+    const {engine} = this.options;
+    const {uid, uidList} = data;
     const fileOptions = Object.assign({}, data);
-    const { onBeforeInsertSection, file } = options;
+    const {onBeforeInsertSection, file} = options;
     if (type === 'image' && isBase64Image(fileOptions.src)) {
       delete fileOptions.src;
     }

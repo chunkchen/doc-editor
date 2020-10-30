@@ -183,7 +183,7 @@ class LockedText extends SectionBase {
   showLockPanel = () => {
     this.clear();
     ReactDOM.render(
-      <Lock onLock={this.lock} onCancelLock={this.onCancelLock} locale={this.locale} />,
+      <Lock onLock={this.lock} onCancelLock={this.onCancelLock} locale={this.locale}/>,
       this.lockContainer,
     );
   };
@@ -191,7 +191,7 @@ class LockedText extends SectionBase {
   showUnLockpanel = () => {
     this.locked = true;
     this.clear();
-    ReactDOM.render(<Unlock onUnlock={this.unLock} locale={this.locale} />, this.unLockContainer);
+    ReactDOM.render(<Unlock onUnlock={this.unLock} locale={this.locale}/>, this.unLockContainer);
   };
 
   cachePassword = (password) => {

@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 
-const { StringUtils } = Engine;
+const {StringUtils} = Engine;
 /**
  * @fileOverview 图片渲染
  */
@@ -40,13 +40,13 @@ export default {
     this.imageContainer.append(mask);
   },
   _renderImageMask() {
-    const { page } = this;
+    const {page} = this;
     const lactions = page.getTextDomLactions();
     const zoom = page.getZoom();
     let search = '';
     let mask = '<div class="lake-image-mask">';
     lactions.forEach((laction) => {
-      const { x, y, text, fontSize } = laction;
+      const {x, y, text, fontSize} = laction;
       const style = 'font-size: '.concat(fontSize * zoom, 'px;left: ').concat(x, 'px;top: ').concat(y, 'px;');
       mask += '<p class="lake-image-mask-point" style="'.concat(style, '">').concat(text, '</p>');
       search += ' '.concat(text);

@@ -15,7 +15,7 @@ const language = {
 
 class FullEditor extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       engine: null,
       toolbar: props.toolbar,
@@ -37,7 +37,7 @@ class FullEditor extends React.Component {
         });
 
         helper(engine, 'translate');
-        const { image, file } = engine.options;
+        const {image, file} = engine.options;
         helper(engine, 'uploader', {
           actions: {
             image: image ? image.action : '',
@@ -91,8 +91,8 @@ class FullEditor extends React.Component {
   }
 
   render() {
-    const { engine, toolbar } = this.state;
-    const { type, header } = this.props;
+    const {engine, toolbar} = this.state;
+    const {type, header} = this.props;
     const toolbarOptions = {
       type,
       engine,
@@ -102,17 +102,18 @@ class FullEditor extends React.Component {
 
     const editorOptions = () => {
       const options = Object.assign({}, this.props);
-      const { onLoad, header, type, toolbar, ...editorOptions } = options;
+      const {onLoad, header, type, toolbar, ...editorOptions} = options;
       return editorOptions;
     };
 
     return (
-      <div className="lake-editor lake-max-editor">
+      <section className="lake-editor lake-max-editor">
         <div className="lake-max-editor-wrapper">
-          {engine && <Dialog engine={engine} />}
-          {engine && <Toolbar {...Object.assign({ hasMore: false }, toolbarOptions)} />}
-          <div className="lake-max-editor-wrapper-content">
+          {engine && <Dialog engine={engine}/>}
+          {engine && <Toolbar {...Object.assign({hasMore: false}, toolbarOptions)} />}
+          <main className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
+              {engine && <Sidebar engine={engine}/>}
               <div className="lake-content-editor show-return-tag" ref={this.contentEditor}>
                 {header && <div className="lake-content-editor-extra">{header}</div>}
                 <Editor
@@ -122,14 +123,13 @@ class FullEditor extends React.Component {
                     },
                     editorOptions(),
                   )}
-                  pageSize="a4_row"
+                  pageSize="a4"
                 />
               </div>
             </div>
-            {engine && <Sidebar engine={engine} />}
-          </div>
+          </main>
         </div>
-      </div>
+      </section>
     );
   }
 }

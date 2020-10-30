@@ -25,7 +25,7 @@ class DropdownButton extends React.Component {
   }
 
   showDropdown = () => {
-    const { name, getActive } = this.props;
+    const {name, getActive} = this.props;
     let currentValue;
     if (name === 'alignment') {
       currentValue = getActive();
@@ -53,7 +53,7 @@ class DropdownButton extends React.Component {
 
   render() {
     const active = this.state.active;
-    const buttonProps = { ...this.props };
+    const buttonProps = {...this.props};
     delete buttonProps.onClick;
     delete buttonProps.active;
     return (
@@ -65,7 +65,7 @@ class DropdownButton extends React.Component {
           'lake-button-set-trigger-active': active,
         })}
         >
-          <Button {...Object.assign({}, { active }, buttonProps)} />
+          <Button {...Object.assign({}, {active}, buttonProps)} />
         </div>
         <Dropdown
           className={this.props.className}

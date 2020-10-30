@@ -2,10 +2,10 @@ import Engine from 'doc-engine/lib';
 import getSections from '../../config/section';
 
 const {
-  userAgent: { macos },
+  userAgent: {macos},
 } = Engine;
 export default function (section) {
-  const { engine, selection, command, locale } = section;
+  const {engine, selection, command, locale} = section;
   const plugins = ['file', 'image', 'label'];
   let sections = getSections(engine);
   sections = sections.filter((plugin) => {

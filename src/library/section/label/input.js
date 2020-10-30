@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from 'antd';
+import {Input} from 'antd';
 import 'antd/lib/input/style';
 import Engine from 'doc-engine/lib';
 import ColorPicker from '../../toolbar/color-picker';
@@ -17,8 +17,8 @@ class InputLabel extends React.Component {
   }
 
   render() {
-    const { colors, sectionValue: { label }, onFocus, onBlur, onPressEnter } = this.props;
-    const { activeColors } = this.state;
+    const {colors, sectionValue: {label}, onFocus, onBlur, onPressEnter} = this.props;
+    const {activeColors} = this.state;
 
     return (
       <div>

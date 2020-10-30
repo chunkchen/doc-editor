@@ -1,5 +1,5 @@
-import { post } from '@itellyou/itellyou-request';
-import { dataURLToImage } from './utils';
+import {post} from '@itellyou/itellyou-request';
+import {dataURLToImage} from './utils';
 
 /**
  * @fileOverview 编辑态
@@ -21,7 +21,7 @@ export default {
     this.imageContainer.show();
   },
   _normalizeValue() {
-    const { graphData, src } = this.value;
+    const {graphData, src} = this.value;
     if (!graphData && !src) {
       this.setValue(
         {
@@ -34,8 +34,8 @@ export default {
   },
   // 绑定编辑态事件
   _bindEditEvent() {
-    const { page, engine } = this;
-    this.graphEditor.on('aftercommandexecute', ({ command }) => {
+    const {page, engine} = this;
+    this.graphEditor.on('aftercommandexecute', ({command}) => {
       if (this.getChangeDataCommandNames().indexOf(command.name) !== -1) {
         this.isChanged = true;
         this.setValue(
@@ -76,7 +76,7 @@ export default {
             'Content-Type': undefined,
           },
           body: formData,
-        }).then(({ result, data, message }) => {
+        }).then(({result, data, message}) => {
           if (result) {
             this.setValue(
               {

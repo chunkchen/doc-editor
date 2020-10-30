@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
 import Resizer from './resizer';
-import { isBase64Image } from '../../utils/string';
+import {isBase64Image} from '../../utils/string';
 import ErrorTips from '../../tips/error';
 
 import Pswp from './pswp';
 
-const { userAgent: { chrome, firefox, mobile } } = Engine;
+const {userAgent: {chrome, firefox, mobile}} = Engine;
 const pswp = new Pswp();
 
 const errorTemplate = (data) => {
@@ -31,9 +31,9 @@ const convWebp = (src, isSupportWebp) => {
 };
 
 const getResizeSrc = (options) => {
-  const { maxWidth, data } = options;
-  let { src } = options;
-  const { width, originWidth, originHeight } = data;
+  const {maxWidth, data} = options;
+  let {src} = options;
+  const {width, originWidth, originHeight} = data;
   if (width && originWidth && originHeight && src.indexOf('x-oss-process=image/resize,') === -1 && originWidth < 3e4 && originHeight < 3e4) {
     let _width = parseInt(width);
     if (_width > maxWidth) {
@@ -58,8 +58,8 @@ const getResizeSrc = (options) => {
 };
 
 const template = (_ref) => {
-  const { data, readonly, maxWidth, onBeforeRenderImage } = _ref;
-  let { src } = _ref;
+  const {data, readonly, maxWidth, onBeforeRenderImage} = _ref;
+  let {src} = _ref;
   if (data.status === 'error') {
     return errorTemplate(data);
   }
@@ -158,8 +158,8 @@ class ImageNode {
     };
 
     this.getValue = () => {
-      const { width, height, src, originWidth, originHeight, display, align, angle, link, linkTarget, status } = this;
-      const { name, size } = this.config.value;
+      const {width, height, src, originWidth, originHeight, display, align, angle, link, linkTarget, status} = this;
+      const {name, size} = this.config.value;
       const newValue = {
         src,
         originWidth,

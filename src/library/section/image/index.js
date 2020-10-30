@@ -1,6 +1,6 @@
 import Engine from 'doc-engine/lib';
 import ImageNode from './image-node';
-import { isBase64Image } from '../../utils/string';
+import {isBase64Image} from '../../utils/string';
 import SectionBase from '../base';
 
 class Image extends SectionBase {

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from 'doc-engine/lib';
-import { EventEmitter2 } from 'eventemitter2';
+import {EventEmitter2} from 'eventemitter2';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default';
 import Zoom from './zoom';
 import './pswp.css';
 import 'photoswipe/dist/photoswipe.css';
 
-const { mobile } = Engine.userAgent;
+const {mobile} = Engine.userAgent;
 
 class Pswp extends EventEmitter2 {
   constructor(options) {
@@ -62,7 +62,7 @@ class Pswp extends EventEmitter2 {
   }
 
   hoverControllerFadeInAndOut() {
-    const { toolbarContainer, closeBtnContainer } = this;
+    const {toolbarContainer, closeBtnContainer} = this;
 
     toolbarContainer.on('mouseenter', () => {
       this.removeFadeOut(toolbarContainer, 'toolbarFadeInAndOut');
@@ -86,7 +86,7 @@ class Pswp extends EventEmitter2 {
   }
 
   removeFadeOut(node, id) {
-    const { timeouts } = this;
+    const {timeouts} = this;
     if (timeouts[id]) {
       clearTimeout(timeouts[id]);
     }
@@ -94,7 +94,7 @@ class Pswp extends EventEmitter2 {
   }
 
   fadeOut(node, id) {
-    const { timeouts } = this;
+    const {timeouts} = this;
     if (timeouts[id]) {
       clearTimeout(timeouts[id]);
     }
@@ -104,9 +104,9 @@ class Pswp extends EventEmitter2 {
   }
 
   bindClickEvent() {
-    const { closeBtnContainer } = this;
+    const {closeBtnContainer} = this;
     this.root.on('click', (event) => {
-      let { target } = event;
+      let {target} = event;
       target = Engine.$(target);
       if (target.hasClass('pswp__img')) {
         setTimeout(() => {
@@ -132,7 +132,7 @@ class Pswp extends EventEmitter2 {
   }
 
   renderCounter() {
-    const { pswp } = this;
+    const {pswp} = this;
     this.toolbarContainer.find('.lake-pswp-counter').html(''.concat(pswp.getCurrentIndex() + 1, ' / ').concat(pswp.items.length));
   }
 
@@ -141,7 +141,7 @@ class Pswp extends EventEmitter2 {
   }
 
   zoomTo(zoom) {
-    const { pswp } = this;
+    const {pswp} = this;
     pswp.zoomTo(zoom, {
       x: pswp.viewportSize.x / 2,
       y: pswp.viewportSize.y / 2,
@@ -193,7 +193,7 @@ class Pswp extends EventEmitter2 {
   }
 
   updateCursor() {
-    const { root } = this;
+    const {root} = this;
     const currentZoomLevel = this.getCurrentZoomLevel();
     const initialZoomLevel = this.getInitialZoomLevel();
     if (currentZoomLevel === 1) {
@@ -231,7 +231,7 @@ class Pswp extends EventEmitter2 {
   }
 
   bindPswpEvent() {
-    const { pswp } = this;
+    const {pswp} = this;
     pswp.listen('afterChange', () => {
       this.afterChange();
     });
@@ -262,7 +262,7 @@ class Pswp extends EventEmitter2 {
 
   open(items, index) {
     if (this.pswpDestroy === true) {
-      const { root } = this;
+      const {root} = this;
       const pswp = new PhotoSwipe(root[0], PhotoSwipeUI, items, Object.assign({
         index,
       }, this.options.pswpOptions));

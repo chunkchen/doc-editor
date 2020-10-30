@@ -12,7 +12,7 @@ const language = {
 
 class MiniEditor extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.onEngineReady = (engine) => {
       this.engine = engine;
@@ -21,7 +21,7 @@ class MiniEditor extends React.Component {
           engine,
         },
         () => {
-          const { image, file } = engine.options;
+          const {image, file} = engine.options;
           helper(engine, 'uploader', {
             actions: {
               image: image ? image.action : '',
@@ -59,8 +59,8 @@ class MiniEditor extends React.Component {
   }
 
   render() {
-    const { engine, toolbar } = this.state;
-    const { type } = this.props;
+    const {engine, toolbar} = this.state;
+    const {type} = this.props;
     const toolbarOptions = {
       type,
       engine,
@@ -70,13 +70,13 @@ class MiniEditor extends React.Component {
 
     const editorOptions = (function (props) {
       const options = Object.assign({}, props);
-      const { onLoad, header, toolbar, ...editorOptions } = options;
+      const {onLoad, header, toolbar, ...editorOptions} = options;
       return editorOptions;
     }(this.props));
 
     return (
       <div className="lake-editor lake-mini-editor">
-        {engine && <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions)} />}
+        {engine && <Toolbar {...Object.assign({hasMore: true}, toolbarOptions)} />}
         <div className="lake-content-editor" ref={this.contentEditor}>
           <Editor
             {...Object.assign(

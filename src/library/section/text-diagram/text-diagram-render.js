@@ -1,5 +1,5 @@
 import React from 'react';
-import { preview } from '../../utils/image-generator';
+import {preview} from '../../utils/image-generator';
 
 class TextDiagramViewer extends React.Component {
   state = {
@@ -50,9 +50,9 @@ class TextDiagramViewer extends React.Component {
   }
 
   render() {
-    let { type, className, onBeforeRenderImage } = this.props;
+    let {type, className, onBeforeRenderImage} = this.props;
     className = className === undefined ? '' : className;
-    const { url, error } = this.state;
+    const {url, error} = this.state;
     const src = onBeforeRenderImage(url);
     const children = error !== null ? <pre>{error}</pre>
       : (src ? (
@@ -64,7 +64,7 @@ class TextDiagramViewer extends React.Component {
             e.stopPropagation();
           }}
         />
-      ) : <span className="lake-icon lake-icon-loading" />);
+      ) : <span className="lake-icon lake-icon-loading"/>);
 
     return (
       <div

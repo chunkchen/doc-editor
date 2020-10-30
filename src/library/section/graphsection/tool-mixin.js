@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Engine from 'doc-engine/lib';
-import { Dropdown, Menu } from 'antd';
+import {Dropdown, Menu} from 'antd';
 import 'antd/lib/menu/style';
 import 'antd/lib/dropdown/style';
 
-const { $ } = Engine;
+const {$} = Engine;
 /**
  * @fileOverview 图Section工具
  */

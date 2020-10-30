@@ -75,7 +75,7 @@ class Label extends SectionBase {
   }
 
   updateLabel() {
-    const { colorIndex, label } = this.value;
+    const {colorIndex, label} = this.value;
     const color = backgroundColors[colorIndex][1];
     let text = label;
     let opacity = 1;
@@ -100,7 +100,7 @@ class Label extends SectionBase {
   }
 
   renderEditor() {
-    const { container, value, engine, sectionRoot } = this;
+    const {container, value, engine, sectionRoot} = this;
     const editorContainer = Engine.$('<div class="lake-section-label-editor"></div>');
     this.editorContainer = editorContainer;
     container.append(editorContainer);

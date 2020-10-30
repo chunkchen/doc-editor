@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
+import ReactDOM, {unmountComponentAtNode} from 'react-dom';
 import Engine from 'doc-engine/lib';
-import keymaster, { deleteScope, setScope, unbind } from 'keymaster';
+import keymaster, {deleteScope, setScope, unbind} from 'keymaster';
 import ToolbarCollapse from '../../toolbar/collapse';
 import toolbarConfig from '../../config/toolbar';
 import SectionBase from '../base';
@@ -77,7 +77,7 @@ class SectionSelect extends SectionBase {
             if (!items.find((dataItems) => {
               return dataItems.name === item.name;
             })) {
-              items.push({ ...item });
+              items.push({...item});
             }
           }
         });
@@ -216,7 +216,7 @@ class SectionSelect extends SectionBase {
     if (this.readonly) {
       return;
     }
-    const { toolbar } = _engine.options;
+    const {toolbar} = _engine.options;
     const toolbarConfigMap = {};
     // let data = []
     toolbarConfig(_engine).forEach((row) => {
