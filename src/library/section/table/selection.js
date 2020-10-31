@@ -30,18 +30,19 @@ class Selection extends EventEmitter2 {
       if (!td || !td.tagName || td.tagName.toLowerCase() !== 'td') {
         return;
       }
-
       const table = this.tableModel.table;
       const tr = td.parentNode;
       const rowSpan = td.rowSpan;
       const colSpan = td.colSpan;
       const row = tr.rowIndex;
-      let col;
+      // 找到鼠标所在单元格 td 的列索引 col
+      let col = 0;
       table[row].forEach((tdModel, i) => {
         if (tdModel.element === td) {
           col = i;
         }
       });
+      console.log(col)
       const row2 = row + rowSpan - 1;
       const col2 = col + colSpan - 1;
       const hoverArea = {
@@ -105,17 +106,22 @@ class Selection extends EventEmitter2 {
         default:
           break;
       }
-
       if (this.base_area) {
         this.area = this.getAdjustArea(this.base_area, hoverArea);
       }
 
       if (this.col_base !== undefined) {
+        if (this.area.col === this.col_base && this.area.col2 === col) {
+          return
+        }
         this.area.col = this.col_base;
         this.area.col2 = col;
       }
 
       if (this.row_base !== undefined) {
+        if (this.area.row === this.row_base && this.area.row2 === row) {
+          return
+        }
         this.area.row = this.row_base;
         this.area.row2 = row;
       }
@@ -240,7 +246,6 @@ class Selection extends EventEmitter2 {
 
     this.selectCol = (index) => {
       const {tableModel} = this;
-
       this.area = {
         row: 0,
         row2: tableModel.rows - 1,
@@ -429,7 +434,7 @@ class Selection extends EventEmitter2 {
     };
 
     this.renderActiveBox = () => {
-      this.hideSubEditor();
+      // this.hideSubEditor();
       this.reRenderActiveBox();
       // 这里需要每次都触发，否则头部不会选中，性能的优化放到后续操作中
       this.emit('select');
@@ -460,43 +465,35 @@ class Selection extends EventEmitter2 {
         top = rowBars[rowMin].offsetTop;
         width = colBars[colMax].offsetLeft - left + colBars[colMax].offsetWidth;
         height = rowBars[rowMax].offsetTop - top + rowBars[rowMax].offsetHeight;
-
-        /** const tdLeft = table[0][col_min].element.offsetLeft
-         const tdTop = table[row_min][0].element.offsetTop
-
-         left = tdLeft
-         top = tdTop
-
-         const tdWidth = table[0][col_max].element.offsetLeft - left + table[0][col_max].element.offsetWidth
-         const tdHeight = table[row_max][0].element.offsetTop - top + table[row_max][0].element.offsetHeight
-
-         width = tdWidth
-         height = tdHeight* */
       }
-
       this.showActiveBox(left, top, height, width, actionPreview);
       this.areaWidth = width;
       this.areaHeight = height;
       this.areaLeft = left;
-      this.areaTop = top;
-      this.reRenderSubEditor();
+      // this.reRenderSubEditor();
       this.td = this.single ? table[rowMin][colMin].element : null;
+      console.log(this.td)
     };
 
     this.showActiveBox = (left, top, height, width, actionPreview) => {
       const {activeBox, hideTextarea} = this;
-      const l = activeBox.find('.l');
-      const r = activeBox.find('.r');
+      // 4 边 上下左右
       const t = activeBox.find('.t');
       const b = activeBox.find('.b');
+      const l = activeBox.find('.l');
+      const r = activeBox.find('.r');
+      // 遮罩
       const mask = activeBox.find('.mask');
       const maskCol = activeBox.find('.mask-col');
       const maskRow = activeBox.find('.mask-row');
+      // 东南角 点
       const se = activeBox.find('.se');
+      // 4 点 上下左右
       const n = activeBox.find('.n');
       const s = activeBox.find('.s');
       const w = activeBox.find('.w');
       const e = activeBox.find('.e');
+
       activeBox.removeClass('col');
       activeBox.removeClass('row');
       activeBox.removeClass('total');
@@ -522,7 +519,6 @@ class Selection extends EventEmitter2 {
       if (actionPreview === 'removeRow') {
         activeBox.addClass('preview-mask-row');
       }
-      const table = this.tableModel.table;
       l.css('height', ''.concat(height, 'px'));
       r.css('height', ''.concat(height + 1, 'px'));
       r.css('left', ''.concat(width, 'px'));
@@ -542,12 +538,10 @@ class Selection extends EventEmitter2 {
       mask.css('width', ''.concat(width, 'px'));
       mask.css('height', ''.concat(height, 'px'));
       maskCol.css('width', ''.concat(width + 1, 'px'));
-      // maskCol.css('height', "".concat(this.rowsHeader[0].offsetHeight - 33, "px"))
-      maskCol.css('height', ''.concat(table[0][0].element.offsetHeight - 33, 'px'));
+      maskCol.css('height', ''.concat(height, 'px'));
       maskCol.css('top', '-'.concat(top, 'px'));
       maskRow.css('height', ''.concat(height + 1, 'px'));
-      // maskRow.css('width', "".concat(this.colsHeader[0].offsetWidth, "px"))
-      maskRow.css('width', ''.concat(table[0][0].element.offsetWidth, 'px'));
+      maskRow.css('width', ''.concat(width, 'px'));
       maskRow.css('left', '-'.concat(left, 'px'));
       activeBox.css('left', ''.concat(left, 'px'));
       activeBox.css('top', ''.concat(top, 'px'));
@@ -605,7 +599,6 @@ class Selection extends EventEmitter2 {
       if (Keymaster.shift) {
         mode = 'shift';
       }
-
       if (e.button === 2) {
         mode = 'contextmenu';
       }
@@ -679,6 +672,7 @@ class Selection extends EventEmitter2 {
         .off('mousemove', this.dragToSelectCell);
     };
 
+    // 鼠标拖动，改变当前选取
     this.dragToSelectCell = (e) => {
       if (!this.dragSelecting) return;
       if (this.timer) clearTimeout(this.timer);
@@ -689,7 +683,7 @@ class Selection extends EventEmitter2 {
       }
       if (dragoverTd[0] !== this.dragoverTd) {
         this.selectCell(dragoverTd[0], this.dragDirection);
-        this.dragoverTd = dragoverTd[0];
+        this.dragoverTd = dragoverTd[0]
       }
     };
 
@@ -731,15 +725,15 @@ class Selection extends EventEmitter2 {
     this.normalizeArea = () => {
       if (!this.area) return;
       const {row, col, row2, col2} = this.area;
-      const row_min = Math.min(row, row2);
-      const row_max = Math.max(row, row2);
-      const col_min = Math.min(col, col2);
-      const col_max = Math.max(col, col2);
+      const rowMin = Math.min(row, row2);
+      const rowMax = Math.max(row, row2);
+      const colMin = Math.min(col, col2);
+      const colMax = Math.max(col, col2);
       return {
-        rowMin: row_min,
-        rowMax: row_max,
-        colMin: col_min,
-        colMax: col_max,
+        rowMin,
+        rowMax,
+        colMin,
+        colMax,
       };
     };
 
@@ -933,11 +927,16 @@ class Selection extends EventEmitter2 {
       this.selectCell(td);
     };
 
+    // 遮罩层鼠标移动事件
     this.onMouseMoveMask = (e) => {
       if (!this.dragSelecting) return;
       const {offsetX, offsetY} = e;
       const td = this.getTdByMaskXY(offsetX, offsetY);
-      this.selectCell(td, this.dragDirection);
+      if (this.dragoverTd !== td) {
+        console.log('mouse move...')
+        this.selectCell(td, this.dragDirection);
+        this.dragoverTd = td
+      }
     };
 
     this.getTdByMaskXY = (x, y) => {
@@ -949,21 +948,15 @@ class Selection extends EventEmitter2 {
 
       let row = rowMin;
       let col = colMin;
-      const w1 = colBars[col].offsetWidth;
-      const h1 = rowBars[row].offsetHeight;
-      console.log(w1, h1);
-      let w = tableModel.table[0][col].element.offsetWidth;
-      let h = tableModel.table[row][0].element.offsetHeight;
+      let w = colBars[col].offsetWidth;
+      let h = rowBars[row].offsetHeight;
       while (w < x) {
         col++;
-        // w += colBars[col].offsetWidth
-        w += tableModel.table[0][col].offsetWidth;
+        w += colBars[col].offsetWidth
       }
-
       while (h < y) {
         row++;
-        // h += rowBars[row].offsetHeight
-        h += tableModel.table[row][0].element.offsetHeight;
+        h += rowBars[row].offsetHeight
       }
       let td = tableModel.table[row][col];
       if (td.isEmpty) {

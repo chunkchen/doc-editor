@@ -442,6 +442,11 @@ const getToolbarConfig = (engine) => {
       className: 'lake-button-fontsize',
       data: fontsizeArray,
       getActive: () => {
+        const tag = engine.command.queryState('heading') || 'p';
+        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock';
+        if(/^h\d$/.test(tag) || isCodeblock) {
+          return '11'
+        }
         return engine.command.queryState('fontsize') || '11';
       },
       getDisabled: () => {

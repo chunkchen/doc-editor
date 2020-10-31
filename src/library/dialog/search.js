@@ -57,7 +57,6 @@ class DialogSearch extends React.Component {
     const locale = engine.locale.search;
     const {searchValue, replacement} = this.state;
     const count = search.count();
-    console.log(count);
     const searchInput = (
       <p style={{marginBottom: '12px'}}>
         <Input

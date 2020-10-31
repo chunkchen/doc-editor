@@ -8,8 +8,8 @@ import LocalDoc from './localdoc';
 import Video from './video';
 
 class Sidebar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.extends = () => {
       this.props.engine.sidebar = {
         set: this.set,
@@ -77,6 +77,7 @@ class Sidebar extends React.Component {
         className={classnames('lake-sidebar', 'lake-sidebar-active', 'lake-common-sidebar', className)}
         data-lake-element="sidebar"
         ref={e => this.current = e}
+        style={{height: window.innerHeight - 64}}
       >
         <div className="lake-sidebar-title">
           {title}

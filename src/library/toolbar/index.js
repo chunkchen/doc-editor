@@ -12,8 +12,8 @@ class Toolbar extends React.Component {
     toolbarState: {},
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleH5Scroll = () => {
       const {engine, mobile} = this.props;
       if (mobile) {
@@ -126,6 +126,7 @@ class Toolbar extends React.Component {
 
   componentDidMount() {
     const {toolbar, engine} = this.props;
+    // 初始化 工具栏
     this.setToolbar(toolbar, toolbarConfig(engine));
     engine.toolbar = {
       set: this.set,
@@ -175,7 +176,6 @@ class Toolbar extends React.Component {
       toolbarState[item.name] = toolbarConfigMap[item.name];
       this.executeGetter(toolbarState[item.name]);
     };
-
     nameList.forEach((group) => {
       group.forEach((item) => {
         if (typeof item === 'object') {
@@ -309,7 +309,11 @@ class Toolbar extends React.Component {
         modified = true;
       }
       item.disabled = disabled;
+      if (disabled) {
+        return modified;
+      }
     }
+
     return modified;
   }
 
