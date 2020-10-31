@@ -147,7 +147,7 @@ FullEditor.defaultProps = {
     ['alignment'],
     ['unorderedlist', 'orderedlist', 'tasklist', 'indent-list'],
     ['link', 'quote', 'hr'],
-    ['search', 'translate', 'toc'],
+    ['search', 'toc'],
   ],
   onLoad() {
   },
