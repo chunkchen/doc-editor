@@ -1,5 +1,3 @@
-const rs = require('../routerConfig');
-
 /**
  * 递归获取路由名字 数组返回
  * @param paths
@@ -50,22 +48,4 @@ export function getColorByWord(word) {
   }
   const index = number % 20;
   return colorList[index];
-}
-
-/**
- * 根据路径获取名字列表
- * @param pathname
- * @returns {[]}
- */
-export function getBreadNamesByPathname(pathname) {
-  let result = [];
-  if (!pathname || pathname === '/') {
-    return ['首页'];
-  }
-  const paths = pathname.split('/').slice(1);
-  console.log(paths);
-  if (paths.length > 0) {
-    result = result.concat(recursiveGetName(paths, rs.routerConfig));
-  }
-  return result;
 }

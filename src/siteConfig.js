@@ -1,5 +1,5 @@
 const siteConfig = {
-  siteName: 'React-Basic-template',
+  siteName: 'Doc-Editor',
 };
 
 export { siteConfig };
