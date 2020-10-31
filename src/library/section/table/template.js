@@ -75,8 +75,8 @@ export default function (section) {
       const colgroup = '<colgroup>'.concat(col, '</colgroup>');
 
       // 列头
-      const colsHeader = '       <div class="'
-        .concat(COLS_HEADER_CLASS, '">         ')
+      const colsHeader = '<div class="'
+        .concat(COLS_HEADER_CLASS, '">')
         .concat('<div class="'
           .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true"> '
             + '<div class="table-col-header-btns">'
@@ -87,18 +87,15 @@ export default function (section) {
             + '       <span class="lake-icon lake-icon-plus"/>'
             + '   </a>'
             + '</div>'
-            + '<div class="col-dragger">'
-            + '   <span class="lake-icon lake-icon-drag"/>'
-            + '   <p class="drag-info"/>'
-            + '</div>'
+            + '<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><p class="drag-info"></p></div>'
             + '<div class="')
           .concat(COLS_HEADER_TRIGGER_CLASS, '"></div></div>')
           .repeat(cols), '')
         .concat('</div>');
 
       // 行头
-      const rowsHeader = '       <div class="'
-        .concat(ROWS_HEADER_CLASS, '">         ')
+      const rowsHeader = '<div class="'
+        .concat(ROWS_HEADER_CLASS, '">')
         .concat('<div class="'
           .concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">'
             + '<div class="table-row-header-btns">\n'
@@ -109,10 +106,7 @@ export default function (section) {
             + '       <span class="lake-icon lake-icon-plus"/>'
             + '    </a>'
             + '</div>          '
-            + '<div class="row-dragger">   '
-            + '    <span class="lake-icon lake-icon-drag"/>'
-            + '    <span class="drag-info"/>'
-            + '</div>'
+            + '<div class="row-dragger"> <span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div>'
             + '<div class="')
           .concat(ROWS_HEADER_TRIGGER_CLASS, '"></div></div>')
           .repeat(rows), ' ')
