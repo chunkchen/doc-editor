@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import Engine from '../editor/engine';
 
 class TocSidebar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.handleClick = (e, id) => {
       const engine = this.props.engine;

@@ -77,32 +77,35 @@ class Sidebar extends React.Component {
         className={classnames('lake-sidebar', 'lake-sidebar-active', 'lake-common-sidebar', className)}
         data-lake-element="sidebar"
         ref={e => this.current = e}
-        style={{height: window.innerHeight - 64}}
       >
-        <div className="lake-sidebar-title">
-          {title}
-          {
-            showCloseBtn !== false
-            && (
-              <div
-                className="lake-sidebar-close"
-                onClick={this.close}
-              >
-                <span className="lake-icon lake-icon-close"/>
-              </div>
-            )
-          }
+        <div className="lake-sidebar-wrapper">
+          <div className="lake-sidebar-title">
+            {title}
+            {
+              showCloseBtn !== false
+              && (
+                <div
+                  className="lake-sidebar-close"
+                  onClick={this.close}
+                >
+                  <span className="lake-icon lake-icon-close"/>
+                </div>
+              )
+            }
+          </div>
+          <div
+            className="lake-sidebar-content"
+            ref={this.contentNode}
+            style={{height: window.innerHeight - 124}}
+          >
+            {name === 'toc' && <Toc {...contentProps} />}
+            {name === 'image' && <Image {...contentProps} />}
+            {name === 'translate' && <Translate {...contentProps} />}
+            {name === 'localdoc' && <LocalDoc {...contentProps} />}
+            {name === 'video' && <Video {...contentProps} />}
+          </div>
         </div>
-        <div
-          className="lake-sidebar-content"
-          ref={this.contentNode}
-        >
-          {name === 'toc' && <Toc {...contentProps} />}
-          {name === 'image' && <Image {...contentProps} />}
-          {name === 'translate' && <Translate {...contentProps} />}
-          {name === 'localdoc' && <LocalDoc {...contentProps} />}
-          {name === 'video' && <Video {...contentProps} />}
-        </div>
+
       </div>
     );
   }
