@@ -13,7 +13,7 @@ const locale = {
   en: {
     hereIsVideo: 'Here is the video, click on the link to view:',
     hereIsOnlineDoc: 'Here is online doc section, click on the link to view:',
-    hereIsLockText: 'Here is the itellyou lock text section, click on the link to view:',
+    hereIsLockText: 'Here is the lake lock text section, click on the link to view:',
   },
 }[window.appData && window.appData.locale !== 'zh-cn' ? 'en' : 'zh-cn'];
 

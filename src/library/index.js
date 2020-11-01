@@ -12,7 +12,7 @@ import WordExportParser from './parser/word';
 import PdfExportParser from './parser/pdf';
 import DoNothingExportParser from './parser/do-nothing';
 import {DocVersion} from './utils/string';
-import htmlToITellYou from './parser/itellyou';
+import htmlToLake from './parser/lake';
 import './index.less';
 
 const HotKeys = hotkey().map((item) => {
@@ -41,6 +41,6 @@ export {
   WordExportParser,
   DoNothingExportParser,
   DocVersion,
-  htmlToITellYou,
+  htmlToLake,
   PdfExportParser,
 };

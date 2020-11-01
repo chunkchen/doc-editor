@@ -102,7 +102,7 @@ export const isBase64Image = (url) => {
 };
 
 export const isRemoteImage = (url) => {
-  return !/^((http|https):\/\/)?[-\w\d]+\.itellyou\.com/.test(url || '');
+  return !/^((http|https):\/\/)?[-\w\d]+\.lake\.com/.test(url || '');
 };
 
 export const getPluginName = (name) => {

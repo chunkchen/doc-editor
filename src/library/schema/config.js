@@ -10,7 +10,7 @@ export default [
   },
   {
     span: {
-      class: /^lake-fontsize-\d+$|itellyou\\-section\\-[\w\\-]{1,100}/,
+      class: /^lake-fontsize-\d+$|lake\\-section\\-[\w\\-]{1,100}/,
       style: {
         color: '@color',
         'background-color': '@color',

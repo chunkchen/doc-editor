@@ -9,7 +9,7 @@ import IFrameHelper from '../helper/iframe';
 import {getDocVersion} from '../utils/string';
 import Outline from '../utils/outline';
 
-const linkDomain = ['itellyou.com'];
+const linkDomain = ['lake.com'];
 
 const language = {
   en: lang_en,
