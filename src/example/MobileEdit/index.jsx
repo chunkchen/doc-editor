@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Container from '../../components/Container';
-import { FullEditor } from '../../library';
+import { MobileEditor } from '../../library';
 
 import tempContent from './tempContent';
 
-export default class BlankPage extends Component {
-  static displayName = 'BlankPage';
+export default class MobileEdit extends Component {
+  static displayName = 'MobileEdit';
 
   cropImgRef = undefined
 
@@ -36,16 +35,14 @@ export default class BlankPage extends Component {
   render() {
     const { content } = this.state;
     return (
-      <Container mode="full">
-        <FullEditor
-          value={content}
-          defaultValue={content}
-          onLoad={this.onEditorLoaded}
-          onChange={this.onEditorChange}
-          onSave={this.onEditorSave}
-          ot={false}
-        />
-      </Container>
+      <MobileEditor
+        value={content}
+        defaultValue={content}
+        onLoad={this.onEditorLoaded}
+        onChange={this.onEditorChange}
+        onSave={this.onEditorSave}
+        ot={false}
+      />
     );
   }
 }

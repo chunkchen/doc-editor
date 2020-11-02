@@ -1,10 +1,7 @@
-import FullEdit from './pages/FullEdit';
-import MiniEdit from './pages/MiniEdit';
-import MobileEdit from './pages/MobileEdit';
-import InlineEdit from './pages/InlineEdit';
-import NoAuth from './components/Exception/403';
-import NotFound from './components/Exception/404';
-import ServerError from './components/Exception/500';
+import FullEdit from './example/FullEdit';
+import MiniEdit from './example/MiniEdit';
+import MobileEdit from './example/MobileEdit';
+import InlineEdit from './example/InlineEdit';
 
 const routerConfig = [
   {
@@ -35,22 +32,4 @@ const routerConfig = [
   },
 ];
 
-const exceptionRouterConfig = [
-  {
-    path: '/403',
-    name: '没有权限',
-    component: NoAuth,
-  },
-  {
-    path: '/404',
-    name: '页面不存在',
-    component: NotFound,
-  },
-  {
-    path: '/500',
-    name: '服务器异常',
-    component: ServerError,
-  },
-];
-
-export { routerConfig, exceptionRouterConfig };
+export default routerConfig;

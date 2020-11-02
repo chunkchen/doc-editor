@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Container from '../../components/Container';
-import { MobileEditor } from '../../library';
+import { LineEditor } from '../../library';
 
 import tempContent from './tempContent';
 
-export default class MobileEdit extends Component {
-  static displayName = 'MobileEdit';
+export default class InlineEdit extends Component {
+  static displayName = 'InlineEdit';
 
   cropImgRef = undefined
 
@@ -36,16 +35,14 @@ export default class MobileEdit extends Component {
   render() {
     const { content } = this.state;
     return (
-      <Container mode="full">
-        <MobileEditor
-          value={content}
-          defaultValue={content}
-          onLoad={this.onEditorLoaded}
-          onChange={this.onEditorChange}
-          onSave={this.onEditorSave}
-          ot={false}
-        />
-      </Container>
+      <LineEditor
+        value={content}
+        defaultValue={content}
+        onLoad={this.onEditorLoaded}
+        onChange={this.onEditorChange}
+        onSave={this.onEditorSave}
+        ot={false}
+      />
     );
   }
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Container from '../../components/Container';
-import { LineEditor } from '../../library';
+import { FullEditor } from '../../library';
 
 import tempContent from './tempContent';
 
-export default class InlineEdit extends Component {
-  static displayName = 'InlineEdit';
+export default class BlankPage extends Component {
+  static displayName = 'BlankPage';
 
   cropImgRef = undefined
 
@@ -36,16 +35,14 @@ export default class InlineEdit extends Component {
   render() {
     const { content } = this.state;
     return (
-      <Container mode="full">
-        <LineEditor
-          value={content}
-          defaultValue={content}
-          onLoad={this.onEditorLoaded}
-          onChange={this.onEditorChange}
-          onSave={this.onEditorSave}
-          ot={false}
-        />
-      </Container>
+      <FullEditor
+        value={content}
+        defaultValue={content}
+        onLoad={this.onEditorLoaded}
+        onChange={this.onEditorChange}
+        onSave={this.onEditorSave}
+        ot={false}
+      />
     );
   }
 }

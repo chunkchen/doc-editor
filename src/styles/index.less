@@ -1,6 +1,6 @@
-@import "./drawer";
-
-@import "./global.less";
+html, body, #root {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -13,53 +13,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// iconfont
-.icon {
-  width: 1.1em;
-  height: 1.1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
-
-#root {
-  height: 100%;
-}
-
 #frame-all {
   background-position: center 0;
   background-repeat: no-repeat;
 }
 
+open {
+  background: #9bea9b;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
   monospace;
-}
-
-.mini-btn {
-  color: #1890FF;
-  text-decoration: none;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-  transition: color 0.3s;
-  padding: 5px;
-  margin: 0 5px;
-
-  &:hover {
-    color: #137fff;
-  }
-}
-
-.btn {
-  color: #1890FF;
-  text-decoration: none;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #137fff;
-  }
 }

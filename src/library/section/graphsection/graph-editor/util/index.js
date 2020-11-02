@@ -2,7 +2,7 @@
  * @fileOverview base util
  */
 import G6 from '@antv/g6';
-import Palettes from 'ant-design-palettes';
+import * as Palettes from '@ant-design/colors';
 
 const keyCodeMap = {
   whitespace: {

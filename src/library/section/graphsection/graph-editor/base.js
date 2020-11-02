@@ -1,4 +1,4 @@
-import EventEmitter from 'wolfy87-eventemitter';
+import EventEmitter from 'eventemitter2';
 import Util from './util';
 
 class Base extends EventEmitter {

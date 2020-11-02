@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Container from '../../components/Container';
 import { MiniEditor } from '../../library';
 
 import tempContent from './tempContent';
@@ -36,16 +35,14 @@ export default class MiniEdit extends Component {
   render() {
     const { content } = this.state;
     return (
-      <Container mode="full">
-        <MiniEditor
-          value={content}
-          defaultValue={content}
-          onLoad={this.onEditorLoaded}
-          onChange={this.onEditorChange}
-          onSave={this.onEditorSave}
-          ot={false}
-        />
-      </Container>
+      <MiniEditor
+        value={content}
+        defaultValue={content}
+        onLoad={this.onEditorLoaded}
+        onChange={this.onEditorChange}
+        onSave={this.onEditorSave}
+        ot={false}
+      />
     );
   }
 }
