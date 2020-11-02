@@ -1,6 +1,11 @@
 import '@hicooper/doc-engine/lib/index.css';
 import hotkey from './config/hotkey';
 import Engine from './editor/engine';
+import Editor from './editor/editor';
+import Sidebar from './sidebar';
+import Toolbar from './toolbar';
+import Dialog from './dialog';
+import helper from './helper';
 import FullEditor from './editor/full';
 import MiniEditor from './editor/mini';
 import MobileEditor from './editor/mobile';
@@ -29,9 +34,14 @@ export default FullEditor;
 
 export {
   Engine,
+  Editor,
   FullEditor,
   MiniEditor,
   MobileEditor,
+  Sidebar,
+  Toolbar,
+  Dialog,
+  helper,
   LineEditor,
   ContentView,
   HotKeys,
