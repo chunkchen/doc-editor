@@ -2,7 +2,7 @@
   "name": "@hicooper/doc-editor",
   "description": "doc editor",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "dependencies": {
     "@ant-design/colors": "^4.0.5",
