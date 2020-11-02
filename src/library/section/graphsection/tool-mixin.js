@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {Dropdown, Menu} from 'antd';
 import 'antd/lib/menu/style';
 import 'antd/lib/dropdown/style';

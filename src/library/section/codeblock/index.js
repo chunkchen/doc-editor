@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import CodeMirror from 'codemirror';
 import debounce from 'lodash/debounce';
 import {message} from 'antd';

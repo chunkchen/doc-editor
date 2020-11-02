@@ -1,4 +1,4 @@
-import {macos} from 'doc-engine/lib/utils/user-agent';
+import {macos} from '@hicooper/doc-engine/lib/utils/user-agent';
 
 const CTRL = macos ? '\u2318' : 'Ctrl';
 const backgroundOrColor = {

@@ -3,7 +3,7 @@ import {Button, notification} from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/notification/style';
 import {post} from '@itellyou/itellyou-request';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {isMarkdown} from '../utils/string';
 
 notification.config({

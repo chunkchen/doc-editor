@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {Modal} from 'antd';
 import Embed from '../embed/embed';
 import GraphView from './graph-view';

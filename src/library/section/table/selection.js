@@ -1,6 +1,6 @@
 import {EventEmitter2} from 'eventemitter2';
 import Keymaster from 'keymaster';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {copyCss, getTableModel} from './utils';
 
 const {$} = Engine;

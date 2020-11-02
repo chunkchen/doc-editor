@@ -1,5 +1,5 @@
 import {EventEmitter2} from 'eventemitter2';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 
 const {NodeUtils, $} = Engine;

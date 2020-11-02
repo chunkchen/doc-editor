@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import localeEn from './locale/en';
 import localeZhCn from './locale/zh-cn';
 import toolbar from './toolbar';

@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {MODE_NAME_MAP} from '../section/codeblock';
 
 const {ChangeUtils, NodeUtils, StringUtils, HTMLParser, $} = Engine;

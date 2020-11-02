@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import Outline from '../utils/outline';
 import {addSidebarCommand} from '../utils/command';
 

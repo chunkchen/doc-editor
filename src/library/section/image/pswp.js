@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {EventEmitter2} from 'eventemitter2';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default';

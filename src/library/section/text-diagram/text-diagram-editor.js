@@ -8,7 +8,7 @@ import 'antd/lib/icon/style';
 import 'antd/lib/menu/style';
 import 'antd/lib/select/style';
 import 'antd/lib/tooltip/style';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import Icon, {DownOutlined} from '@ant-design/icons';
 import Template from './template';
 import constants from './constants';

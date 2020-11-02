@@ -1,5 +1,5 @@
 import React from 'react';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {Tooltip} from 'antd';
 import 'antd/lib/tooltip/style';
 

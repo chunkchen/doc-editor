@@ -1,5 +1,5 @@
 import {post} from '@itellyou/itellyou-request';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 
 class Transfer {
   constructor(options) {

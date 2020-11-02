@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import schema_config from '../schema/config';
 import lang_cn from '../lang/zh-cn';
 import {addMentionAttrs} from '../utils/string';

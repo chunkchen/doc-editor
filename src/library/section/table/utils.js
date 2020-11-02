@@ -1,6 +1,6 @@
 import isInteger from 'lodash/isInteger';
 import isObject from 'lodash/isObject';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 
 const {$, StringUtils, NodeUtils} = Engine;
 

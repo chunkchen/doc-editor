@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {loadImage} from '../../utils/dom';
 
 const URL = window.URL || window.webkitURL;

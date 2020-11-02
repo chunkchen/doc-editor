@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import SectionMath from '../section/math';
 import SectionSelect from '../section/sectionselect';
 import SectionImage from '../section/image';

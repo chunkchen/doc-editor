@@ -1,7 +1,7 @@
 import {EventEmitter2} from 'eventemitter2';
 import isArray from 'lodash/isArray';
 import isNumber from 'lodash/isNumber';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {copyCss, copyHTML, copyTo, getCopyData, getTableModel, normalizeTable, trimBlankSpan} from './utils';
 
 const {HTMLParser, StringUtils, ChangeUtils, ClipboardUtils, TextParser, $} = Engine;

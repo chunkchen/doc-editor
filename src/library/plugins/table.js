@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {getTableModel, normalizeTable, unWrapperTableBI} from '../section/table/utils';
 import schema from '../section/table/schema';
 

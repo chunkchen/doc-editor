@@ -1,5 +1,5 @@
 import Filesize from 'filesize';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 import locale_en from './locale/en';
 import locale_zh_cn from './locale/zh-cn';

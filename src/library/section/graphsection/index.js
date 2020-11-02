@@ -1,7 +1,7 @@
 /**
  * @fileOverview 图Section基类 - 用于拓展各式各样的Section
  */
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import GraphEditor from './graph-editor';
 import ToolMixin from './tool-mixin';
 import ReadMixin from './read-mixin';

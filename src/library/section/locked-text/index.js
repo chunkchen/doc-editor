@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 import lang from './lang';
 import SectionBase from '../base';

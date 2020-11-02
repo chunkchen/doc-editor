@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from 'antd';
 import 'antd/lib/input/style';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import ColorPicker from '../../toolbar/color-picker';
 
 class InputLabel extends React.Component {

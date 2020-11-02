@@ -1,6 +1,6 @@
 import lodash_uniqBy from 'lodash/uniqBy';
 import Keymaster from 'keymaster';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 
 const SCOPE_NAME = 'lake-plugin-mention';

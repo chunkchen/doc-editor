@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import GraphSection from '../graphsection';
 import GraphEditor from '../graphsection/graph-editor';
 

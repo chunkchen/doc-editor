@@ -1,6 +1,6 @@
 import {EventEmitter2} from 'eventemitter2';
 import 'antd/lib/input-number/style';
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {fixDragEvent} from './utils';
 
 const {$} = Engine;

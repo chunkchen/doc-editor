@@ -1,4 +1,4 @@
-import 'doc-engine/lib/index.css';
+import '@hicooper/doc-engine/lib/index.css';
 import hotkey from './config/hotkey';
 import Engine from './editor/engine';
 import FullEditor from './editor/full';

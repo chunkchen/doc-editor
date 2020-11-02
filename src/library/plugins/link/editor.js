@@ -1,5 +1,5 @@
 import React from 'react';
-import {sanitizeUrl} from 'doc-engine/lib/utils/string';
+import {sanitizeUrl} from '@hicooper/doc-engine/lib/utils/string';
 import {Button, Input, Tooltip} from 'antd';
 import languages from './lang';
 

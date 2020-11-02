@@ -1,4 +1,4 @@
-import Engine from 'doc-engine/lib';
+import Engine from '@hicooper/doc-engine/lib';
 import {MODE_NAME_MAP, setMode, template as codeblockTemplate} from '../section/codeblock';
 import {getPreviewUrl} from '../utils/string';
 
