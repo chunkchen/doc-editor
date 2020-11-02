@@ -129,13 +129,13 @@ export default {
       }
     });
 
-    // 快捷键
-    const options = this.options[PLUGIN_NAME] || {
-      hotkey: 'mod+shift+c',
-    };
-
-    if (options.hotkey) {
-      this.hotkey.set(options.hotkey, PLUGIN_NAME);
-    }
+    // // 快捷键
+    // const options = this.options[PLUGIN_NAME] || {
+    //   hotkey: 'mod+shift+c',
+    // };
+    //
+    // if (options.hotkey) {
+    //   this.hotkey.set(options.hotkey, PLUGIN_NAME);
+    // }
   },
 };
