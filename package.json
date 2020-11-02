@@ -1,7 +1,7 @@
 {
-  "name": "doc-editor",
+  "name": "@hicooper/doc-editor",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@ant-design/colors": "^4.0.5",
     "@ant-design/icons": "^4.2.1",
