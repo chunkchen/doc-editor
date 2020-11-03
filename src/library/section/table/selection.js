@@ -42,7 +42,6 @@ class Selection extends EventEmitter2 {
           col = i;
         }
       });
-      console.log(col)
       const row2 = row + rowSpan - 1;
       const col2 = col + colSpan - 1;
       const hoverArea = {
@@ -472,7 +471,6 @@ class Selection extends EventEmitter2 {
       this.areaLeft = left;
       // this.reRenderSubEditor();
       this.td = this.single ? table[rowMin][colMin].element : null;
-      console.log(this.td)
     };
 
     this.showActiveBox = (left, top, height, width, actionPreview) => {
@@ -933,7 +931,6 @@ class Selection extends EventEmitter2 {
       const {offsetX, offsetY} = e;
       const td = this.getTdByMaskXY(offsetX, offsetY);
       if (this.dragoverTd !== td) {
-        console.log('mouse move...')
         this.selectCell(td, this.dragDirection);
         this.dragoverTd = td
       }
