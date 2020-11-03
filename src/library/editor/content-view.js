@@ -27,8 +27,8 @@ window.lozad_observer = lozad('.lozad', {
 });
 
 class ContentView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.viewArea = React.createRef();
   }
 
