@@ -713,6 +713,7 @@
   margin: 24px 24px 0 0;
   width: auto;
   min-width: 230px;
+  z-index: 99;
 }
 
 .lake-sidebar .lake-sidebar-close {
@@ -727,12 +728,12 @@
 }
 
 .lake-sidebar-wrapper {
-  padding-right: 8px;
-  padding-left: 12px;
+  position: fixed;
+  padding-right: 24px;
+  right: 0;
   contain: content;
   overflow-x: hidden;
   overflow-y: auto;
-  position: fixed;
   transform: translateZ(0);
   will-change: max-height,transform;
   min-width: 230px;
@@ -820,7 +821,7 @@
   line-height: 30px;
   width: auto;
   min-width: 30px;
-  margin: 0;
+  margin: 0 1px;
   text-align: center;
   padding: 0 7px;
   background-color: transparent;
@@ -2498,12 +2499,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 .lake-mobile-editor .lake-content-editor .lake-content-editor-extra .bi-meta-title-input {
   font-size: 24px;
-}
-
-@media only screen and (max-width: 1440px) {
-  .lake-max-editor {
-    min-width: 1156px;
-  }
 }
 
 .lake-engine-view h1,
