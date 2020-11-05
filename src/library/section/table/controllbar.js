@@ -829,16 +829,50 @@ class ControllBar extends EventEmitter2 {
       this.focusTextArea();
     };
 
+    this.onColAddBtnClick = (e) => {
+      e.stopPropagation();
+      this.section.command.insertColRight();
+      // 添加后刷新绑定
+      this.bindColHeaderInsertBtnClickEvent()
+    }
+
+    this.onColDeleteBtnClick = (e) => {
+      e.stopPropagation();
+      this.section.command.removeCol();
+    }
+
+    this.onRowAddBtnClick = (e) => {
+      e.stopPropagation();
+      this.section.command.insertRowDown();
+      // 添加后刷新绑定
+      this.bindRowHeaderInsertBtnClickEvent()
+    }
+
+    this.onRowDeleteBtnClick = (e) => {
+      e.stopPropagation();
+      this.section.command.removeRow();
+    }
+
+    this.bindColHeaderInsertBtnClickEvent = () => {
+      const {template} = this.section;
+      this.colsHeader.find(template.HEADER_ADD_CLASS).on('click', this.onColAddBtnClick)
+      this.colsHeader.find(template.HEADER_DELETE_CLASS).on('click', this.onColDeleteBtnClick)
+    }
+
+    this.bindRowHeaderInsertBtnClickEvent = () => {
+      const {template} = this.section;
+      this.rowsHeader.find(template.HEADER_ADD_CLASS).on('click', this.onRowAddBtnClick)
+      this.rowsHeader.find(template.HEADER_DELETE_CLASS).on('click', this.onRowDeleteBtnClick)
+    }
+
     this.bindEvents = () => {
       this.colsHeader.on('mousedown', this.onMouseDownColsHeader).on('click', this.clickColsHeader).on('dragstart', this.onDragStartColsHeader);
       this.rowsHeader.on('mousedown', this.onMouseDownRowsHeader).on('click', this.clickRowsHeader).on('dragstart', this.onDragStartRowsHeader);
       this.tableHeader.on('click', this.clickTableHeader);
-      // this.rowsAddition.on('click', () => {
-      //   this.section.command.insertRow();
-      // });
-      // this.colsAddition.on('click', () => {
-      //   this.section.command.insertCol();
-      // });
+
+      this.bindColHeaderInsertBtnClickEvent()
+      this.bindRowHeaderInsertBtnClickEvent()
+
       this.section.container.on('mousedown', this.handleClickContainer);
       this.section.container.on('dragover', (e) => {
         return e.stopPropagation();

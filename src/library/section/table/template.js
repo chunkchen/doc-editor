@@ -7,6 +7,8 @@ const TABLE_WRAPPER_CLASS = 'table-wrapper';
 const TABLE_CLASS = 'lake-table';
 const COLS_HEADER_CLASS = 'table-cols-header';
 const COLS_HEADER_ITEM_CLASS = 'table-cols-header-item';
+const HEADER_ADD_CLASS = 'table-header-add-btn';
+const HEADER_DELETE_CLASS = 'table-header-delete-btn';
 const COLS_HEADER_TRIGGER_CLASS = 'cols-trigger';
 const ROWS_HEADER_CLASS = 'table-rows-header';
 const ROWS_HEADER_ITEM_CLASS = 'table-rows-header-item';
@@ -34,6 +36,8 @@ export default function (section) {
     TABLE_CLASS: '.'.concat(TABLE_CLASS),
     COLS_HEADER_CLASS: '.'.concat(COLS_HEADER_CLASS),
     COLS_HEADER_ITEM_CLASS: '.'.concat(COLS_HEADER_ITEM_CLASS),
+    HEADER_ADD_CLASS: '.'.concat(HEADER_ADD_CLASS),
+    HEADER_DELETE_CLASS: '.'.concat(HEADER_DELETE_CLASS),
     COLS_HEADER_TRIGGER_CLASS: '.'.concat(COLS_HEADER_TRIGGER_CLASS),
     ROWS_HEADER_CLASS: '.'.concat(ROWS_HEADER_CLASS),
     ROWS_HEADER_ITEM_CLASS: '.'.concat(ROWS_HEADER_ITEM_CLASS),

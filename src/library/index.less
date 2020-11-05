@@ -2358,7 +2358,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   width: 100%;
   display: grid;
   grid-gap: 24px;
-  grid-template-columns: 1fr minmax(754px, 1123px) 1fr;
+  grid-template-columns: 1fr min(794px) 1fr;
   grid-template-rows: 1fr;
   flex-grow: 1;
   min-height: auto;
@@ -2376,23 +2376,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
       }
     }
   }
-}
-
-.lake-max-editor-wrapper-content .lake-content-editor {
-  display: block;
-  position: relative;
-  max-width: 1123px;
-  min-width: 794px;
-  margin: 24px 0 84px 0;
-  align-self: start;
-  justify-self: center;
-  grid-column: 2;
-  grid-row: 1;
-  counter-reset: numbered;
-  border: var(--devsite-page-border, 0);
-  border-radius: var(--devsite-page-border-radius, 2px);
-  box-shadow: var(--devsite-page-box-shadow, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15));
-  background-color: #fff;
 }
 
 .lake-max-editor-wrapper-content .lake-content-editor-extra {
@@ -2451,9 +2434,8 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 .lake-content-editor {
+  display: block;
   position: relative;
-  background: #ffffff;
-  width: fit-content;
   font-family: 'Tahoma For Number', 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #262626;
@@ -2461,6 +2443,18 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   white-space: normal;
   height: fit-content;
   padding: 40px;
+  width: 794px;
+  margin: 24px 0 84px 0;
+  align-self: start;
+  justify-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  counter-reset: numbered;
+  border: var(--devsite-page-border, 0);
+  border-radius: var(--devsite-page-border-radius, 2px);
+  box-shadow: var(--devsite-page-box-shadow, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15));
+  background-color: #fff;
+
 
   .lake-content-editor-core {
     min-height: 500px;
@@ -2484,7 +2478,6 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 .lake-mobile-editor .lake-content-editor .lake-engine {
   min-height: calc(100vh - 60px);
   padding: 10px 16px;
-
 }
 
 .lake-mobile-editor .lake-content-editor .lake-content-editor-extra {
@@ -3804,7 +3797,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 [data-section-key="table"] .lake-embed-toolbar {
-  top: -86px;
+  top: -82px;
 }
 
 [data-section-key="table"] [data-section-element="center"] {
