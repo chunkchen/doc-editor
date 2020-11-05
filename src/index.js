@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 import router from './router';
 import * as serviceWorker from './serviceWorker';
 import './index.less';
-import './library/index.less';
 
 ReactDOM.render(router, document.getElementById('root'));
 

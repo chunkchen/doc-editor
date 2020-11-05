@@ -107,7 +107,7 @@ class FullEditor extends React.Component {
     };
 
     return (
-      <section className="lake-editor lake-max-editor">
+      <section className="lake-max-editor">
         <div className="lake-max-editor-wrapper">
           {engine && <Dialog engine={engine}/>}
           {engine && <Toolbar {...Object.assign({hasMore: false}, toolbarOptions)} />}
