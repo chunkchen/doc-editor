@@ -1,4 +1,5 @@
 import Engine from '@hicooper/doc-engine/lib';
+
 import SectionMath from '../section/math';
 import SectionSelect from '../section/sectionselect';
 import SectionImage from '../section/image';
@@ -15,6 +16,7 @@ import SectionOnlineDoc from '../section/online-doc';
 import SectionLockedText from '../section/locked-text';
 import SectionLocalDoc from '../section/local-doc';
 import SectionMXGraph from '../section/mxgraph';
+
 import math from '../plugins/math';
 import save from '../plugins/save';
 import search from '../plugins/search';
@@ -37,6 +39,7 @@ import lockedtext from '../plugins/lockedtext';
 import label from '../plugins/label';
 import mxgraph from '../plugins/mxgraph';
 import link from '../plugins/link';
+import markdown from '../plugins/markdown';
 import Scrollbar from '../scrollbar';
 
 Engine.Scrollbar = Scrollbar;
@@ -60,6 +63,7 @@ Engine.section.add('onlinedoc', SectionOnlineDoc);
 Engine.section.add('lockedtext', SectionLockedText);
 Engine.section.add('localdoc', SectionLocalDoc);
 Engine.section.add('mxgraph', SectionMXGraph);
+
 Engine.plugin.add('translate', translate);
 Engine.plugin.add('search', search);
 Engine.plugin.add('save', save);
@@ -82,5 +86,6 @@ Engine.plugin.add('lockedtext', lockedtext);
 Engine.plugin.add('label', label);
 Engine.plugin.add('mxgraph', mxgraph);
 Engine.plugin.add('link', link);
+Engine.plugin.add('markdown', markdown);
 
 export default Engine;

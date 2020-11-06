@@ -5,6 +5,7 @@ import langCn from '../lang/zh-cn';
 import {addMentionAttrs, DocVersion, getDocVersion} from '../utils/string';
 import HtmlParser from '../parser/html';
 import Migrate from '../helper/migrate';
+import helper from '../helper'
 import schemaConfig from '../schema/config';
 import Engine from './engine';
 
@@ -50,7 +51,7 @@ class Editor extends React.Component {
       return engine.getHtml(new HtmlParser());
     };
 
-    // helper(engine, "pasteFileTransfer", {})
+    helper(engine, "pasteFileTransfer", {})
   };
 
   componentDidMount() {
