@@ -46,7 +46,6 @@ export const getStyle = (dom, name, defaultValue) => {
     if (window.getComputedStyle) {
       return window.getComputedStyle(dom, null)[name];
     }
-
     return dom.currentStyle[name];
   } catch (e) {
     if (!isNil(defaultValue)) {
@@ -80,11 +79,9 @@ export const getWidth = (el, defaultValue) => {
  */
 export const getHeight = (el, defaultValue = 50) => {
   let height = getStyle(el, 'height', defaultValue);
-
   if (height === 'auto') {
     height = el.offsetHeight;
   }
-
   return parseFloat(height);
 };
 

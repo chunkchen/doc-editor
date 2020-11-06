@@ -421,8 +421,7 @@ class Command extends EventEmitter2 {
 
           if (r + tdModel.rowSpan - 1 > rowMax) {
             const insertRow = rowMax + 1;
-            const insertCol = c;
-            const insertIndex = selection.getTdIndex(insertRow, insertCol);
+            const insertIndex = selection.getTdIndex(insertRow, c);
             const td = trs[insertRow].insertCell(insertIndex);
             td.rowSpan = r + tdModel.rowSpan - 1 - rowMax;
             td.colSpan = tdModel.colSpan;
@@ -474,10 +473,7 @@ class Command extends EventEmitter2 {
             // 切左边非左下角，下方需要补合并单元格的左下缺口
             if (pRow2 > rowMax && c === Math.min(pCol2, colMax) && r === rowMin) {
               const _insertRow2 = rowMax + 1;
-
-              const _insertCol2 = pCol;
-
-              const _insertIndex4 = selection.getTdIndex(_insertRow2, _insertCol2);
+              const _insertIndex4 = selection.getTdIndex(_insertRow2, pCol);
               const _td4 = trs[_insertRow2].insertCell(_insertIndex4);
               _td4.rowSpan = pRow2 - rowMax;
               _td4.colSpan = cross ? parentTd.colSpan : colMax - pCol + 1;
@@ -493,8 +489,7 @@ class Command extends EventEmitter2 {
             // 非贯穿
             if (!_cross && r === rowMax && c === colMin) {
               const _cutRow = rowMax + 1;
-              const _cutCol = pCol;
-              const _insertIndex5 = selection.getTdIndex(_cutRow, _cutCol);
+              const _insertIndex5 = selection.getTdIndex(_cutRow, pCol);
               const _td5 = trs[_cutRow].insertCell(_insertIndex5);
               _td5.colSpan = parentTd.colSpan;
               _td5.rowSpan = pRow2 - rowMax;
@@ -828,55 +823,32 @@ class Command extends EventEmitter2 {
           }
         })
       }
-
       if (type === 'outBorder') {
-        const tableModel = selection.tableModel;
-        console.log(tableModel)
-        console.log(selection.area)
         const {row, col, row2, col2} = selection.area
-        const rowCount = selection.rowCount()
-        const colCount = selection.colCount()
-        console.log('行数：', rowCount)
-        console.log('列数：', colCount)
-        console.log(selection)
         if (selection.single) {
           // 单个单元格
           $(selection.td).removeClass('lake-no-border')
           $(selection.td).attr('border', true)
           $(selection.td).css('border', '2px solid #222222')
-          return
+        } else {
+          selection.each((tdModel, r, c) => {
+            if (tdModel.element) {
+              if (r === row) {
+                $(tdModel.element).css('border-top', '2px solid #222222')
+              }
+              if (c === col) {
+                $(tdModel.element).css('border-left', '2px solid #222222')
+              }
+              if (r === row2) {
+                $(tdModel.element).css('border-bottom', '2px solid #222222')
+              }
+              if (c + tdModel.colSpan  - 1 === col2) {
+                $(tdModel.element).css('border-right', '2px solid #222222')
+              }
+            }
+          })
         }
-        selection.each((tdModel, r, c) => {
-          if (tdModel.element) {
-            console.log(tdModel.element, r, c)
-            if (r === row) {
-              $(tdModel.element).css('border-top', '2px solid #222222')
-              if (tdModel.colSpan === colCount) {
-                $(tdModel.element).css('border-right', '2px solid #222222')
-              }
-            }
-            if (c === col) {
-              $(tdModel.element).css('border-left', '2px solid #222222')
-              if (tdModel.rowSpan === rowCount) {
-                $(tdModel.element).css('border-bottom', '2px solid #222222')
-              }
-            }
-            if (r === row2) {
-              $(tdModel.element).css('border-bottom', '2px solid #222222')
-              if (tdModel.colSpan === colCount) {
-                $(tdModel.element).css('border-right', '2px solid #222222')
-              }
-            }
-            if (c === col2 - 1) {
-              $(tdModel.element).css('border-right', '2px solid #222222')
-              if (tdModel.rowSpan === rowCount) {
-                $(tdModel.element).css('border-bottom', '2px solid #222222')
-              }
-            }
-          }
-        })
       }
-
       if (type === 'allBorder') {
         selection.each((tdModel) => {
           if (tdModel.element) {
@@ -910,7 +882,6 @@ class Command extends EventEmitter2 {
         if ($(tdModel.element)[0] && $(tdModel.element)[0].attributes[item]) {
           $(tdModel.element).css(item, '');
           $(tdModel.element).removeAttr(item)
-          console.log('remove attr: ', item)
         }
       })
     }
@@ -920,7 +891,6 @@ class Command extends EventEmitter2 {
         return false
       }
       return keys.some(key => {
-        console.log(key, $(tdModel.element)[0].attributes[key])
         return $(tdModel.element)[0].attributes[key] && $(tdModel.element)[0].attributes[key].value === 'true'
       })
     }

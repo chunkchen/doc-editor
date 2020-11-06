@@ -4,8 +4,7 @@ import Engine from '@hicooper/doc-engine/lib';
 import {fixDragEvent} from './utils';
 
 const {$} = Engine;
-
-class ControllBar extends EventEmitter2 {
+class ControlBar extends EventEmitter2 {
   constructor(section) {
     super(section);
 
@@ -32,6 +31,9 @@ class ControllBar extends EventEmitter2 {
           needRenderCol = false;
           opts = this.section.selection.getEffectRows();
           break;
+        case 'border':
+          this.emit('heightchanging')
+          break
         default:
           break;
       }
@@ -77,18 +79,18 @@ class ControllBar extends EventEmitter2 {
           });
         });
         // 合并单元格的存在，可能出现某些列全部属于合并单元格，导致无法通过 td 的 offsetWidth 直接获得，需要把剩余zhi
-        let unkownCount = 0;
+        let unknownCount = 0;
         let knownWidth = 0;
         for (let c = 0; c < cols.length; c++) {
           if (!tdWidth[c]) {
-            unkownCount++;
+            unknownCount++;
           } else {
             knownWidth += tdWidth[c];
           }
         }
         let averageWidth = 0;
-        if (unkownCount > 0) {
-          averageWidth = Math.round((tableWidth - knownWidth) / unkownCount);
+        if (unknownCount > 0) {
+          averageWidth = Math.round((tableWidth - knownWidth) / unknownCount);
         }
         for (let _c = 0; _c < cols.length; _c++) {
           const width = tdWidth[_c] || averageWidth;
@@ -924,4 +926,4 @@ class ControllBar extends EventEmitter2 {
   }
 }
 
-export default ControllBar;
+export default ControlBar;

@@ -5,7 +5,7 @@ import toolbar from './toolbar';
 import toolbarMini from './toolbar-mini';
 import constants from './constants';
 import template from './template';
-import Controllbar from './controllbar';
+import Controllbar from './controlBar';
 import Command from './command';
 import Hotkey from './hotkey';
 import History from './history';
@@ -510,7 +510,6 @@ class Table extends SectionBase {
   getTableHeight() {
     const height = getHeight(this.tableRoot[0]);
     return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height;
-
   }
 
   onTableSizeChange() {
