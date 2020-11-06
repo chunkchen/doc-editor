@@ -82,38 +82,32 @@ export default function (section) {
       const colsHeader = '<div class="'
         .concat(COLS_HEADER_CLASS, '">')
         .concat('<div class="'
-          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true"> '
-            + '<div class="table-col-header-btns">'
-            + '   <a class="table-control-icon-btn table-header-delete-btn">'
-            + '       <span class="lake-icon lake-icon-delete" />'
-            + '   </a>'
-            + '   <a class="table-control-icon-btn table-header-add-btn">'
-            + '       <span class="lake-icon lake-icon-plus"/>'
-            + '   </a>'
-            + '</div>'
-            + '<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><p class="drag-info"></p></div>'
-            + '<div class="')
-          .concat(COLS_HEADER_TRIGGER_CLASS, '"></div></div>')
+          .concat(COLS_HEADER_ITEM_CLASS, '" draggable="true">'
+            .concat('<div class="table-col-header-btns">', '<a class="table-control-icon-btn '
+              .concat(HEADER_DELETE_CLASS, '"><span class="lake-icon lake-icon-delete" /></a>'
+                .concat('<a class="table-control-icon-btn ', HEADER_ADD_CLASS
+                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>')
+                )
+              )
+            ).concat('<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', COLS_HEADER_TRIGGER_CLASS
+              .concat('"></div></div>')))
           .repeat(cols), '')
-        .concat('</div>');
+        .concat('</div> ');
 
       // 行头
       const rowsHeader = '<div class="'
         .concat(ROWS_HEADER_CLASS, '">')
         .concat('<div class="'
           .concat(ROWS_HEADER_ITEM_CLASS, '" draggable="true">'
-            + '<div class="table-row-header-btns">\n'
-            + '    <a class="table-control-icon-btn table-header-delete-btn">'
-            + '       <span class="lake-icon lake-icon-delete" />'
-            + '    </a>'
-            + '    <a class="table-control-icon-btn table-header-add-btn">'
-            + '       <span class="lake-icon lake-icon-plus"/>'
-            + '    </a>'
-            + '</div>          '
-            + '<div class="row-dragger"> <span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div>'
-            + '<div class="')
-          .concat(ROWS_HEADER_TRIGGER_CLASS, '"></div></div>')
-          .repeat(rows), ' ')
+            .concat('<div class="table-row-header-btns">', '<a class="table-control-icon-btn '
+              .concat(HEADER_DELETE_CLASS, '"><span class="lake-icon lake-icon-delete" /></a>'
+                .concat('<a class="table-control-icon-btn ', HEADER_ADD_CLASS
+                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>')
+                )
+              )
+            ).concat('<div class="row-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', ROWS_HEADER_TRIGGER_CLASS
+              .concat('"></div></div>')))
+          .repeat(rows), '')
         .concat('</div> ');
 
       // 整个表 锚点

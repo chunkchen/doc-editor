@@ -2787,7 +2787,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   font-size: 14px;
   white-space: normal;
   word-wrap: break-word;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #777777;
   vertical-align: top;
   padding: 4px 8px;
   cursor: default;
@@ -3375,9 +3375,15 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   padding: 3px;
 }
 
-[data-section-key="table"].lake-activated .lake-table.lake-no-border {
-  border: 1px dashed #d9d9d9;
+[data-section-key="table"] .lake-table.lake-no-border{
+  border: none;
+  td {
+    border: none;
+  }
+}
 
+[data-section-key="table"].lake-activated .lake-table.lake-no-border{
+  border: 1px dashed #d9d9d9;
   td {
     border: 1px dashed #d9d9d9;
   }

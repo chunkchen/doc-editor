@@ -281,6 +281,63 @@ export default function (section) {
       },
     },
     {
+      name: 'table:border',
+      type: 'dropdown',
+      title: locale.border.borderTitle,
+      icon: '<span class="lake-icon icon-border-top" />',
+      className: 'lake-button-icon-list',
+      data: [
+        {
+          key: 'top',
+          icon: '<span class="lake-icon icon-border-top" />',
+          title: locale.border.borderTop,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'right',
+          icon: '<span class="lake-icon icon-border-right" />',
+          title: locale.border.borderRight,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'bottom',
+          icon: '<span class="lake-icon icon-border-bottom" />',
+          title: locale.border.borderBottom,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'left',
+          icon: '<span class="lake-icon icon-border-left" />',
+          title: locale.border.borderLeft,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'allBorder',
+          icon: '<span class="lake-icon icon-border-all" />',
+          title: locale.border.allBorder,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'outBorder',
+          icon: '<span class="lake-icon icon-border-out" />',
+          title: locale.border.outBorder,
+          className: 'lake-button-set-list-item-icon',
+        },
+        {
+          key: 'reset',
+          icon: '<span class="lake-icon icon-border-reset" />',
+          title: locale.border.resetBorder,
+          className: 'lake-button-set-list-item-icon',
+        },
+      ],
+      // getActive: () => {
+      //   return command.queryState('alignment');
+      // },
+      onClick: (value) => {
+        command.border(value);
+      },
+    },
+    {
       name: 'insertRowUp',
       title: locale.insertRowUp,
       icon: '<span class="lake-icon lake-icon-table-insert-row-up" />',

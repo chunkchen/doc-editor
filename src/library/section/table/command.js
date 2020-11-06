@@ -756,6 +756,175 @@ class Command extends EventEmitter2 {
       this.emit('actioned', 'align');
     };
 
+    // 边框
+    this.border = (type) => {
+      const selection = this.section.selection;
+      if (!selection.area) return;
+      if (type === 'top') {
+        // first row => row
+        const firstRow = selection.area.row
+        selection.each((tdModel, row) => {
+          if (tdModel.element && row === firstRow) {
+            $(tdModel.element).removeClass('lake-no-border');
+            if (this.checkHasBorderAttr(tdModel, ['border-top', 'border'])) {
+              $(tdModel.element).removeAttr('border-top');
+              $(tdModel.element).css('border-top', '');
+              $(tdModel.element).removeAttr('border');
+            } else {
+              $(tdModel.element).attr('border-top', true)
+              $(tdModel.element).css('border-top', '2px solid #222222');
+            }
+          }
+        })
+      }
+      if (type === 'bottom') {
+        // last row => row2
+        let lastRow = selection.area.row2
+        selection.each((tdModel, row) => {
+          if (tdModel.element && row === lastRow) {
+            $(tdModel.element).removeClass('lake-no-border');
+            if (this.checkHasBorderAttr(tdModel, ['border-bottom', 'border'])) {
+              $(tdModel.element).removeAttr('border-bottom');
+              $(tdModel.element).removeAttr('border');
+              $(tdModel.element).css('border-bottom', '');
+            } else {
+              $(tdModel.element).attr('border-bottom', true)
+              $(tdModel.element).css('border-bottom', '2px solid #222222');
+            }
+          }
+        })
+      }
+      if (type === 'left') {
+        // first col => col
+        let firstCol = selection.area.col
+        selection.each((tdModel, row, col) => {
+          if (tdModel.element && col === firstCol) {
+            $(tdModel.element).removeClass('lake-no-border');
+            if (this.checkHasBorderAttr(tdModel, ['border-left', 'border'])) {
+              $(tdModel.element).removeAttr('border-left');
+              $(tdModel.element).removeAttr('border');
+              $(tdModel.element).css('border-left', '');
+            } else {
+              $(tdModel.element).attr('border-left', true)
+              $(tdModel.element).css('border-left', '2px solid #222222');
+            }
+          }
+        })
+      }
+      if (type === 'right') {
+        // last col => col2
+        const lastCol = selection.area.col2
+        selection.each((tdModel, row, col) => {
+          if (tdModel.element && (tdModel.colSpan + col - 1) === lastCol) {
+            $(tdModel.element).removeClass('lake-no-border');
+            if (this.checkHasBorderAttr(tdModel, ['border-right', 'border'])) {
+              $(tdModel.element).removeAttr('border-right');
+              $(tdModel.element).removeAttr('border');
+              $(tdModel.element).css('border-right', '');
+            } else {
+              $(tdModel.element).attr('border-right', true)
+              $(tdModel.element).css('border-right', '2px solid #222222');
+            }
+          }
+        })
+      }
+
+      if (type === 'outBorder') {
+        const tableModel = selection.tableModel;
+        console.log(tableModel)
+        console.log(selection.area)
+        const {row, col, row2, col2} = selection.area
+        const rowCount = selection.rowCount()
+        const colCount = selection.colCount()
+        console.log('行数：', rowCount)
+        console.log('列数：', colCount)
+        console.log(selection)
+        if (selection.single) {
+          // 单个单元格
+          $(selection.td).removeClass('lake-no-border')
+          $(selection.td).attr('border', true)
+          $(selection.td).css('border', '2px solid #222222')
+          return
+        }
+        selection.each((tdModel, r, c) => {
+          if (tdModel.element) {
+            console.log(tdModel.element, r, c)
+            if (r === row) {
+              $(tdModel.element).css('border-top', '2px solid #222222')
+              if (tdModel.colSpan === colCount) {
+                $(tdModel.element).css('border-right', '2px solid #222222')
+              }
+            }
+            if (c === col) {
+              $(tdModel.element).css('border-left', '2px solid #222222')
+              if (tdModel.rowSpan === rowCount) {
+                $(tdModel.element).css('border-bottom', '2px solid #222222')
+              }
+            }
+            if (r === row2) {
+              $(tdModel.element).css('border-bottom', '2px solid #222222')
+              if (tdModel.colSpan === colCount) {
+                $(tdModel.element).css('border-right', '2px solid #222222')
+              }
+            }
+            if (c === col2 - 1) {
+              $(tdModel.element).css('border-right', '2px solid #222222')
+              if (tdModel.rowSpan === rowCount) {
+                $(tdModel.element).css('border-bottom', '2px solid #222222')
+              }
+            }
+          }
+        })
+      }
+
+      if (type === 'allBorder') {
+        selection.each((tdModel) => {
+          if (tdModel.element) {
+            $(tdModel.element).removeClass('lake-no-border');
+            if (this.checkHasBorderAttr(tdModel, ['border'])) {
+              $(tdModel.element).removeAttr('border');
+              $(tdModel.element).css('border', '');
+            } else {
+              this.removeAnyBorderAttr(tdModel)
+              $(tdModel.element).attr('border', true)
+              $(tdModel.element).css('border', '2px solid #222222');
+            }
+          }
+        })
+      }
+      // 重置默认边框
+      if (type === 'reset') {
+        selection.each((tdModel) => {
+          if (tdModel.element) {
+            this.removeAnyBorderAttr(tdModel)
+            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element).removeAttr('style');
+          }
+        })
+      }
+      this.emit('actioned', 'border');
+    }
+
+    this.removeAnyBorderAttr = (tdModel) => {
+      ['border', 'border-top', 'border-right', 'border-bottom', 'border-left'].forEach(item => {
+        if ($(tdModel.element)[0] && $(tdModel.element)[0].attributes[item]) {
+          $(tdModel.element).css(item, '');
+          $(tdModel.element).removeAttr(item)
+          console.log('remove attr: ', item)
+        }
+      })
+    }
+
+    this.checkHasBorderAttr = (tdModel, keys) => {
+      if (!$(tdModel.element)[0] || !$(tdModel.element)[0].attributes.length) {
+        return false
+      }
+      return keys.some(key => {
+        console.log(key, $(tdModel.element)[0].attributes[key])
+        return $(tdModel.element)[0].attributes[key] && $(tdModel.element)[0].attributes[key].value === 'true'
+      })
+    }
+
     this.background = (rgb) => {
       const selection = this.section.selection;
       if (!selection.area) return;

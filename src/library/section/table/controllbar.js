@@ -223,6 +223,7 @@ class ControllBar extends EventEmitter2 {
 
         this.dropCol = dropIndex;
         const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
+        console.log(colBars, dropIndex)
         const left = this.dropCol !== colBars.length ? colBars[this.dropCol].offsetLeft + 2 : colBars[this.dropCol - 1].offsetLeft + colBars[this.dropCol - 1].offsetWidth + 2;
         const {scrollLeft, offsetWidth} = this.viewport[0];
         if (left < scrollLeft) {
@@ -259,7 +260,10 @@ class ControllBar extends EventEmitter2 {
     // 拖动列-事件结束
     this.onDragColEnd = () => {
       this.unBindDragColEvent();
-      if (!this.colDragging || this.dropCol === undefined) return;
+      if (!this.colDragging || this.dropCol === undefined) {
+        this.colDragging = false
+        return
+      }
       const {command, selection} = this.section;
       const {colMin, colMax} = selection.normalizeArea();
       const colBars = this.section.container.find(this.section.template.COLS_HEADER_ITEM_CLASS);
@@ -292,7 +296,10 @@ class ControllBar extends EventEmitter2 {
     // 拖动行-事件结束
     this.onDragRowEnd = () => {
       this.unBindDragRowEvent();
-      if (!this.rowDragging || this.dropRow === undefined) return;
+      if (!this.rowDragging || this.dropRow === undefined) {
+        this.rowDragging = false
+        return
+      }
       const {command, selection} = this.section;
       const {rowMin, rowMax} = selection.normalizeArea();
       command.mockCopy();
