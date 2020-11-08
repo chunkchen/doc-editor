@@ -2,7 +2,7 @@
   "name": "@hicooper/doc-editor",
   "description": "doc editor",
   "license": "MIT",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": false,
   "dependencies": {
     "@ant-design/colors": "^4.0.5",
@@ -53,7 +53,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "compile": "rimraf library/* && babel src/library -d library --no-babelrc --presets=es2015,react,stage-0 && lessc src/library/index.less library/index.css && cpr src/library/section/codeblock/index.css library/section/codeblock/index.css && cpr src/library/section/image/pswp.css library/section/image/pswp.css && cpr src/library/section/text-diagram/index.css library/section/text-diagram/index.css && cpr src/library/tips/index.css library/tips/index.css && cpr src/library/toolbar/collapse-group.css library/toolbar/collapse-group.css && cpr src/library/section/mxgraph/graph-view.css library/section/mxgraph/graph-view.css && cpr src/library/plugins/link/index.css library/plugins/link/index.css",
+    "compile": "rimraf library/* && babel src/library -d library --no-babelrc --presets=es2015,react,stage-0 && lessc src/library/index.less library/index.css && cpr src/library/assets library/assets  -o && cpr src/library/section/codeblock/index.css library/section/codeblock/index.css && cpr src/library/section/image/pswp.css library/section/image/pswp.css && cpr src/library/section/text-diagram/index.css library/section/text-diagram/index.css && cpr src/library/tips/index.css library/tips/index.css && cpr src/library/toolbar/collapse-group.css library/toolbar/collapse-group.css && cpr src/library/section/mxgraph/graph-view.css library/section/mxgraph/graph-view.css && cpr src/library/plugins/link/index.css library/plugins/link/index.css",
     "eject": "react-app-rewired eject",
     "lint": "eslint . --ext '.js,.jsx' --fix"
   },
