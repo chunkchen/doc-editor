@@ -154,7 +154,7 @@ class Command extends EventEmitter2 {
     };
 
     this.removeCol = (silence) => {
-      const {selection, tableRoot, controllBar, template} = this.section;
+      const {selection, tableRoot, controlBar, template} = this.section;
       const area = selection.area;
       const tableModel = selection.tableModel;
       if (!area) return;
@@ -175,7 +175,7 @@ class Command extends EventEmitter2 {
       }
 
       for (let c = col_max; c >= col_min; c--) {
-        controllBar.removeCol(c);
+        controlBar.removeCol(c);
         cols[c].remove();
       }
 
@@ -314,7 +314,7 @@ class Command extends EventEmitter2 {
     };
 
     this.removeRow = (silence) => {
-      const {selection, tableRoot, controllBar, template} = this.section;
+      const {selection, tableRoot, controlBar, template} = this.section;
       const {area, tableModel} = selection;
       if (!area) return;
       const table = tableModel.table;
@@ -362,7 +362,7 @@ class Command extends EventEmitter2 {
 
       for (let r = row_max; r >= row_min; r--) {
         tableRoot[0].deleteRow(r);
-        controllBar.removeRow(r);
+        controlBar.removeRow(r);
       }
       this.emit('actioned', 'removeRow', silence);
       this.section.onTableSizeChange();

@@ -114,7 +114,7 @@ class FullEditor extends React.Component {
           <main className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
               {engine && <Sidebar engine={engine}/>}
-              <div className="lake-content-editor show-return-tag" ref={this.contentEditor}>
+              <div className="lake-content-editor lake-typography-a4 show-return-tag" ref={this.contentEditor}>
                 {header && <div className="lake-content-editor-extra">{header}</div>}
                 <Editor
                   {...Object.assign(

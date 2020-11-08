@@ -32,7 +32,7 @@ class ControlBar extends EventEmitter2 {
           opts = this.section.selection.getEffectRows();
           break;
         case 'border':
-          this.emit('heightchanging')
+          this.emit('tableSizeChange')
           break
         default:
           break;
@@ -521,7 +521,7 @@ class ControlBar extends EventEmitter2 {
       this.hideContextMenu();
       this.renderRowSplitBars();
       this.changeRowHeight(itemHeight);
-      this.emit('heightchanging');
+      this.emit('tableSizeChange');
     };
 
     this.changeColWidth = (colWidth, tableWidth) => {
@@ -843,11 +843,13 @@ class ControlBar extends EventEmitter2 {
       this.section.command.insertColRight();
       // 添加后刷新绑定
       this.bindColHeaderInsertBtnClickEvent()
+      this.emit('tableSizeChange')
     }
 
     this.onColDeleteBtnClick = (e) => {
       e.stopPropagation();
       this.section.command.removeCol();
+      this.emit('tableSizeChange')
     }
 
     this.onRowAddBtnClick = (e) => {
@@ -855,11 +857,13 @@ class ControlBar extends EventEmitter2 {
       this.section.command.insertRowDown();
       // 添加后刷新绑定
       this.bindRowHeaderInsertBtnClickEvent()
+      this.emit('tableSizeChange')
     }
 
     this.onRowDeleteBtnClick = (e) => {
       e.stopPropagation();
       this.section.command.removeRow();
+      this.emit('tableSizeChange')
     }
 
     this.bindColHeaderInsertBtnClickEvent = () => {

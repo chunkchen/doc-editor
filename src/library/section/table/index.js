@@ -5,7 +5,7 @@ import toolbar from './toolbar';
 import toolbarMini from './toolbar-mini';
 import constants from './constants';
 import template from './template';
-import Controllbar from './controlBar';
+import ControlBar from './controlBar';
 import Command from './command';
 import Hotkey from './hotkey';
 import History from './history';
@@ -17,6 +17,8 @@ import schemaConfig from '../../schema/config';
 import {getHeight} from '../../utils/dom';
 import SectionBase from '../base';
 
+
+const { $ } = Engine
 const getKeys = (keyString) => {
   let keys = null;
   if (keyString) {
@@ -54,14 +56,14 @@ class Table extends SectionBase {
           this.engine.toolbar.set(toolbar(this));
         }
       }
-      this.controllBar.refresh();
+      this.controlBar.refresh();
     };
 
     this.unactivate = () => {
       this.active = false;
       this.container.css('user-select', 'auto');
       this.selection.clear();
-      this.controllBar.hide();
+      this.controlBar.hide();
       this.removeEditor();
       this.engine.toolbar.restore();
     };
@@ -155,7 +157,7 @@ class Table extends SectionBase {
       const tdHeight = this.subEngine.td[0].offsetHeight;
       if (!this.tdHeight || tdHeight !== this.tdHeight) {
         this.tdHeight = tdHeight;
-        this.controllBar.render('input');
+        this.controlBar.render('input');
         this.selection.reRenderActiveBox();
       }
       this.onTableSizeChange();
@@ -393,16 +395,17 @@ class Table extends SectionBase {
 
     this.bindEditEvents = () => {
       if (this.inited) return;
-      this.controllBar.on('startChangeCellSize', this.selection.clear);
-      this.controllBar.on('clickColsHeader', this.selection.selectCol);
-      this.controllBar.on('clickRowsHeader', this.selection.selectRow);
-      this.controllBar.on('clickTableHeader', this.selection.selectTable);
-      this.controllBar.on('sizeChanged', () => {
+      this.controlBar.on('startChangeCellSize', this.selection.clear);
+      this.controlBar.on('clickColsHeader', this.selection.selectCol);
+      this.controlBar.on('clickRowsHeader', this.selection.selectRow);
+      this.controlBar.on('clickTableHeader', this.selection.selectTable);
+      this.controlBar.on('sizeChanged', () => {
         this.setSectionValue();
         this.scrollbar.refresh();
+        this.onTableSizeChange();
       });
 
-      this.controllBar.on('heightchanging', () => {
+      this.controlBar.on('tableSizeChange', () => {
         this.onTableSizeChange();
       });
 
@@ -411,7 +414,7 @@ class Table extends SectionBase {
           Engine.section.renderAll(this.container, undefined, this.engine);
         }
         this.removeEditor();
-        this.controllBar.render(action);
+        this.controlBar.render(action);
         this.selection.render(action);
         this.scrollbar.refresh();
         if (!silence) {
@@ -423,12 +426,12 @@ class Table extends SectionBase {
       this.selection.on('select', () => {
         this.delayToUpdateToolbar();
         this.removeEditor();
-        this.controllBar.refresh('select');
+        this.controlBar.refresh('select');
       });
 
       this.selection.on('cancelSelect', () => {
         this.removeEditor();
-        this.controllBar.clearActiveStatus();
+        this.controlBar.clearActiveStatus();
       });
       this.selection.on('active', this.createEditor);
       this.container.on('compositionend', this.startEdit);
@@ -463,7 +466,7 @@ class Table extends SectionBase {
 
     this.change = engine.change;
     this.sectionManage = engine.section;
-    this.controllBar = new Controllbar(this);
+    this.controlBar = new ControlBar(this);
     this.selection = new Selection(this);
     this.command = new Command(this);
     this.hotkey = new Hotkey(this);
@@ -513,14 +516,29 @@ class Table extends SectionBase {
   }
 
   onTableSizeChange() {
+    const tableWidth = this.tableRoot[0].offsetWidth;
+    const pageWidth = this.engine.container[0].offsetWidth;
+    const editAreaWidth = this.engine.container[0].querySelector('[data-section-key="table"]').offsetWidth;
+    const body = this.engine.container[0].querySelector('[data-section-key="table"] [data-section-element="body"]');
+    let margin = 0
+    // 表格宽度超出可编辑区域，左右margin 居中，最大margin为 ((pageWidth - editAreaWidth) / 2 - 14) px
+    const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
+    const tableMaxSize = editAreaWidth + maxMargin * 2
+    if (tableWidth > editAreaWidth) {
+      margin = (tableWidth - editAreaWidth)/2
+      const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
+      margin = Math.min(margin, maxMargin)
+      $(body).css('margin', `0 -${margin}px`)
+    }
     this.container.css({
-      'min-height': `${this.getTableHeight()}px`,
+      'height': `${this.getTableHeight()}px`,
+      'width': `${Math.min(tableWidth, tableMaxSize)}px`,
+      // 'margin': `0 -${margin}px`,
     });
     if (this.options.type === 'mini' && !this.state.maximize) {
       const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS);
       const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS);
       triggerCols.css('height', `${this.tableRoot[0].offsetHeight}px`);
-      const tableWidth = this.tableRoot[0].offsetWidth;
       const wrapperWidth = this.tableWrapper[0].offsetWidth;
       triggerRows.css('width', `${tableWidth > wrapperWidth ? wrapperWidth : tableWidth}px`);
     }
@@ -568,7 +586,7 @@ class Table extends SectionBase {
     this.viewport = container.find(this.template.VIEWPORT);
     this.tableWrapper = container.find(this.template.TABLE_WRAPPER_CLASS);
     this.selection.init();
-    this.controllBar.init();
+    this.controlBar.init();
     this.scrollbar = new Scrollbar(this.viewport, true, false, true);
     this.bindEditEvents();
 

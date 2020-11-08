@@ -167,7 +167,7 @@ export default function (section) {
         .concat(trs, '</table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      return '       <div class="'.concat(sectionClass, '">').concat(tableHeader, ' <div class=" ').concat(VIEWPORT, '">').concat(colsHeader, '')
+      return '<div class="'.concat(sectionClass, '">').concat(tableHeader, ' <div class=" ').concat(VIEWPORT, '">').concat(colsHeader, '')
         .concat(activeBox, '')
         .concat(table, '')
         .concat(placeholder, '')
@@ -178,7 +178,7 @@ export default function (section) {
     },
     htmlView: (value) => {
       const html = value.html;
-      return '<div class="'.concat(VIEWPORT_READER, '">       ').concat(html, '     </div>');
+      return '<div class="'.concat(VIEWPORT_READER, '">').concat(html, '</div>');
     },
   };
 }

@@ -2444,22 +2444,20 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
   cursor: text;
   white-space: normal;
   height: fit-content;
-  padding: 40px;
-  width: 794px;
-  margin: 24px 0 84px 0;
+  margin: 24px 0;
   align-self: start;
   justify-self: center;
   grid-column: 2;
   grid-row: 1;
   counter-reset: numbered;
-  border: var(--devsite-page-border, 0);
-  border-radius: var(--devsite-page-border-radius, 2px);
-  box-shadow: var(--devsite-page-box-shadow, 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15));
-  background-color: #fff;
 
+  &:last-child {
+    margin-bottom: 64px !important;
+  }
 
   .lake-content-editor-core {
-    min-height: 500px;
+    min-width: 500px;
+    min-height: 300px;
     cursor: text;
   }
 }
@@ -3713,8 +3711,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 }
 
 .lake-engine div[data-section-key="table"] > div[data-section-element="body"] > .lake-section-dnd {
-  left: -38px;
-  top: -4px;
+  top: -40px;
 }
 
 .lake-engine div[data-section-table="mini"] > div[data-section-element="body"] > .lake-section-dnd {
@@ -3806,6 +3803,7 @@ span[data-section-key="image"].lake-section-block.lake-image-center {
 
 [data-section-key="table"] .lake-embed-toolbar {
   top: -82px;
+  transition: all 0.3s ease-in-out 0s;
 }
 
 [data-section-key="table"] [data-section-element="center"] {
