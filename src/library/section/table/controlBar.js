@@ -406,6 +406,7 @@ class ControlBar extends EventEmitter2 {
       const {template, selection} = this.section;
       this.trigger = $(e.target).closest(template.COLS_HEADER_TRIGGER_CLASS);
       if (!this.trigger[0]) {
+        // 移动列位置
         if (e.button === 2) {
           const colHeader = $(e.target).closest(template.COLS_HEADER_ITEM_CLASS);
           if (!colHeader[0]) return;
@@ -425,6 +426,7 @@ class ControlBar extends EventEmitter2 {
         }
         return;
       }
+      // 拖动修改列宽
       this.startChangeCol(this.trigger, e);
     };
 
@@ -438,6 +440,9 @@ class ControlBar extends EventEmitter2 {
       this.currentColWidth = this.currentCol[0].offsetWidth;
       this.width = this.colsHeader[0].offsetWidth;
       this.currentColIndex = this.currentCol.index();
+      console.log(this.draggingX)
+      console.log(this.currentColWidth)
+      console.log(this.width)
       this.bindChangeSizeEvent();
     };
 
@@ -574,6 +579,10 @@ class ControlBar extends EventEmitter2 {
         this.unBindChangeSizeEvent();
         this.width = this.section.tableRoot[0].offsetWidth;
         this.height = this.section.tableRoot[0].offsetHeight;
+        console.log(this.draggingX)
+        console.log(this.currentColWidth)
+        console.log(this.width)
+        // todo 点击 trigger 也会触发 sizeChanged -> need fix
         this.emit('sizeChanged');
       }
     };

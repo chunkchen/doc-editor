@@ -130,16 +130,19 @@ class Scrollbar extends EventEmitter2 {
         this.oHeight = offsetHeight;
         this.sWidth = scrollWidth;
         this.sHeight = scrollHeight;
+        // x滑块的宽度
         this.xWidth = Math.floor(offsetWidth * offsetWidth / scrollWidth);
         this.yHeight = Math.floor(offsetHeight * offsetHeight / scrollHeight);
         this.maxScrollLeft = scrollWidth - offsetWidth;
         if (this.option.x) {
+          console.log('offsetWidth:', this.oWidth)
+          console.log('scrollWidth:', this.sWidth)
           this.slideX.css('width', `${this.xWidth}px`);
-          this.slideX.css('display', this.oWidth === this.sWidth ? 'none' : 'block');
+          this.slideX.css('display', this.oWidth >= this.sWidth ? 'none' : 'block');
         }
         if (this.option.y) {
           this.slideY.css('height', `${this.yHeight}px`);
-          this.slideY.css('display', this.oHeight === this.sHeight ? 'none' : 'block');
+          this.slideY.css('display', this.oHeight >= this.sHeight ? 'none' : 'block');
         }
         this.reRenderX(scrollLeft);
         this.reRenderY(scrollTop);
