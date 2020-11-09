@@ -225,7 +225,6 @@ class ControlBar extends EventEmitter2 {
 
         this.dropCol = dropIndex;
         const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
-        console.log(colBars, dropIndex)
         const left = this.dropCol !== colBars.length ? colBars[this.dropCol].offsetLeft + 2 : colBars[this.dropCol - 1].offsetLeft + colBars[this.dropCol - 1].offsetWidth + 2;
         const {scrollLeft, offsetWidth} = this.viewport[0];
         if (left < scrollLeft) {
@@ -440,9 +439,6 @@ class ControlBar extends EventEmitter2 {
       this.currentColWidth = this.currentCol[0].offsetWidth;
       this.width = this.colsHeader[0].offsetWidth;
       this.currentColIndex = this.currentCol.index();
-      console.log(this.draggingX)
-      console.log(this.currentColWidth)
-      console.log(this.width)
       this.bindChangeSizeEvent();
     };
 
@@ -494,14 +490,15 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.onChangeColWidth = (e) => {
-      let dx = e.clientX - this.draggingX;
-      const itemWidth = Math.max(this.MIN_WIDTH, this.currentColWidth + dx);
-      dx = itemWidth - this.currentColWidth;
-      const tableWidth = this.width + dx;
+      this.dx = e.clientX - this.draggingX;
+      const itemWidth = Math.max(this.MIN_WIDTH, this.currentColWidth + this.dx);
+      this.dx = itemWidth - this.currentColWidth;
+      const tableWidth = this.width + this.dx;
       this.currentCol.css('width', `${itemWidth}px`);
       this.colsHeader.css('width', `${tableWidth}px`);
       const viewport = this.viewport[0];
       // 拖到边界时，需要滚动表格视窗的滚动条
+      // 当前列头 右侧边界偏移量
       const currentColRightSide = this.currentCol[0].offsetLeft + this.currentCol[0].offsetWidth;
       if (currentColRightSide - viewport.scrollLeft + 20 > viewport.offsetWidth) {
         // 拖宽单元格时，若右侧已经到边，需要滚动左侧的滚动条
@@ -518,9 +515,9 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.onChangeRowHeight = (e) => {
-      let dy = e.clientY - this.draggingY;
-      const itemHeight = Math.max(this.MIN_HEIGHT, this.currentRowHeight + dy);
-      dy = itemHeight - this.currentRowHeight;
+      this.dy = e.clientY - this.draggingY;
+      const itemHeight = Math.max(this.MIN_HEIGHT, this.currentRowHeight + this.dy);
+      this.dy = itemHeight - this.currentRowHeight;
       this.currentRow.css('height', `${itemHeight}px`);
       this.clearActiveStatus();
       this.hideContextMenu();
@@ -579,11 +576,11 @@ class ControlBar extends EventEmitter2 {
         this.unBindChangeSizeEvent();
         this.width = this.section.tableRoot[0].offsetWidth;
         this.height = this.section.tableRoot[0].offsetHeight;
-        console.log(this.draggingX)
-        console.log(this.currentColWidth)
-        console.log(this.width)
-        // todo 点击 trigger 也会触发 sizeChanged -> need fix
-        this.emit('sizeChanged');
+        if (this.dx || this.dy) {
+          this.dx = 0
+          this.dy = 0
+          this.emit('sizeChanged');
+        }
       }
     };
 
@@ -911,6 +908,8 @@ class ControlBar extends EventEmitter2 {
     this.dragging = false;
     this.draggingX = 0;
     this.draggingY = 0;
+    this.dx = 0
+    this.dy = 0
     this.width = 0;
     this.height = 0;
     this.MIN_WIDTH = 40;

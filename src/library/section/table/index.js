@@ -402,12 +402,10 @@ class Table extends SectionBase {
       this.controlBar.on('sizeChanged', () => {
         this.setSectionValue();
         this.onTableSizeChange();
-        this.scrollbar.refresh();
       });
 
       this.controlBar.on('tableSizeChange', () => {
         this.onTableSizeChange();
-        this.scrollbar.refresh();
       });
 
       this.command.on('actioned', (action, silence) => {
@@ -517,18 +515,14 @@ class Table extends SectionBase {
   }
 
   onTableSizeChange() {
-    let startTime = new Date().getMilliseconds();
-    console.log('table size change...')
     const tableWidth = this.tableRoot[0].offsetWidth;
     const pageWidth = this.engine.container[0].offsetWidth;
     const editAreaWidth = this.table.offsetWidth;
-    console.log(pageWidth, editAreaWidth)
     let margin = 0
     // 表格宽度超出可编辑区域，左右margin 居中，最大margin为 ((pageWidth - editAreaWidth) / 2 - 20) px, 20 为 预留的最小页边距
     const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
     // 表格最大可显示区域
     const tableMaxSize = editAreaWidth + maxMargin * 2
-    console.log('tableMaxSize:', tableMaxSize)
     if (tableWidth > editAreaWidth) {
       margin = (tableWidth - editAreaWidth)/2
       const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
@@ -547,7 +541,7 @@ class Table extends SectionBase {
       const wrapperWidth = this.tableWrapper[0].offsetWidth;
       triggerRows.css('width', `${tableWidth > wrapperWidth ? wrapperWidth : tableWidth}px`);
     }
-    console.log('take time: ', (new Date().getMilliseconds() - startTime) + 'ms')
+    this.scrollbar.refresh();
   }
 
   render(container, value, self) {
@@ -595,8 +589,6 @@ class Table extends SectionBase {
     this.tableBody = this.engine.container[0].querySelector('[data-section-key="table"] [data-section-element="body"]');
     this.selection.init();
     this.controlBar.init();
-    this.onTableSizeChange();
-    console.log('table size change after:', this.viewport[0].offsetWidth)
     this.scrollbar = new Scrollbar(this.viewport, true, false, true);
     this.bindEditEvents();
 
@@ -604,6 +596,7 @@ class Table extends SectionBase {
       // 新插入表格的时候设置sectionValue，这样外部立刻保存的时候，服务端不会报错
       this.setSectionValue(self);
     }
+    this.onTableSizeChange();
   }
 }
 

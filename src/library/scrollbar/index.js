@@ -135,8 +135,6 @@ class Scrollbar extends EventEmitter2 {
         this.yHeight = Math.floor(offsetHeight * offsetHeight / scrollHeight);
         this.maxScrollLeft = scrollWidth - offsetWidth;
         if (this.option.x) {
-          console.log('offsetWidth:', this.oWidth)
-          console.log('scrollWidth:', this.sWidth)
           this.slideX.css('width', `${this.xWidth}px`);
           this.slideX.css('display', this.oWidth >= this.sWidth ? 'none' : 'block');
         }
