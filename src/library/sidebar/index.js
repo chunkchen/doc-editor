@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.name !== prevState.name && this.state.name === 'toc') {
-      new Engine.Scrollbar(Engine.$(this.contentNode.current), false, true);
+      new Engine.Scrollbar(Engine.$(this.contentNode.current), false, true, false);
     }
   }
 

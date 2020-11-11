@@ -53,6 +53,14 @@ class Dialog extends React.Component {
   }
 
   componentDidMount() {
+    this.initDialog()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.initDialog()
+  }
+
+  initDialog = () => {
     Engine.$(document).on('keydown', this.onEsc);
     this.extends();
   }

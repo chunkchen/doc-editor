@@ -125,6 +125,16 @@ class Toolbar extends React.Component {
   }
 
   componentDidMount() {
+    this.initToolbar()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.engine.hash !== prevProps.engine.hash) {
+      this.initToolbar()
+    }
+  }
+
+  initToolbar = () => {
     const {toolbar, engine} = this.props;
     // 初始化 工具栏
     this.setToolbar(toolbar, toolbarConfig(engine));
