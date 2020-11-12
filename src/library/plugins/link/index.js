@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {ConfigProvider} from 'antd';
-import {shrinkToElementNode} from '@hicooper/doc-engine/lib/utils/range';
-import {escapeRegExp, sanitizeUrl} from '@hicooper/doc-engine/lib/utils/string';
+import { ConfigProvider } from 'antd';
+import { shrinkToElementNode } from '@hicooper/doc-engine/lib/utils/range';
+import { escapeRegExp, sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
 import Engine from '@hicooper/doc-engine/lib';
 import LinkEditor from './editor';
 import './index.css';
@@ -15,10 +15,11 @@ function shouldTargetBlank(href) {
 }
 
 function getLink(linkUrl) {
-  const {location} = window;
+  const { location } = window;
   const url = escapeRegExp(location.origin + location.pathname.replace('/edit', ''));
   const reg = RegExp('^'.concat(url, '#'));
-  linkUrl.replace(reg, '#').trim();
+  linkUrl.replace(reg, '#')
+    .trim();
   if (/^(\w+\.)+\w+(\/|$)/.test(linkUrl)) {
     linkUrl = `http://${linkUrl}`;
   }
@@ -30,14 +31,15 @@ function go(node) {
   const isRmove = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
   const container = document.createElement('div');
   const removeLink = () => {
-    Engine.$(node).each((child) => {
-      const range = this.change.getRange();
-      range.selectNode(child);
-      this.change.select(range);
-      this.change.unwrapInline('<a />');
-    });
+    Engine.$(node)
+      .each((child) => {
+        const range = this.change.getRange();
+        range.selectNode(child);
+        this.change.select(range);
+        this.change.unwrapInline('<a />');
+      });
   };
-  const {body} = document;
+  const { body } = document;
   body.appendChild(container);
   ReactDOM.render(
     <ConfigProvider autoInsertSpaceInButton={false}>
@@ -81,7 +83,8 @@ function go(node) {
 export default {
   initialize() {
     this.container.on('click', (event) => {
-      const link = Engine.$(event.target).closest(TAG_NAME);
+      const link = Engine.$(event.target)
+        .closest(TAG_NAME);
       if (link.length > 0) {
         const section = this.section.closest(link);
         if (section) {
@@ -121,7 +124,8 @@ export default {
         if (TAG_NAME !== root.name) {
           root = root.find('.lake-link-marker');
           if (root.length === 0) {
-            root = Engine.$(range.commonAncestorContainer).closest(TAG_NAME);
+            root = Engine.$(range.commonAncestorContainer)
+              .closest(TAG_NAME);
           }
         }
         root.removeClass('lake-link-marker');

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Button, Input, message} from 'antd';
+import { Button, Input, message } from 'antd';
 
 const w = /[^a-zA-Z0-9`~!@#$%\\^&*()_+-={}|\\[\\]\\:";'<>?,\.\/]/;
 
 class Lock extends React.Component {
   changeLockPassword = (e) => {
     this.password = e.target.value;
-  }
+  };
 
   lock = () => {
     if (!this.password) {
@@ -15,8 +15,10 @@ class Lock extends React.Component {
     }
     if (this.password.match(w)) {
       message.error(this.props.locale.passwordPattern);
-    } else this.props.onLock(this.password);
-  }
+    } else {
+      this.props.onLock(this.password);
+    }
+  };
 
   render() {
     return (

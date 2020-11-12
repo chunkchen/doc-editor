@@ -1,8 +1,8 @@
 import Engine from '@hicooper/doc-engine/lib';
-import {getTableModel, normalizeTable, unWrapperTableBI} from '../section/table/utils';
+import { getTableModel, normalizeTable, unWrapperTableBI } from '../section/table/utils';
 import schema from '../section/table/schema';
 
-const {ChangeUtils, StringUtils, NodeUtils, $} = Engine;
+const { ChangeUtils, StringUtils, NodeUtils, $ } = Engine;
 
 function handleKeydownEnter(e) {
   const range = this.change.getRange();
@@ -26,9 +26,10 @@ function handleKeydownEnter(e) {
   if (match) {
     e.preventDefault();
     ChangeUtils.removeBlockLeftText(block, range);
-    const textList = match[0].split('|').filter((n) => {
-      return n;
-    });
+    const textList = match[0].split('|')
+      .filter((n) => {
+        return n;
+      });
     const rows = 3;
     const cols = textList.length;
     let html = '<table>';
@@ -56,7 +57,7 @@ function handleKeydownEnter(e) {
   }
 }
 
-export {handleKeydownEnter};
+export { handleKeydownEnter };
 
 export default {
   initialize() {
@@ -80,19 +81,20 @@ export default {
     });
     this.on('paste:origin', unWrapperTableBI);
     this.on('paste:before', (fragment) => {
-      NodeUtils.fetchAllChildren(fragment).forEach((node) => {
-        node = $(node);
-        if (node.name === 'table') {
-          const table = normalizeTable(node[0]);
-          const tableModel = getTableModel(node[0]);
-          const value = {
-            html: table.outerHTML,
-            rows: tableModel.rows,
-            cols: tableModel.cols,
-          };
-          this.section.replaceNode(node, 'table', value);
-        }
-      });
+      NodeUtils.fetchAllChildren(fragment)
+        .forEach((node) => {
+          node = $(node);
+          if (node.name === 'table') {
+            const table = normalizeTable(node[0]);
+            const tableModel = getTableModel(node[0]);
+            const value = {
+              html: table.outerHTML,
+              rows: tableModel.rows,
+              cols: tableModel.cols,
+            };
+            this.section.replaceNode(node, 'table', value);
+          }
+        });
     });
     // markdown 快捷方式
     this.on('keydown:enter', (e) => {

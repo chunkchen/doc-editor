@@ -12,20 +12,20 @@ import History from './history';
 import Selection from './selection';
 import Scrollbar from '../../scrollbar';
 import schema from './schema';
-import {tableInnerSchema, unWrapperTable, unWrapperTableHTML} from './utils';
+import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils';
 import schemaConfig from '../../schema/config';
-import {getHeight} from '../../utils/dom';
+import { getHeight } from '../../utils/dom';
 import SectionBase from '../base';
 
-
-const { $ } = Engine
+const { $ } = Engine;
 const getKeys = (keyString) => {
   let keys = null;
   if (keyString) {
     keys = [];
-    keyString.split('+').forEach((key) => {
-      keys.push(key.trim(), '+');
-    });
+    keyString.split('+')
+      .forEach((key) => {
+        keys.push(key.trim(), '+');
+      });
     if (keys.length > 0) delete keys[keys.length - 1];
   }
   return keys;
@@ -167,7 +167,8 @@ class Table extends SectionBase {
       if (!this.active) {
         return;
       }
-      const hideTextarea = Engine.$(e.target).closest(this.template.TABLE_TEXTAREA_CLASS);
+      const hideTextarea = Engine.$(e.target)
+        .closest(this.template.TABLE_TEXTAREA_CLASS);
       if (!hideTextarea[0]) {
         return;
       }
@@ -349,7 +350,8 @@ class Table extends SectionBase {
     };
 
     this.prevent = (e) => {
-      const table = Engine.$(e.target).closest('.lake-table');
+      const table = Engine.$(e.target)
+        .closest('.lake-table');
       if (table[0]) {
         e.preventDefault();
       }
@@ -390,7 +392,9 @@ class Table extends SectionBase {
     this.tab = (e) => {
       if (this.subEngine) {
         this.subEngine.command.queryState('tasklist');
-      } else this.selection.selectTab(e);
+      } else {
+        this.selection.selectTab(e);
+      }
     };
 
     this.bindEditEvents = () => {
@@ -475,9 +479,10 @@ class Table extends SectionBase {
   }
 
   select() {
-    if (this.state.readonly) super.select.call(this);
-    else {
-      const {container} = this;
+    if (this.state.readonly) {
+      super.select.call(this);
+    } else {
+      const { container } = this;
       if (container[0].childNodes.length > 0) {
         container.addClass('lake-table-selected');
       }
@@ -488,7 +493,7 @@ class Table extends SectionBase {
     if (this.state.readonly) {
       super.unselect.call(this);
     } else {
-      const {container} = this;
+      const { container } = this;
       if (container[0].childNodes.length > 0) {
         container.removeClass('lake-table-selected');
       }
@@ -496,14 +501,14 @@ class Table extends SectionBase {
   }
 
   selectByOther(color) {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       container.css('outline', `2px solid ${color}`);
     }
   }
 
   unselectByOther() {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       container.css('outline', '');
     }
@@ -518,16 +523,17 @@ class Table extends SectionBase {
     const tableWidth = this.tableRoot[0].offsetWidth;
     const pageWidth = this.engine.container[0].offsetWidth;
     const editAreaWidth = this.table.offsetWidth;
-    let margin = 0
+    let margin = 0;
     // 表格宽度超出可编辑区域，左右margin 居中，最大margin为 ((pageWidth - editAreaWidth) / 2 - 20) px, 20 为 预留的最小页边距
-    const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
+    const maxMargin = (pageWidth - editAreaWidth) / 2 - 20;
     // 表格最大可显示区域
-    const tableMaxSize = editAreaWidth + maxMargin * 2
+    const tableMaxSize = editAreaWidth + maxMargin * 2;
     if (tableWidth > editAreaWidth) {
-      margin = (tableWidth - editAreaWidth)/2
-      const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
-      margin = Math.min(margin, maxMargin)
-      $(this.tableBody).css('margin', `0 -${margin}px`)
+      margin = (tableWidth - editAreaWidth) / 2;
+      const maxMargin = (pageWidth - editAreaWidth) / 2 - 20;
+      margin = Math.min(margin, maxMargin);
+      $(this.tableBody)
+        .css('margin', `0 -${margin}px`);
     }
     // this.container 对应 subEdit 层级
     this.container.css({

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
-import {Dropdown, Menu} from 'antd';
+import { Dropdown, Menu } from 'antd';
 import 'antd/lib/menu/style';
 import 'antd/lib/dropdown/style';
 
-const {$} = Engine;
+const { $ } = Engine;
 /**
  * @fileOverview 图Section工具
  */
@@ -19,7 +19,8 @@ export default {
     const page = this.page;
     const zoom = page.getZoom();
     this.currentZoom = zoom;
-    this.tool.find('.zoom-precent').html(`${Math.round(zoom * 100)}%`);
+    this.tool.find('.zoom-precent')
+      .html(`${Math.round(zoom * 100)}%`);
   },
   // 点击缩放放大按钮
   _clickZoomUp() {
@@ -76,7 +77,8 @@ export default {
         <Menu.Item value="autoZoom">适合画布</Menu.Item>
       </Menu>
     );
-    $(this.page.getGraphContainer()).append(tool);
+    $(this.page.getGraphContainer())
+      .append(tool);
     tool.hide();
     ReactDom.render(
       <div>

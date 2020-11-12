@@ -24,11 +24,13 @@ class IFrame {
       if (lozad) {
         lozad.observe();
       }
-    } else iframe.attr('src', src);
+    } else {
+      iframe.attr('src', src);
+    }
   }
 
   render(cfg, delay, lozad) {
-    const {iframe, url} = cfg;
+    const { iframe, url } = cfg;
     if (delay) {
       setTimeout(() => {
         this.setSrc(iframe, url, lozad);

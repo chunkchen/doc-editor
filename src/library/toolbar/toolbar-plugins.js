@@ -24,7 +24,7 @@ class ToolbarPlugins extends React.Component {
   state = {
     elementWidths: null,
     menuContainerWidth: null,
-  }
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.onResize, false);
@@ -72,7 +72,7 @@ class ToolbarPlugins extends React.Component {
   }
 
   findMoreBoundary() {
-    const {elementWidths, menuContainerWidth} = this.state;
+    const { elementWidths, menuContainerWidth } = this.state;
     const length = Object.keys(elementWidths).length;
     let index = -1;
     let width = 0;
@@ -87,8 +87,8 @@ class ToolbarPlugins extends React.Component {
   }
 
   render() {
-    const {children, hasMore} = this.props;
-    const {elementWidths} = this.state;
+    const { children, hasMore } = this.props;
+    const { elementWidths } = this.state;
     let pluginItems = [];
     const morePluginItems = [];
 

@@ -1,4 +1,4 @@
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import React from 'react';
 import routerConfig from './routerConfig';
 
@@ -12,7 +12,7 @@ const renderNormalRoute = (config, parentPath) => {
   if (!config || !config.length) return [];
   let routerList = [];
   config.forEach((item) => {
-    let {path} = item;
+    let { path } = item;
     if (!path) {
       return;
     }
@@ -22,7 +22,7 @@ const renderNormalRoute = (config, parentPath) => {
       }
       const exact = (item.children && item.children.length > 0) || item.exact;
       routerList.push(
-        <Route path={path} component={item.component} exact={exact} key={path}/>,
+        <Route path={path} component={item.component} exact={exact} key={path} />,
       );
     }
     if (item.children && item.children.length) {

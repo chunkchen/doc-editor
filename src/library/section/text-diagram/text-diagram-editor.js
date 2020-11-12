@@ -2,21 +2,21 @@ import React from 'react';
 import classnames from 'classnames';
 import CodeMirror from 'codemirror';
 import debounce from 'lodash/debounce';
-import {Dropdown, Menu, Select, Tooltip} from 'antd';
+import { Dropdown, Menu, Select, Tooltip } from 'antd';
 import 'antd/lib/dropdown/style';
 import 'antd/lib/icon/style';
 import 'antd/lib/menu/style';
 import 'antd/lib/select/style';
 import 'antd/lib/tooltip/style';
 import Engine from '@hicooper/doc-engine/lib';
-import Icon, {DownOutlined} from '@ant-design/icons';
+import Icon, { DownOutlined } from '@ant-design/icons';
 import Template from './template';
 import constants from './constants';
 import Icons from './icons';
 import TextDiagramViewer from './text-diagram-render';
 
 const {
-  userAgent: {macos},
+  userAgent: { macos },
 } = Engine;
 const {
   EDITOR_MODE,
@@ -50,7 +50,8 @@ class TextDiagramEditor extends React.PureComponent {
         mode: EDITOR_MODE.CODE,
       });
 
-      const rootCenter = Engine.$(this.rootRef.current).closest('div[data-section-element=center]');
+      const rootCenter = Engine.$(this.rootRef.current)
+        .closest('div[data-section-element=center]');
       const sectionResize = rootCenter.find('div.section-resize-button-ud');
 
       if (this.instance) {
@@ -108,14 +109,15 @@ class TextDiagramEditor extends React.PureComponent {
     };
 
     this.handlePreviewButtonClick = () => {
-      const {mode, layout} = this.state;
+      const { mode, layout } = this.state;
       // 双栏模式直接执行预览
       if (layout === EDITOR_LAYOUT.TWO_COLUMN) {
         this.doPreview();
         return;
       }
 
-      const rootCenter = Engine.$(this.rootRef.current).closest('div[data-section-element=center]');
+      const rootCenter = Engine.$(this.rootRef.current)
+        .closest('div[data-section-element=center]');
       const sectionResize = rootCenter.find('div.section-resize-button-ud');
 
       if (mode === EDITOR_MODE.PREVIEW) {
@@ -136,7 +138,7 @@ class TextDiagramEditor extends React.PureComponent {
     };
 
     this.renderPreview = () => {
-      const {mode, layout, codeForPreview} = this.state;
+      const { mode, layout, codeForPreview } = this.state;
       // 单栏布局、代码模式，不渲染
       if (layout === EDITOR_LAYOUT.DEFAULT && mode === EDITOR_MODE.CODE) return null;
       // 无待预览代码，不渲染
@@ -198,7 +200,7 @@ class TextDiagramEditor extends React.PureComponent {
   initEditor() {
     const textAreaDom = this.editorRef.current;
     const options = this.getOptions(this.props.type);
-    const {isMaximize} = this.props;
+    const { isMaximize } = this.props;
     const doPreview = debounce(() => {
       this.doPreview();
     }, 300);
@@ -278,7 +280,7 @@ class TextDiagramEditor extends React.PureComponent {
   // hack: 将 popover dorpdown 限定在容器范围内，阻止 meun popover 事件被拦截
   // 修订编辑区域的展示尺寸，保证给预览区域足够的空间展示图片
   fixEditorBodySize() {
-    const {mode, layout} = this.state;
+    const { mode, layout } = this.state;
     // 仅单栏模式需要调整
     if (layout !== EDITOR_LAYOUT.DEFAULT) return;
     const body = this.bodyRef.current;
@@ -306,15 +308,16 @@ class TextDiagramEditor extends React.PureComponent {
         overlay={(
           <Menu
             onClick={(_ref) => {
-              const {key, domEvent} = _ref;
+              const { key, domEvent } = _ref;
               // 需要阻止事件被编辑器捕获
               domEvent.stopPropagation();
               this.switchTemplate(key);
             }}
           >
-            {Object.values(this.templates).map((template) => {
-              return <Menu.Item key={template.id}>{template.name}</Menu.Item>;
-            })}
+            {Object.values(this.templates)
+              .map((template) => {
+                return <Menu.Item key={template.id}>{template.name}</Menu.Item>;
+              })}
           </Menu>
         )}
       >
@@ -328,7 +331,7 @@ class TextDiagramEditor extends React.PureComponent {
 
   render() {
     const locale = this.props.locale;
-    const {mode, layout} = this.state;
+    const { mode, layout } = this.state;
     return (
       <div
         className={classnames([
@@ -381,7 +384,7 @@ class TextDiagramEditor extends React.PureComponent {
           </div>
           <div
             className="lake-text-diagram-preview"
-            style={{display: this.needShowPreviewPanel() ? 'block' : 'none'}}
+            style={{ display: this.needShowPreviewPanel() ? 'block' : 'none' }}
           >
             {this.renderPreview()}
           </div>

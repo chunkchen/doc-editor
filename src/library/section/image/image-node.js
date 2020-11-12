@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
 import Resizer from './resizer';
-import {isBase64Image} from '../../utils/string';
+import { isBase64Image } from '../../utils/string';
 import ErrorTips from '../../tips/error';
 
 import Pswp from './pswp';
 
-const {userAgent: {chrome, firefox, mobile}} = Engine;
+const { userAgent: { chrome, firefox, mobile } } = Engine;
 const pswp = new Pswp();
 
 const errorTemplate = (data) => {
@@ -22,7 +22,8 @@ const errorTemplate = (data) => {
 };
 const winPixelRatio = window.devicePixelRatio;
 let canvas;
-const isSupportWebp = !(!(canvas = document.createElement('canvas')).getContext || !canvas.getContext('2d')) && (chrome || firefox || canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0);
+const isSupportWebp = !(!(canvas = document.createElement('canvas')).getContext || !canvas.getContext('2d')) && (chrome || firefox || canvas.toDataURL('image/webp')
+  .indexOf('data:image/webp') === 0);
 const convWebp = (src, isSupportWebp) => {
   if (src && src.endsWith('.webp') && !isSupportWebp) {
     src += '?x-oss-process=image/format,png';
@@ -31,9 +32,9 @@ const convWebp = (src, isSupportWebp) => {
 };
 
 const getResizeSrc = (options) => {
-  const {maxWidth, data} = options;
-  let {src} = options;
-  const {width, originWidth, originHeight} = data;
+  const { maxWidth, data } = options;
+  let { src } = options;
+  const { width, originWidth, originHeight } = data;
   if (width && originWidth && originHeight && src.indexOf('x-oss-process=image/resize,') === -1 && originWidth < 3e4 && originHeight < 3e4) {
     let _width = parseInt(width);
     if (_width > maxWidth) {
@@ -58,8 +59,8 @@ const getResizeSrc = (options) => {
 };
 
 const template = (_ref) => {
-  const {data, readonly, maxWidth, onBeforeRenderImage} = _ref;
-  let {src} = _ref;
+  const { data, readonly, maxWidth, onBeforeRenderImage } = _ref;
+  let { src } = _ref;
   if (data.status === 'error') {
     return errorTemplate(data);
   }
@@ -92,7 +93,8 @@ const template = (_ref) => {
   }
 
   const title = data.name ? Engine.StringUtils.escape(data.name) : '';
-  const altAttr = title ? ' alt="'.concat(title, '" title="').concat(title, '"') : '';
+  const altAttr = title ? ' alt="'.concat(title, '" title="')
+    .concat(title, '"') : '';
   let imgHtml;
 
   if (data.link && readonly) {
@@ -101,23 +103,35 @@ const template = (_ref) => {
       target = ' target="_blank"';
     }
     if (mobile) {
-      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" data-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"')
+      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"')
+        .concat(target, '><img data-role="image" data-src="')
+        .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="')
+        .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"')
         .concat(altAttr, ' /></a>');
     } else {
-      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"').concat(target, '><img data-role="image" src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"')
+      imgHtml = '<a href="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(data.link)), '"')
+        .concat(target, '><img data-role="image" src="')
+        .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="')
+        .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"')
         .concat(altAttr, ' /></a>');
     }
   } else if (mobile && readonly) {
-    imgHtml = '<img data-role="image" data-src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"').concat(altAttr, ' />');
+    imgHtml = '<img data-role="image" data-src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="')
+      .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lozad lake-drag-image"')
+      .concat(altAttr, ' />');
   } else {
-    imgHtml = '<img data-role="image" src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="').concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"').concat(altAttr, ' />');
+    imgHtml = '<img data-role="image" src="'.concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(src)), '" data-raw-src="')
+      .concat(Engine.StringUtils.escape(Engine.StringUtils.sanitizeUrl(rawSrc)), '" class="image lake-drag-image"')
+      .concat(altAttr, ' />');
   }
 
   let maximize = '<span data-role="maximize" class="lake-image-editor-maximize" style="display: none;"><span class="lake-icon lake-icon-maximize"/></span>';
   if ((data.width && data.originWidth < 100) || (typeof data.width === 'number' && data.width < 100) || mobile) {
     maximize = '';
   }
-  return '\n  <span class="lake-image">\n    <span class="lake-image-content lake-image-content-istmp">\n      <span data-role="detail" class="lake-image-detail">\n        <span class="lake-image-meta">\n          <span class="lake-image-warning" style="display: none;">\n            <i class="anticon anticon-exclamation-circle">\n              <svg viewBox="64 64 896 896" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zM488 576h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path>\n              </svg>\n            </i>\n          </span>\n          '.concat(imgHtml, '\n          ').concat(progressHtml, '\n          ').concat(maximize, '\n        </span>\n      </span>\n    </span>\n  </span>\n  ');
+  return '\n  <span class="lake-image">\n    <span class="lake-image-content lake-image-content-istmp">\n      <span data-role="detail" class="lake-image-detail">\n        <span class="lake-image-meta">\n          <span class="lake-image-warning" style="display: none;">\n            <i class="anticon anticon-exclamation-circle">\n              <svg viewBox="64 64 896 896" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true">\n                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zM488 576h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path>\n              </svg>\n            </i>\n          </span>\n          '.concat(imgHtml, '\n          ')
+    .concat(progressHtml, '\n          ')
+    .concat(maximize, '\n        </span>\n      </span>\n    </span>\n  </span>\n  ');
 };
 
 class ImageNode {
@@ -145,7 +159,8 @@ class ImageNode {
       if (this.status === 'done') {
         this.destroyEditor();
       }
-      Engine.$('div[data-lake-element=embed-tooltip]').remove();
+      Engine.$('div[data-lake-element=embed-tooltip]')
+        .remove();
     };
 
     this.getMaxWidth = function (sectionRoot) {
@@ -158,8 +173,8 @@ class ImageNode {
     };
 
     this.getValue = () => {
-      const {width, height, src, originWidth, originHeight, display, align, angle, link, linkTarget, status} = this;
-      const {name, size} = this.config.value;
+      const { width, height, src, originWidth, originHeight, display, align, angle, link, linkTarget, status } = this;
+      const { name, size } = this.config.value;
       const newValue = {
         src,
         originWidth,
@@ -306,48 +321,51 @@ class ImageNode {
         const sectionRoot = this.sectionRoot;
         let rootIndex = 0;
 
-        engine.container.find('[data-section-key="image"]').toArray().filter((imgSection) => {
-          imgSection = Engine.$(imgSection);
-          return imgSection.find('[data-role="image"]').length > 0;
-        }).forEach((imgSection, index) => {
-          imgSection = Engine.$(imgSection);
-          const image = imgSection.find('[data-role="image"]');
-          const value = engine.section.getValue(imgSection);
-          const imageWidth = parseInt(image.css('width'));
-          const imageHeight = parseInt(image.css('height'));
-          const width = value.width || imageWidth;
-          const height = value.height || imageHeight;
-          const originWidth = value.originWidth || imageWidth * winPixelRatio;
-          const originHeight = value.originHeight || imageHeight * winPixelRatio;
-          const maxWidth = mobile ? 1e3 : 4e3;
-          const src = convWebp(value.src, isSupportWebp);
-          const resizeSrc = getResizeSrc({
-            maxWidth,
-            src,
-            data: {
-              width,
-              originWidth,
-              originHeight,
-            },
-          });
-          const msrc = image.attr('src');
-          imageArray.push(
-            resizeSrc ? {
-              src: resizeSrc,
-              msrc,
-              w: maxWidth,
-              h: height / width * maxWidth,
-            } : {
+        engine.container.find('[data-section-key="image"]')
+          .toArray()
+          .filter((imgSection) => {
+            imgSection = Engine.$(imgSection);
+            return imgSection.find('[data-role="image"]').length > 0;
+          })
+          .forEach((imgSection, index) => {
+            imgSection = Engine.$(imgSection);
+            const image = imgSection.find('[data-role="image"]');
+            const value = engine.section.getValue(imgSection);
+            const imageWidth = parseInt(image.css('width'));
+            const imageHeight = parseInt(image.css('height'));
+            const width = value.width || imageWidth;
+            const height = value.height || imageHeight;
+            const originWidth = value.originWidth || imageWidth * winPixelRatio;
+            const originHeight = value.originHeight || imageHeight * winPixelRatio;
+            const maxWidth = mobile ? 1e3 : 4e3;
+            const src = convWebp(value.src, isSupportWebp);
+            const resizeSrc = getResizeSrc({
+              maxWidth,
               src,
-              msrc,
-              w: originWidth,
-              h: originHeight,
+              data: {
+                width,
+                originWidth,
+                originHeight,
+              },
+            });
+            const msrc = image.attr('src');
+            imageArray.push(
+              resizeSrc ? {
+                src: resizeSrc,
+                msrc,
+                w: maxWidth,
+                h: height / width * maxWidth,
+              } : {
+                src,
+                msrc,
+                w: originWidth,
+                h: originHeight,
+              },
+            );
+            if (imgSection[0] === sectionRoot[0]) {
+              rootIndex = index;
             }
-          );
-          if (imgSection[0] === sectionRoot[0]) {
-            rootIndex = index;
-          }
-        });
+          });
         pswp.open(imageArray, rootIndex);
       }
     };
@@ -416,8 +434,10 @@ class ImageNode {
       }
 
       if (this.status === 'done') {
-        this.root.find('.lake-image-content').addClass('lake-image-content-isvalid');
-        this.root.find('.lake-image-content').removeClass('lake-image-content-istmp');
+        this.root.find('.lake-image-content')
+          .addClass('lake-image-content-isvalid');
+        this.root.find('.lake-image-content')
+          .removeClass('lake-image-content-istmp');
       }
 
       const img = this.image[0];
@@ -560,9 +580,11 @@ class ImageNode {
     }
 
     if (this.status === 'uploading') {
-      this.find('progress').show();
+      this.find('progress')
+        .show();
     } else {
-      this.find('progress').remove();
+      this.find('progress')
+        .remove();
     }
 
     if (this.readonly) {
@@ -578,7 +600,7 @@ class ImageNode {
         this.image.css('background-color', '#FAFAFA');
         this.image.css('background-repeat', 'no-repeat');
         this.image.css('background-position', 'center');
-        this.image.css('background-image', "url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjhweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjggMjIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDU1LjIgKDc4MTgxKSAtIGh0dHBzOi8vc2tldGNoYXBwLmNvbSAtLT4KICAgIDx0aXRsZT5pbWFnZS1maWxs5aSH5Lu9PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9Iuafpeeci+WbvueJh+S8mOWMljQuMCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IuWKoOi9veWbvueJhyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU3Mi4wMDAwMDAsIC01MDYuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpbWFnZS1maWxs5aSH5Lu9IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NzAuMDAwMDAwLCA1MDEuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlIiBmaWxsPSIjMDAwMDAwIiBvcGFjaXR5PSIwIiB4PSIwIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yOSw1IEwzLDUgQzIuNDQ2ODc1LDUgMiw1LjQ0Njg3NSAyLDYgTDIsMjYgQzIsMjYuNTUzMTI1IDIuNDQ2ODc1LDI3IDMsMjcgTDI5LDI3IEMyOS41NTMxMjUsMjcgMzAsMjYuNTUzMTI1IDMwLDI2IEwzMCw2IEMzMCw1LjQ0Njg3NSAyOS41NTMxMjUsNSAyOSw1IFogTTEwLjU2MjUsOS41IEMxMS42NjU2MjUsOS41IDEyLjU2MjUsMTAuMzk2ODc1IDEyLjU2MjUsMTEuNSBDMTIuNTYyNSwxMi42MDMxMjUgMTEuNjY1NjI1LDEzLjUgMTAuNTYyNSwxMy41IEM5LjQ1OTM3NSwxMy41IDguNTYyNSwxMi42MDMxMjUgOC41NjI1LDExLjUgQzguNTYyNSwxMC4zOTY4NzUgOS40NTkzNzUsOS41IDEwLjU2MjUsOS41IFogTTI2LjYyMTg3NSwyMy4xNTkzNzUgQzI2LjU3ODEyNSwyMy4xOTY4NzUgMjYuNTE4NzUsMjMuMjE4NzUgMjYuNDU5Mzc1LDIzLjIxODc1IEw1LjUzNzUsMjMuMjE4NzUgQzUuNCwyMy4yMTg3NSA1LjI4NzUsMjMuMTA2MjUgNS4yODc1LDIyLjk2ODc1IEM1LjI4NzUsMjIuOTA5Mzc1IDUuMzA5Mzc1LDIyLjg1MzEyNSA1LjM0Njg3NSwyMi44MDYyNSBMMTAuNjY4NzUsMTYuNDkzNzUgQzEwLjc1NjI1LDE2LjM4NzUgMTAuOTE1NjI1LDE2LjM3NSAxMS4wMjE4NzUsMTYuNDYyNSBDMTEuMDMxMjUsMTYuNDcxODc1IDExLjA0Mzc1LDE2LjQ4MTI1IDExLjA1MzEyNSwxNi40OTM3NSBMMTQuMTU5Mzc1LDIwLjE4MTI1IEwxOS4xLDE0LjMyMTg3NSBDMTkuMTg3NSwxNC4yMTU2MjUgMTkuMzQ2ODc1LDE0LjIwMzEyNSAxOS40NTMxMjUsMTQuMjkwNjI1IEMxOS40NjI1LDE0LjMgMTkuNDc1LDE0LjMwOTM3NSAxOS40ODQzNzUsMTQuMzIxODc1IEwyNi42NTkzNzUsMjIuODA5Mzc1IEMyNi43NDA2MjUsMjIuOTEyNSAyNi43MjgxMjUsMjMuMDcxODc1IDI2LjYyMTg3NSwyMy4xNTkzNzUgWiIgaWQ9IlNoYXBlIiBmaWxsPSIjRThFOEU4Ij48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==')");
+        this.image.css('background-image', 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjhweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjggMjIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDU1LjIgKDc4MTgxKSAtIGh0dHBzOi8vc2tldGNoYXBwLmNvbSAtLT4KICAgIDx0aXRsZT5pbWFnZS1maWxs5aSH5Lu9PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9Iuafpeeci+WbvueJh+S8mOWMljQuMCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IuWKoOi9veWbvueJhyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU3Mi4wMDAwMDAsIC01MDYuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpbWFnZS1maWxs5aSH5Lu9IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NzAuMDAwMDAwLCA1MDEuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlIiBmaWxsPSIjMDAwMDAwIiBvcGFjaXR5PSIwIiB4PSIwIiB5PSIwIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjwvcmVjdD4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0yOSw1IEwzLDUgQzIuNDQ2ODc1LDUgMiw1LjQ0Njg3NSAyLDYgTDIsMjYgQzIsMjYuNTUzMTI1IDIuNDQ2ODc1LDI3IDMsMjcgTDI5LDI3IEMyOS41NTMxMjUsMjcgMzAsMjYuNTUzMTI1IDMwLDI2IEwzMCw2IEMzMCw1LjQ0Njg3NSAyOS41NTMxMjUsNSAyOSw1IFogTTEwLjU2MjUsOS41IEMxMS42NjU2MjUsOS41IDEyLjU2MjUsMTAuMzk2ODc1IDEyLjU2MjUsMTEuNSBDMTIuNTYyNSwxMi42MDMxMjUgMTEuNjY1NjI1LDEzLjUgMTAuNTYyNSwxMy41IEM5LjQ1OTM3NSwxMy41IDguNTYyNSwxMi42MDMxMjUgOC41NjI1LDExLjUgQzguNTYyNSwxMC4zOTY4NzUgOS40NTkzNzUsOS41IDEwLjU2MjUsOS41IFogTTI2LjYyMTg3NSwyMy4xNTkzNzUgQzI2LjU3ODEyNSwyMy4xOTY4NzUgMjYuNTE4NzUsMjMuMjE4NzUgMjYuNDU5Mzc1LDIzLjIxODc1IEw1LjUzNzUsMjMuMjE4NzUgQzUuNCwyMy4yMTg3NSA1LjI4NzUsMjMuMTA2MjUgNS4yODc1LDIyLjk2ODc1IEM1LjI4NzUsMjIuOTA5Mzc1IDUuMzA5Mzc1LDIyLjg1MzEyNSA1LjM0Njg3NSwyMi44MDYyNSBMMTAuNjY4NzUsMTYuNDkzNzUgQzEwLjc1NjI1LDE2LjM4NzUgMTAuOTE1NjI1LDE2LjM3NSAxMS4wMjE4NzUsMTYuNDYyNSBDMTEuMDMxMjUsMTYuNDcxODc1IDExLjA0Mzc1LDE2LjQ4MTI1IDExLjA1MzEyNSwxNi40OTM3NSBMMTQuMTU5Mzc1LDIwLjE4MTI1IEwxOS4xLDE0LjMyMTg3NSBDMTkuMTg3NSwxNC4yMTU2MjUgMTkuMzQ2ODc1LDE0LjIwMzEyNSAxOS40NTMxMjUsMTQuMjkwNjI1IEMxOS40NjI1LDE0LjMgMTkuNDc1LDE0LjMwOTM3NSAxOS40ODQzNzUsMTQuMzIxODc1IEwyNi42NTkzNzUsMjIuODA5Mzc1IEMyNi43NDA2MjUsMjIuOTEyNSAyNi43MjgxMjUsMjMuMDcxODc1IDI2LjYyMTg3NSwyMy4xNTkzNzUgWiIgaWQ9IlNoYXBlIiBmaWxsPSIjRThFOEU4Ij48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==\')');
       }
     } else {
       this.image.css('visibility', 'hidden');

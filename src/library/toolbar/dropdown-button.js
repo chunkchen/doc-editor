@@ -8,7 +8,7 @@ class DropdownButton extends React.Component {
   state = {
     active: false,
     currentValue: undefined,
-  }
+  };
 
   toggleDropdown = (e) => {
     e.preventDefault();
@@ -22,30 +22,32 @@ class DropdownButton extends React.Component {
     } else {
       this.showDropdown();
     }
-  }
+  };
 
   showDropdown = () => {
-    const {name, getActive} = this.props;
+    const { name, getActive } = this.props;
     let currentValue;
     if (name === 'alignment') {
       currentValue = getActive();
     }
-    Engine.$('div[data-lake-element=toolbar]').attr('style', 'z-index:202');
+    Engine.$('div[data-lake-element=toolbar]')
+      .attr('style', 'z-index:202');
     document.addEventListener('click', this.hideDropdown);
     this.setState({
       active: true,
       currentValue,
     });
-  }
+  };
 
   hideDropdown = () => {
-    Engine.$('div[data-lake-element=toolbar]').removeAttr('style');
+    Engine.$('div[data-lake-element=toolbar]')
+      .removeAttr('style');
     document.removeEventListener('click', this.hideDropdown);
     this.setState({
       active: false,
       currentValue: undefined,
     });
-  }
+  };
 
   componentWillUnmount() {
     document.removeEventListener('click', this.hideDropdown);
@@ -53,7 +55,7 @@ class DropdownButton extends React.Component {
 
   render() {
     const active = this.state.active;
-    const buttonProps = {...this.props};
+    const buttonProps = { ...this.props };
     delete buttonProps.onClick;
     delete buttonProps.active;
     return (
@@ -65,7 +67,7 @@ class DropdownButton extends React.Component {
           'lake-button-set-trigger-active': active,
         })}
         >
-          <Button {...Object.assign({}, {active}, buttonProps)} />
+          <Button {...Object.assign({}, { active }, buttonProps)} />
         </div>
         <Dropdown
           className={this.props.className}

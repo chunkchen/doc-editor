@@ -1,11 +1,11 @@
 import React from 'react';
-import {message} from 'antd';
+import { message } from 'antd';
 import langEn from '../lang/en';
 import langCn from '../lang/zh-cn';
-import {addMentionAttrs, DocVersion, getDocVersion} from '../utils/string';
+import { addMentionAttrs, DocVersion, getDocVersion } from '../utils/string';
 import HtmlParser from '../parser/html';
 import Migrate from '../helper/migrate';
-import helper from '../helper'
+import helper from '../helper';
 import schemaConfig from '../schema/config';
 import Engine from './engine';
 
@@ -51,19 +51,23 @@ class Editor extends React.Component {
       return engine.getHtml(new HtmlParser());
     };
 
-    helper(engine, "pasteFileTransfer", {})
+    helper(engine, 'pasteFileTransfer', {});
   };
 
   componentDidMount() {
-    const {onEngineReady, ot} = this.props;
+    const { onEngineReady, ot } = this.props;
     this.engine = this.renderEditor();
     if (!ot) this.engine.setDefaultValue(this.engine.options.defaultValue);
     this.extendEngine(this.engine);
     onEngineReady(this.engine);
   }
 
-  componentDidUpdate({onSave, onChange}) {
-    this.engine.options = {...this.engine.options, onSave, onChange};
+  componentDidUpdate({ onSave, onChange }) {
+    this.engine.options = {
+      ...this.engine.options,
+      onSave,
+      onChange,
+    };
   }
 
   componentWillUnmount() {
@@ -73,7 +77,7 @@ class Editor extends React.Component {
   }
 
   renderEditor() {
-    const {defaultValue, ...options} = this.props;
+    const { defaultValue, ...options } = this.props;
     let value = (`${defaultValue || '<p><br /></p>'}`).trim();
     value = Engine.StringUtils.removeBookmarkTags(value);
     options.defaultValue = value;
@@ -106,7 +110,7 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div ref={this.container} className="lake-content-editor-core" />
+      <div ref={this.container} className="lake-content-editor-core"/>
     );
   }
 }

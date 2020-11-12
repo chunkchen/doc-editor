@@ -49,8 +49,9 @@ const template = (value, locale) => {
   }
 
   let percent = '';
-  if (value.status === 'uploading') percent = '<span data-role="percent"></span> &nbsp;';
-  else if (value.status === 'transfering') percent = '<span></span> &nbsp;';
+  if (value.status === 'uploading') {
+    percent = '<span data-role="percent"></span> &nbsp;';
+  } else if (value.status === 'transfering') percent = '<span></span> &nbsp;';
 
   return '\n  <span class="lake-file lake-file-'
     .concat(value.status, '">\n    <span class="lake-file-icon">')
@@ -94,7 +95,8 @@ class File extends SectionBase {
     };
 
     this.updateMaxWidth = () => {
-      this.sectionRoot.find('.lake-file-title').css('max-width', `${this.maxWidth - 100}px`);
+      this.sectionRoot.find('.lake-file-title')
+        .css('max-width', `${this.maxWidth - 100}px`);
     };
 
     this.focusSection = () => {
@@ -102,12 +104,12 @@ class File extends SectionBase {
     };
 
     this.previewFile = () => {
-      const {preview, src} = this.value;
+      const { preview, src } = this.value;
       window.open(Engine.StringUtils.sanitizeUrl(preview || src));
     };
 
     this.downloadFile = () => {
-      const {download, src} = this.value;
+      const { download, src } = this.value;
       window.open(Engine.StringUtils.sanitizeUrl(download || src));
     };
 
@@ -164,11 +166,13 @@ class File extends SectionBase {
   }
 
   activate() {
-    this.container.find('lake-file').addClass('lake-file-active');
+    this.container.find('lake-file')
+      .addClass('lake-file-active');
   }
 
   unactivate() {
-    this.container.find('lake-file').removeClass('lake-file-active');
+    this.container.find('lake-file')
+      .removeClass('lake-file-active');
   }
 
   renderViewMode() {
@@ -196,9 +200,10 @@ class File extends SectionBase {
 
     const handleMouseenter = () => {
       canHide = false;
-      this.contentView.container.find('[data-section-key="file"]').each((node) => {
-        this.section.hideSectionToolbar(Engine.$(node));
-      });
+      this.contentView.container.find('[data-section-key="file"]')
+        .each((node) => {
+          this.section.hideSectionToolbar(Engine.$(node));
+        });
       this.section.showSectionToolbar(this.sectionRoot);
     };
 

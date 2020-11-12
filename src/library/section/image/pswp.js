@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
-import {EventEmitter2} from 'eventemitter2';
+import { EventEmitter2 } from 'eventemitter2';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default';
 import Zoom from './zoom';
 import './pswp.css';
 import 'photoswipe/dist/photoswipe.css';
 
-const {mobile} = Engine.userAgent;
+const { mobile } = Engine.userAgent;
 
 class Pswp extends EventEmitter2 {
   constructor(options) {
@@ -49,7 +49,8 @@ class Pswp extends EventEmitter2 {
     this.toolbarContainer = toolbarContainer;
     this.closeBtnContainer = closeBtnContainer;
     root.addClass(mobile ? 'lake-pswp-mobile' : 'lake-pswp-pc');
-    Engine.$(document.body).append(root);
+    Engine.$(document.body)
+      .append(root);
     ReactDOM.render(<Zoom
       imageBrowser={this}
     />, toolbarContainer[0], () => {
@@ -62,7 +63,7 @@ class Pswp extends EventEmitter2 {
   }
 
   hoverControllerFadeInAndOut() {
-    const {toolbarContainer, closeBtnContainer} = this;
+    const { toolbarContainer, closeBtnContainer } = this;
 
     toolbarContainer.on('mouseenter', () => {
       this.removeFadeOut(toolbarContainer, 'toolbarFadeInAndOut');
@@ -86,7 +87,7 @@ class Pswp extends EventEmitter2 {
   }
 
   removeFadeOut(node, id) {
-    const {timeouts} = this;
+    const { timeouts } = this;
     if (timeouts[id]) {
       clearTimeout(timeouts[id]);
     }
@@ -94,7 +95,7 @@ class Pswp extends EventEmitter2 {
   }
 
   fadeOut(node, id) {
-    const {timeouts} = this;
+    const { timeouts } = this;
     if (timeouts[id]) {
       clearTimeout(timeouts[id]);
     }
@@ -104,9 +105,9 @@ class Pswp extends EventEmitter2 {
   }
 
   bindClickEvent() {
-    const {closeBtnContainer} = this;
+    const { closeBtnContainer } = this;
     this.root.on('click', (event) => {
-      let {target} = event;
+      let { target } = event;
       target = Engine.$(target);
       if (target.hasClass('pswp__img')) {
         setTimeout(() => {
@@ -132,16 +133,19 @@ class Pswp extends EventEmitter2 {
   }
 
   renderCounter() {
-    const {pswp} = this;
-    this.toolbarContainer.find('.lake-pswp-counter').html(''.concat(pswp.getCurrentIndex() + 1, ' / ').concat(pswp.items.length));
+    const { pswp } = this;
+    this.toolbarContainer.find('.lake-pswp-counter')
+      .html(''.concat(pswp.getCurrentIndex() + 1, ' / ')
+        .concat(pswp.items.length));
   }
 
   getCurrentZoomLevel() {
-    return (this.currentZoom && +this.currentZoom.toFixed(2)) || (this.pswp && +this.pswp.getZoomLevel().toFixed(2));
+    return (this.currentZoom && +this.currentZoom.toFixed(2)) || (this.pswp && +this.pswp.getZoomLevel()
+      .toFixed(2));
   }
 
   zoomTo(zoom) {
-    const {pswp} = this;
+    const { pswp } = this;
     pswp.zoomTo(zoom, {
       x: pswp.viewportSize.x / 2,
       y: pswp.viewportSize.y / 2,
@@ -193,7 +197,7 @@ class Pswp extends EventEmitter2 {
   }
 
   updateCursor() {
-    const {root} = this;
+    const { root } = this;
     const currentZoomLevel = this.getCurrentZoomLevel();
     const initialZoomLevel = this.getInitialZoomLevel();
     if (currentZoomLevel === 1) {
@@ -231,7 +235,7 @@ class Pswp extends EventEmitter2 {
   }
 
   bindPswpEvent() {
-    const {pswp} = this;
+    const { pswp } = this;
     pswp.listen('afterChange', () => {
       this.afterChange();
     });
@@ -247,22 +251,23 @@ class Pswp extends EventEmitter2 {
   }
 
   setWhiteBackground() {
-    this.root.find('.pswp__img').each((img) => {
-      if (img.complete) {
-        img.style.background = 'white';
-        img.style['box-shadow'] = '0 0 10px rgba(0, 0, 0, 0.5)';
-      } else {
-        img.onload = () => {
+    this.root.find('.pswp__img')
+      .each((img) => {
+        if (img.complete) {
           img.style.background = 'white';
           img.style['box-shadow'] = '0 0 10px rgba(0, 0, 0, 0.5)';
-        };
-      }
-    });
+        } else {
+          img.onload = () => {
+            img.style.background = 'white';
+            img.style['box-shadow'] = '0 0 10px rgba(0, 0, 0, 0.5)';
+          };
+        }
+      });
   }
 
   open(items, index) {
     if (this.pswpDestroy === true) {
-      const {root} = this;
+      const { root } = this;
       const pswp = new PhotoSwipe(root[0], PhotoSwipeUI, items, Object.assign({
         index,
       }, this.options.pswpOptions));

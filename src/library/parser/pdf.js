@@ -1,5 +1,5 @@
 import ExportParser from './export';
-import {lists} from './utils';
+import { lists } from './utils';
 
 class PdfParser extends ExportParser {
   getDefaultSectionParsers() {
@@ -9,7 +9,7 @@ class PdfParser extends ExportParser {
       {
         checkbox: () => {
         },
-      }
+      },
     );
   }
 

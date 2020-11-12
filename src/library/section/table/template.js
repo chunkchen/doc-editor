@@ -1,7 +1,7 @@
 import Engine from '@hicooper/doc-engine/lib';
-import {normalizeTable} from './utils';
+import { normalizeTable } from './utils';
 
-const {$} = Engine;
+const { $ } = Engine;
 
 const TABLE_WRAPPER_CLASS = 'table-wrapper';
 const TABLE_CLASS = 'lake-table';
@@ -59,7 +59,8 @@ export default function (section) {
     SHADOW_LEFT_CLASS: '.'.concat(SHADOW_LEFT_CLASS),
     SHADOW_RIGHT_CLASS: '.'.concat(SHADOW_RIGHT_CLASS),
     EmptyCell: '<p><br /></p>',
-    SubEditor: '<div class="'.concat(SUB_EDITOR_CLASS, '"><div class="').concat(SUB_EDITOR_CONTENT_CLASS, '"></div></div>'),
+    SubEditor: '<div class="'.concat(SUB_EDITOR_CLASS, '"><div class="')
+      .concat(SUB_EDITOR_CONTENT_CLASS, '"></div></div>'),
 
     /**
      * 用于Section渲染
@@ -74,7 +75,8 @@ export default function (section) {
       const cols = value.cols;
       let html = value.html;
       const tds = '<td><p><br /></p></td>'.repeat(cols);
-      const trs = '<tr>'.concat(tds, '</tr>').repeat(rows);
+      const trs = '<tr>'.concat(tds, '</tr>')
+        .repeat(rows);
       const col = '<col />'.repeat(cols);
       const colgroup = '<colgroup>'.concat(col, '</colgroup>');
 
@@ -86,10 +88,11 @@ export default function (section) {
             .concat('<div class="table-col-header-btns">', '<a class="table-control-icon-btn '
               .concat(HEADER_DELETE_CLASS, '"><span class="lake-icon lake-icon-delete" /></a>'
                 .concat('<a class="table-control-icon-btn ', HEADER_ADD_CLASS
-                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>')
-                )
-              )
-            ).concat('<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', COLS_HEADER_TRIGGER_CLASS
+                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>'),
+                ),
+              ),
+            )
+            .concat('<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', COLS_HEADER_TRIGGER_CLASS
               .concat('"></div></div>')))
           .repeat(cols), '')
         .concat('</div> ');
@@ -102,10 +105,11 @@ export default function (section) {
             .concat('<div class="table-row-header-btns">', '<a class="table-control-icon-btn '
               .concat(HEADER_DELETE_CLASS, '"><span class="lake-icon lake-icon-delete" /></a>'
                 .concat('<a class="table-control-icon-btn ', HEADER_ADD_CLASS
-                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>')
-                )
-              )
-            ).concat('<div class="row-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', ROWS_HEADER_TRIGGER_CLASS
+                  .concat('"><span class="lake-icon lake-icon-plus"/></a></div>'),
+                ),
+              ),
+            )
+            .concat('<div class="row-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', ROWS_HEADER_TRIGGER_CLASS
               .concat('"></div></div>')))
           .repeat(rows), '')
         .concat('</div> ');
@@ -167,7 +171,10 @@ export default function (section) {
         .concat(trs, '</table>');
 
       const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
-      return '<div class="'.concat(sectionClass, '">').concat(tableHeader, ' <div class=" ').concat(VIEWPORT, '">').concat(colsHeader, '')
+      return '<div class="'.concat(sectionClass, '">')
+        .concat(tableHeader, ' <div class=" ')
+        .concat(VIEWPORT, '">')
+        .concat(colsHeader, '')
         .concat(activeBox, '')
         .concat(table, '')
         .concat(placeholder, '')
@@ -178,7 +185,8 @@ export default function (section) {
     },
     htmlView: (value) => {
       const html = value.html;
-      return '<div class="'.concat(VIEWPORT_READER, '">').concat(html, '</div>');
+      return '<div class="'.concat(VIEWPORT_READER, '">')
+        .concat(html, '</div>');
     },
   };
 }

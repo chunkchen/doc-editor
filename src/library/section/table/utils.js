@@ -2,7 +2,7 @@ import isInteger from 'lodash/isInteger';
 import isObject from 'lodash/isObject';
 import Engine from '@hicooper/doc-engine/lib';
 
-const {$, StringUtils, NodeUtils} = Engine;
+const { $, StringUtils, NodeUtils } = Engine;
 
 /**
  * 提取表格数据模型，由于合并单元格的存在，html 结构不利于操作
@@ -36,7 +36,7 @@ export const getTableModel = (table) => {
 
     for (let c = 0; c < cellCount; c++) {
       const td = cells[c];
-      let {rowSpan, colSpan} = td;
+      let { rowSpan, colSpan } = td;
       rowSpan = rowSpan === void 0 ? 1 : rowSpan;
       colSpan = colSpan === void 0 ? 1 : colSpan;
       const isMulti = rowSpan > 1 || colSpan > 1;
@@ -147,9 +147,11 @@ export const normalizeTable = (table) => {
   let cols = $table.find('col');
   if (cols.length !== 0) {
     for (let c = cols.length - 1; c >= 0; c--) {
-      const _width = $(cols[c]).attr('width');
+      const _width = $(cols[c])
+        .attr('width');
       if (_width) {
-        $(cols[c]).attr('width', parseInt(_width));
+        $(cols[c])
+          .attr('width', parseInt(_width));
       }
       if (cols[c].span > 1) {
         let addCount = cols[c].span - 1;
@@ -166,7 +168,8 @@ export const normalizeTable = (table) => {
         cols[0].parentNode.appendChild(cols[lastCol].cloneNode());
       }
     }
-    $table.find('col').attr('span', 1);
+    $table.find('col')
+      .attr('span', 1);
   } else {
     let colgroup = $table.find('colgroup')[0];
     if (!colgroup) {
@@ -175,11 +178,14 @@ export const normalizeTable = (table) => {
     $table.prepend(colgroup);
     const widths = (function (table) {
       const tr = table.find('tr')[0];
-      const tds = $(tr).find('td');
+      const tds = $(tr)
+        .find('td');
       const widthArray = [];
       tds.each((td) => {
-        let colWidth = $(td).attr('data-colwidth');
-        let tdWidth = $(td).attr('width');
+        let colWidth = $(td)
+          .attr('data-colwidth');
+        let tdWidth = $(td)
+          .attr('width');
         const tdColSpan = $(td)[0].colSpan;
         if (colWidth) {
           colWidth = colWidth.split(',');
@@ -231,7 +237,8 @@ export const normalizeTable = (table) => {
   const trs = $table.find('tr');
   trs.each((tr) => {
     const $tr = $(tr);
-    let height = $(tr).css('height');
+    let height = $(tr)
+      .css('height');
     height = parseInt(height) || 33;
     $tr.css('height', `${height}px`);
   });
@@ -245,7 +252,8 @@ export const normalizeTable = (table) => {
 export const trimStartTr = (table) => {
   const tr = table.find('tr');
   if (tr[0].childNodes.length === 0) {
-    $(tr[0]).remove();
+    $(tr[0])
+      .remove();
   }
 };
 
@@ -331,7 +339,8 @@ export const getCopyData = () => {
 };
 
 export const unWrapperTableHTML = (html) => {
-  html = html.replace(/<p(>|\s+[^>]*>)/ig, '<div$1').replace(/<\/p>/ig, '</div>');
+  html = html.replace(/<p(>|\s+[^>]*>)/ig, '<div$1')
+    .replace(/<\/p>/ig, '</div>');
   const root = new DOMParser().parseFromString(html, 'text/html');
   unWrapperTable(root);
   return root.body.innerHTML;
@@ -379,7 +388,9 @@ export const unWrapperCodeBlock = (node) => {
       const p = $('<p />');
       lines.forEach((line) => {
         const cloneLine = p.clone();
-        cloneLine.html(StringUtils.escape(line).replace(/\t/g, '&nbsp;&nbsp;').replace(/\s/g, '&nbsp;'));
+        cloneLine.html(StringUtils.escape(line)
+          .replace(/\t/g, '&nbsp;&nbsp;')
+          .replace(/\s/g, '&nbsp;'));
         node.before(cloneLine);
       });
       node.remove();
@@ -446,7 +457,7 @@ export const fixDragEvent = (e) => {
  * 获得一个表格内包含内容的最大行列数
  */
 export const getContentArea = (tableModel) => {
-  const {table, cols, rows} = tableModel;
+  const { table, cols, rows } = tableModel;
   let row = rows - 1;
   let col = cols - 1;
   let rowHasContent = false;
@@ -493,7 +504,8 @@ const isTdEmpty = (table, row, col) => {
     td = tdModel.element;
   }
 
-  return !(td && (td.innerText.trim() !== '' || $(td).find('img')[0]));
+  return !(td && (td.innerText.trim() !== '' || $(td)
+    .find('img')[0]));
 };
 
 const fixNumberTr = (table) => {
@@ -513,7 +525,7 @@ const fixNumberTr = (table) => {
     let cellCountThisRow = 0;
 
     for (let c = 0; c < cells.length; c++) {
-      const {rowSpan, colSpan} = cells[c];
+      const { rowSpan, colSpan } = cells[c];
       totalCellCounts += rowSpan * colSpan;
       cellCountThisRow += colSpan;
       if (rowSpan > 1) {
@@ -553,7 +565,7 @@ const fixNumberTr = (table) => {
           }
 
           for (let _c2 = 0; _c2 < _cells.length; _c2++) {
-            const {rowSpan, colSpan} = _cells[_c2];
+            const { rowSpan, colSpan } = _cells[_c2];
             if (rowSpan > 1) {
               for (let rr = 1; rr < rowSpan; rr++) {
                 colCounts[realRow + rr] = (colCounts[realRow + rr] || 0) + colSpan;

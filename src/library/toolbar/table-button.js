@@ -1,5 +1,5 @@
 import React from 'react';
-import {Popover} from 'antd';
+import { Popover } from 'antd';
 import 'antd/lib/popover/style';
 import Button from './button';
 import TableSelector from './table-selector';
@@ -9,15 +9,15 @@ export default class extends React.Component {
     event.preventDefault();
     event.stopPropagation();
     this.props.onClick(opts);
-  }
+  };
 
   onMouseEnter = (event) => {
     event.stopPropagation();
-  }
+  };
 
   onMouseLeave = (event) => {
     event.stopPropagation();
-  }
+  };
 
   render() {
     return (

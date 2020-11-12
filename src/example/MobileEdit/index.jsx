@@ -6,7 +6,7 @@ import tempContent from './tempContent';
 export default class MobileEdit extends Component {
   static displayName = 'MobileEdit';
 
-  cropImgRef = undefined
+  cropImgRef = undefined;
 
   constructor(props) {
     super(props);

@@ -1,4 +1,4 @@
-import {macos} from '@hicooper/doc-engine/lib/utils/user-agent';
+import { macos } from '@hicooper/doc-engine/lib/utils/user-agent';
 
 const CTRL = macos ? '\u2318' : 'Ctrl';
 const backgroundOrColor = {
@@ -172,7 +172,7 @@ export default {
     uploadTips: 'Drag an image here or click to choose one to upload (maximum image size: 10M)',
     copyFailed: 'Failed to copy the image',
     copyFailedTips: 'Image does not support copy, please copy and upload separately',
-    loadFailed: "Network error, can't display image",
+    loadFailed: 'Network error, can\'t display image',
     placeholder: 'Upload an image (maximum image size: 10M)',
     sizeTitle: 'Size',
     width: 'Width',

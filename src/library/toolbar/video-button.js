@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Input, message, Modal, Tabs} from 'antd';
-import {UploadOutlined} from '@ant-design/icons';
+import { Button, Input, message, Modal, Tabs } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import 'antd/lib/message/style';
 import 'antd/lib/modal/style';
 import 'antd/lib/button/style';
@@ -9,7 +9,7 @@ import 'antd/lib/input/style';
 import 'antd/lib/icon/style';
 import VideoUploader from './video-uploader';
 import ToolbarButton from './button';
-import {getDocEmbedURL} from '../section/youku';
+import { getDocEmbedURL } from '../section/youku';
 
 const InputGroup = Input.Group;
 
@@ -58,8 +58,8 @@ export default class extends React.Component {
 
   handleOnlineVideo = (event) => {
     event.stopPropagation();
-    const {embedUrl} = this.state;
-    const {engine, setOnline} = this.props;
+    const { embedUrl } = this.state;
+    const { engine, setOnline } = this.props;
     const url = getDocEmbedURL(embedUrl);
     if (!url) {
       engine.messageError('链接错误，请检查后重新输入');
@@ -82,8 +82,8 @@ export default class extends React.Component {
   };
 
   render() {
-    const {visible, embedUrl} = this.state;
-    const {engine} = this.props;
+    const { visible, embedUrl } = this.state;
+    const { engine } = this.props;
     return (
       <ToolbarButton
         {...this.props}
@@ -145,12 +145,12 @@ export default class extends React.Component {
                     onMouseMove={event => event.stopPropagation()}
                     onPressEnter={this.handleOnlineVideo}
                     placeholder="请输入视频链接，支持优酷、哔哩哔哩"
-                    style={{width: '86%'}}
+                    style={{ width: '86%' }}
                   />
                   <Button
                     size="large"
                     type="primary"
-                    style={{width: '14%'}}
+                    style={{ width: '14%' }}
                     onClick={this.handleOnlineVideo}
                   >
                     确定

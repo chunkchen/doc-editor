@@ -2,8 +2,8 @@ import React from 'react';
 
 export default class extends React.Component {
   render() {
-    const {onBeforeUpload, onAfterUpload, getEngine, children} = this.props;
-    let {engine, name} = this.props;
+    const { onBeforeUpload, onAfterUpload, getEngine, children } = this.props;
+    let { engine, name } = this.props;
     name = name || '';
     if (name.indexOf(':') >= 0) {
       name = name.split(':')[1];

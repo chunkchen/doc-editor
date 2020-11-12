@@ -86,7 +86,9 @@ class Resizer {
         width: `${width}px`,
         height: `${height}px`,
       });
-      this.find('number').html(''.concat(width, '\xB7').concat(height));
+      this.find('number')
+        .html(''.concat(width, '\xB7')
+          .concat(height));
     };
 
     this.closeZoom = () => {
@@ -121,7 +123,7 @@ class Resizer {
   }
 
   render(container) {
-    const {width, height} = this.config;
+    const { width, height } = this.config;
     this.root.css({
       width: ''.concat(width, 'px'),
       height: ''.concat(height, 'px'),
@@ -129,18 +131,22 @@ class Resizer {
     container.append(this.root);
     this.image.on('dblclick', this.openZoom);
     // this.find('maximize').on('click', this.openZoom);
-    this.find('holder-45').on('mousedown', (e) => {
-      return this.onMouseDown(e, 45);
-    });
-    this.find('holder-135').on('mousedown', (e) => {
-      return this.onMouseDown(e, 135);
-    });
-    this.find('holder-225').on('mousedown', (e) => {
-      return this.onMouseDown(e, 225);
-    });
-    this.find('holder-315').on('mousedown', (e) => {
-      return this.onMouseDown(e, 315);
-    });
+    this.find('holder-45')
+      .on('mousedown', (e) => {
+        return this.onMouseDown(e, 45);
+      });
+    this.find('holder-135')
+      .on('mousedown', (e) => {
+        return this.onMouseDown(e, 135);
+      });
+    this.find('holder-225')
+      .on('mousedown', (e) => {
+        return this.onMouseDown(e, 225);
+      });
+    this.find('holder-315')
+      .on('mousedown', (e) => {
+        return this.onMouseDown(e, 315);
+      });
   }
 }
 

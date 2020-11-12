@@ -2,7 +2,8 @@ import Command from './command';
 
 function zoomexecute(editor) {
   const page = editor.getCurrentPage();
-  this.matrixCache = page.getMatrix().slice(0);
+  this.matrixCache = page.getMatrix()
+    .slice(0);
   this._zoom(editor);
   page.updateStatus();
 }

@@ -11,11 +11,11 @@ class TableSelector extends React.Component {
     currentRows: 4,
     selectedCols: 0,
     selectedRows: 0,
-  }
+  };
 
   onSelect = (e, rows, cols) => {
     this.props.onSelect(e, rows + 1, cols + 1);
-  }
+  };
 
   onHover = (rows, cols) => {
     const showRows = Math.max(this.state.minRows, Math.min(this.state.maxRows, rows + 2));
@@ -27,10 +27,10 @@ class TableSelector extends React.Component {
       selectedRows: rows + 1,
       selectedCols: cols + 1,
     });
-  }
+  };
 
   renderTr = (r, cols) => {
-    const {selectedRows, selectedCols} = this.state;
+    const { selectedRows, selectedCols } = this.state;
     const tds = [];
     const _loop = (c) => {
       const cls = classnames({
@@ -46,7 +46,7 @@ class TableSelector extends React.Component {
           onMouseOver={() => {
             return this.onHover(r, c);
           }}
-        />
+        />,
       );
     };
 
@@ -54,7 +54,7 @@ class TableSelector extends React.Component {
       _loop(c);
     }
     return tds;
-  }
+  };
 
   renderTable = (rows, cols) => {
     const trs = [];
@@ -62,10 +62,10 @@ class TableSelector extends React.Component {
       trs.push(<div className="lake-toolbar-table-selector-tr" key={r}>{this.renderTr(r, cols)}</div>);
     }
     return trs;
-  }
+  };
 
   render() {
-    const {currentCols, currentRows} = this.state;
+    const { currentCols, currentRows } = this.state;
     const selectedRows = this.state.selectedRows === undefined ? 0 : this.state.selectedRows;
     const selectedCols = this.state.selectedCols === undefined ? 0 : this.state.selectedCols;
     return (

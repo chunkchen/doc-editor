@@ -1,6 +1,6 @@
 import Engine from '@hicooper/doc-engine/lib';
-import {MODE_NAME_MAP, setMode, template as codeblockTemplate} from '../section/codeblock';
-import {getPreviewUrl} from '../utils/string';
+import { MODE_NAME_MAP, setMode, template as codeblockTemplate } from '../section/codeblock';
+import { getPreviewUrl } from '../utils/string';
 
 const locale = {
   'zh-cn': {
@@ -62,15 +62,16 @@ class ExportParser extends Engine.ExportParser {
             outline: 'none',
             'border-collapse': 'collapse',
           });
-          table.find('td').css({
-            'min-width': '90px',
-            'font-size': '14px',
-            'white-space': 'normal',
-            'word-wrap': 'break-word',
-            border: '1px solid #d9d9d9',
-            padding: '4px 8px',
-            cursor: 'default',
-          });
+          table.find('td')
+            .css({
+              'min-width': '90px',
+              'font-size': '14px',
+              'white-space': 'normal',
+              'word-wrap': 'break-word',
+              border: '1px solid #d9d9d9',
+              padding: '4px 8px',
+              cursor: 'default',
+            });
           section.append(table);
         }
       },
@@ -121,7 +122,8 @@ class ExportParser extends Engine.ExportParser {
           content.hide();
           document.body.appendChild(content[0]);
           setStyle(content, ['color', 'margin', 'padding', 'background']);
-          section.find('.lake-codeblock').remove();
+          section.find('.lake-codeblock')
+            .remove();
           content.show();
           content.css('background', '#f9f9f9');
           section.append(content);
@@ -162,7 +164,8 @@ class ExportParser extends Engine.ExportParser {
         if (value && value.src) {
           const height = value.height;
           section.append(
-            '<img src="'.concat(value.src, '" ').concat(height ? `height=${height}` : '', '/>'),
+            '<img src="'.concat(value.src, '" ')
+              .concat(height ? `height=${height}` : '', '/>'),
           );
         }
       },

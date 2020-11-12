@@ -5,7 +5,7 @@ import Button from './button';
 class ToolbarPluginsMore extends React.Component {
   state = {
     active: false,
-  }
+  };
 
   constructor() {
     super();
@@ -42,8 +42,8 @@ class ToolbarPluginsMore extends React.Component {
   }
 
   render() {
-    const {children, width} = this.props;
-    const {active} = this.state;
+    const { children, width } = this.props;
+    const { active } = this.state;
     const moreIcon = '<span class="lake-icon lake-icon-more" />';
     return (
       <div className={classnames('lake-toolbar-area', {
@@ -67,7 +67,7 @@ class ToolbarPluginsMore extends React.Component {
           <div className={classnames('lake-button-set-list', 'lake-button-set-list-hoz', {
             'lake-button-set-list-active': active,
           })}
-               style={{width: ''.concat(width, 'px')}}
+               style={{ width: ''.concat(width, 'px') }}
           >
             {children}
           </div>

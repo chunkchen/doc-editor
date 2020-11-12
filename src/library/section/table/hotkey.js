@@ -1,7 +1,7 @@
 import Keymaster from 'keymaster';
 import Engine from '@hicooper/doc-engine/lib';
 
-const {$} = Engine;
+const { $ } = Engine;
 
 const hotkey = {
   handler: {},
@@ -9,7 +9,8 @@ const hotkey = {
     Keymaster.filter = (e) => {
       const template = section.template;
       const tagName = (e.target || e.srcElement).tagName.toLocaleUpperCase();
-      const target = $(e.target).closest(template.TABLE_TEXTAREA_CLASS);
+      const target = $(e.target)
+        .closest(template.TABLE_TEXTAREA_CLASS);
       if (target[0]) return true;
       return !(tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA');
     };

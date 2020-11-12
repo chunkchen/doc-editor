@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
-import {Modal} from 'antd';
+import { Modal } from 'antd';
 import Embed from '../embed/embed';
 import GraphView from './graph-view';
 import 'antd/lib/modal/style';
@@ -42,13 +42,13 @@ class Visio extends Embed {
   }
 
   getGraphOptions() {
-    const {engine, contentView} = this;
+    const { engine, contentView } = this;
     const options = engine ? engine.options : contentView.options;
     return options.mxgraph || {};
   }
 
   getUrl() {
-    const {src, url} = this.value;
+    const { src, url } = this.value;
     return url || src || undefined;
   }
 
@@ -93,7 +93,7 @@ class Visio extends Embed {
         >
           所有修改均将会丢失！确认要取消更改吗?
         </Modal>,
-        this.modal[0]
+        this.modal[0],
       );
       return false;
     }
@@ -124,25 +124,34 @@ class Visio extends Embed {
     if (iframeWindow && iframeWindow.postMessage) {
       iframeWindow.postMessage(JSON.stringify(jsonMsg), '*');
     }
-  }
+  };
 
   onGraphMessage = (event) => {
     const msg = JSON.parse(event.data);
     if (msg.event === 'configure') {
       this.setGraphMessage({
         action: 'configure',
-        config: {defaultFonts: ['Humor Sans', 'Helvetica', 'Times New Roman']},
+        config: { defaultFonts: ['Humor Sans', 'Helvetica', 'Times New Roman'] },
       });
     } else if (msg.event === 'init') {
-      this.setGraphMessage({action: 'load', autosave: 1, xml: this.value.xml});
+      this.setGraphMessage({
+        action: 'load',
+        autosave: 1,
+        xml: this.value.xml,
+      });
     } else if (msg.event === 'load') {
-      this.setGraphMessage({action: 'status'});
+      this.setGraphMessage({ action: 'status' });
     } else if (msg.event === 'autosave') {
       this.setValue({
         draft: msg.xml,
       });
     } else if (msg.event === 'save') {
-      this.setGraphMessage({action: 'export', format: 'xmlsvg', xml: msg.xml, spin: 'Updating page'});
+      this.setGraphMessage({
+        action: 'export',
+        format: 'xmlsvg',
+        xml: msg.xml,
+        spin: 'Updating page',
+      });
     } else if (msg.event === 'export') {
       const dataWidth = Math.ceil(msg.width / msg.scale);
       const dataHeight = Math.ceil(msg.height / msg.scale);
@@ -158,25 +167,25 @@ class Visio extends Embed {
     } else if (msg.event === 'exit') {
       this.hideGraphEditor();
     }
-  }
+  };
 
   showGraphEditor = () => {
-    const {sectionRoot, engine, contentView} = this;
+    const { sectionRoot, engine, contentView } = this;
     engine.section.maximize({
       sectionRoot,
       engine,
       contentView,
     });
-  }
+  };
 
   hideGraphEditor = () => {
-    const {contentView, sectionRoot, engine} = this;
+    const { contentView, sectionRoot, engine } = this;
     engine.section.restore({
       sectionRoot,
       engine,
       contentView,
     });
-  }
+  };
 
   destroy() {
     this.removeIframeView();
@@ -192,10 +201,11 @@ class Visio extends Embed {
   }
 
   renderIframeView() {
-    const {container, value, options} = this;
+    const { container, value, options } = this;
     const height = this.getHeight();
-    const {transition} = options;
-    const embedNode = Engine.$('\n      <div class="lake-embed lake-embed-active">\n   <div class="lake-embed-modal"></div>     <div class="lake-embed-content">\n          <div class="lake-embed-content-bg">\n            <span class="lake-icon lake-icon-loading"></span>\n          </div>\n          <iframe data-role="iframe" \n            class="lake-embed-content-frame" \n            frameborder="0" \n            allowfullscreen="true" \n            style="height: '.concat(height, 'px; transition: ').concat(transition, '"\n            >\n          </iframe>\n        </div>\n      </div>\n    '));
+    const { transition } = options;
+    const embedNode = Engine.$('\n      <div class="lake-embed lake-embed-active">\n   <div class="lake-embed-modal"></div>     <div class="lake-embed-content">\n          <div class="lake-embed-content-bg">\n            <span class="lake-icon lake-icon-loading"></span>\n          </div>\n          <iframe data-role="iframe" \n            class="lake-embed-content-frame" \n            frameborder="0" \n            allowfullscreen="true" \n            style="height: '.concat(height, 'px; transition: ')
+      .concat(transition, '"\n            >\n          </iframe>\n        </div>\n      </div>\n    '));
 
     const iframe = embedNode.find('iframe');
 
@@ -217,12 +227,12 @@ class Visio extends Embed {
   }
 
   renderEditView() {
-    const {url} = this.getGraphOptions();
+    const { url } = this.getGraphOptions();
     this.setValue({
       url,
     });
 
-    const {value} = this;
+    const { value } = this;
     ReactDOM.render(<GraphView
       showGraphEditor={this.showGraphEditor}
       value={value}
@@ -231,7 +241,7 @@ class Visio extends Embed {
       }}
     />, this.container[0], () => {
       this.root = this.container.find('.lake-mxgraph-preview');
-      const {height} = this.value;
+      const { height } = this.value;
       this.addResizeController(this.root);
       if (!value.xml) {
         this.showGraphEditor();

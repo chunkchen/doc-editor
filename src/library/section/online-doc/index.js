@@ -22,8 +22,11 @@ class OnlineDoc extends EmbedUrl {
 
   render() {
     this.value = this.value || {};
-    if (window.location.search.indexOf('view=doc_embed') > 0) this.renderEmbedEmbedView();
-    else super.render.call(this);
+    if (window.location.search.indexOf('view=doc_embed') > 0) {
+      this.renderEmbedEmbedView();
+    } else {
+      super.render.call(this);
+    }
   }
 }
 

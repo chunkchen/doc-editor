@@ -6,7 +6,7 @@ import tempContent from './tempContent';
 export default class InlineEdit extends Component {
   static displayName = 'InlineEdit';
 
-  cropImgRef = undefined
+  cropImgRef = undefined;
 
   constructor(props) {
     super(props);

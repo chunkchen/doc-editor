@@ -1,15 +1,16 @@
 import React from 'react';
 import section from './section';
 import hotkey from './hotkey';
-import {getHotkeyText} from '../utils/string';
-import {addIframeSection} from '../utils/command';
+import { getHotkeyText } from '../utils/string';
+import { addIframeSection } from '../utils/command';
 
 const getSections = (engine) => {
   const locale = engine.locale;
   const sectionMap = {};
-  section(engine).forEach((item) => {
-    sectionMap[item.name] = item;
-  });
+  section(engine)
+    .forEach((item) => {
+      sectionMap[item.name] = item;
+    });
   // 分组形式的Section
   const groups = [];
   // 普通Section
@@ -52,11 +53,15 @@ export const setToolbarHotkey = (customList, keyList) => {
   }
   keyList.forEach((item) => {
     item.keyText = getHotkeyText(item.keys);
-    item.keyValue = item.keys.join('').toLowerCase();
+    item.keyValue = item.keys.join('')
+      .toLowerCase();
     hotkeyMap[item.name] = item;
     if (item.group) {
-      if (hotkeyGroupMap[item.group]) hotkeyGroupMap[item.group].push(item.name);
-      else hotkeyGroupMap[item.group] = [item.name];
+      if (hotkeyGroupMap[item.group]) {
+        hotkeyGroupMap[item.group].push(item.name);
+      } else {
+        hotkeyGroupMap[item.group] = [item.name];
+      }
     }
   });
 
@@ -68,8 +73,14 @@ export const setToolbarHotkey = (customList, keyList) => {
             const childName = typeof childItem === 'object' ? childItem.name : childItem;
             const childConfig = hotkeyMap[childName];
             if (!childItem.hotkey && childConfig && childConfig.keyValue) {
-              if (typeof childItem === 'object') childItem.hotkey = childConfig.keyValue;
-              else childItem = {name: childName, hotkey: childConfig.keyValue};
+              if (typeof childItem === 'object') {
+                childItem.hotkey = childConfig.keyValue;
+              } else {
+                childItem = {
+                  name: childName,
+                  hotkey: childConfig.keyValue,
+                };
+              }
             }
             return childItem;
           });
@@ -77,7 +88,7 @@ export const setToolbarHotkey = (customList, keyList) => {
           item.items = [];
           hotkeyGroupMap[item.name].forEach((child) => {
             const config = hotkeyMap[child];
-            const childObj = {name: child};
+            const childObj = { name: child };
             if (config && config.keyValue) {
               childObj.hotkey = config.keyValue;
             }
@@ -87,10 +98,13 @@ export const setToolbarHotkey = (customList, keyList) => {
           item.hotkey = hotkeyMap[item.name].keyValue;
         }
       } else if (hotkeyGroupMap[item]) {
-        item = {name: item, items: []};
+        item = {
+          name: item,
+          items: [],
+        };
         hotkeyGroupMap[item.name].forEach((child) => {
           const config = hotkeyMap[child];
-          const childObj = {name: child};
+          const childObj = { name: child };
           if (config && config.keyValue) {
             childObj.hotkey = config.keyValue;
           }
@@ -99,7 +113,10 @@ export const setToolbarHotkey = (customList, keyList) => {
       } else {
         const config = hotkeyMap[item];
         if (config && config.keyValue) {
-          item = {name: item, hotkey: config.keyValue};
+          item = {
+            name: item,
+            hotkey: config.keyValue,
+          };
         }
       }
       return item;
@@ -112,11 +129,13 @@ const getToolbarConfig = (engine) => {
   // 快捷键
 
   const hotkeyMap = {};
-  hotkey(locale).forEach((item) => {
-    item.keyText = getHotkeyText(item.keys);
-    item.keyValue = item.keys.join('').toLowerCase();
-    hotkeyMap[item.name] = item;
-  });
+  hotkey(locale)
+    .forEach((item) => {
+      item.keyText = getHotkeyText(item.keys);
+      item.keyValue = item.keys.join('')
+        .toLowerCase();
+      hotkeyMap[item.name] = item;
+    });
   // 标题
   const headingMap = {
     p: locale.heading.normal,
@@ -184,7 +203,7 @@ const getToolbarConfig = (engine) => {
   return [
     {
       name: 'section',
-      title: <span dangerouslySetInnerHTML={{__html: locale.section.buttonTitle}}/>,
+      title: <span dangerouslySetInnerHTML={{ __html: locale.section.buttonTitle }}/>,
       type: 'collapse',
       icon: '<span class="lake-icon lake-icon-section" />',
       data: getSections(engine),
@@ -444,8 +463,8 @@ const getToolbarConfig = (engine) => {
       getActive: () => {
         const tag = engine.command.queryState('heading') || 'p';
         const isCodeblock = engine.command.queryState('codeblock') === 'codeblock';
-        if(/^h\d$/.test(tag) || isCodeblock) {
-          return '11'
+        if (/^h\d$/.test(tag) || isCodeblock) {
+          return '11';
         }
         return engine.command.queryState('fontsize') || '11';
       },

@@ -107,7 +107,8 @@ class Page extends Base {
 
   focusGraphWrapper() {
     const graph = this.getGraph();
-    graph.getKeyboardEventWrapper().focus();
+    graph.getKeyboardEventWrapper()
+      .focus();
   }
 
   saveImage(options) {
@@ -120,12 +121,14 @@ class Page extends Base {
       width: box.width + padding[1] + padding[3],
       height: box.height + padding[0] + padding[2],
       beforeTransform: () => {
-        seletedIds = this.getSelected().map((item) => {
-          return item.id;
-        });
-        activedIds = this.getSelected().map((item) => {
-          return item.id;
-        });
+        seletedIds = this.getSelected()
+          .map((item) => {
+            return item.id;
+          });
+        activedIds = this.getSelected()
+          .map((item) => {
+            return item.id;
+          });
         this.clearSelected();
         this.clearActived();
       },

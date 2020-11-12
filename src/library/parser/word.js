@@ -1,7 +1,7 @@
 import Engine from '@hicooper/doc-engine/lib';
 import ExportParser from './export';
-import {loadImage} from '../utils/dom';
-import {lists} from './utils';
+import { loadImage } from '../utils/dom';
+import { lists } from './utils';
 
 class WordParser extends ExportParser {
   async after(element) {
@@ -22,11 +22,14 @@ class WordParser extends ExportParser {
         const width = parseInt(colgroupChildren[i].getAttribute('width'));
         widthArray.push(parseInt(width / colgroupWidth * 560));
       }
-      table.find('tr').each((tr) => {
-        Engine.$(tr).children().each((td, index) => {
-          td.setAttribute('width', widthArray[index]);
+      table.find('tr')
+        .each((tr) => {
+          Engine.$(tr)
+            .children()
+            .each((td, index) => {
+              td.setAttribute('width', widthArray[index]);
+            });
         });
-      });
       colgroup.remove();
     });
     images.each((img) => {

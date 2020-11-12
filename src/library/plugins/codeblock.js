@@ -1,7 +1,7 @@
 import Engine from '@hicooper/doc-engine/lib';
-import {MODE_NAME_MAP} from '../section/codeblock';
+import { MODE_NAME_MAP } from '../section/codeblock';
 
-const {ChangeUtils, NodeUtils, StringUtils, HTMLParser, $} = Engine;
+const { ChangeUtils, NodeUtils, StringUtils, HTMLParser, $ } = Engine;
 
 // 缩写替换
 const INPUT_MODE_ALIAS = {
@@ -23,7 +23,7 @@ export default {
     // 创建命令
     this.command.add(PLUGIN_NAME, {
       queryState: () => {
-        const {section, activeSection} = this.change;
+        const { section, activeSection } = this.change;
         if (section && activeSection) {
           return section.getName(activeSection);
         }

@@ -1,11 +1,12 @@
 import Engine from '@hicooper/doc-engine/lib';
 
-const {userAgent: {safari}} = Engine;
+const { userAgent: { safari } } = Engine;
 
 function handleKeydownSlash(e) {
   let range = this.change.getRange();
   const block = Engine.ChangeUtils.getClosestBlock(range.startContainer);
-  const chars = block.text().trim();
+  const chars = block.text()
+    .trim();
   if (chars === '/' && safari) {
     block.empty();
   }

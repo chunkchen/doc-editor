@@ -7,7 +7,8 @@ function handleKeydownAt(e) {
   }
 
   const bookmark = Engine.RangeUtils.createBookmark(range);
-  const prevNode = Engine.$(bookmark.anchor).prev();
+  const prevNode = Engine.$(bookmark.anchor)
+    .prev();
   const prevText = prevNode && prevNode.isText() ? prevNode[0].nodeValue : '';
   Engine.RangeUtils.moveToBookmark(range, bookmark);
   // 前面有非空格文本时，应该要输入普通 at 字符

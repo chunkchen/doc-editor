@@ -1,12 +1,12 @@
 import React from 'react';
-import {sanitizeUrl} from '@hicooper/doc-engine/lib/utils/string';
-import {Button, Input, Tooltip} from 'antd';
+import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
+import { Button, Input, Tooltip } from 'antd';
 import languages from './lang';
 
 class LinkEditor extends React.Component {
   constructor(props) {
     super(props);
-    const {type, target, lang} = props;
+    const { type, target, lang } = props;
     this.locale = languages[lang];
     this.nativeEvents = [];
     this.rect = target.getBoundingClientRect();
@@ -21,8 +21,8 @@ class LinkEditor extends React.Component {
   }
 
   setContainerPosition() {
-    const {container, target} = this.props;
-    const {bottom} = target.getBoundingClientRect();
+    const { container, target } = this.props;
+    const { bottom } = target.getBoundingClientRect();
     container.className = 'lake-prevent-section-activated';
     container.style.top = ''.concat(+window.pageYOffset + bottom + 4, 'px');
     container.style.left = ''.concat(window.pageXOffset, 'px');
@@ -31,9 +31,9 @@ class LinkEditor extends React.Component {
   }
 
   adjustPosition() {
-    const {container, target} = this.props;
-    const {top, left, bottom} = target.getBoundingClientRect();
-    const {height, width} = container.getBoundingClientRect();
+    const { container, target } = this.props;
+    const { top, left, bottom } = target.getBoundingClientRect();
+    const { height, width } = container.getBoundingClientRect();
     const styleLeft = (left + width) > window.innerWidth - 20
       ? window.pageXOffset + window.innerWidth - width - 20
       : left - window.pageXOffset < 20
@@ -60,13 +60,13 @@ class LinkEditor extends React.Component {
   }
 
   bindNativeEvents() {
-    const {container} = this.props;
+    const { container } = this.props;
     let isMouseDown = false;
     this.addNativeEvent(
       window,
       'scroll',
       (event) => {
-        const {target} = event;
+        const { target } = event;
         if (this.preventScrollCancel) {
           event.preventDefault();
         } else if (!target.className || target.className.indexOf('lake-link') === -1) {
@@ -109,7 +109,7 @@ class LinkEditor extends React.Component {
     );
 
     this.addNativeEvent(container, 'keydown', (event) => {
-      const {keyCode} = event;
+      const { keyCode } = event;
 
       if (keyCode === 13 && !this.state.invalidLink) {
         this.confirm();
@@ -121,7 +121,7 @@ class LinkEditor extends React.Component {
   }
 
   cancel() {
-    const {target, onCancel} = this.props;
+    const { target, onCancel } = this.props;
     onCancel({
       link: target ? target.getAttribute('href') : null,
     });
@@ -139,15 +139,15 @@ class LinkEditor extends React.Component {
 
   removeNativeEvents() {
     this.nativeEvents.forEach((nativeEvent) => {
-      const {dom, name, callback, useCapture} = nativeEvent;
+      const { dom, name, callback, useCapture } = nativeEvent;
       dom.removeEventListener(name, callback, useCapture);
     });
     this.nativeEvents = [];
   }
 
   confirm() {
-    const {onConfirm} = this.props;
-    const {invalidLink} = this.state;
+    const { onConfirm } = this.props;
+    const { invalidLink } = this.state;
     const text = this.getText();
     const link = this.getLink();
 
@@ -157,7 +157,7 @@ class LinkEditor extends React.Component {
   }
 
   renderPreview() {
-    const {onDeleteLink, shouldTargetBlank} = this.props;
+    const { onDeleteLink, shouldTargetBlank } = this.props;
     const link = this.getLink();
     const locale = this.locale;
     const text = link || locale.emptyLink;
@@ -210,10 +210,10 @@ class LinkEditor extends React.Component {
 
   isInvalidLink = (link) => {
     return !link || (link && !link.match(/^[\x00-\x7F]/)) || link.startsWith('javascript:');
-  }
+  };
 
   renderEditor() {
-    const {invalidLink} = this.state;
+    const { invalidLink } = this.state;
     const text = this.getText();
     const link = this.getLink();
     const locale = this.locale;
@@ -283,7 +283,7 @@ class LinkEditor extends React.Component {
   }
 
   getLink() {
-    const {target, getLink} = this.props;
+    const { target, getLink } = this.props;
     return (this.link && getLink(this.link)) || target.getAttribute('href') || '';
   }
 

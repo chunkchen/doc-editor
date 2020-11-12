@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
 import TextDiagramEditor from './text-diagram-editor';
 import TextDiagramViewer from './text-diagram-render';
-import {preview} from '../../utils/image-generator';
+import { preview } from '../../utils/image-generator';
 import SectionBase from '../base';
 import constants from './constants';
 import './index.css';
 
-const {EDITOR_LAYOUT, TEXT_DIAGRAM_TYPES} = constants;
-const {$} = Engine;
+const { EDITOR_LAYOUT, TEXT_DIAGRAM_TYPES } = constants;
+const { $ } = Engine;
 const template = () => {
   return '<div class="lake-text-diagram lake-text-diagram-root"></div>';
 };
@@ -78,19 +78,20 @@ class TextDiagram extends SectionBase {
     };
 
     this.genImage = (code) => {
-      return preview(this.diagramType, code).then((res) => {
-        // 图片成功生成，设置 src 属性
-        const src = `data:image/svg+xml,${
-          encodeURIComponent(res.svg)
-            .replace(/'/g, '%27')
-            .replace(/"/g, '%22')}`;
-        if (res.success) {
-          this.value.src = src;
-        }
-        this.saveDiagram();
-        this.prevValue = this.value;
-        this.engine.history.update(true);
-      });
+      return preview(this.diagramType, code)
+        .then((res) => {
+          // 图片成功生成，设置 src 属性
+          const src = `data:image/svg+xml,${
+            encodeURIComponent(res.svg)
+              .replace(/'/g, '%27')
+              .replace(/"/g, '%22')}`;
+          if (res.success) {
+            this.value.src = src;
+          }
+          this.saveDiagram();
+          this.prevValue = this.value;
+          this.engine.history.update(true);
+        });
     };
 
     this.onBeforeSave = () => {
@@ -223,7 +224,8 @@ class TextDiagram extends SectionBase {
         onLoad={(ref) => {
           this.editor = ref.editor;
           this.container.on('click', (e) => {
-            const hasSelect = $(e.target).closest('.ant-select');
+            const hasSelect = $(e.target)
+              .closest('.ant-select');
             if (!hasSelect || hasSelect.length === 0) this.focusToCodeEditor();
           });
         }}
@@ -232,7 +234,7 @@ class TextDiagram extends SectionBase {
       this.root[0],
       () => {
         const diagram = this.root.find('.lake-text-diagram-editor');
-        const {height} = this.value;
+        const { height } = this.value;
         this.addResizeController(diagram);
         if (height) {
           diagram.css('height', `${height}px`);

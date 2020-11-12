@@ -17,21 +17,23 @@ export default {
           if (fileNode.length > 0) {
             const src = fileNode.attr('data-src') || '';
             const name = fileNode.attr('data-name');
-            const ext = src.split('.').pop();
+            const ext = src.split('.')
+              .pop();
             const sizeNode = fileNode.find('.size');
             if (!src || !ext || sizeNode.length === 0) {
               return;
             }
-            const size = sizeNode.text().replace(/^.+?([\d\\.]+)\s*(kb|mb).*$/i, (match0, size, unit) => {
-              // 注意：这里必须用 1000，不能用 1024
-              if (unit.toLowerCase() === 'kb') {
-                return size * 1000;
-              }
+            const size = sizeNode.text()
+              .replace(/^.+?([\d\\.]+)\s*(kb|mb).*$/i, (match0, size, unit) => {
+                // 注意：这里必须用 1000，不能用 1024
+                if (unit.toLowerCase() === 'kb') {
+                  return size * 1000;
+                }
 
-              if (unit.toLowerCase() === 'mb') {
-                return size * 1000 * 1000;
-              }
-            });
+                if (unit.toLowerCase() === 'mb') {
+                  return size * 1000 * 1000;
+                }
+              });
             const value = {
               src,
               name,

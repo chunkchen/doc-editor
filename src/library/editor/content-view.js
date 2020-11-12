@@ -6,7 +6,7 @@ import lang_en from '../lang/en';
 import lang_zh_cn from '../lang/zh-cn';
 import schema_config from '../schema/config';
 import IFrameHelper from '../helper/iframe';
-import {getDocVersion} from '../utils/string';
+import { getDocVersion } from '../utils/string';
 import Outline from '../utils/outline';
 
 const linkDomain = ['lake.com'];
@@ -34,7 +34,7 @@ class ContentView extends React.Component {
 
   containsMarkdownToc = (content) => {
     return !!content && content.includes(markdownPlaceholder.PLACEHOLDER);
-  }
+  };
 
   adaptContent = (content) => {
     if (!content) return '';
@@ -44,51 +44,60 @@ class ContentView extends React.Component {
     const parser = new Engine.HTMLParser(content, sechema);
     this.docVerstion = getDocVersion(content);
     return parser.toLowerValue();
-  }
+  };
 
   addRelToLink = () => {
-    Engine.$(this.viewArea.current).find('a[target=_blank]').each((node) => {
-      if (node.closest('[data-section-key=file]') || node.closest('[data-section-key=localdoc]')) return;
-      const isDomain = (href) => {
-        if (!/^(?:\w{1,20}:){0,1}\/\//i.test(href)) return true;
-        let url;
-        try {
-          url = new URL(href);
-        } catch (e) {
+    Engine.$(this.viewArea.current)
+      .find('a[target=_blank]')
+      .each((node) => {
+        if (node.closest('[data-section-key=file]') || node.closest('[data-section-key=localdoc]')) return;
+        const isDomain = (href) => {
+          if (!/^(?:\w{1,20}:){0,1}\/\//i.test(href)) return true;
+          let url;
+          try {
+            url = new URL(href);
+          } catch (e) {
+            return false;
+          }
+          const hostname = url.hostname;
+          if (!hostname) return false;
+          for (let i = 0; linkDomain.length > i; i++) {
+            const domain = linkDomain[i];
+            if (hostname === domain || hostname.endsWith('.'.concat(domain))) return true;
+          }
           return false;
-        }
-        const hostname = url.hostname;
-        if (!hostname) return false;
-        for (let i = 0; linkDomain.length > i; i++) {
-          const domain = linkDomain[i];
-          if (hostname === domain || hostname.endsWith('.'.concat(domain))) return true;
-        }
-        return false;
-      };
+        };
 
-      if (!isDomain(node.href)) Engine.$(node).attr('rel', 'noopener noreferrer');
-    });
-  }
+        if (!isDomain(node.href)) {
+          Engine.$(node)
+            .attr('rel', 'noopener noreferrer');
+        }
+      });
+  };
 
   addHeadingAnchor = () => {
-    Engine.$(this.viewArea.current).find('h1,h2,h3,h4,h5,h6').each((node) => {
-      node = Engine.$(node);
-      const id = node.attr('id');
-      if (id) {
-        node.prepend('<a class="lake-anchor" href="#'.concat(id, '"></a>'));
-      }
-    });
-  }
+    Engine.$(this.viewArea.current)
+      .find('h1,h2,h3,h4,h5,h6')
+      .each((node) => {
+        node = Engine.$(node);
+        const id = node.attr('id');
+        if (id) {
+          node.prepend('<a class="lake-anchor" href="#'.concat(id, '"></a>'));
+        }
+      });
+  };
 
   removeInvalidStyles = () => {
-    Engine.$(this.viewArea.current).children().each((child) => {
-      child = Engine.$(child);
-      Engine.NodeUtils.removeMinusStyle(child, 'text-indent');
-    });
-  }
+    Engine.$(this.viewArea.current)
+      .children()
+      .each((child) => {
+        child = Engine.$(child);
+        Engine.NodeUtils.removeMinusStyle(child, 'text-indent');
+      });
+  };
 
   renderContent = () => {
-    const {lang, onBeforeRenderImage, customMaximizeRestore, customMaximize, autoMaximizeSection, renderParser, content, genAnchor, genOutline, onLoad, ...options} = this.props;
+    const { lang, onBeforeRenderImage, customMaximizeRestore, customMaximize, autoMaximizeSection, renderParser, content, genAnchor, genOutline, onLoad, ...options } = this.props;
     const view = Engine.$(this.viewArea.current);
     const contentViewEngine = Engine.ContentView.create(view, {
       lang,
@@ -128,7 +137,7 @@ class ContentView extends React.Component {
     if (genAnchor) {
       this.addHeadingAnchor();
     }
-  }
+  };
 
   componentDidMount() {
     this.renderContent();
@@ -151,7 +160,9 @@ class ContentView extends React.Component {
     this.container.on('keydown', (event) => {
       if (Engine.isHotkey('mod+a', event)) {
         event.preventDefault();
-        window.getSelection().getRangeAt(0).selectNode(this.container[0]);
+        window.getSelection()
+          .getRangeAt(0)
+          .selectNode(this.container[0]);
       }
     });
     if (window.lozad_observer) {
@@ -204,7 +215,7 @@ class ContentView extends React.Component {
       <div
         className="lake-engine-view"
         ref={this.viewArea}
-        dangerouslySetInnerHTML={{__html: content}}
+        dangerouslySetInnerHTML={{ __html: content }}
       />
     );
   }

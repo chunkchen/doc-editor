@@ -1,11 +1,11 @@
 import React from 'react';
 import Engine from '@hicooper/doc-engine/lib';
-import {Tooltip} from 'antd';
+import { Tooltip } from 'antd';
 import 'antd/lib/tooltip/style';
 
 class Toolbar extends React.Component {
   render() {
-    const {locale, onChange, onFocus, onBlur, code, options} = this.props;
+    const { locale, onChange, onFocus, onBlur, code, options } = this.props;
     return (
       <div>
         <textarea

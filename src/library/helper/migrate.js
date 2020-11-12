@@ -1,7 +1,8 @@
 class Migrate {
   update(fromVersion, toVersion, root) {
     for (let i = fromVersion; toVersion > i; i++) {
-      const func = 'migrate_v'.concat(i, '_to_v').concat(i + 1);
+      const func = 'migrate_v'.concat(i, '_to_v')
+        .concat(i + 1);
       if (this[func]) {
         this[func](root);
       }

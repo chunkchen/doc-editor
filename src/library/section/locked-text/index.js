@@ -142,7 +142,8 @@ class LockedText extends SectionBase {
           this.originData = res.data !== undefined ? res.data : '';
           this.cachePassword(key);
           this.showOriginData(this.originData);
-          this.locktrigger.find('.text').html(this.locale.lock);
+          this.locktrigger.find('.text')
+            .html(this.locale.lock);
           this.showStatus();
         },
         error: () => {
@@ -157,18 +158,22 @@ class LockedText extends SectionBase {
     this.errorCount += 1;
     if (this.errorCount === 5) {
       this.disabled = true;
-      Engine.$(this.unLockContainer).addClass('locked');
+      Engine.$(this.unLockContainer)
+        .addClass('locked');
       this.delayClearLockStatus();
     }
-    Engine.$(this.unLockContainer).addClass('error');
+    Engine.$(this.unLockContainer)
+      .addClass('error');
   };
 
   delayClearLockStatus = () => {
     setTimeout(() => {
       this.disabled = false;
       this.errorCount = 0;
-      Engine.$(this.unLockContainer).removeClass('error');
-      Engine.$(this.unLockContainer).removeClass('locked');
+      Engine.$(this.unLockContainer)
+        .removeClass('error');
+      Engine.$(this.unLockContainer)
+        .removeClass('locked');
     }, 60000);
   };
 
@@ -200,8 +205,10 @@ class LockedText extends SectionBase {
   };
 
   clear = () => {
-    Engine.$(this.unLockContainer).removeClass('error');
-    Engine.$(this.unLockContainer).removeClass('locked');
+    Engine.$(this.unLockContainer)
+      .removeClass('error');
+    Engine.$(this.unLockContainer)
+      .removeClass('locked');
     ReactDOM.unmountComponentAtNode(this.unLockContainer);
     if (this.lockContainer) ReactDOM.unmountComponentAtNode(this.lockContainer);
   };
@@ -326,8 +333,11 @@ class LockedText extends SectionBase {
 
   render(e, value) {
     this.value = value || {};
-    if (this.contentView) this.renderView();
-    else this.renderEditor();
+    if (this.contentView) {
+      this.renderView();
+    } else {
+      this.renderEditor();
+    }
   }
 }
 

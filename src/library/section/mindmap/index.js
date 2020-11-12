@@ -2,7 +2,7 @@ import Engine from '@hicooper/doc-engine/lib';
 import GraphSection from '../graphsection';
 import GraphEditor from '../graphsection/graph-editor';
 
-const {userAgent} = Engine;
+const { userAgent } = Engine;
 
 /**
  * @fileOverview 思维脑图
@@ -17,7 +17,7 @@ class MindMap extends GraphSection {
   }
 
   topToolbar() {
-    const {engine, locale, graphEditor} = this;
+    const { engine, locale, graphEditor } = this;
     return [{
       name: 'save',
       title: locale.save,

@@ -10,13 +10,13 @@ import ImageMixin from './image-mixin';
 import MaximizeMixin from './maximize-mixin';
 import SectionBase from '../base';
 
-const {$} = Engine;
+const { $ } = Engine;
 const Mixins = [ToolMixin, ReadMixin, EditMixin, ImageMixin, MaximizeMixin];
 
 class GraphSection extends SectionBase {
   constructor(_ref) {
     super();
-    const {engine, contentView, pageType} = _ref;
+    const { engine, contentView, pageType } = _ref;
     this.engine = engine;
     this.graphEditor = new GraphEditor();
     this.rendererOptions = engine ? engine.options : contentView.options;
@@ -227,7 +227,7 @@ class GraphSection extends SectionBase {
   }
 
   normalizeValue() {
-    const {value} = this;
+    const { value } = this;
     if (value.width) {
       value.width = +value.width;
     }
@@ -257,7 +257,7 @@ class GraphSection extends SectionBase {
   // 读取值
   _readValue() {
     const page = this.page;
-    const {height, graphData, matrix} = this.value;
+    const { height, graphData, matrix } = this.value;
     const readonly = this.state.readonly;
 
     if (height) {

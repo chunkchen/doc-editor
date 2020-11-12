@@ -1,10 +1,10 @@
-import {EventEmitter2} from 'eventemitter2';
+import { EventEmitter2 } from 'eventemitter2';
 import isArray from 'lodash/isArray';
 import isNumber from 'lodash/isNumber';
 import Engine from '@hicooper/doc-engine/lib';
-import {copyCss, copyHTML, copyTo, getCopyData, getTableModel, normalizeTable, trimBlankSpan} from './utils';
+import { copyCss, copyHTML, copyTo, getCopyData, getTableModel, normalizeTable, trimBlankSpan } from './utils';
 
-const {HTMLParser, StringUtils, ChangeUtils, ClipboardUtils, TextParser, $} = Engine;
+const { HTMLParser, StringUtils, ChangeUtils, ClipboardUtils, TextParser, $ } = Engine;
 
 class Command extends EventEmitter2 {
   constructor(section) {
@@ -27,7 +27,7 @@ class Command extends EventEmitter2 {
     };
 
     this.insertColAt = (colIndex, count, isLeft, silence, widths) => {
-      const {container, selection, tableRoot, template} = this.section;
+      const { container, selection, tableRoot, template } = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       // 第一行插在前面，其他行插在后面
@@ -66,7 +66,8 @@ class Command extends EventEmitter2 {
         // cloneColHeader.css('width', widths[useWidthIndex] + 'px');
         $(baseColHeader)[insertMethod](cloneColHeader);
         const insertCloneCol = cloneNode.cloneNode();
-        $(insertCloneCol).attr('width', isArray(widths) ? widths[count - counter] : widths);
+        $(insertCloneCol)
+          .attr('width', isArray(widths) ? widths[count - counter] : widths);
         const baseCol = cols[insertCol];
         colgroup[0].insertBefore(insertCloneCol, baseCol);
         counter--;
@@ -138,7 +139,7 @@ class Command extends EventEmitter2 {
         count = selection.isSingleArea() ? 1 : selection.colCount();
 
         if (area) {
-          const {colMin, colMax} = selection.normalizeArea();
+          const { colMin, colMax } = selection.normalizeArea();
           colBase = isLeft ? colMin : colMax;
         }
       }
@@ -154,12 +155,12 @@ class Command extends EventEmitter2 {
     };
 
     this.removeCol = (silence) => {
-      const {selection, tableRoot, controlBar, template} = this.section;
+      const { selection, tableRoot, controlBar, template } = this.section;
       const area = selection.area;
       const tableModel = selection.tableModel;
       if (!area) return;
       const table = tableModel.table;
-      const {col, col2} = area;
+      const { col, col2 } = area;
       const count = selection.colCount();
       const col_min = Math.min(col, col2);
       const col_max = Math.max(col, col2);
@@ -222,7 +223,7 @@ class Command extends EventEmitter2 {
       const count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       let isUp = arguments.length > 2 ? arguments[2] : undefined;
       const silence = arguments.length > 3 ? arguments[3] : undefined;
-      const {container, selection, tableRoot, template} = this.section;
+      const { container, selection, tableRoot, template } = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       isUp = rowIndex === 0 || isUp;
@@ -296,7 +297,7 @@ class Command extends EventEmitter2 {
       let count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       const silence = arguments.length > 2 ? arguments[2] : undefined;
       const selection = this.section.selection;
-      const {area, tableModel} = selection;
+      const { area, tableModel } = selection;
       const isUp = position === 'up';
       const isEnd = position === 'end' || !position;
       let baseRow = tableModel.rows - 1;
@@ -305,7 +306,7 @@ class Command extends EventEmitter2 {
         count = selection.isSingleArea() ? 1 : selection.rowCount();
 
         if (area) {
-          const {row, row2} = area;
+          const { row, row2 } = area;
           baseRow = isUp ? Math.min(row, row2) : Math.max(row, row2);
         }
       }
@@ -314,11 +315,11 @@ class Command extends EventEmitter2 {
     };
 
     this.removeRow = (silence) => {
-      const {selection, tableRoot, controlBar, template} = this.section;
-      const {area, tableModel} = selection;
+      const { selection, tableRoot, controlBar, template } = this.section;
+      const { area, tableModel } = selection;
       if (!area) return;
       const table = tableModel.table;
-      const {row, row2} = area;
+      const { row, row2 } = area;
       const count = selection.rowCount();
       const row_min = Math.min(row, row2);
       const row_max = Math.max(row, row2);
@@ -374,7 +375,7 @@ class Command extends EventEmitter2 {
       if (!area) return;
 
       this.splitCell();
-      const {row, col, row2, col2} = area;
+      const { row, col, row2, col2 } = area;
       const row_min = Math.min(row, row2);
       const col_min = Math.min(col, col2);
       const row_count = selection.rowCount();
@@ -403,14 +404,14 @@ class Command extends EventEmitter2 {
     };
 
     this.splitCell = (silence) => {
-      const {selection, tableRoot, template} = this.section;
+      const { selection, tableRoot, template } = this.section;
       const area = selection.area;
       const tableModel = selection.tableModel;
       if (!area) return;
       const table = tableModel.table;
       const trs = tableRoot.find('tr');
 
-      const {rowMin, rowMax, colMin, colMax} = selection.normalizeArea();
+      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
       // 注意这里用倒序，见 selection.each 方法的最后一个参数传的时 true
       // 因为是倒序，所有空位一定先转换为 td, 这样在补齐切断的单元格时，需要考虑插入时的偏移量
 
@@ -497,7 +498,6 @@ class Command extends EventEmitter2 {
               _td5.innerHTML = template.EmptyCell;
             } // 非右上角，需要在选区右边再补一个合并单元格的右上缺口
 
-
             if (pCol2 > colMax && r === Math.min(pRow2, rowMax) && c === colMax) {
               const _insertRow3 = pRow;
               const _insertCol3 = colMax + 1;
@@ -522,7 +522,7 @@ class Command extends EventEmitter2 {
     };
 
     this.clear = () => {
-      const {selection, subEngine, template} = this.section;
+      const { selection, subEngine, template } = this.section;
       const area = selection.area;
       if (!area || subEngine) return;
 
@@ -596,7 +596,7 @@ class Command extends EventEmitter2 {
       const tableModel = selection.tableModel;
       if (!area) return;
 
-      const {rowMin, colMin, rowMax, colMax} = selection.normalizeArea();
+      const { rowMin, colMin, rowMax, colMax } = selection.normalizeArea();
       const isSingleTd = rowMin === rowMax && colMin === colMax;
       const isSingleArea = selection.isSingleArea();
       const html = data.html;
@@ -609,7 +609,7 @@ class Command extends EventEmitter2 {
         const pasteTableModel = getTableModel(element[0]);
         const rowCount = pasteTableModel.rows;
         const colCount = pasteTableModel.cols;
-        const {rowSpan, colSpan} = pasteTableModel.table[0][0];
+        const { rowSpan, colSpan } = pasteTableModel.table[0][0];
         const isPasteSingle = rowSpan === rowCount && colSpan === colCount;
 
         if (isPasteSingle && isSingleArea) {
@@ -618,7 +618,6 @@ class Command extends EventEmitter2 {
           return;
         } // 只在选中一个非合并单元格的时候才会延伸平铺，遇到表格边界会自动增加行列
         // 若选中的是一个区域或合并单元格，则只要将区域中的单元格填充上数据即可
-
 
         if (isSingleTd) {
           if (colCount + colMin > tableModel.cols) {
@@ -734,7 +733,8 @@ class Command extends EventEmitter2 {
       if (!selection.area) return;
       selection.each((tdModel) => {
         if (tdModel.element) {
-          $(tdModel.element).css('text-align', direction);
+          $(tdModel.element)
+            .css('text-align', direction);
         }
       });
       this.emit('actioned', 'align');
@@ -745,7 +745,8 @@ class Command extends EventEmitter2 {
       if (!selection.area) return;
       selection.each((tdModel) => {
         if (tdModel.element) {
-          $(tdModel.element).css('vertical-align', direction);
+          $(tdModel.element)
+            .css('vertical-align', direction);
         }
       });
       this.emit('actioned', 'align');
@@ -757,150 +758,191 @@ class Command extends EventEmitter2 {
       if (!selection.area) return;
       if (type === 'top') {
         // first row => row
-        const firstRow = selection.area.row
+        const firstRow = selection.area.row;
         selection.each((tdModel, row) => {
           if (tdModel.element && row === firstRow) {
-            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeClass('lake-no-border');
             if (this.checkHasBorderAttr(tdModel, ['border-top', 'border'])) {
-              $(tdModel.element).removeAttr('border-top');
-              $(tdModel.element).css('border-top', '');
-              $(tdModel.element).removeAttr('border');
+              $(tdModel.element)
+                .removeAttr('border-top');
+              $(tdModel.element)
+                .css('border-top', '');
+              $(tdModel.element)
+                .removeAttr('border');
             } else {
-              $(tdModel.element).attr('border-top', true)
-              $(tdModel.element).css('border-top', '2px solid #222222');
+              $(tdModel.element)
+                .attr('border-top', true);
+              $(tdModel.element)
+                .css('border-top', '2px solid #222222');
             }
           }
-        })
+        });
       }
       if (type === 'bottom') {
         // last row => row2
-        let lastRow = selection.area.row2
+        let lastRow = selection.area.row2;
         selection.each((tdModel, row) => {
           if (tdModel.element && row === lastRow) {
-            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeClass('lake-no-border');
             if (this.checkHasBorderAttr(tdModel, ['border-bottom', 'border'])) {
-              $(tdModel.element).removeAttr('border-bottom');
-              $(tdModel.element).removeAttr('border');
-              $(tdModel.element).css('border-bottom', '');
+              $(tdModel.element)
+                .removeAttr('border-bottom');
+              $(tdModel.element)
+                .removeAttr('border');
+              $(tdModel.element)
+                .css('border-bottom', '');
             } else {
-              $(tdModel.element).attr('border-bottom', true)
-              $(tdModel.element).css('border-bottom', '2px solid #222222');
+              $(tdModel.element)
+                .attr('border-bottom', true);
+              $(tdModel.element)
+                .css('border-bottom', '2px solid #222222');
             }
           }
-        })
+        });
       }
       if (type === 'left') {
         // first col => col
-        let firstCol = selection.area.col
+        let firstCol = selection.area.col;
         selection.each((tdModel, row, col) => {
           if (tdModel.element && col === firstCol) {
-            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeClass('lake-no-border');
             if (this.checkHasBorderAttr(tdModel, ['border-left', 'border'])) {
-              $(tdModel.element).removeAttr('border-left');
-              $(tdModel.element).removeAttr('border');
-              $(tdModel.element).css('border-left', '');
+              $(tdModel.element)
+                .removeAttr('border-left');
+              $(tdModel.element)
+                .removeAttr('border');
+              $(tdModel.element)
+                .css('border-left', '');
             } else {
-              $(tdModel.element).attr('border-left', true)
-              $(tdModel.element).css('border-left', '2px solid #222222');
+              $(tdModel.element)
+                .attr('border-left', true);
+              $(tdModel.element)
+                .css('border-left', '2px solid #222222');
             }
           }
-        })
+        });
       }
       if (type === 'right') {
         // last col => col2
-        const lastCol = selection.area.col2
+        const lastCol = selection.area.col2;
         selection.each((tdModel, row, col) => {
           if (tdModel.element && (tdModel.colSpan + col - 1) === lastCol) {
-            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeClass('lake-no-border');
             if (this.checkHasBorderAttr(tdModel, ['border-right', 'border'])) {
-              $(tdModel.element).removeAttr('border-right');
-              $(tdModel.element).removeAttr('border');
-              $(tdModel.element).css('border-right', '');
+              $(tdModel.element)
+                .removeAttr('border-right');
+              $(tdModel.element)
+                .removeAttr('border');
+              $(tdModel.element)
+                .css('border-right', '');
             } else {
-              $(tdModel.element).attr('border-right', true)
-              $(tdModel.element).css('border-right', '2px solid #222222');
+              $(tdModel.element)
+                .attr('border-right', true);
+              $(tdModel.element)
+                .css('border-right', '2px solid #222222');
             }
           }
-        })
+        });
       }
       if (type === 'outBorder') {
-        const {row, col, row2, col2} = selection.area
+        const { row, col, row2, col2 } = selection.area;
         if (selection.single) {
           // 单个单元格
-          $(selection.td).removeClass('lake-no-border')
-          $(selection.td).attr('border', true)
-          $(selection.td).css('border', '2px solid #222222')
+          $(selection.td)
+            .removeClass('lake-no-border');
+          $(selection.td)
+            .attr('border', true);
+          $(selection.td)
+            .css('border', '2px solid #222222');
         } else {
           selection.each((tdModel, r, c) => {
             if (tdModel.element) {
               if (r === row) {
-                $(tdModel.element).css('border-top', '2px solid #222222')
+                $(tdModel.element)
+                  .css('border-top', '2px solid #222222');
               }
               if (c === col) {
-                $(tdModel.element).css('border-left', '2px solid #222222')
+                $(tdModel.element)
+                  .css('border-left', '2px solid #222222');
               }
               if (r === row2) {
-                $(tdModel.element).css('border-bottom', '2px solid #222222')
+                $(tdModel.element)
+                  .css('border-bottom', '2px solid #222222');
               }
-              if (c + tdModel.colSpan  - 1 === col2) {
-                $(tdModel.element).css('border-right', '2px solid #222222')
+              if (c + tdModel.colSpan - 1 === col2) {
+                $(tdModel.element)
+                  .css('border-right', '2px solid #222222');
               }
             }
-          })
+          });
         }
       }
       if (type === 'allBorder') {
         selection.each((tdModel) => {
           if (tdModel.element) {
-            $(tdModel.element).removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeClass('lake-no-border');
             if (this.checkHasBorderAttr(tdModel, ['border'])) {
-              $(tdModel.element).removeAttr('border');
-              $(tdModel.element).css('border', '');
+              $(tdModel.element)
+                .removeAttr('border');
+              $(tdModel.element)
+                .css('border', '');
             } else {
-              this.removeAnyBorderAttr(tdModel)
-              $(tdModel.element).attr('border', true)
-              $(tdModel.element).css('border', '2px solid #222222');
+              this.removeAnyBorderAttr(tdModel);
+              $(tdModel.element)
+                .attr('border', true);
+              $(tdModel.element)
+                .css('border', '2px solid #222222');
             }
           }
-        })
+        });
       }
       // 重置默认边框
       if (type === 'reset') {
         selection.each((tdModel) => {
           if (tdModel.element) {
-            this.removeAnyBorderAttr(tdModel)
-            $(tdModel.element).removeClass('lake-no-border');
-            $(tdModel.element).removeAttr('style');
+            this.removeAnyBorderAttr(tdModel);
+            $(tdModel.element)
+              .removeClass('lake-no-border');
+            $(tdModel.element)
+              .removeAttr('style');
           }
-        })
+        });
       }
       this.emit('actioned', 'border');
-    }
+    };
 
     this.removeAnyBorderAttr = (tdModel) => {
       ['border', 'border-top', 'border-right', 'border-bottom', 'border-left'].forEach(item => {
         if ($(tdModel.element)[0] && $(tdModel.element)[0].attributes[item]) {
-          $(tdModel.element).css(item, '');
-          $(tdModel.element).removeAttr(item)
+          $(tdModel.element)
+            .css(item, '');
+          $(tdModel.element)
+            .removeAttr(item);
         }
-      })
-    }
+      });
+    };
 
     this.checkHasBorderAttr = (tdModel, keys) => {
       if (!$(tdModel.element)[0] || !$(tdModel.element)[0].attributes.length) {
-        return false
+        return false;
       }
       return keys.some(key => {
-        return $(tdModel.element)[0].attributes[key] && $(tdModel.element)[0].attributes[key].value === 'true'
-      })
-    }
+        return $(tdModel.element)[0].attributes[key] && $(tdModel.element)[0].attributes[key].value === 'true';
+      });
+    };
 
     this.background = (rgb) => {
       const selection = this.section.selection;
       if (!selection.area) return;
       selection.each((tdModel) => {
         if (tdModel.element) {
-          $(tdModel.element).css('background-color', rgb || '#f0f0f0');
+          $(tdModel.element)
+            .css('background-color', rgb || '#f0f0f0');
         }
       });
       this.emit('actioned', 'background');
@@ -911,14 +953,15 @@ class Command extends EventEmitter2 {
       if (!selection.area) return;
       selection.each((tdModel) => {
         if (tdModel.element) {
-          $(tdModel.element).css('color', rgb || '#666');
+          $(tdModel.element)
+            .css('color', rgb || '#666');
         }
       });
       this.emit('actioned', 'fontcolor');
     };
 
     this.queryState = (status) => {
-      const {selection, engine, subEngine} = this.section;
+      const { selection, engine, subEngine } = this.section;
       if (subEngine) {
         return subEngine.command.queryState(status);
       }
@@ -930,14 +973,16 @@ class Command extends EventEmitter2 {
       let result;
       selection.each((tdModel) => {
         if (tdModel.element && hasContent && !findContent && tdModel.element.innerText.trim() !== '') {
-          $(tdModel.element).attr('contenteditable', true);
+          $(tdModel.element)
+            .attr('contenteditable', true);
           const range = engine.change.getRange();
           range.selectNodeContents(tdModel.element);
           engine.change.select(range);
           engine.change.marks = ChangeUtils.getActiveMarks(range);
           result = engine.command.queryState(status);
           findContent = true;
-          $(tdModel.element).removeAttr('contenteditable');
+          $(tdModel.element)
+            .removeAttr('contenteditable');
         }
       });
       return result;
@@ -946,7 +991,7 @@ class Command extends EventEmitter2 {
     this.fill = (table) => {
       const selection = this.section.selection;
       const pasteTableModel = getTableModel(table[0]);
-      const {rowMin, colMin} = selection.normalizeArea();
+      const { rowMin, colMin } = selection.normalizeArea();
 
       selection.each((tdModel, r, c) => {
         const paste_r = r - rowMin;
@@ -964,7 +1009,7 @@ class Command extends EventEmitter2 {
 
     this.execute = function () {
       let _engine$command;
-      const {selection, sectionRoot, engine, subEngine, state} = this.section;
+      const { selection, sectionRoot, engine, subEngine, state } = this.section;
       if (state.readonly) return;
       if (subEngine) {
         let _subEngine$command;

@@ -37,7 +37,7 @@ class FullEditor extends React.Component {
         });
 
         helper(engine, 'translate');
-        const {image, file} = engine.options;
+        const { image, file } = engine.options;
         helper(engine, 'uploader', {
           actions: {
             image: image ? image.action : '',
@@ -50,11 +50,13 @@ class FullEditor extends React.Component {
         this.bindScrollEvent();
 
         engine.on('maximizesection', () => {
-          engine.container.closest('.lake-editor').addClass('lake-maximize-section');
+          engine.container.closest('.lake-editor')
+            .addClass('lake-maximize-section');
         });
 
         engine.on('restoresection', () => {
-          engine.container.closest('.lake-editor').removeClass('lake-maximize-section');
+          engine.container.closest('.lake-editor')
+            .removeClass('lake-maximize-section');
         });
 
         this.props.onLoad(engine);
@@ -74,25 +76,27 @@ class FullEditor extends React.Component {
   }
 
   componentWillUnmount() {
-    Engine.$(document.body).css({
-      'overscroll-behavior-x': '',
-      'overflow-y': '',
-    });
+    Engine.$(document.body)
+      .css({
+        'overscroll-behavior-x': '',
+        'overflow-y': '',
+      });
   }
 
   bindScrollEvent() {
     this.lakeToolbar = Engine.$('.lake-toolbar');
     this.lakeFullEditorWrapperContent = Engine.$('.lake-max-editor-wrapper-content');
     this.lakeFullEditorWrapperContent.on('scroll', this.handleScroll);
-    Engine.$(document.body).css({
-      'overscroll-behavior-x': 'none',
-      'overflow-y': 'hidden',
-    });
+    Engine.$(document.body)
+      .css({
+        'overscroll-behavior-x': 'none',
+        'overflow-y': 'hidden',
+      });
   }
 
   render() {
-    const {engine, toolbar} = this.state;
-    const {type, header} = this.props;
+    const { engine, toolbar } = this.state;
+    const { type, header } = this.props;
     const toolbarOptions = {
       type,
       engine,
@@ -102,7 +106,7 @@ class FullEditor extends React.Component {
 
     const editorOptions = () => {
       const options = Object.assign({}, this.props);
-      const {onLoad, header, type, toolbar, ...editorOptions} = options;
+      const { onLoad, header, type, toolbar, ...editorOptions } = options;
       return editorOptions;
     };
 
@@ -110,7 +114,7 @@ class FullEditor extends React.Component {
       <section className="lake-max-editor">
         <div className="lake-max-editor-wrapper">
           {engine && <Dialog engine={engine}/>}
-          {engine && <Toolbar {...Object.assign({hasMore: false}, toolbarOptions)} />}
+          {engine && <Toolbar {...Object.assign({ hasMore: false }, toolbarOptions)} />}
           <main className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
               {engine && <Sidebar engine={engine}/>}

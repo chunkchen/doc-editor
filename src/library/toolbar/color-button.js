@@ -125,7 +125,7 @@ class ColorButton extends React.Component {
         </g>
       </svg>
     );
-  }
+  };
 
   backgroundColorIcon = () => {
     // 默认描边 & 填充
@@ -177,7 +177,7 @@ class ColorButton extends React.Component {
         </g>
       </svg>
     );
-  }
+  };
 
   fontColorIcon() {
     // 默认描边 & 填充
@@ -233,7 +233,7 @@ class ColorButton extends React.Component {
   }
 
   render() {
-    let {name, title, moreTitle, disabled} = this.props;
+    let { name, title, moreTitle, disabled } = this.props;
     const active = this.state.active;
 
     if (name.indexOf(':') >= 0) {
@@ -272,7 +272,7 @@ class ColorButton extends React.Component {
           'lake-button-set-list-active': active,
         })}
         >
-          <ColorPicker {...Object.assign({}, this.props, {onSelect: this.handleSelect})} />
+          <ColorPicker {...Object.assign({}, this.props, { onSelect: this.handleSelect })} />
         </div>
       </div>
     );

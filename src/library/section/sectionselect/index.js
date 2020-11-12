@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM, {unmountComponentAtNode} from 'react-dom';
+import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
-import keymaster, {deleteScope, setScope, unbind} from 'keymaster';
+import keymaster, { deleteScope, setScope, unbind } from 'keymaster';
 import ToolbarCollapse from '../../toolbar/collapse';
 import toolbarConfig from '../../config/toolbar';
 import SectionBase from '../base';
@@ -49,20 +49,23 @@ class SectionSelect extends SectionBase {
 
       let offset = listRoot.find('.ant-collapse-header')[0].clientHeight;
       const collapseItem = nextNode.closest('.ant-collapse-item');
-      collapseItem.parent().find('.ant-collapse-item').each((node) => {
-        if (node === collapseItem[0]) {
-          return false;
-        }
+      collapseItem.parent()
+        .find('.ant-collapse-item')
+        .each((node) => {
+          if (node === collapseItem[0]) {
+            return false;
+          }
 
-        offset += node.clientHeight;
-      });
+          offset += node.clientHeight;
+        });
       offset += activeNode[0].clientHeight * nextNode.attr('data-index');
       listRoot[0].scrollTop = offset - listRoot[0].clientHeight / 2;
     };
 
     this.selectItem = (node) => {
       const listRoot = this.container.find('.lake-toolbar-collapse');
-      listRoot.find('.lake-collapse-list-item-active').removeClass('lake-collapse-list-item-active');
+      listRoot.find('.lake-collapse-list-item-active')
+        .removeClass('lake-collapse-list-item-active');
       node.addClass('lake-collapse-list-item-active');
     };
 
@@ -73,11 +76,13 @@ class SectionSelect extends SectionBase {
 
       this.data.forEach((group) => {
         group.items.forEach((item) => {
-          if (item.title.toLowerCase().indexOf(keyword) >= 0 || item.pinyin.toLowerCase().indexOf(keyword) >= 0) {
+          if (item.title.toLowerCase()
+            .indexOf(keyword) >= 0 || item.pinyin.toLowerCase()
+            .indexOf(keyword) >= 0) {
             if (!items.find((dataItems) => {
               return dataItems.name === item.name;
             })) {
-              items.push({...item});
+              items.push({ ...item });
             }
           }
         });
@@ -154,7 +159,8 @@ class SectionSelect extends SectionBase {
 
     this.handleBeforeUpload = () => {
       this.sectionRoot.hide();
-      Engine.$(document.body).append(this.sectionRoot);
+      Engine.$(document.body)
+        .append(this.sectionRoot);
     };
 
     this.handleAfterUpload = () => {
@@ -175,7 +181,8 @@ class SectionSelect extends SectionBase {
       const editorHeader = Engine.$('.lark-editor-header');
       let height = 0;
       if (editorHeader.length > 0) {
-        const toolbarElement = engine.container.closest('.lake-editor').find('.lake-toolbar');
+        const toolbarElement = engine.container.closest('.lake-editor')
+          .find('.lake-toolbar');
         if (toolbarElement.length > 0) height = editorHeader[0].clientHeight + toolbarElement[0].clientHeight;
       }
       if (rootOffset.top - height > 482) {
@@ -216,12 +223,13 @@ class SectionSelect extends SectionBase {
     if (this.readonly) {
       return;
     }
-    const {toolbar} = _engine.options;
+    const { toolbar } = _engine.options;
     const toolbarConfigMap = {};
     // let data = []
-    toolbarConfig(_engine).forEach((row) => {
-      toolbarConfigMap[row.name] = row;
-    });
+    toolbarConfig(_engine)
+      .forEach((row) => {
+        toolbarConfigMap[row.name] = row;
+      });
     /* const toolbarSection = toolbar['section'] || {}
     if(typeof toolbarSection === "object"){
         const sectionConfigMap = toolbarConfigMap['section']
@@ -307,8 +315,11 @@ class SectionSelect extends SectionBase {
   }
 
   resetPlaceHolder() {
-    if (this.keywordNode[0].innerText === '/') this.placeholder.show();
-    else this.placeholder.hide();
+    if (this.keywordNode[0].innerText === '/') {
+      this.placeholder.show();
+    } else {
+      this.placeholder.hide();
+    }
   }
 
   render(container) {
@@ -337,7 +348,8 @@ class SectionSelect extends SectionBase {
         const textNode = keywordNode.first();
         if ((textNode && textNode.isText() && textNode[0].nodeValue === '/、') || textNode[0].nodeValue === '//') {
           const rightTextNode = textNode[0].splitText(1);
-          Engine.$(rightTextNode).remove();
+          Engine.$(rightTextNode)
+            .remove();
         }
       }
 

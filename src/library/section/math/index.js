@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Engine from '@hicooper/doc-engine/lib';
 import debounce from 'lodash/debounce';
-import {preview} from '../../utils/image-generator';
+import { preview } from '../../utils/image-generator';
 import Toolbar from './toolbar';
 import {
   addScrollAndResizeEventListener,
@@ -21,7 +21,7 @@ class Math extends SectionBase {
   renderImage(ele) {
     const maxWidth = this.getMaxWidth();
     const node = ele[0];
-    const {naturalWidth, naturalHeight} = node;
+    const { naturalWidth, naturalHeight } = node;
 
     const width = parseInt((14 / 17.4) * naturalWidth);
     const height = parseInt((14 / 17.4) * naturalHeight);
@@ -56,42 +56,43 @@ class Math extends SectionBase {
   }
 
   _renderMath(code) {
-    preview('latex', code).then((res) => {
-      this.hasSave = false;
-      if (res.success) {
-        res.svg = this.exConvertToPx(res.svg);
-        const svg = `data:image/svg+xml,${
-          encodeURIComponent(res.svg)
-            .replace(/'/g, '%27')
-            .replace(/"/g, '%22')}`;
-        const image = new Image();
-        image.src = svg;
-        image.onload = () => {
-          this.renderImage(Engine.$(image));
-          this.viewContainer.empty();
-          this.viewContainer.append(image);
-          this.updateEditorPosition();
-        };
-        this.svg = res.svg;
-        this.setValue(
-          {
-            src: svg,
-            code,
-          },
-          false,
-        );
-      } else {
-        this.renderPureText(code);
-        this.svg = undefined;
-        this.setValue(
-          {
-            src: null,
-            code,
-          },
-          false,
-        );
-      }
-    });
+    preview('latex', code)
+      .then((res) => {
+        this.hasSave = false;
+        if (res.success) {
+          res.svg = this.exConvertToPx(res.svg);
+          const svg = `data:image/svg+xml,${
+            encodeURIComponent(res.svg)
+              .replace(/'/g, '%27')
+              .replace(/"/g, '%22')}`;
+          const image = new Image();
+          image.src = svg;
+          image.onload = () => {
+            this.renderImage(Engine.$(image));
+            this.viewContainer.empty();
+            this.viewContainer.append(image);
+            this.updateEditorPosition();
+          };
+          this.svg = res.svg;
+          this.setValue(
+            {
+              src: svg,
+              code,
+            },
+            false,
+          );
+        } else {
+          this.renderPureText(code);
+          this.svg = undefined;
+          this.setValue(
+            {
+              src: null,
+              code,
+            },
+            false,
+          );
+        }
+      });
   }
 
   getMaxWidth() {
@@ -140,8 +141,8 @@ class Math extends SectionBase {
   }
 
   renderView() {
-    const {value, container, locale} = this;
-    const {src, code, width, height} = value;
+    const { value, container, locale } = this;
+    const { src, code, width, height } = value;
     const mathContainer = Engine.$('<span class="lake-math-container"></span>');
     container.append(mathContainer);
     this.viewContainer = mathContainer;
@@ -182,7 +183,7 @@ class Math extends SectionBase {
   }
 
   renderEditor() {
-    const {container, value, engine, sectionRoot, locale} = this;
+    const { container, value, engine, sectionRoot, locale } = this;
     const editorContainer = Engine.$('<div class="lake-section-math-editor"></div>');
     this.editorContainer = editorContainer;
     container.append(editorContainer);
@@ -213,12 +214,13 @@ class Math extends SectionBase {
       />,
       editorContainer[0],
       () => {
-        editorContainer.find('[data-role="save"]').on('click', (event) => {
-          event.stopPropagation();
-          event.preventDefault();
-          engine.change.activateSection(document.body, 'manual');
-          engine.change.focusSection(sectionRoot);
-        });
+        editorContainer.find('[data-role="save"]')
+          .on('click', (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            engine.change.activateSection(document.body, 'manual');
+            engine.change.focusSection(sectionRoot);
+          });
         const textarea = editorContainer.find('textarea');
         textarea.on('mousedown', () => {
           textarea[0].focus();
@@ -227,23 +229,24 @@ class Math extends SectionBase {
     );
     this.bindEvent(engine.asyncEvent, 'save:before', () => {
       if (this.hasSave === false) {
-        return preview('latex', this.code).then((res) => {
-          if (!res.success) return;
-          res.svg = this.exConvertToPx(res.svg);
-          const src = `data:image/svg+xml,${
-            encodeURIComponent(res.svg)
-              .replace(/'/g, '%27')
-              .replace(/"/g, '%22')}`;
-          this.svg = res.svg;
-          this.hasSave = true;
-          this.setValue(
-            {
-              src,
-              code: this.code,
-            },
-            false,
-          );
-        });
+        return preview('latex', this.code)
+          .then((res) => {
+            if (!res.success) return;
+            res.svg = this.exConvertToPx(res.svg);
+            const src = `data:image/svg+xml,${
+              encodeURIComponent(res.svg)
+                .replace(/'/g, '%27')
+                .replace(/"/g, '%22')}`;
+            this.svg = res.svg;
+            this.hasSave = true;
+            this.setValue(
+              {
+                src,
+                code: this.code,
+              },
+              false,
+            );
+          });
       }
     });
   }

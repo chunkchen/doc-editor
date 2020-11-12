@@ -21,7 +21,7 @@ class MiniEditor extends React.Component {
           engine,
         },
         () => {
-          const {image, file} = engine.options;
+          const { image, file } = engine.options;
           helper(engine, 'uploader', {
             actions: {
               image: image ? image.action : '',
@@ -31,11 +31,13 @@ class MiniEditor extends React.Component {
           helper(engine, 'iframeHelper');
 
           engine.on('maximizesection', () => {
-            engine.container.closest('.lake-editor').addClass('lake-maximize-section');
+            engine.container.closest('.lake-editor')
+              .addClass('lake-maximize-section');
           });
 
           engine.on('restoresection', () => {
-            engine.container.closest('.lake-editor').removeClass('lake-maximize-section');
+            engine.container.closest('.lake-editor')
+              .removeClass('lake-maximize-section');
           });
 
           this.props.onLoad(engine);
@@ -59,8 +61,8 @@ class MiniEditor extends React.Component {
   }
 
   render() {
-    const {engine, toolbar} = this.state;
-    const {type} = this.props;
+    const { engine, toolbar } = this.state;
+    const { type } = this.props;
     const toolbarOptions = {
       type,
       engine,
@@ -70,13 +72,13 @@ class MiniEditor extends React.Component {
 
     const editorOptions = (function (props) {
       const options = Object.assign({}, props);
-      const {onLoad, header, toolbar, ...editorOptions} = options;
+      const { onLoad, header, toolbar, ...editorOptions } = options;
       return editorOptions;
     }(this.props));
 
     return (
       <div className="lake-editor lake-mini-editor">
-        {engine && <Toolbar {...Object.assign({hasMore: true}, toolbarOptions)} />}
+        {engine && <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions)} />}
         <div className="lake-content-editor" ref={this.contentEditor}>
           <Editor
             {...Object.assign(

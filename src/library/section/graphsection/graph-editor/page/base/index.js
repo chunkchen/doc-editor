@@ -11,10 +11,10 @@ const baseShape = {
   getSelectedStyle() {
   },
 };
-G6.registerNode('page-base', {...baseShape});
-G6.registerEdge('page-base', {...baseShape});
-G6.registerGroup('page-base', {...baseShape});
-G6.registerGuide('page-base', {...baseShape});
+G6.registerNode('page-base', { ...baseShape });
+G6.registerEdge('page-base', { ...baseShape });
+G6.registerGroup('page-base', { ...baseShape });
+G6.registerGuide('page-base', { ...baseShape });
 
 function getExtendShape(extend, baseExtend, parentConstructorName) {
   let rst = [];

@@ -1,11 +1,11 @@
 import React from 'react';
-import {Button, Input, Tabs} from 'antd';
+import { Button, Input, Tabs } from 'antd';
 import 'antd/lib/tabs/style';
 import 'antd/lib/input/style';
 import 'antd/lib/button/style';
 import Engine from '../editor/engine';
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 /**
  * @fileOverview 搜索会话框
@@ -15,19 +15,19 @@ class DialogSearch extends React.Component {
   state = {
     searchValue: null,
     replacement: '',
-  }
+  };
 
   componentWillUnmount() {
-    const {engine} = this.props;
-    const {search} = engine;
+    const { engine } = this.props;
+    const { search } = engine;
     search.clear();
     search.off('after:select', this.onAfterSelect);
     engine.off('change', this.onDocChange);
   }
 
   componentDidMount() {
-    const {engine} = this.props;
-    const {search} = engine;
+    const { engine } = this.props;
+    const { search } = engine;
     const input = this.inputRef.input;
 
     const onAfterSelect = () => {
@@ -52,13 +52,13 @@ class DialogSearch extends React.Component {
   }
 
   render() {
-    const {engine, onClose} = this.props;
+    const { engine, onClose } = this.props;
     const search = engine.search;
     const locale = engine.locale.search;
-    const {searchValue, replacement} = this.state;
+    const { searchValue, replacement } = this.state;
     const count = search.count();
     const searchInput = (
-      <p style={{marginBottom: '12px'}}>
+      <p style={{ marginBottom: '12px' }}>
         <Input
           accessbilityid="search-input"
           placeholder={locale.pleaseEnter}
@@ -83,9 +83,9 @@ class DialogSearch extends React.Component {
       </p>
     );
     const replacementInput = (
-      <p style={{marginBottom: '16px'}}>
+      <p style={{ marginBottom: '16px' }}>
         <Input
-          style={{width: '100%'}}
+          style={{ width: '100%' }}
           accessbilityid="replace-input"
           placeholder={locale.pleaseEnter}
           onChange={(e) => {
@@ -119,7 +119,7 @@ class DialogSearch extends React.Component {
         defaultActiveKey="search"
         animated={false}
         className="lake-search"
-        style={{padding: '0 2px'}}
+        style={{ padding: '0 2px' }}
         tabBarExtraContent={(
           <span className="lake-icon lake-icon-close"
                 accessbilityid="searchreplace-close-button"
@@ -132,7 +132,7 @@ class DialogSearch extends React.Component {
           key="search"
         >
           {searchInput}
-          <p style={{textAlign: 'right'}}>
+          <p style={{ textAlign: 'right' }}>
             {prev}
             {next}
           </p>
@@ -141,17 +141,17 @@ class DialogSearch extends React.Component {
           tab={locale.replace}
           key="replace"
         >
-          <p style={{textAlign: 'left'}}>{locale.search}</p>
+          <p style={{ textAlign: 'left' }}>{locale.search}</p>
           {searchInput}
           <p>{locale.replaceTo}</p>
           {replacementInput}
-          <p style={{textAlign: 'right'}}>
+          <p style={{ textAlign: 'right' }}>
             <Button
               onClick={() => {
                 search.replaceAll(replacement);
                 search.scrollIntoView();
               }}
-              style={{marginLeft: '0px'}}
+              style={{ marginLeft: '0px' }}
               disabled={count === 0}
             >
               {locale.replaceAll}

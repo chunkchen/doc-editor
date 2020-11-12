@@ -1,6 +1,6 @@
-import {post} from '@itellyou/itellyou-request';
+import { post } from '@itellyou/itellyou-request';
 import Engine from '@hicooper/doc-engine/lib';
-import {isBase64Image, isRemoteImage} from '../../utils/string';
+import { isBase64Image, isRemoteImage } from '../../utils/string';
 import ImageCompress from './compress';
 
 // 上传图片 URL
@@ -10,32 +10,34 @@ function uploadUrl(sectionRoot, url) {
   const uploadAction = imageConfig.action || '';
   post(uploadAction, {
     url,
-  }).then((res) => {
-    const data = res.data;
-    const params = {
-      status: 'done',
-      src: data.url,
-    };
-    // 如果返回了大小，也更新一下
-    if (data.size) {
-      params.size = data.size;
-    }
+  })
+    .then((res) => {
+      const data = res.data;
+      const params = {
+        status: 'done',
+        src: data.url,
+      };
+      // 如果返回了大小，也更新一下
+      if (data.size) {
+        params.size = data.size;
+      }
 
-    if (data.width) {
-      params.width = data.width;
-    }
+      if (data.width) {
+        params.width = data.width;
+      }
 
-    if (data.height) {
-      params.height = data.height;
-    }
+      if (data.height) {
+        params.height = data.height;
+      }
 
-    Engine.UploadUtils.updateSection(this, sectionRoot, params, true);
-  }).catch(() => {
-    Engine.UploadUtils.updateSection(this, sectionRoot, {
-      status: 'error',
-      message: locale.copyFailedTips,
-    }, true);
-  });
+      Engine.UploadUtils.updateSection(this, sectionRoot, params, true);
+    })
+    .catch(() => {
+      Engine.UploadUtils.updateSection(this, sectionRoot, {
+        status: 'error',
+        message: locale.copyFailedTips,
+      }, true);
+    });
 }
 
 // 自己页面
@@ -212,15 +214,16 @@ export default {
     });
     // 上传粘贴板里的图片
     this.on('paste:files', (files) => {
-      imageCompress.compress(files).then((files) => {
-        this.uploader.post('image', files, {
-          onBeforeInsertSection: (file, options) => {
-            if (!file.ext) {
-              options.scaleByPixelRatio = true;
-            }
-          },
+      imageCompress.compress(files)
+        .then((files) => {
+          this.uploader.post('image', files, {
+            onBeforeInsertSection: (file, options) => {
+              if (!file.ext) {
+                options.scaleByPixelRatio = true;
+              }
+            },
+          });
         });
-      });
     });
 
     // 转换粘贴过来的图片
@@ -265,49 +268,50 @@ export default {
     this.on('paste:after', () => {
       // 转存 base64 图片、第三方图片
       const options = this.options.image || {};
-      this.container.find('[data-section-key=image]').each((node, key) => {
-        const sectionRoot = Engine.$(node);
-        const component = this.section.getComponent(sectionRoot);
-        const value = component.value;
-        if (value.status !== 'uploading') {
-          return;
-        }
+      this.container.find('[data-section-key=image]')
+        .each((node, key) => {
+          const sectionRoot = Engine.$(node);
+          const component = this.section.getComponent(sectionRoot);
+          const value = component.value;
+          if (value.status !== 'uploading') {
+            return;
+          }
 
-        const src = component.imageNode.src || '';
-        // 转存 base64 图片
+          const src = component.imageNode.src || '';
+          // 转存 base64 图片
 
-        if (isBase64Image(src)) {
-          const file = Engine.ImageUtils.dataURIToFile(src);
-          const ext = Engine.UploadUtils.getFileExtname(file);
-          const name = ext ? 'image.'.concat(ext) : 'image';
-          const fileObject = new File([file], name);
-          component.value = {
-            status: 'uploading',
-            src,
-            name,
-            size: file.size,
-            type: file.type,
-            percent: 0,
-          };
-          this.section.updateNode(sectionRoot, component);
-          fileObject.uid = this.uploader.getUid(key);
-          this.uploader.addUploadingSection(fileObject.uid, sectionRoot);
-          this.uploader.post('image', [fileObject]);
-          return;
-        }
-        // 转存第三方图片
-        if (options.domain) {
-          options.domain.forEach((domain) => {
-            if (src.indexOf(domain) > -1) {
+          if (isBase64Image(src)) {
+            const file = Engine.ImageUtils.dataURIToFile(src);
+            const ext = Engine.UploadUtils.getFileExtname(file);
+            const name = ext ? 'image.'.concat(ext) : 'image';
+            const fileObject = new File([file], name);
+            component.value = {
+              status: 'uploading',
+              src,
+              name,
+              size: file.size,
+              type: file.type,
+              percent: 0,
+            };
+            this.section.updateNode(sectionRoot, component);
+            fileObject.uid = this.uploader.getUid(key);
+            this.uploader.addUploadingSection(fileObject.uid, sectionRoot);
+            this.uploader.post('image', [fileObject]);
+            return;
+          }
+          // 转存第三方图片
+          if (options.domain) {
+            options.domain.forEach((domain) => {
+              if (src.indexOf(domain) > -1) {
 
-            }
-          });
-        }
-        if (isRemoteImage(src)) {
-          this.section.updateNode(sectionRoot, component);
-          uploadUrl.call(this, sectionRoot, src);
-        }
-      });
+              }
+            });
+          }
+          if (isRemoteImage(src)) {
+            this.section.updateNode(sectionRoot, component);
+            uploadUrl.call(this, sectionRoot, src);
+          }
+        });
     });
     // markdown 快捷方式
     this.on('keydown:enter', (e) => {

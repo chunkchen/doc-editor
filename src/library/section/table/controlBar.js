@@ -1,9 +1,10 @@
-import {EventEmitter2} from 'eventemitter2';
+import { EventEmitter2 } from 'eventemitter2';
 import 'antd/lib/input-number/style';
 import Engine from '@hicooper/doc-engine/lib';
-import {fixDragEvent} from './utils';
+import { fixDragEvent } from './utils';
 
-const {$} = Engine;
+const { $ } = Engine;
+
 class ControlBar extends EventEmitter2 {
   constructor(section) {
     super(section);
@@ -32,8 +33,8 @@ class ControlBar extends EventEmitter2 {
           opts = this.section.selection.getEffectRows();
           break;
         case 'border':
-          this.emit('tableSizeChange')
-          break
+          this.emit('tableSizeChange');
+          break;
         default:
           break;
       }
@@ -46,7 +47,7 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.renderColBars = () => {
-      const {tableRoot, selection, template} = this.section;
+      const { tableRoot, selection, template } = this.section;
       const tableModel = selection.tableModel;
       const table = tableModel.table;
       const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
@@ -59,7 +60,8 @@ class ControlBar extends EventEmitter2 {
       let allColWidth = 0;
       let colIndex = 0;
       cols.each((col, i) => {
-        const colWidth = $(col).attr('width');
+        const colWidth = $(col)
+          .attr('width');
         if (colWidth) {
           colWidthArray[i] = colWidth;
           allColWidth += parseInt(colWidth);
@@ -94,28 +96,34 @@ class ControlBar extends EventEmitter2 {
         }
         for (let _c = 0; _c < cols.length; _c++) {
           const width = tdWidth[_c] || averageWidth;
-          $(colBars[_c]).css('width', `${width}px`);
-          $(cols[_c]).attr('width', width);
+          $(colBars[_c])
+            .css('width', `${width}px`);
+          $(cols[_c])
+            .attr('width', width);
         }
       } else if (colIndex) {
         const averageWidth = Math.round((tableWidth - allColWidth) / colIndex);
         cols.each((col, index) => {
           const width = undefined === colWidthArray[index] ? averageWidth : colWidthArray[index];
-          $(colBars[index]).css('width', `${width}px`);
-          $(col).attr('width', width);
+          $(colBars[index])
+            .css('width', `${width}px`);
+          $(col)
+            .attr('width', width);
         });
       } else {
         cols.each((col, index) => {
           const width = Math.round(tableWidth * colWidthArray[index] / allColWidth);
-          $(colBars[index]).css('width', `${width}px`);
-          $(col).attr('width', width);
+          $(colBars[index])
+            .css('width', `${width}px`);
+          $(col)
+            .attr('width', width);
         });
       }
       this.width = tableWidth;
     };
 
     this.renderRowBars = (opts) => {
-      const {tableRoot, template} = this.section;
+      const { tableRoot, template } = this.section;
       const trs = tableRoot[0].rows;
       const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
 
@@ -126,7 +134,8 @@ class ControlBar extends EventEmitter2 {
         end = opts.row_max;
       }
       for (let renderIndex = start; renderIndex <= end; renderIndex++) {
-        $(rowBars[renderIndex]).css('height', `${trs[renderIndex].offsetHeight}px`);
+        $(rowBars[renderIndex])
+          .css('height', `${trs[renderIndex].offsetHeight}px`);
       }
       this.height = tableRoot[0].offsetHeight;
     };
@@ -142,8 +151,10 @@ class ControlBar extends EventEmitter2 {
       if (Math.abs(this.rowDraggingPosiX - e.offsetX) < 3) return;
       this.rowDraggingPosiX = e.offsetX;
       this.dragBar.removeClass('dragging');
-      const td = $(e.target).closest('td');
-      const colBar = $(e.target).closest(this.section.template.COLS_HEADER_ITEM_CLASS);
+      const td = $(e.target)
+        .closest('td');
+      const colBar = $(e.target)
+        .closest(this.section.template.COLS_HEADER_ITEM_CLASS);
       if (!td[0] && !colBar[0]) return;
 
       if (colBar[0]) {
@@ -154,7 +165,7 @@ class ControlBar extends EventEmitter2 {
       }
       const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
       const colSpan = td[0].colSpan;
-      const {col} = this.section.selection.getTdRowCol(td[0]);
+      const { col } = this.section.selection.getTdRowCol(td[0]);
       let dropCol = col;
       let _passWidth = 0;
 
@@ -183,8 +194,10 @@ class ControlBar extends EventEmitter2 {
       if (Math.abs(this.rowDraggingPosiY - e.offsetY) < 3) return;
       this.rowDraggingPosiY = e.offsetY;
       this.dragBar.removeClass('dragging');
-      const td = $(e.target).closest('td');
-      const rowBar = $(e.target).closest(this.section.template.ROWS_HEADER_ITEM_CLASS);
+      const td = $(e.target)
+        .closest('td');
+      const rowBar = $(e.target)
+        .closest(this.section.template.ROWS_HEADER_ITEM_CLASS);
       if (!td[0] && !rowBar[0]) return;
 
       if (rowBar[0]) {
@@ -195,7 +208,7 @@ class ControlBar extends EventEmitter2 {
       }
       const rowBars = this.rowsHeader.find(this.section.template.ROWS_HEADER_ITEM_CLASS);
       const rowSpan = td[0].rowSpan;
-      const {row} = this.section.selection.getTdRowCol(td[0]);
+      const { row } = this.section.selection.getTdRowCol(td[0]);
       let dropRow = row;
       let _passHeight = 0;
 
@@ -226,7 +239,7 @@ class ControlBar extends EventEmitter2 {
         this.dropCol = dropIndex;
         const colBars = this.colsHeader.find(this.section.template.COLS_HEADER_ITEM_CLASS);
         const left = this.dropCol !== colBars.length ? colBars[this.dropCol].offsetLeft + 2 : colBars[this.dropCol - 1].offsetLeft + colBars[this.dropCol - 1].offsetWidth + 2;
-        const {scrollLeft, offsetWidth} = this.viewport[0];
+        const { scrollLeft, offsetWidth } = this.viewport[0];
         if (left < scrollLeft) {
           this.viewport[0].scrollLeft = left - 5;
         }
@@ -262,11 +275,11 @@ class ControlBar extends EventEmitter2 {
     this.onDragColEnd = () => {
       this.unBindDragColEvent();
       if (!this.colDragging || this.dropCol === undefined) {
-        this.colDragging = false
-        return
+        this.colDragging = false;
+        return;
       }
-      const {command, selection} = this.section;
-      const {colMin, colMax} = selection.normalizeArea();
+      const { command, selection } = this.section;
+      const { colMin, colMax } = selection.normalizeArea();
       const colBars = this.section.container.find(this.section.template.COLS_HEADER_ITEM_CLASS);
       const widths = [];
       for (let c = colMin; c <= colMax; c++) {
@@ -298,11 +311,11 @@ class ControlBar extends EventEmitter2 {
     this.onDragRowEnd = () => {
       this.unBindDragRowEvent();
       if (!this.rowDragging || this.dropRow === undefined) {
-        this.rowDragging = false
-        return
+        this.rowDragging = false;
+        return;
       }
-      const {command, selection} = this.section;
-      const {rowMin, rowMax} = selection.normalizeArea();
+      const { command, selection } = this.section;
+      const { rowMin, rowMax } = selection.normalizeArea();
       command.mockCopy();
       if (rowMin > this.dropRow) {
         command.insertRowAt(this.dropRow, this.dragCount, false, true);
@@ -358,10 +371,11 @@ class ControlBar extends EventEmitter2 {
       e.stopPropagation();
       const area = this.section.selection.area;
       if (!area || !area.total_col) return;
-      const colBar = $(e.target).closest(this.section.template.COLS_HEADER_ITEM_CLASS);
+      const colBar = $(e.target)
+        .closest(this.section.template.COLS_HEADER_ITEM_CLASS);
       if (!colBar[0]) return;
       const dragCol = colBar.index();
-      const {colMin, colMax} = this.section.selection.normalizeArea();
+      const { colMin, colMax } = this.section.selection.normalizeArea();
       if (dragCol < colMin || dragCol > colMax) return;
       this.colDragging = true;
       this.dragBar = colBar;
@@ -371,7 +385,8 @@ class ControlBar extends EventEmitter2 {
       };
       this.dragCount = this.section.selection.colCount();
       this.dragBar.addClass('dragging');
-      this.dragBar.find('.drag-info').html('\u6B63\u5728\u79FB\u52A8 '.concat(this.dragCount, ' \u5217'));
+      this.dragBar.find('.drag-info')
+        .html('\u6B63\u5728\u79FB\u52A8 '.concat(this.dragCount, ' \u5217'));
       this.colsHeader.addClass('dragging');
       fixDragEvent(e);
       this.bindDragColEvent();
@@ -381,11 +396,12 @@ class ControlBar extends EventEmitter2 {
       e.stopPropagation();
       const area = this.section.selection.area;
       if (!area || !area.total_row) return;
-      const rowBar = $(e.target).closest(this.section.template.ROWS_HEADER_ITEM_CLASS);
+      const rowBar = $(e.target)
+        .closest(this.section.template.ROWS_HEADER_ITEM_CLASS);
       if (!rowBar[0]) return;
       const dragRow = rowBar.index();
 
-      const {rowMin, rowMax} = this.section.selection.normalizeArea();
+      const { rowMin, rowMax } = this.section.selection.normalizeArea();
       if (dragRow < rowMin || dragRow > rowMax) return;
       this.rowDragging = true;
       this.dragBar = rowBar;
@@ -395,24 +411,27 @@ class ControlBar extends EventEmitter2 {
       };
       this.dragCount = this.section.selection.rowCount();
       this.dragBar.addClass('dragging');
-      this.dragBar.find('.drag-info').html('\u6B63\u5728\u79FB\u52A8 '.concat(this.dragCount, ' \u884C'));
+      this.dragBar.find('.drag-info')
+        .html('\u6B63\u5728\u79FB\u52A8 '.concat(this.dragCount, ' \u884C'));
       this.rowsHeader.addClass('dragging');
       fixDragEvent(e);
       this.bindDragRowEvent();
     };
 
     this.onMouseDownColsHeader = (e) => {
-      const {template, selection} = this.section;
-      this.trigger = $(e.target).closest(template.COLS_HEADER_TRIGGER_CLASS);
+      const { template, selection } = this.section;
+      this.trigger = $(e.target)
+        .closest(template.COLS_HEADER_TRIGGER_CLASS);
       if (!this.trigger[0]) {
         // 移动列位置
         if (e.button === 2) {
-          const colHeader = $(e.target).closest(template.COLS_HEADER_ITEM_CLASS);
+          const colHeader = $(e.target)
+            .closest(template.COLS_HEADER_ITEM_CLASS);
           if (!colHeader[0]) return;
           const col = colHeader.index();
           let currentColSelected = false;
           if (selection.area && selection.area.total_col) {
-            const {colMin, colMax} = selection.normalizeArea();
+            const { colMin, colMax } = selection.normalizeArea();
             if (col >= colMin && col <= colMax) {
               currentColSelected = true;
             }
@@ -443,16 +462,18 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.onMouseDownRowsHeader = (e) => {
-      const {template, selection} = this.section;
-      this.trigger = $(e.target).closest(template.ROWS_HEADER_TRIGGER_CLASS);
+      const { template, selection } = this.section;
+      this.trigger = $(e.target)
+        .closest(template.ROWS_HEADER_TRIGGER_CLASS);
       if (!this.trigger[0]) {
         if (e.button === 2) {
-          const rowHeader = $(e.target).closest(template.ROWS_HEADER_ITEM_CLASS);
+          const rowHeader = $(e.target)
+            .closest(template.ROWS_HEADER_ITEM_CLASS);
           if (!rowHeader[0]) return;
           const row = rowHeader.index();
           let currentRowSelected = false;
           if (selection.area && selection.area.total_row) {
-            const {rowMin, rowMax} = selection.normalizeArea();
+            const { rowMin, rowMax } = selection.normalizeArea();
             if (row >= rowMin && row <= rowMax) {
               currentRowSelected = true;
             }
@@ -530,22 +551,26 @@ class ControlBar extends EventEmitter2 {
       const tableRoot = this.section.tableRoot;
       const cols = tableRoot.find('col');
       tableRoot.css('width', `${tableWidth}px`);
-      $(cols[this.currentColIndex]).attr('width', colWidth);
+      $(cols[this.currentColIndex])
+        .attr('width', colWidth);
     };
 
     this.changeRowHeight = (rowHeight) => {
       const tableRoot = this.section.tableRoot;
       const trs = tableRoot.find('tr');
-      $(trs[this.currentRowIndex]).css('height', `${rowHeight}px`);
+      $(trs[this.currentRowIndex])
+        .css('height', `${rowHeight}px`);
     };
 
     this.renderColSplitBars = () => {
-      this.trigger.addClass('dragging').css('height', `${this.height + (this.section.options.type === 'mini' && !this.section.state.maximize ? 0 : 24)}px`);
+      this.trigger.addClass('dragging')
+        .css('height', `${this.height + (this.section.options.type === 'mini' && !this.section.state.maximize ? 0 : 24)}px`);
     };
 
     this.renderRowSplitBars = () => {
       const width = Math.min(this.viewport[0].offsetWidth, this.width);
-      this.trigger.addClass('dragging').css('width', `${width + (this.section.options.type === 'mini' && !this.section.state.maximize ? 0 : 24)}px`);
+      this.trigger.addClass('dragging')
+        .css('width', `${width + (this.section.options.type === 'mini' && !this.section.state.maximize ? 0 : 24)}px`);
     };
 
     this.onChangeSizeEnd = (e) => {
@@ -577,8 +602,8 @@ class ControlBar extends EventEmitter2 {
         this.width = this.section.tableRoot[0].offsetWidth;
         this.height = this.section.tableRoot[0].offsetHeight;
         if (this.dx || this.dy) {
-          this.dx = 0
-          this.dy = 0
+          this.dx = 0;
+          this.dy = 0;
           this.emit('sizeChanged');
         }
       }
@@ -609,38 +634,48 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.activeHeader = () => {
-      const {selection, template} = this.section;
-      const {area, tableModel} = selection;
+      const { selection, template } = this.section;
+      const { area, tableModel } = selection;
       this.clearActiveStatus();
       if (!area) return;
       const colBars = this.colsHeader.find(template.COLS_HEADER_ITEM_CLASS);
       const rowBars = this.rowsHeader.find(template.ROWS_HEADER_ITEM_CLASS);
-      const {total_col, total_row, total_table} = area;
-      const {rowMin, rowMax, colMin, colMax} = selection.normalizeArea();
+      const { total_col, total_row, total_table } = area;
+      const { rowMin, rowMax, colMin, colMax } = selection.normalizeArea();
       for (let r = rowMin; r <= rowMax; r++) {
-        $(rowBars[r]).addClass('active');
+        $(rowBars[r])
+          .addClass('active');
         if (total_row || total_table) {
-          $(rowBars[r]).addClass('selected');
+          $(rowBars[r])
+            .addClass('selected');
         }
         if (total_row && (rowMin !== rowMax)) {
-          $(rowBars[r]).addClass('multi-selected');
+          $(rowBars[r])
+            .addClass('multi-selected');
         }
         if (total_table) {
-          $(rowBars[r]).addClass('no-dragger');
-          $(rowBars[r]).addClass('multi-selected');
+          $(rowBars[r])
+            .addClass('no-dragger');
+          $(rowBars[r])
+            .addClass('multi-selected');
         }
       }
       for (let c = colMin; c <= colMax; c++) {
-        $(colBars[c]).addClass('active');
+        $(colBars[c])
+          .addClass('active');
         if (total_col || total_table) {
-          $(colBars[c]).addClass('selected');
+          $(colBars[c])
+            .addClass('selected');
         }
         if (total_col && (colMin !== colMax)) {
-          $(colBars[c]).addClass('multi-selected');
+          $(colBars[c])
+            .addClass('multi-selected');
         }
         if (total_table) {
-          $(colBars[c]).addClass('no-dragger');
-          $(colBars[c]).addClass('multi-selected');
+          $(colBars[c])
+            .addClass('no-dragger');
+          $(colBars[c])
+            .addClass('multi-selected');
         }
       }
       const table_select = rowMin === 0 && rowMax === tableModel.rows - 1 && colMin === 0 && colMax === tableModel.cols - 1;
@@ -667,18 +702,22 @@ class ControlBar extends EventEmitter2 {
 
     this.clickRowsHeader = (e) => {
       const template = this.section.template;
-      const trigger = $(e.target).closest(template.ROWS_HEADER_TRIGGER_CLASS);
+      const trigger = $(e.target)
+        .closest(template.ROWS_HEADER_TRIGGER_CLASS);
       if (trigger[0]) return;
-      const rowHeader = $(e.target).closest(template.ROWS_HEADER_ITEM_CLASS);
+      const rowHeader = $(e.target)
+        .closest(template.ROWS_HEADER_ITEM_CLASS);
       if (!rowHeader[0]) return;
       this.emit('clickRowsHeader', rowHeader.index());
     };
 
     this.clickColsHeader = (e) => {
       const template = this.section.template;
-      const trigger = $(e.target).closest(template.COLS_HEADER_TRIGGER_CLASS);
+      const trigger = $(e.target)
+        .closest(template.COLS_HEADER_TRIGGER_CLASS);
       if (trigger[0]) return;
-      const colHeader = $(e.target).closest(template.COLS_HEADER_ITEM_CLASS);
+      const colHeader = $(e.target)
+        .closest(template.COLS_HEADER_ITEM_CLASS);
       if (!colHeader[0]) return;
       this.emit('clickColsHeader', colHeader.index());
     };
@@ -688,9 +727,11 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.handleClickContainer = (e) => {
-      const td = $(e.target).closest('td');
+      const td = $(e.target)
+        .closest('td');
       if (!td[0]) {
-        const mask = $(e.target).closest('.mask');
+        const mask = $(e.target)
+          .closest('.mask');
         if (!mask[0]) {
           return;
         }
@@ -704,7 +745,8 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.handleHoverMenu = (e) => {
-      const menu = $(e.target).closest('.table-menubar-item');
+      const menu = $(e.target)
+        .closest('.table-menubar-item');
       if (!menu[0]) return;
       e.stopPropagation();
       if (!menu.hasClass('disabled')) {
@@ -719,7 +761,8 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.handleClickMenu = (e) => {
-      const menu = $(e.target).closest('.table-menubar-item');
+      const menu = $(e.target)
+        .closest('.table-menubar-item');
       if (!menu[0]) return;
       e.stopPropagation();
       if (!menu.hasClass('disabled')) {
@@ -760,16 +803,19 @@ class ControlBar extends EventEmitter2 {
 
     this.showContextMenu = (e) => {
       const area = this.section.selection.area;
-      const currentTd = $(e.target).closest('td')[0];
+      const currentTd = $(e.target)
+        .closest('td')[0];
       if (!currentTd && !area) return;
 
       const menuItems = this.menuBar.find(this.section.template.MENUBAR_ITEM_CLASS);
       const y = Math.min(Math.max(120, document.body.offsetHeight - 500), e.clientY);
       menuItems.removeClass('disabled');
       menuItems.each((menu) => {
-        const action = $(menu).attr('data-action');
+        const action = $(menu)
+          .attr('data-action');
         if (this.getMenuDisabled(action)) {
-          $(menu).addClass('disabled');
+          $(menu)
+            .addClass('disabled');
         }
       });
       this.menuBar.css('left', `${e.clientX + 30}px`);
@@ -793,7 +839,8 @@ class ControlBar extends EventEmitter2 {
     this.filterEvent = (e) => {
       const template = this.section.template;
       const tagName = (e.target || e.srcElement).tagName.toLocaleUpperCase();
-      const target = $(e.target).closest(template.TABLE_TEXTAREA_CLASS);
+      const target = $(e.target)
+        .closest(template.TABLE_TEXTAREA_CLASS);
       return !!target[0] || !(tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA');
     };
 
@@ -814,7 +861,7 @@ class ControlBar extends EventEmitter2 {
     };
 
     this.onMultiChangeRowCol = (value, type) => {
-      const {rows, cols} = this.section.selection.tableModel;
+      const { rows, cols } = this.section.selection.tableModel;
       if (type === 'row') {
         value = Math.max(this.contentRow + 1, value);
         if (value > rows) {
@@ -848,49 +895,57 @@ class ControlBar extends EventEmitter2 {
       e.stopPropagation();
       this.section.command.insertColRight();
       // 添加后刷新绑定
-      this.bindColHeaderInsertBtnClickEvent()
-      this.emit('tableSizeChange')
-    }
+      this.bindColHeaderInsertBtnClickEvent();
+      this.emit('tableSizeChange');
+    };
 
     this.onColDeleteBtnClick = (e) => {
       e.stopPropagation();
       this.section.command.removeCol();
-      this.emit('tableSizeChange')
-    }
+      this.emit('tableSizeChange');
+    };
 
     this.onRowAddBtnClick = (e) => {
       e.stopPropagation();
       this.section.command.insertRowDown();
       // 添加后刷新绑定
-      this.bindRowHeaderInsertBtnClickEvent()
-      this.emit('tableSizeChange')
-    }
+      this.bindRowHeaderInsertBtnClickEvent();
+      this.emit('tableSizeChange');
+    };
 
     this.onRowDeleteBtnClick = (e) => {
       e.stopPropagation();
       this.section.command.removeRow();
-      this.emit('tableSizeChange')
-    }
+      this.emit('tableSizeChange');
+    };
 
     this.bindColHeaderInsertBtnClickEvent = () => {
-      const {template} = this.section;
-      this.colsHeader.find(template.HEADER_ADD_CLASS).on('click', this.onColAddBtnClick)
-      this.colsHeader.find(template.HEADER_DELETE_CLASS).on('click', this.onColDeleteBtnClick)
-    }
+      const { template } = this.section;
+      this.colsHeader.find(template.HEADER_ADD_CLASS)
+        .on('click', this.onColAddBtnClick);
+      this.colsHeader.find(template.HEADER_DELETE_CLASS)
+        .on('click', this.onColDeleteBtnClick);
+    };
 
     this.bindRowHeaderInsertBtnClickEvent = () => {
-      const {template} = this.section;
-      this.rowsHeader.find(template.HEADER_ADD_CLASS).on('click', this.onRowAddBtnClick)
-      this.rowsHeader.find(template.HEADER_DELETE_CLASS).on('click', this.onRowDeleteBtnClick)
-    }
+      const { template } = this.section;
+      this.rowsHeader.find(template.HEADER_ADD_CLASS)
+        .on('click', this.onRowAddBtnClick);
+      this.rowsHeader.find(template.HEADER_DELETE_CLASS)
+        .on('click', this.onRowDeleteBtnClick);
+    };
 
     this.bindEvents = () => {
-      this.colsHeader.on('mousedown', this.onMouseDownColsHeader).on('click', this.clickColsHeader).on('dragstart', this.onDragStartColsHeader);
-      this.rowsHeader.on('mousedown', this.onMouseDownRowsHeader).on('click', this.clickRowsHeader).on('dragstart', this.onDragStartRowsHeader);
+      this.colsHeader.on('mousedown', this.onMouseDownColsHeader)
+        .on('click', this.clickColsHeader)
+        .on('dragstart', this.onDragStartColsHeader);
+      this.rowsHeader.on('mousedown', this.onMouseDownRowsHeader)
+        .on('click', this.clickRowsHeader)
+        .on('dragstart', this.onDragStartRowsHeader);
       this.tableHeader.on('click', this.clickTableHeader);
 
-      this.bindColHeaderInsertBtnClickEvent()
-      this.bindRowHeaderInsertBtnClickEvent()
+      this.bindColHeaderInsertBtnClickEvent();
+      this.bindRowHeaderInsertBtnClickEvent();
 
       this.section.container.on('mousedown', this.handleClickContainer);
       this.section.container.on('dragover', (e) => {
@@ -908,8 +963,8 @@ class ControlBar extends EventEmitter2 {
     this.dragging = false;
     this.draggingX = 0;
     this.draggingY = 0;
-    this.dx = 0
-    this.dy = 0
+    this.dx = 0;
+    this.dy = 0;
     this.width = 0;
     this.height = 0;
     this.MIN_WIDTH = 40;
@@ -923,7 +978,7 @@ class ControlBar extends EventEmitter2 {
   }
 
   init() {
-    const {container, template} = this.section;
+    const { container, template } = this.section;
     this.tableHeader = container.find(template.HEADER_CLASS);
     this.colsHeader = container.find(template.COLS_HEADER_CLASS);
     this.rowsHeader = container.find(template.ROWS_HEADER_CLASS);

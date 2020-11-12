@@ -188,12 +188,13 @@ class Mind extends Page {
     const rootGroup = graph.getRootGroup();
     const hotAreaGroup = rootGroup.addGroup();
     this.set('hotAreaGroup', hotAreaGroup);
-    graph.edge().shape((model) => {
-      const target = graph.find(model.target);
-      if (target.getModel().isPlaceholder) {
-        return 'mind-placeholder-edge';
-      }
-    });
+    graph.edge()
+      .shape((model) => {
+        const target = graph.find(model.target);
+        if (target.getModel().isPlaceholder) {
+          return 'mind-placeholder-edge';
+        }
+      });
     defaultData && this.read(defaultData);
 
     if (mode === 'default') {
@@ -700,7 +701,8 @@ class Mind extends Page {
 
       const next = getNext(index + 1, child, parent);
       const last = getLast(index - 1, child, parent);
-      const childBox = graph.find(child.id).getBBox();
+      const childBox = graph.find(child.id)
+        .getBBox();
       const children = parent.children;
       // 所在节点
       const firstSubDx = 90;
@@ -715,7 +717,8 @@ class Mind extends Page {
             let minY = last ? childBox.minY : childBox.minY - dy;
 
             if (children[index - 1] && children[index - 1].isPlaceholder && children[index - 1].side === child.side) {
-              const placeholderBox = graph.find(children[index - 1].id).getBBox();
+              const placeholderBox = graph.find(children[index - 1].id)
+                .getBBox();
               minY = placeholderBox.minY;
             }
 
@@ -732,7 +735,8 @@ class Mind extends Page {
       }
 
       if (next) {
-        const nextBox = graph.find(next.id).getBBox();
+        const nextBox = graph.find(next.id)
+          .getBBox();
         hotAreas.push({
           minX: (function () {
             if (child.side === 'left') {
@@ -762,7 +766,8 @@ class Mind extends Page {
           maxY: (function () {
             let maxY = childBox.maxY + dy;
             if (children[index + 1] && children[index + 1].isPlaceholder && children[index + 1].side === child.side) {
-              const placeholderBox = graph.find(children[index + 1].id).getBBox();
+              const placeholderBox = graph.find(children[index + 1].id)
+                .getBBox();
               maxY = placeholderBox.maxY;
             }
             return maxY;
@@ -855,21 +860,24 @@ class Mind extends Page {
         const nodes = graph.getNodes();
         collapsedIds = nodes.filter((node) => {
           return node.getModel().collapsed;
-        }).map((node) => {
-          return node.getModel().id;
-        });
+        })
+          .map((node) => {
+            return node.getModel().id;
+          });
         collapsedIds.forEach((collapsedId) => {
           graph.update(collapsedId, {
             collapsed: false,
           });
         });
         graph.layout();
-        seletedIds = this.getSelected().map((item) => {
-          return item.id;
-        });
-        activedIds = this.getSelected().map((item) => {
-          return item.id;
-        });
+        seletedIds = this.getSelected()
+          .map((item) => {
+            return item.id;
+          });
+        activedIds = this.getSelected()
+          .map((item) => {
+            return item.id;
+          });
 
         this.clearSelected();
 

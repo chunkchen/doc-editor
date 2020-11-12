@@ -50,7 +50,7 @@ class ColorPickerItem extends React.Component {
   }
 
   render() {
-    const {color, activeColors, defaultColor, setStroke} = this.props;
+    const { color, activeColors, defaultColor, setStroke } = this.props;
     const needborder = ['#FFFFFF', '#FAFAFA'].indexOf(color) >= 0;
     const active = activeColors.indexOf(color) >= 0;
     const special = color === defaultColor;
@@ -88,7 +88,7 @@ class ColorPickerItem extends React.Component {
 class ColorPickerGroup extends React.Component {
   render() {
     const data = this.props.data === void 0 ? [] : this.props.data;
-    const {activeColors, defaultColor, onSelect, setStroke} = this.props;
+    const { activeColors, defaultColor, onSelect, setStroke } = this.props;
 
     return (
       <span className="lake-colorboard-group">
@@ -113,8 +113,8 @@ class ColorPickerGroup extends React.Component {
 
 class ColorPicker extends React.Component {
   render() {
-    const {activeColors, defaultColor, onSelect, setStroke} = this.props;
-    let {colors} = this.props;
+    const { activeColors, defaultColor, onSelect, setStroke } = this.props;
+    let { colors } = this.props;
     if (!colors) colors = Palette.getColors();
     return (
       <div className="lake-colorboard">

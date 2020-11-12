@@ -3,10 +3,10 @@ export default {
     placeholder: 'Please paste the link here',
     submit: 'submit',
     addressInvalid: 'Link error, please check and re-enter',
-    validUrl: "Illegal link, can't be embedded",
+    validUrl: 'Illegal link, can\'t be embedded',
     uploading: 'files are still uploading',
     iframeOverLimit: 'Documents support up to ${limit} embedded sections',
-    iframeOverLimitSectionView: "Embed sections can't be more than ${limit}",
+    iframeOverLimitSectionView: 'Embed sections can\'t be more than ${limit}',
     canNotShowSection: 'Section cannot be displayed',
   },
   'zh-cn': {

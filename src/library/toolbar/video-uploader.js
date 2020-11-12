@@ -1,6 +1,6 @@
 import lodashGet from 'lodash/get';
 import ajax from '@itellyou/itellyou-ajax';
-import {message} from 'antd';
+import { message } from 'antd';
 import 'antd/lib/message/style';
 
 class VideoUploader {
@@ -35,7 +35,7 @@ class VideoUploader {
       addFileSuccess: (uploadInfo) => {
         // 触发外围 toolbar 的 click 事件， 用于选择文件后关闭菜单
         this.onToolBarClick();
-        const {key, file} = uploadInfo;
+        const { key, file } = uploadInfo;
         // debug('上传:文件选择: %j', file)
         this.selectedFile = file;
         // 选定文件后，执行插入Section
@@ -53,7 +53,7 @@ class VideoUploader {
             filename,
             filesize,
           },
-          success: ({result, data, message}) => {
+          success: ({ result, data, message }) => {
             if (!result) {
               message.error(message);
               return;
@@ -75,9 +75,10 @@ class VideoUploader {
       },
       // 文件上传成功
       onUploadSucceed: (uploadInfo) => {
-        const {videoId, file, key} = uploadInfo;
-        const {name, size, type} = file;
-        let fileType = name.split('.').pop();
+        const { videoId, file, key } = uploadInfo;
+        const { name, size, type } = file;
+        let fileType = name.split('.')
+          .pop();
         if (fileType) {
           fileType = '.'.concat(fileType);
         }
@@ -149,7 +150,8 @@ class VideoUploader {
   }
 
   updatePercent(file) {
-    this.sectionRoot.find('[data-role=percent]').html(''.concat(file.percent, '%'));
+    this.sectionRoot.find('[data-role=percent]')
+      .html(''.concat(file.percent, '%'));
   }
 
   updateSection() {

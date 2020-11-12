@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tooltip} from 'antd';
+import { Tooltip } from 'antd';
 import 'antd/lib/tooltip/style';
 import './collapse-group.css';
 
@@ -27,7 +27,8 @@ class CollapseGroup extends React.Component {
         return (
           <span
             className={'lake-svg-icon lake-svg-icon-'.concat(child.icon)}
-            key={''.concat(key).concat(child_key)}
+            key={''.concat(key)
+              .concat(child_key)}
           />
         );
       });
@@ -56,7 +57,7 @@ class CollapseGroup extends React.Component {
   }
 
   renderTooltip() {
-    const {data} = this.props;
+    const { data } = this.props;
     const tooltip = data.length > 1 ? this.renderHierarchy(data) : this.renderFlat(data);
     return (
       <div className="lake-section-tooltip-content-container">
@@ -67,7 +68,7 @@ class CollapseGroup extends React.Component {
   }
 
   render() {
-    const {children, data} = this.props;
+    const { children, data } = this.props;
     return data ? (
       <Tooltip
         title={this.renderTooltip()}

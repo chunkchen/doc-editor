@@ -1,8 +1,8 @@
 import React from 'react';
-import {Input} from 'antd';
+import { Input } from 'antd';
 import 'antd/lib/input/style';
 import 'antd/lib/icon/style';
-import {UnlockOutlined} from '@ant-design/icons';
+import { UnlockOutlined } from '@ant-design/icons';
 
 class Unlock extends React.Component {
   changeUnlockPassword = (e) => {

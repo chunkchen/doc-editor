@@ -19,7 +19,7 @@ class Request {
 
   ajax(options) {
     options = Object.assign({}, this.options.ajaxOptions, {}, options);
-    const {success, error} = options;
+    const { success, error } = options;
     const promise = new Promise((resolve) => {
       options.success = (res) => {
         success(res);

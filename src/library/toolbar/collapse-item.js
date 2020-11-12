@@ -1,5 +1,5 @@
 import React from 'react';
-import {message} from 'antd';
+import { message } from 'antd';
 import VideoUploader from './video-uploader';
 import CollapseGroup from './collapse-group';
 import OnlineDoc from './online-doc';
@@ -16,7 +16,7 @@ class CollapseItem extends React.PureComponent {
   }
 
   onVideoTriggerClick() {
-    const {engine, onToolBarClick} = this.props;
+    const { engine, onToolBarClick } = this.props;
     if (!this.videoUploader) {
       this.videoUploader = new VideoUploader({
         trigger: this.videoTrigger,
@@ -50,7 +50,7 @@ class CollapseItem extends React.PureComponent {
   }
 
   renderCommon() {
-    const {item, index, itemOnClick} = this.props;
+    const { item, index, itemOnClick } = this.props;
     const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     const style = item.subTitle
       ? {
@@ -90,10 +90,10 @@ class CollapseItem extends React.PureComponent {
   }
 
   getIcon = () => {
-    const {icon} = this.props.item;
+    const { icon } = this.props.item;
     if (icon && typeof icon === 'string') {
       return (
-        <div className="lake-collapse-item-icon" dangerouslySetInnerHTML={{__html: icon}}/>
+        <div className="lake-collapse-item-icon" dangerouslySetInnerHTML={{ __html: icon }}/>
       );
     }
     if (icon) {
@@ -103,7 +103,7 @@ class CollapseItem extends React.PureComponent {
   };
 
   renderVideo() {
-    const {item, index} = this.props;
+    const { item, index } = this.props;
     const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     return (
       <div
@@ -130,7 +130,7 @@ class CollapseItem extends React.PureComponent {
   }
 
   render() {
-    const {item, type} = this.props;
+    const { item, type } = this.props;
     let child;
     if (item.name === 'onlinedoc') {
       child = <OnlineDoc {...this.props} />;

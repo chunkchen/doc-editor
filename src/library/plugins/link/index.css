@@ -6,13 +6,16 @@
   box-shadow: rgba(221, 221, 221, 0.5) 0 1px 3px;
   background: white;
 }
+
 .lake-link-editor .lake-link-invalid-link {
   color: #cf1322;
 }
+
 .lake-link-editor p {
   margin-top: 0;
   margin-bottom: 14px;
 }
+
 .lake-link-editor .lake-link-editor-slash {
   width: 1px;
   height: 14px;
@@ -20,28 +23,34 @@
   margin: 5px 1px 0;
   vertical-align: top;
 }
+
 .lake-link-editor .lake-icon {
   color: #8590a6;
   font-size: 16px;
 }
+
 .lake-link-editor-preview {
   line-height: 16px;
   padding: 6px 8px;
   vertical-align: middle;
   white-space: nowrap;
 }
+
 .lake-link-editor-preview * {
   display: inline-block;
 }
+
 .lake-link-editor-preview .lake-link-editor-button {
   color: #595959;
   margin: 0 0 0 8px;
   padding: 4px;
 }
+
 .lake-link-editor-preview .lake-link-editor-button:hover {
   background: #f4f4f4;
   cursor: pointer;
 }
+
 .lake-link-editor-preview .lake-link-editor-link-container {
   color: #1890ff;
   height: 16px;
@@ -57,9 +66,11 @@
   letter-spacing: 1.2px;
   vertical-align: middle;
 }
+
 .lake-link-editor-preview .lake-link-editor-link-container:hover {
   cursor: pointer;
 }
+
 .lake-link-editor-preview .lake-link-editor-link-empty {
   height: 16px;
   padding: 0 6px;
@@ -68,6 +79,7 @@
   line-height: 20px;
   font-size: 14px;
 }
+
 .lake-link-editor-edit {
   width: 365px;
   padding: 16px 12px 4px;

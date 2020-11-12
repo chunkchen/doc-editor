@@ -129,7 +129,7 @@ class Video extends SectionBase {
         data: {
           video_id: this.value.videoId,
         },
-        success: ({result, data}) => {
+        success: ({ result, data }) => {
           // debug('第 %d 次查询结果: %j', this.num, this.value);
           // 设置状态前先清除状态
           this.value.coverUrl = null;
@@ -172,7 +172,8 @@ class Video extends SectionBase {
         video.poster = this.value.coverUrl;
       }
 
-      this.container.find('.lake-video-content').append(video);
+      this.container.find('.lake-video-content')
+        .append(video);
 
       video.oncontextmenu = function () {
         return false;
@@ -273,11 +274,13 @@ class Video extends SectionBase {
   }
 
   activate() {
-    this.container.find('.lake-video-content').addClass('lake-video-content-active');
+    this.container.find('.lake-video-content')
+      .addClass('lake-video-content-active');
   }
 
   unactivate() {
-    this.container.find('.lake-video-content').removeClass('lake-video-content-active');
+    this.container.find('.lake-video-content')
+      .removeClass('lake-video-content-active');
     if (this.engine) {
       this.engine.sidebar.restore();
     }

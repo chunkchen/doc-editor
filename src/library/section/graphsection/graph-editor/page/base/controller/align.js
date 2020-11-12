@@ -68,7 +68,6 @@ class Controller extends Base {
           horizontalLines[`${item.id}lcrc`] = [bbox.minX, bbox.centerY, bbox.maxX, bbox.centerY, item];
         } // set vertical lines
 
-
         if (itemAlignType === true || itemAlignType === 'vertical') {
           verticalLines[`${item.id}tlbl`] = [bbox.minX, bbox.minY, bbox.minX, bbox.maxY, item];
           verticalLines[`${item.id}tcbc`] = [bbox.centerX, bbox.minY, bbox.centerX, bbox.maxY, item];

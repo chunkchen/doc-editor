@@ -1,10 +1,10 @@
 import React from 'react';
-import {Button, notification} from 'antd';
+import { Button, notification } from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/notification/style';
-import {post} from '@itellyou/itellyou-request';
+import { post } from '@itellyou/itellyou-request';
 import Engine from '@hicooper/doc-engine/lib';
-import {isMarkdown} from '../utils/string';
+import { isMarkdown } from '../utils/string';
 
 notification.config({
   top: 105,
@@ -13,7 +13,7 @@ notification.config({
 function openConfirm(text, prevValue) {
   const locale = this.locale.markdown || {};
   const key = 'lake-paste-markdown';
-  const {markdown} = this.options;
+  const { markdown } = this.options;
   const serviceUrl = markdown ? markdown.action : null;
   if (!serviceUrl) return;
   const onOk = () => {
@@ -21,16 +21,17 @@ function openConfirm(text, prevValue) {
       from: 'markdown',
       to: 'section',
       content: text,
-    }).then((res) => {
-      if (res.result) {
-        const data = res.data;
-        this.history.stop();
-        this.change.setValue(prevValue);
-        this.command.execute('paste', data.content);
-        this.history.save();
-        notification.close(key);
-      }
-    });
+    })
+      .then((res) => {
+        if (res.result) {
+          const data = res.data;
+          this.history.stop();
+          this.change.setValue(prevValue);
+          this.command.execute('paste', data.content);
+          this.history.save();
+          notification.close(key);
+        }
+      });
   };
 
   const btn = (

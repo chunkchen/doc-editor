@@ -2,7 +2,7 @@ import React from 'react';
 import './graph-view.css';
 
 class GraphView extends React.Component {
-  state = {}
+  state = {};
 
   componentDidMount() {
     this.instance = {
@@ -20,11 +20,11 @@ class GraphView extends React.Component {
 
   onState = (state) => {
     this.setState(state);
-  }
+  };
 
   render() {
-    const {maximize} = this.state;
-    const {value, showGraphEditor} = this.props;
+    const { maximize } = this.state;
+    const { value, showGraphEditor } = this.props;
     return (
       <div className={`lake-mxgraph${maximize ? ' lake-mxgraph-maximize' : ''}`}>
         {

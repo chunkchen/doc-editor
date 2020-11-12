@@ -6,7 +6,7 @@ import tempContent from './tempContent';
 export default class BlankPage extends Component {
   static displayName = 'BlankPage';
 
-  cropImgRef = undefined
+  cropImgRef = undefined;
 
   constructor(props) {
     super(props);

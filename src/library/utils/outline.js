@@ -1,5 +1,5 @@
 import HeadingId from 'heading-id';
-import {getTextNodes} from './dom';
+import { getTextNodes } from './dom';
 
 const Outline = {
   _invalidTags: {

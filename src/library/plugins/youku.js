@@ -5,7 +5,8 @@ export default {
     this.command.add(PLUGIN_NAME, {
       execute: (url) => {
         const sectionRoot = this.change.insertSection('youku', url);
-        this.section.getComponent(sectionRoot).focusInput();
+        this.section.getComponent(sectionRoot)
+          .focusInput();
       },
     });
   },

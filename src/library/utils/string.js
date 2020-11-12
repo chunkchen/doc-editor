@@ -6,23 +6,26 @@ export const addMentionAttrs = (value) => {
   value = ((value) => {
     return value.replace(/<section\s+([^>]+)>/g, (match0, match1) => {
       const attrs = Engine.StringUtils.getAttrMap(match0);
-      let {name, value} = attrs;
+      let { name, value } = attrs;
 
       if (name === 'mention' && value) {
         value = Engine.StringUtils.unescape(value);
         const valueObj = Engine.StringUtils.decodeSectionValue(value);
-        let {key, name} = valueObj;
+        let { key, name } = valueObj;
 
         if (key && name) {
           key = Engine.StringUtils.escape(key);
           name = Engine.StringUtils.escape(name);
-          return '<section data-user-key="'.concat(key, '" data-user-name="').concat(name, '" ').concat(match1, '>');
+          return '<section data-user-key="'.concat(key, '" data-user-name="')
+            .concat(name, '" ')
+            .concat(match1, '>');
         }
       }
       return match0;
     });
   });
-  return '<!doctype><meta name="doc-version" content="'.concat(DocVersion, '" />').concat(value);
+  return '<!doctype><meta name="doc-version" content="'.concat(DocVersion, '" />')
+    .concat(value);
 };
 
 export const getDocVersion = (doc) => {
@@ -56,7 +59,8 @@ export const getHotkeyText = (keys) => {
     } else if (key.toLowerCase() === 'opt') {
       key = Engine.userAgent.macos ? 'Option' : 'Alt';
     } else if (key.length > 1) {
-      key = key.toLowerCase().replace(key[0], key[0].toUpperCase());
+      key = key.toLowerCase()
+        .replace(key[0], key[0].toUpperCase());
     } else if (key.length === 1) {
       key = key.toUpperCase();
     }

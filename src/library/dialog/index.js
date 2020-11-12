@@ -24,7 +24,7 @@ class Dialog extends React.Component {
       if (!state) {
         this.close();
       }
-      const {engine} = this.props;
+      const { engine } = this.props;
       this.setState(state);
       localStorage.setItem('lake-dialog', state.name);
       engine.toolbar.updateState();
@@ -38,7 +38,7 @@ class Dialog extends React.Component {
     };
 
     this.store = (config) => {
-      const {engine} = this.props;
+      const { engine } = this.props;
       this.storeConfig = config;
       engine.dialog.storeConfig = config;
     };
@@ -53,24 +53,26 @@ class Dialog extends React.Component {
   }
 
   componentDidMount() {
-    this.initDialog()
+    this.initDialog();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.initDialog()
+    this.initDialog();
   }
 
   initDialog = () => {
-    Engine.$(document).on('keydown', this.onEsc);
+    Engine.$(document)
+      .on('keydown', this.onEsc);
     this.extends();
-  }
+  };
 
   componentWillUnmount() {
-    Engine.$(document).off('keydown', this.onEsc);
+    Engine.$(document)
+      .off('keydown', this.onEsc);
   }
 
   render() {
-    const {name} = this.state;
+    const { name } = this.state;
     return name === 'none' ? null
       : (
         <div

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Collapse, Popover} from 'antd';
+import { Collapse, Popover } from 'antd';
 import 'antd/lib/collapse/style';
 import 'antd/lib/popover/style';
 import classnames from 'classnames';
@@ -7,7 +7,7 @@ import TableSelector from './table-selector';
 import Upload from './upload';
 import CollapseItem from './collapse-item';
 
-const {Panel} = Collapse;
+const { Panel } = Collapse;
 
 export default class extends React.Component {
   constructor(props) {
@@ -83,12 +83,12 @@ export default class extends React.Component {
   }
 
   render() {
-    const {className, data, description, active, activeKeys} = this.props;
+    const { className, data, description, active, activeKeys } = this.props;
     let toolbarDesc = '';
     if (description) {
       toolbarDesc = (
         <div className="lake-toolbar-collapse-description">
-          <div className="description" dangerouslySetInnerHTML={{__html: description}}/>
+          <div className="description" dangerouslySetInnerHTML={{ __html: description }}/>
         </div>
       );
     }
@@ -108,7 +108,7 @@ export default class extends React.Component {
               <Panel showArrow={false} header={row.title} disabled key={index}>
                 {row.items.map((item, i) => {
                   if (item.type === 'upload') {
-                    const uploadProps = {...this.props};
+                    const uploadProps = { ...this.props };
                     uploadProps.name = item.name;
                     uploadProps.getEngine = item.getEngine;
                     if (!uploadProps.getEngine) {
@@ -118,7 +118,7 @@ export default class extends React.Component {
                     }
 
                     return (
-                      <Upload {...Object.assign({}, {key: i}, uploadProps)}>
+                      <Upload {...Object.assign({}, { key: i }, uploadProps)}>
                         {this.renderItem(item, i)}
                       </Upload>
                     );

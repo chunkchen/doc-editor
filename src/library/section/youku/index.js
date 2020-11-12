@@ -34,7 +34,8 @@ function getDocEmbedURL(url) {
     }
     return 'https://player.bilibili.com/player.html?bvid='
       .concat(id)
-      .concat(search ? '&p='.concat(search, '&page=').concat(search) : '');
+      .concat(search ? '&p='.concat(search, '&page=')
+        .concat(search) : '');
   }
 }
 
@@ -87,4 +88,4 @@ class YouKu extends EmbedUrl {
 
 YouKu.type = 'block';
 export default YouKu;
-export {hitBlack, getDocEmbedURL};
+export { hitBlack, getDocEmbedURL };

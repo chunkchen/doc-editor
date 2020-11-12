@@ -1,4 +1,4 @@
-import {isNil} from './type';
+import { isNil } from './type';
 
 /**
  * 获取一串字符关于另一个字符的索引集

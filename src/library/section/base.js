@@ -1,10 +1,11 @@
 import Engine from '@hicooper/doc-engine/lib';
-import {getHeight, getWidth} from '../utils/dom';
+import { getHeight, getWidth } from '../utils/dom';
 
 class SectionBase {
   constructor() {
     this.onBeforeRenderImage = (src) => {
-      return this.getOptions().onBeforeRenderImage(src);
+      return this.getOptions()
+        .onBeforeRenderImage(src);
     };
     this.events = [];
   }
@@ -34,21 +35,21 @@ class SectionBase {
   }
 
   select() {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       container.addClass(this.constructor.selectStyleType === 'background' ? 'lake-selected-background' : 'lake-selected-outline');
     }
   }
 
   unselect() {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       container.removeClass(this.constructor.selectStyleType === 'background' ? 'lake-selected-background' : 'lake-selected-outline');
     }
   }
 
   selectByOther(outline, background) {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       if (this.constructor.selectStyleType === 'background') {
         container.css('background', background);
@@ -59,7 +60,7 @@ class SectionBase {
   }
 
   unselectByOther() {
-    const {container} = this;
+    const { container } = this;
     if (container[0].childNodes.length > 0) {
       container.css(this.constructor.selectStyleType === 'background' ? 'background' : 'outline', '');
     }
@@ -110,7 +111,7 @@ class SectionBase {
   }
 
   createResizeController(cfg) {
-    const {container, dragstart, dragmove, dragend} = cfg;
+    const { container, dragstart, dragmove, dragend } = cfg;
     const resizeImg = Engine.$('<div class="section-resize-button-ud" draggable="true" />');
     let point;
     container.append(resizeImg);
@@ -149,7 +150,7 @@ class SectionBase {
 
   removeEvent() {
     this.events.forEach((event) => {
-      const {element, type, callback} = event;
+      const { element, type, callback } = event;
       element.off(type, callback);
     });
     this.events = [];
@@ -181,7 +182,7 @@ class SectionBase {
     const readonly = this.state.readonly;
 
     if (!readonly && value) {
-      const {section, history, change} = this.engine;
+      const { section, history, change } = this.engine;
       section.setValue(sectionRoot, Object.assign(this.value, value));
 
       if (saveHistory) {

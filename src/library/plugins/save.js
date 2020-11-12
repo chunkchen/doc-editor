@@ -7,11 +7,13 @@ export default {
     this.command.add(PLUGIN_NAME, {
       execute: () => {
         this.event.trigger('save:before');
-        this.asyncEvent.emitAsync('save:before').then(() => {
-          this.options.onSave && this.options.onSave();
-        }).catch((error) => {
-          this.messageError(error);
-        });
+        this.asyncEvent.emitAsync('save:before')
+          .then(() => {
+            this.options.onSave && this.options.onSave();
+          })
+          .catch((error) => {
+            this.messageError(error);
+          });
       },
     });
     // save 快捷键，所有插件都统一用，所以绑定在 document

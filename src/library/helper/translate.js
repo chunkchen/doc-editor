@@ -1,11 +1,11 @@
-import {EventEmitter2} from 'eventemitter2';
+import { EventEmitter2 } from 'eventemitter2';
 import Engine from '@hicooper/doc-engine/lib';
 import ajax from '@itellyou/itellyou-ajax';
 
-const {NodeUtils, $} = Engine;
+const { NodeUtils, $ } = Engine;
 
 class Translate extends EventEmitter2 {
-  constructor({engine}) {
+  constructor({ engine }) {
     super();
     this.engine = engine;
   }
@@ -28,7 +28,7 @@ class Translate extends EventEmitter2 {
   }
 
   _getSourceText(_ref) {
-    const {childNodes, isCrossRow} = _ref;
+    const { childNodes, isCrossRow } = _ref;
     let rst = '';
 
     if (isCrossRow) {
@@ -47,7 +47,7 @@ class Translate extends EventEmitter2 {
   }
 
   _translateFragment(_ref) {
-    const {isCrossRow, targetPlainText, fragment} = _ref;
+    const { isCrossRow, targetPlainText, fragment } = _ref;
 
     if (isCrossRow) {
       const textSplit = targetPlainText.split('\n');
@@ -62,10 +62,11 @@ class Translate extends EventEmitter2 {
   }
 
   _getChildNodes(fragment) {
-    const childNodes = Array.from(fragment.childNodes).filter((node) => {
-      // 只取非Section内的元素
-      return !this.engine.section.closest(node);
-    });
+    const childNodes = Array.from(fragment.childNodes)
+      .filter((node) => {
+        // 只取非Section内的元素
+        return !this.engine.section.closest(node);
+      });
     childNodes.forEach((node) => {
       // 删除里面的Section元素
       NodeUtils.walkTree(node, (sub) => {
@@ -79,13 +80,15 @@ class Translate extends EventEmitter2 {
 
   translate(range, source, target) {
     if (!range || !source || !target || this.engine.section.closest(range.commonAncestorContainer) // 在Section里的内容不翻译
-      || $(range.commonAncestorContainer).closest('.sub-editor-content')[0] // TODO：在表格子编辑器的内容暂时不翻译
+      || $(range.commonAncestorContainer)
+        .closest('.sub-editor-content')[0] // TODO：在表格子编辑器的内容暂时不翻译
     ) {
       return;
     }
 
     const fragment = range.cloneContents();
-    const isCrossRow = $(range.commonAncestorContainer).isRoot() || range.commonAncestorContainer.tagName === 'UL';
+    const isCrossRow = $(range.commonAncestorContainer)
+      .isRoot() || range.commonAncestorContainer.tagName === 'UL';
     const childNodes = this._getChildNodes(fragment);
     const q = this._getSourceText({
       childNodes,

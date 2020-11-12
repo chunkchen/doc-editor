@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox} from 'antd';
+import { Checkbox } from 'antd';
 import 'antd/lib/checkbox/style';
 
 class Video extends React.Component {
@@ -11,7 +11,7 @@ class Video extends React.Component {
   }
 
   getActivatedComponent() {
-    const {engine} = this.props;
+    const { engine } = this.props;
     const section = engine.change.activeSection;
     if (section) {
       const component = engine.section.getComponent(section);

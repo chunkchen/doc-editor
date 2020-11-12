@@ -1,8 +1,8 @@
-import {EventEmitter2} from 'eventemitter2';
+import { EventEmitter2 } from 'eventemitter2';
 import Engine from '@hicooper/doc-engine/lib';
 import TinyCanvas from './tiny-canvas';
-import {getHeight, getRangesByText, getStyle, getTextNodes, getWidth, isInViewport} from '../utils/dom';
-import {isFunction, isNil, isNumber, isString} from '../utils/type';
+import { getHeight, getRangesByText, getStyle, getTextNodes, getWidth, isInViewport } from '../utils/dom';
+import { isFunction, isNil, isNumber, isString } from '../utils/type';
 
 /**
  * @fileOverview 查找 && 替换
@@ -51,11 +51,11 @@ class Search extends EventEmitter2 {
     this.engine = options.engine;
   }
 
-
   _saveSectionValue(range) {
     const root = this.engine.section.closest(range.commonAncestorContainer);
     if (root) {
-      this.engine.section.getComponent(root).saveValue();
+      this.engine.section.getComponent(root)
+        .saveValue();
     }
   }
 
@@ -173,7 +173,7 @@ class Search extends EventEmitter2 {
   }
 
   _move(offset) {
-    const {selectedRange, ranges} = this;
+    const { selectedRange, ranges } = this;
 
     if (!selectedRange) {
       return;
@@ -212,7 +212,7 @@ class Search extends EventEmitter2 {
       return;
     }
 
-    const {selectedRange, ranges} = this;
+    const { selectedRange, ranges } = this;
 
     if (ranges.length > 0) {
       const evObj = {
@@ -301,7 +301,7 @@ class Search extends EventEmitter2 {
   scrollIntoView() {
     if (this.selectedRange) {
       const element = this.selectedRange.commonAncestorContainer.parentElement;
-      if (!isInViewport(element)) element.scrollIntoView({block: 'center'});
+      if (!isInViewport(element)) element.scrollIntoView({ block: 'center' });
     }
   }
 

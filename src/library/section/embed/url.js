@@ -31,7 +31,7 @@ class Url extends Upload {
   }
 
   getUrl() {
-    const {src, url} = this.value;
+    const { src, url } = this.value;
     return url || src;
   }
 
@@ -66,7 +66,8 @@ class Url extends Upload {
 
   unactivate() {
     super.unactivate.call(this);
-    this.container.find('.lake-embed-content').removeClass('lake-embed-content-active');
+    this.container.find('.lake-embed-content')
+      .removeClass('lake-embed-content-active');
   }
 
   find(role) {
@@ -99,14 +100,18 @@ class Url extends Upload {
         ),
     );
     this.container.append(embedNode);
-    this.find('url').on('keydown', this.handleInputKeydown);
-    this.find('submit').on('click', this.handleSubmit);
+    this.find('url')
+      .on('keydown', this.handleInputKeydown);
+    this.find('submit')
+      .on('click', this.handleSubmit);
   }
 
   renderEditView() {
     if (this.value.url) {
       super.renderEditView();
-    } else this.renderInput();
+    } else {
+      this.renderInput();
+    }
   }
 }
 

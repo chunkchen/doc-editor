@@ -6,9 +6,10 @@ const Command = {};
 function snapShotexecute(editor) {
   const page = editor.getCurrentPage();
   this.snapShot = page.save();
-  this.selectedItems = page.getSelected().map((item) => {
-    return item.id;
-  });
+  this.selectedItems = page.getSelected()
+    .map((item) => {
+      return item.id;
+    });
   if (this.method) {
     if (Util.isString(this.method)) {
       page[this.method]();

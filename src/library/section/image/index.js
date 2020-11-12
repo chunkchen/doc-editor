@@ -1,6 +1,6 @@
 import Engine from '@hicooper/doc-engine/lib';
 import ImageNode from './image-node';
-import {isBase64Image} from '../../utils/string';
+import { isBase64Image } from '../../utils/string';
 import SectionBase from '../base';
 
 class Image extends SectionBase {
@@ -15,7 +15,7 @@ class Image extends SectionBase {
   onRemove = () => {
     this.imageNode.blur();
     this.engine.change.removeSection(this.sectionRoot);
-  }
+  };
 
   onSaveBefore = () => {
     return new Promise((resolve, reject) => {
@@ -25,13 +25,13 @@ class Image extends SectionBase {
       }
       resolve();
     });
-  }
+  };
 
   saveSectionValue = () => {
     const value = this.imageNode.getValue();
     this.section.setValue(this.sectionRoot, value);
     this.engine.history.save();
-  }
+  };
 
   embedToolbar() {
     const engine = this.engine;
@@ -58,7 +58,8 @@ class Image extends SectionBase {
               this.imageNode.changeDisplay(this.sectionRoot, display);
               this.saveSectionValue();
               if (this.modeButton) {
-                this.modeButton.find('span.embed-text').html(display === 'block' ? locale.inlineMode : locale.blockMode);
+                this.modeButton.find('span.embed-text')
+                  .html(display === 'block' ? locale.inlineMode : locale.blockMode);
               }
             }
           },

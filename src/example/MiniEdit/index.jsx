@@ -6,7 +6,7 @@ import tempContent from './tempContent';
 export default class MiniEdit extends Component {
   static displayName = 'MiniEdit';
 
-  cropImgRef = undefined
+  cropImgRef = undefined;
 
   constructor(props) {
     super(props);

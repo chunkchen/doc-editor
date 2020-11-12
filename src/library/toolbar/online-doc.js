@@ -1,12 +1,12 @@
 import React from 'react';
-import {Button, Modal} from 'antd';
+import { Button, Modal } from 'antd';
 import 'antd/lib/modal/style';
 
 class OnlineDoc extends React.Component {
   state = {
     visible: false,
     activated: false,
-  }
+  };
 
   constructor() {
     super();
@@ -28,10 +28,10 @@ class OnlineDoc extends React.Component {
   handleMouseDown = (event) => {
     // 弹窗时，禁止 focus 编辑器
     event.stopPropagation();
-  }
+  };
 
   handleClick = (event) => {
-    const {hideDropdown} = this.props;
+    const { hideDropdown } = this.props;
     event.preventDefault();
     event.stopPropagation();
 
@@ -42,13 +42,13 @@ class OnlineDoc extends React.Component {
         hideDropdown();
       }
     });
-  }
+  };
 
   handleInsert = (event, collapsed) => {
     event.preventDefault();
     event.stopPropagation();
-    const {item, removeSelect} = this.props;
-    const {fetchSelectedFile} = this.iframe.current.contentWindow;
+    const { item, removeSelect } = this.props;
+    const { fetchSelectedFile } = this.iframe.current.contentWindow;
     if (fetchSelectedFile) {
       const files = fetchSelectedFile();
       const file = files.length > 0 ? files[0] : undefined;
@@ -69,12 +69,12 @@ class OnlineDoc extends React.Component {
         removeSelect();
       }
     });
-  }
+  };
 
   handleCancel = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const {removeSelect} = this.props;
+    const { removeSelect } = this.props;
     this.setState({
       visible: false,
     }, () => {
@@ -82,11 +82,11 @@ class OnlineDoc extends React.Component {
         removeSelect();
       }
     });
-  }
+  };
 
   render() {
-    const {visible} = this.state;
-    const {item, index, engine} = this.props;
+    const { visible } = this.state;
+    const { item, index, engine } = this.props;
     const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
     const style = item.subTitle ? {
       height: 'auto',
@@ -107,7 +107,7 @@ class OnlineDoc extends React.Component {
       >
         <div
           className="lake-collapse-item-icon"
-          dangerouslySetInnerHTML={{__html: item.icon}}
+          dangerouslySetInnerHTML={{ __html: item.icon }}
         />
         <div
           className="lake-collapse-item-text"
@@ -146,7 +146,10 @@ class OnlineDoc extends React.Component {
           <iframe
             ref={this.iframe}
             title="online-doc"
-            style={{width: '100%', minHeight: '480px'}}
+            style={{
+              width: '100%',
+              minHeight: '480px',
+            }}
             frameBorder={0}
             allowFullScreen
             src={options.action}

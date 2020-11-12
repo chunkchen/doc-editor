@@ -16,13 +16,14 @@ import ExportParser from './parser/export';
 import WordExportParser from './parser/word';
 import PdfExportParser from './parser/pdf';
 import DoNothingExportParser from './parser/do-nothing';
-import {DocVersion} from './utils/string';
+import { DocVersion } from './utils/string';
 import htmlToLake from './parser/lake';
 
-const HotKeys = hotkey().map((item) => {
-  item.text = item.text.replace(/<br.*?>/, '');
-  return item;
-});
+const HotKeys = hotkey()
+  .map((item) => {
+    item.text = item.text.replace(/<br.*?>/, '');
+    return item;
+  });
 Engine.registerClipboardExportParser(new ExportParser());
 
 FullEditor.mini = MiniEditor;

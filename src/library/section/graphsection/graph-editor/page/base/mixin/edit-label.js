@@ -30,7 +30,8 @@ Mixin.AUGMENT = {
           'box-sizing': 'content-box',
         },
       );
-      graph.getGraphContainer().appendChild(labelTextArea);
+      graph.getGraphContainer()
+        .appendChild(labelTextArea);
       this.isCompositing = false;
       labelTextArea.on('compositionstart', () => {
         this.isCompositing = true;

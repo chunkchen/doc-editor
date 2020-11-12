@@ -1,4 +1,4 @@
-import {addIframeSection} from '../utils/command';
+import { addIframeSection } from '../utils/command';
 
 export default (engine) => {
   const locale = engine.locale;
