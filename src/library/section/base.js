@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import { getHeight, getWidth } from '../utils/dom';
 
 class SectionBase {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import Resizer from './resizer';
 import { isBase64Image } from '../../utils/string';
 import ErrorTips from '../../tips/error';

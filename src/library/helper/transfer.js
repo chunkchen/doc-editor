@@ -1,5 +1,5 @@
-import { post } from '@itellyou/itellyou-request';
-import Engine from '@hicooper/doc-engine/lib';
+import { post } from '../network/request';
+import Engine from '@hicooper/doc-engine';
 
 class Transfer {
   constructor(options) {

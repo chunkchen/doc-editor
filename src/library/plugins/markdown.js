@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, notification } from 'antd';
 import 'antd/lib/button/style';
 import 'antd/lib/notification/style';
-import { post } from '@itellyou/itellyou-request';
-import Engine from '@hicooper/doc-engine/lib';
+import { post } from '../network/request';
+import Engine from '@hicooper/doc-engine';
 import { isMarkdown } from '../utils/string';
 
 notification.config({

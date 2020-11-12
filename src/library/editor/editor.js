@@ -124,20 +124,24 @@ Editor.defaultProps = {
   onBeforeRenderImage: (url) => {
     return url;
   },
+  // 绘图
   mxgraph: {
     url: 'http://www.draw.io/?embed=1&ui=atlas&spin=1&proto=json&configure=1&lang=zh',
   },
   lockedtext: {
     action: '/api/crypto',
   },
+  // 图片上传 api
   image: {
     action: '/api/upload/image',
     display: 'block',
     align: 'center',
   },
+  // 文件上传 api
   file: {
     action: '/api/upload/file',
   },
+  // 视频上传、保存、获取 api
   video: {
     action: {
       create: '/api/upload/video',
@@ -145,9 +149,11 @@ Editor.defaultProps = {
       query: '/api/upload/video/query',
     },
   },
+  // 翻译 api
   translate: {
     action: '/api/translate',
   },
+  // @ 提及 查询
   mention: {
     action: '/api/user/search',
     paramName: 'q',
@@ -156,6 +162,7 @@ Editor.defaultProps = {
   onlinedoc: {
     action: '/hwme-service/richFilemanager/index.html',
   },
+  // markdown 转换 api
   markdown: {
     action: '/api/document/convert',
     items: [

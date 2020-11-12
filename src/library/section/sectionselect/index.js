@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import keymaster, { deleteScope, setScope, unbind } from 'keymaster';
 import ToolbarCollapse from '../../toolbar/collapse';
 import toolbarConfig from '../../config/toolbar';

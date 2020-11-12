@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import { EventEmitter2 } from 'eventemitter2';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default';
@@ -42,7 +42,16 @@ class Pswp extends EventEmitter2 {
   }
 
   _initRoot() {
-    const root = Engine.$('\n    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\n        <div class="pswp__bg"></div>\n        <div class="pswp__scroll-wrap">\n            <div class="pswp__container">\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n                <div class="pswp__item"></div>\n            </div>\n            <div class="pswp__ui pswp__ui--hidden">\n                <button class="pswp__button lake-pswp-button-close" title="Close (Esc)"></button>\n                <div class="lake-pswp-custom-top-bar"></div>\n            </div>\n        </div>\n    </div>\n    ');
+    const root = Engine.$('<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">' +
+      '<div class="pswp__bg"></div><div class="pswp__scroll-wrap">' +
+      '<div class="pswp__container">' +
+      '<div class="pswp__item"></div>' +
+      '<div class="pswp__item"></div>' +
+      '<div class="pswp__item"></div></div>' +
+      '<div class="pswp__ui pswp__ui--hidden">' +
+      '<button class="pswp__button lake-pswp-button-close" title="Close (Esc)" />' +
+      '<div class="lake-pswp-custom-top-bar"></div>' +
+      '</div></div></div>');
     const toolbarContainer = root.find('.lake-pswp-custom-top-bar');
     const closeBtnContainer = root.find('.lake-pswp-button-close');
     this.root = root;

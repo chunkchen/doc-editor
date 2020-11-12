@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import { normalizeTable } from './utils';
 
 const { $ } = Engine;

@@ -2,7 +2,7 @@ import React from 'react';
 import { message as antdMessage, Popover } from 'antd';
 import 'antd/lib/popover/style';
 import 'antd/lib/message/style';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import './index.css';
 
 const msgTip = {

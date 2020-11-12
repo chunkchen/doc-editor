@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 export const DocVersion = 1;
 // mention：key 和 name 放到属性，方便服务端正则匹配

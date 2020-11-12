@@ -1,6 +1,6 @@
 import { EventEmitter2 } from 'eventemitter2';
 import { firefox, mobile } from '@hicooper/doc-engine/lib/utils/user-agent';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 class Scrollbar extends EventEmitter2 {
   /**

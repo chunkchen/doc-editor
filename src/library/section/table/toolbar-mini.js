@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 const { userAgent: { macos } } = Engine;
 export default function (section) {

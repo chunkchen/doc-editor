@@ -1,6 +1,6 @@
 import { EventEmitter2 } from 'eventemitter2';
 import { message } from 'antd';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import { isBase64Image } from '../utils/string';
 import Request from './request';
 

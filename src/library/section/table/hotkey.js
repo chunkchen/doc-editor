@@ -1,5 +1,5 @@
 import Keymaster from 'keymaster';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 const { $ } = Engine;
 

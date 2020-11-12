@@ -1,5 +1,5 @@
 import { EventEmitter2 } from 'eventemitter2';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import TinyCanvas from './tiny-canvas';
 import { getHeight, getRangesByText, getStyle, getTextNodes, getWidth, isInViewport } from '../utils/dom';
 import { isFunction, isNil, isNumber, isString } from '../utils/type';

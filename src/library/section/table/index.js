@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import localeEn from './locale/en';
 import localeZhCn from './locale/zh-cn';
 import toolbar from './toolbar';
@@ -299,6 +299,7 @@ class Table extends SectionBase {
         hideEmbedToolbar: false,
       };
 
+      console.log(this.selection.editAreaContent)
       this.subEngine = Engine.create(this.selection.editAreaContent, {
         plugins: ['bold', 'italic', 'fontcolor', 'fontsize', 'strikethrough', 'underline', 'backcolor', 'removeformat', 'code', 'file', 'label', 'list', 'link', 'image', 'tasklist', 'indent'],
         lang: this.engine.options.lang,

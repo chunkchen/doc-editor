@@ -1,5 +1,5 @@
-import { post } from '@itellyou/itellyou-request';
-import Engine from '@hicooper/doc-engine/lib';
+import { post } from '../../network/request';
+import Engine from '@hicooper/doc-engine';
 import { isBase64Image, isRemoteImage } from '../../utils/string';
 import ImageCompress from './compress';
 
@@ -214,6 +214,7 @@ export default {
     });
     // 上传粘贴板里的图片
     this.on('paste:files', (files) => {
+      debugger
       imageCompress.compress(files)
         .then((files) => {
           this.uploader.post('image', files, {

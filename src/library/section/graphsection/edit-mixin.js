@@ -1,4 +1,4 @@
-import { post } from '@itellyou/itellyou-request';
+import { post } from '../../network/request';
 import { dataURLToImage } from './utils';
 
 /**

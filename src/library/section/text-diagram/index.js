@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import TextDiagramEditor from './text-diagram-editor';
 import TextDiagramViewer from './text-diagram-render';
 import { preview } from '../../utils/image-generator';

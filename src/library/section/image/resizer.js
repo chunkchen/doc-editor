@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 const template = (data) => {
   return '\n  <div class="lake-image-editor">\n    <img data-role="image-bg" class="lake-image-editor-bg lake-image-editor-bg-active" src="'.concat(data.src, '">\n    <div data-role="holder-45" class="lake-image-editor-holder lake-image-editor-holder-45"></div>\n    <div data-role="holder-135" class="lake-image-editor-holder lake-image-editor-holder-135"></div>\n    <div data-role="holder-225" class="lake-image-editor-holder lake-image-editor-holder-225"></div>\n    <div data-role="holder-315" class="lake-image-editor-holder lake-image-editor-holder-315"></div>\n    <span data-role="number" class="lake-image-editor-number"></span>\n  </div>\n  '); //    <span data-role="maximize" class="lake-image-editor-maximize"><span class="lake-icon lake-icon-full-screen"></span></span>

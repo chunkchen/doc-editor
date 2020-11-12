@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 
 class DoNothingParser extends Engine.ExportParser {
   parse(element) {

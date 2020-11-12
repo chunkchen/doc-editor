@@ -1,5 +1,5 @@
 import lodashGet from 'lodash/get';
-import ajax from '@itellyou/itellyou-ajax';
+import ajax from '../network/ajax';
 import { message } from 'antd';
 import 'antd/lib/message/style';
 

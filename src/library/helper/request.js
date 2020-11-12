@@ -1,4 +1,4 @@
-import ajax from '@itellyou/itellyou-ajax';
+import ajax from '../network/ajax';
 
 class Request {
   constructor(options) {

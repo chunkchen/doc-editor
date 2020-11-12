@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import { shrinkToElementNode } from '@hicooper/doc-engine/lib/utils/range';
 import { escapeRegExp, sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import LinkEditor from './editor';
 import './index.css';
 

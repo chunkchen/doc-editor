@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import ExportParser from './export';
 import { loadImage } from '../utils/dom';
 import { lists } from './utils';

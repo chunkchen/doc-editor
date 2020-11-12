@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
 import Embed from './embed';
 import Error from '../../tips/error';

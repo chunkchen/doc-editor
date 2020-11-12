@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import ImageNode from './image-node';
 import { isBase64Image } from '../../utils/string';
 import SectionBase from '../base';

@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import Engine from '@hicooper/doc-engine/lib';
+import Engine from '@hicooper/doc-engine';
 import toolbarConfig from '../config/toolbar';
 import ToolbarPlugins from './toolbar-plugins';
 import ToolbarGroup from './toolbar-group';
