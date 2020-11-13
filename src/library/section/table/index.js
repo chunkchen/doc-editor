@@ -186,7 +186,7 @@ class Table extends SectionBase {
       // 已经有激活的编辑单元格时
       if (this.subEngine) return;
       if (this.selection.td && this.selection.single) {
-        // firefox 输入英文是，e.data 为 undefined 需要从 target 里取
+        // firefox 输入英文时，e.data 为 undefined 需要从 target 里取
         this.createEditor(Engine.$(this.selection.td), '<p>'.concat(e.data || e.target.value, '</p>'));
       }
     };
@@ -286,6 +286,8 @@ class Table extends SectionBase {
       return this.subEngine && td[0] === this.subEngine.td[0];
     };
 
+
+
     this.createEditor = (td, content) => {
       // 已经创建
       if (this.isEditing(td)) {
@@ -299,7 +301,6 @@ class Table extends SectionBase {
         hideEmbedToolbar: false,
       };
 
-      console.log(this.selection.editAreaContent)
       this.subEngine = Engine.create(this.selection.editAreaContent, {
         plugins: ['bold', 'italic', 'fontcolor', 'fontsize', 'strikethrough', 'underline', 'backcolor', 'removeformat', 'code', 'file', 'label', 'list', 'link', 'image', 'tasklist', 'indent'],
         lang: this.engine.options.lang,
