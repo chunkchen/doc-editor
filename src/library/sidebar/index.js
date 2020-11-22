@@ -54,9 +54,7 @@ class Sidebar extends React.Component {
   }
 
   componentDidMount() {
-    const { engine } = this.props;
     this.extends();
-    engine.command.execute('toc', true);
   }
 
   componentDidUpdate(prevProps, prevState) {
