@@ -1,4 +1,4 @@
-import { post } from '../network/request';
+import { post } from '../network/request'
 
 /**
  * 生成 latex/puml svg 图片内容
@@ -10,5 +10,5 @@ import { post } from '../network/request';
 export const preview = (type, code) => {
   return post('/api/'.concat(type), {
     content: code,
-  });
-};
+  })
+}

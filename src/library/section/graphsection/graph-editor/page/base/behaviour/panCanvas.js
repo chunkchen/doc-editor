@@ -1,4 +1,4 @@
-import Page from '../page';
-import Util from '../util';
+import Page from '../page'
+import Util from '../util'
 
-Page.registerBehaviour('panCanvas', Util.getPanCanvasBehaviour());
+Page.registerBehaviour('panCanvas', Util.getPanCanvasBehaviour())

@@ -1,72 +1,72 @@
-import React from 'react';
-import CollapseButton from './collapse-button';
-import DropdownButton from './dropdown-button';
-import ColorButton from './color-button';
-import UploadButton from './upload-button';
-import VideoButton from './video-button';
-import TableButton from './table-button';
-import Button from './button';
+import React from 'react'
+import CollapseButton from './collapse-button'
+import DropdownButton from './dropdown-button'
+import ColorButton from './color-button'
+import UploadButton from './upload-button'
+import VideoButton from './video-button'
+import TableButton from './table-button'
+import Button from './button'
 
 class ToolbarGroup extends React.Component {
   render() {
-    const { engine, locale, toolbar, toolbarState, mobile } = this.props;
+    const { engine, locale, toolbar, toolbarState, mobile } = this.props
 
     return (
-      <React.Fragment>
+      <div>
         <div className="lake-toolbar-area">
           {
             toolbar.map((name, index) => {
               // 配置参数
               if (typeof name === 'object') {
-                if (name.items && name.items.length === 0) return null;
-                name = name.name;
+                if (name.items && name.items.length === 0) return null
+                name = name.name
               }
 
-              const buttonProps = toolbarState[name] || {};
-              const type = buttonProps.type;
-              buttonProps.hasArrow = type === 'dropdown';
-              buttonProps.engine = engine;
-              buttonProps.mobile = mobile;
+              const buttonProps = toolbarState[name] || {}
+              const type = buttonProps.type
+              buttonProps.hasArrow = type === 'dropdown'
+              buttonProps.engine = engine
+              buttonProps.mobile = mobile
               if (!buttonProps.getEngine) {
                 buttonProps.getEngine = () => {
-                  return engine;
-                };
+                  return engine
+                }
               }
-              buttonProps.locale = locale;
+              buttonProps.locale = locale
               if (name === 'table') {
-                return <TableButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <TableButton {...({ key: index, ...buttonProps })} />
               }
               if (type === 'collapse') {
-                return <CollapseButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <CollapseButton {...({ key: index, ...buttonProps })} />
               }
 
               if (type === 'dropdown') {
-                return <DropdownButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <DropdownButton {...({ key: index, ...buttonProps })} />
               }
 
               if (type === 'color') {
-                buttonProps.activeColors = [buttonProps.active];
-                return <ColorButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                buttonProps.activeColors = [buttonProps.active]
+                return <ColorButton {...({ key: index, ...buttonProps })} />
               }
 
               if (type === 'upload') {
-                return <UploadButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <UploadButton {...({ key: index, ...buttonProps })} />
               }
 
               if (type === 'video') {
-                return <VideoButton {...Object.assign({}, { key: index }, buttonProps)} />;
+                return <VideoButton {...({ key: index, ...buttonProps })} />
               }
 
-              return <Button {...Object.assign({}, { key: index }, buttonProps)} />;
+              return <Button {...({ key: index, ...buttonProps })} />
             })
           }
         </div>
-      </React.Fragment>
-    );
+      </div>
+    )
   }
 }
 
 ToolbarGroup.defaultProps = {
   isFirstGroup: false,
-};
-export default ToolbarGroup;
+}
+export default ToolbarGroup

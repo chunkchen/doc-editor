@@ -1,5 +1,5 @@
 // 模板数据
-const Templates = {};
+const Templates = {}
 Templates.puml = {
   sequence: {
     id: 'sequence',
@@ -49,7 +49,7 @@ Templates.puml = {
     text: '@startuml\n\nobject Car\nobject Bus\nobject Tire\nobject Engine\nobject Driver\n\nCar <|- Bus\nCar *-down- Tire\nCar *-down- Engine\nBus o-down- Driver\n\n@enduml',
     src: '',
   },
-};
+}
 const Template = {
   /**
    * 获取某种图支持的模板
@@ -58,7 +58,7 @@ const Template = {
    * @return {object|null}
    */
   getTemplates(diagramType) {
-    return Templates[diagramType] || null;
+    return Templates[diagramType] || null
   },
-};
-export default Template;
+}
+export default Template

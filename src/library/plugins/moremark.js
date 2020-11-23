@@ -1,4 +1,4 @@
-const PLUGIN_NAME = 'moremark';
+const PLUGIN_NAME = 'moremark'
 
 export default {
   initialize() {
@@ -8,14 +8,14 @@ export default {
         const list = [];
         ['sup', 'sub', 'code'].forEach((name) => {
           if (this.command.queryState(name)) {
-            list.push(name);
+            list.push(name)
           }
-        });
-        return list;
+        })
+        return list
       },
       execute: (name) => {
-        this.command.execute(name);
+        this.command.execute(name)
       },
-    });
+    })
   },
-};
+}

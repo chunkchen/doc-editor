@@ -102,5 +102,5 @@ export default () => {
     }, {
       name: 'pasteplaintext',
       keys: ['mod', '+', 'shift', '+', 'V'],
-    }];
-};
+    }]
+}

@@ -42,4 +42,4 @@ export default {
     // 双栏模式
     TWO_COLUMN: 'two-column',
   },
-};
+}

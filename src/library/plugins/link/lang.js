@@ -23,4 +23,4 @@ export default {
     emptyLink: 'Empty link',
     pleaseEnterCorrectLink: 'Please enter the correct link',
   },
-};
+}

@@ -8,23 +8,23 @@ const Palette = {
     ['#CF1322', '#D4380D', '#D46B08', '#D4B106', '#389E0D', '#08979C', '#096DD9', '#1D39C4', '#531DAB', '#C41D7F'],
     ['#820014', '#871400', '#873800', '#614700', '#135200', '#00474F', '#003A8C', '#061178', '#22075E', '#780650'],
   ],
-};
+}
 
 Palette._map = (() => {
-  const map = {};
-  const colors = Palette.colors;
+  const map = {}
+  const colors = Palette.colors
   for (let i = 0, l1 = colors.length; i < l1; i++) {
-    const group = colors[i];
+    const group = colors[i]
     for (let k = 0, l2 = group.length; k < l2; k++) {
-      const color = colors[i][k];
+      const color = colors[i][k]
       map[color] = {
         y: i,
         x: k,
-      };
+      }
     }
   }
-  return map;
-});
+  return map
+})
 
 /**
  * 获取描边颜色
@@ -34,18 +34,18 @@ Palette._map = (() => {
  * @return {string} 描边颜色
  */
 Palette.getStroke = (color) => {
-  const pos = Palette._map[color];
-  if (!pos) return color;
+  const pos = Palette._map[color]
+  if (!pos) return color
 
   if (pos.y === 2 || (pos.y === 3 && pos.x > 2 && pos.x < 5)) {
-    return this.colors[4][pos.x];
+    return this.colors[4][pos.x]
   }
 
-  return color;
-};
+  return color
+}
 
 Palette.getColors = () => {
-  return Palette.colors;
-};
+  return Palette.colors
+}
 
-export default Palette;
+export default Palette

@@ -12,4 +12,4 @@ export default {
   errorFeedback: '密码有误',
   lockedFeedback: '密码出错超过 5 次，请 1 分钟后再尝试',
   contentFeedback: '请在加密Section中输入内容',
-};
+}

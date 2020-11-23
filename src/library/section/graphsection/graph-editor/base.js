@@ -1,29 +1,29 @@
-import EventEmitter from 'eventemitter2';
-import Util from './util';
+import EventEmitter from 'eventemitter2'
+import Util from './util'
 
 class Base extends EventEmitter {
   constructor(cfg) {
-    super();
-    const defaultCfg = this.getDefaultCfg();
-    this._cfg = Util.mix(true, {}, this._cfg, defaultCfg, cfg);
+    super()
+    const defaultCfg = this.getDefaultCfg()
+    this._cfg = Util.mix(true, {}, this._cfg, defaultCfg, cfg)
   }
 
   getDefaultCfg() {
-    return {};
+    return {}
   }
 
   get(name) {
-    return this._cfg[name];
+    return this._cfg[name]
   }
 
   set(name, value) {
-    this._cfg[name] = value;
+    this._cfg[name] = value
   }
 
   destroy() {
-    this._cfg = {};
-    this.destroyed = true;
+    this._cfg = {}
+    this.destroyed = true
   }
 }
 
-export default Base;
+export default Base

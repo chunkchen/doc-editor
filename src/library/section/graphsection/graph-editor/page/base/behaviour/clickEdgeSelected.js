@@ -1,16 +1,16 @@
-import Page from '../page';
+import Page from '../page'
 
 Page.registerBehaviour('clickEdgeSelected', (page) => {
-  const graph = page.getGraph();
+  const graph = page.getGraph()
   graph.behaviourOn('edge:click', (ev) => {
-    const multiSelectable = page.get('multiSelectable');
+    const multiSelectable = page.get('multiSelectable')
 
     if (multiSelectable && page.getSignal('shiftKeyDown') === true) {
-      page.setSelected(ev.item.id, true);
+      page.setSelected(ev.item.id, true)
     } else {
-      page.clearActived();
-      page.clearSelected();
-      page.setSelected(ev.item.id, true);
+      page.clearActived()
+      page.clearSelected()
+      page.setSelected(ev.item.id, true)
     }
-  });
-});
+  })
+})

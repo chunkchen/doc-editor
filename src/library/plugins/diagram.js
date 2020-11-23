@@ -5,9 +5,9 @@ export default {
         const section = this.change.insertSection('diagram', {
           code: code || '',
           type: 'puml',
-        });
-        this.change.focusSection(section);
+        })
+        this.change.focusSection(section)
       },
-    });
+    })
   },
-};
+}

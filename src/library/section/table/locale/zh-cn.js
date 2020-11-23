@@ -59,4 +59,4 @@ export default {
     decrease: '减少缩进',
     increase: '增加缩进',
   },
-};
+}

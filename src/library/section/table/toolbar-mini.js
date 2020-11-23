@@ -1,8 +1,8 @@
-import Engine from '@hicooper/doc-engine';
+import Engine from '@hicooper/doc-engine'
 
-const { userAgent: { macos } } = Engine;
+const { userAgent: { macos } } = Engine
 export default function (section) {
-  const { command, locale } = section;
+  const { command, locale } = section
   return [
     {
       name: 'table:bold',
@@ -10,13 +10,13 @@ export default function (section) {
       hotkey: macos ? '\u2318+B' : 'Ctrl+B',
       icon: '<span class="lake-icon lake-icon-bold" />',
       getDisabled: () => {
-        return !section.selection.area;
+        return !section.selection.area
       },
       getActive: () => {
-        return command.queryState('bold');
+        return command.queryState('bold')
       },
       onClick: () => {
-        command.execute('bold');
+        command.execute('bold')
       },
     },
     {
@@ -25,13 +25,13 @@ export default function (section) {
       hotkey: macos ? '\u2318+I' : 'Ctrl+I',
       icon: '<span class="lake-icon lake-icon-italic" />',
       getDisabled: () => {
-        return !section.selection.area;
+        return !section.selection.area
       },
       getActive: () => {
-        return command.queryState('italic');
+        return command.queryState('italic')
       },
       onClick: () => {
-        command.execute('italic');
+        command.execute('italic')
       },
     },
     {
@@ -40,13 +40,13 @@ export default function (section) {
       key: macos ? '\u2318+Shift+X' : 'Ctrl+Shift+X',
       icon: '<span class="lake-icon lake-icon-strikethrough" />',
       getDisabled: () => {
-        return !section.selection.area;
+        return !section.selection.area
       },
       getActive: () => {
-        return command.queryState('strikethrough');
+        return command.queryState('strikethrough')
       },
       onClick: () => {
-        command.execute('strikethrough');
+        command.execute('strikethrough')
       },
     },
     {
@@ -55,13 +55,13 @@ export default function (section) {
       key: macos ? '\u2318+U' : 'Ctrl+U',
       icon: '<span class="lake-icon lake-icon-underline" />',
       getDisabled: () => {
-        return !section.selection.area;
+        return !section.selection.area
       },
       getActive: () => {
-        return command.queryState('underline');
+        return command.queryState('underline')
       },
       onClick: () => {
-        command.execute('underline');
+        command.execute('underline')
       },
     },
     {
@@ -95,10 +95,10 @@ export default function (section) {
         className: 'lake-button-set-list-item-icon',
       }],
       getActive: () => {
-        return command.queryState('alignment');
+        return command.queryState('alignment')
       },
       onClick: (value) => {
-        command.align(value);
+        command.align(value)
       },
     },
     {
@@ -124,10 +124,10 @@ export default function (section) {
         className: 'lake-button-set-list-item-icon',
       }],
       getActive: () => {
-        return command.queryState('alignment');
+        return command.queryState('alignment')
       },
       onClick: (value) => {
-        command.valign(value);
+        command.valign(value)
       },
     },
     {
@@ -139,13 +139,13 @@ export default function (section) {
       hotkey: macos ? '\u2318+Shift+8' : 'Ctrl+Shift+8',
       icon: '<span class="lake-icon lake-icon-unordered-list" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
       getActive: () => {
-        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'unorderedlist';
+        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'unorderedlist'
       },
       onClick: () => {
-        section.subEngine && section.subEngine.command.execute('tasklist', 'unorderedlist');
+        section.subEngine && section.subEngine.command.execute('tasklist', 'unorderedlist')
       },
     },
     {
@@ -154,13 +154,13 @@ export default function (section) {
       hotkey: macos ? '\u2318+Shift+7' : 'Ctrl+Shift+7',
       icon: '<span class="lake-icon lake-icon-ordered-list" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
       getActive: () => {
-        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'orderedlist';
+        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'orderedlist'
       },
       onClick: () => {
-        section.subEngine && section.subEngine.command.execute('tasklist', 'orderedlist');
+        section.subEngine && section.subEngine.command.execute('tasklist', 'orderedlist')
       },
     },
     {
@@ -168,13 +168,13 @@ export default function (section) {
       title: locale.taskList,
       icon: '<span class="lake-icon lake-icon-task-list" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
       getActive: () => {
-        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'tasklist';
+        return section.subEngine && section.subEngine.command.queryState('tasklist') === 'tasklist'
       },
       onClick: () => {
-        section.subEngine && section.subEngine.command.execute('tasklist', 'tasklist');
+        section.subEngine && section.subEngine.command.execute('tasklist', 'tasklist')
       },
     },
     {
@@ -188,10 +188,10 @@ export default function (section) {
       defaultColor: '#000000',
       currentColor: '#F5222D',
       getActive: () => {
-        return command.queryState('fontcolor') || [];
+        return command.queryState('fontcolor') || []
       },
       onClick: (value) => {
-        command.execute('fontcolor', value, '#000000');
+        command.execute('fontcolor', value, '#000000')
       },
     },
     {
@@ -202,7 +202,7 @@ export default function (section) {
       defaultColor: '#FFFFFF',
       currentColor: '#f5f5f5',
       onClick: (value) => {
-        command.background(value);
+        command.background(value)
       },
     },
     {
@@ -214,7 +214,7 @@ export default function (section) {
       title: locale.image,
       icon: '<span class="lake-icon lake-icon-image" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
     },
     {
@@ -223,7 +223,7 @@ export default function (section) {
       title: locale.file,
       icon: '<span class="lake-icon lake-icon-attachment" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
     },
     {
@@ -231,10 +231,10 @@ export default function (section) {
       icon: '<span class="lake-icon lake-icon-label" />',
       title: locale.label,
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
       onClick: () => {
-        section.subEngine.command.execute('label');
+        section.subEngine.command.execute('label')
       },
     },
     {
@@ -244,11 +244,11 @@ export default function (section) {
       hotkey: macos ? '\u2318+K' : 'Ctrl+K',
       icon: '<span class="lake-icon lake-icon-link" />',
       getDisabled: () => {
-        return !section.subEngine;
+        return !section.subEngine
       },
       onClick: () => {
-        section.subEngine && section.subEngine.command.execute('link');
+        section.subEngine && section.subEngine.command.execute('link')
       },
     },
-  ];
+  ]
 }

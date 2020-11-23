@@ -1,14 +1,14 @@
-import lang_en from '../lang/en';
-import lang_zh_cn from '../lang/zh-cn';
-import app_data from './app-data';
+import lang_en from '../lang/en'
+import lang_zh_cn from '../lang/zh-cn'
+import app_data from './app-data'
 
 const language = {
   'en-us': lang_en,
   'zh-cn': lang_zh_cn,
-};
+}
 
 export default (locale) => {
-  locale = locale || language[app_data.locale];
+  locale = locale || language[app_data.locale]
   return [
     {
       group: 'heading',
@@ -180,5 +180,5 @@ export default (locale) => {
       name: 'inlinecode',
       text: locale.code.text,
       keys: ['mod', '+', 'E'],
-    }];
-};
+    }]
+}

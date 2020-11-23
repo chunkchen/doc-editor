@@ -1,43 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Engine from '@hicooper/doc-engine';
-import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
-import Embed from './embed';
-import Error from '../../tips/error';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Engine from '@hicooper/doc-engine'
+import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string'
+import Embed from './embed'
+import Error from '../../tips/error'
 
 class Upload extends Embed {
   constructor(props) {
     super({
       defaultHeight: 467,
       ...props,
-    });
+    })
   }
 
   downloadFile = () => {
-    const src = this.value.download || this.value.src;
+    const src = this.value.download || this.value.src
     if (src) {
-      window.open(src);
+      window.open(src)
     }
-  };
+  }
 
   onSaveBefore = () => {
     return new Promise((resolve, reject) => {
       if (this.value.status === 'uploading') {
-        reject(this.locale.stillUploading);
-        return;
+        reject(this.locale.stillUploading)
+        return
       }
       if (this.value.status !== 'transfering') {
-        resolve();
+        resolve()
       } else {
-        reject(this.locale.stillTransfering);
+        reject(this.locale.stillTransfering)
       }
-    });
-  };
+    })
+  }
 
   hitBlack(src) {
-    src = new URL(src, window.location.href);
+    src = new URL(src, window.location.href)
     //! src.pathname.startsWith("/office/") && !src.pathname.startsWith("/preview/")
-    return false;
+    return false
   }
 
   embedToolbar() {
@@ -66,17 +66,17 @@ class Upload extends Embed {
       {
         type: 'preferences',
         onClick: () => {
-          this.setSidebar();
+          this.setSidebar()
         },
       },
-    ];
+    ]
     if (!this.state.readonly || this.value.allowDownload) {
       toolbar.unshift({
         type: 'download',
         onClick: this.downloadFile.bind(this),
-      });
+      })
     }
-    return toolbar;
+    return toolbar
   }
 
   setSidebar() {
@@ -85,42 +85,42 @@ class Upload extends Embed {
   collapse() {
     this.setValue({
       collapsed: true,
-    });
-    this.render();
+    })
+    this.render()
   }
 
   expand() {
     this.setValue({
       collapsed: false,
-    });
-    this.render();
+    })
+    this.render()
   }
 
   getUrl() {
-    const { preview, src } = this.value;
-    return sanitizeUrl(preview || src);
+    const { preview, src } = this.value
+    return sanitizeUrl(preview || src)
   }
 
   getAcceptExt() {
-    let { ext, name } = this.value;
+    let { ext, name } = this.value
     if (name && /\.mindnode\.zip$/.test(name)) {
-      ext = 'mindnode';
+      ext = 'mindnode'
     } else if (name && /\.xmind\.zip$/.test(name)) {
-      ext = 'xmind';
+      ext = 'xmind'
     }
-    return ext;
+    return ext
   }
 
   renderCollapse() {
-    const value = this.value;
-    const url = this.getUrl();
-    const ext = this.getAcceptExt();
+    const value = this.value
+    const url = this.getUrl()
+    const ext = this.getAcceptExt()
     const size = value.size
       ? '<span class="lake-embed-upload-collapse-file-size">'.concat(
         Engine.StringUtils.escape(Engine.UploadUtils.getFileSize(value.size)),
         '</span>\n',
       )
-      : '';
+      : ''
     const root = this.container.append(
       '\n      <div class="lake-embed lake-embed-upload lake-embed-upload-collapse" style="position: relative">\n        <div class="lake-embed-upload-file-icon lake-svg-icon-'
         .concat(
@@ -134,23 +134,23 @@ class Upload extends Embed {
           '</div>\n        </div>\n        <a class="lake-embed-upload-icon lake-svg-icon-preview" href="',
         )
         .concat(url, '" target="_blank" rel="noopener noreferrer" ></a>\n      </div>\n    '),
-    );
-    this.root = root;
+    )
+    this.root = root
   }
 
   getStatusTips() {
-    return this.value.status === 'uploading' ? this.locale.uploading : '';
+    return this.value.status === 'uploading' ? this.locale.uploading : ''
   }
 
   renderExpand() {
-    const { value, options } = this;
-    const { status, ext } = value;
-    const height = this.getHeight();
-    const url = this.getUrl();
-    const { transition } = options;
-    const readonlyClass = this.state.readonly ? ' lake-section-readonly' : '';
-    const tips = this.getStatusTips();
-    const acceptExt = this.getAcceptExt();
+    const { value, options } = this
+    const { status, ext } = value
+    const height = this.getHeight()
+    const url = this.getUrl()
+    const { transition } = options
+    const readonlyClass = this.state.readonly ? ' lake-section-readonly' : ''
+    const tips = this.getStatusTips()
+    const acceptExt = this.getAcceptExt()
     const root = Engine.$(
       '\n      <div class="lake-embed lake-embed-upload'
         .concat(
@@ -179,78 +179,78 @@ class Upload extends Embed {
           Engine.StringUtils.escape(transition),
           '"\n          ></iframe>\n          <div class="lake-embed-mask"></div>\n        </div>\n      </div>\n    ',
         ),
-    );
+    )
 
-    const iframe = root.find('iframe');
-    this.container.append(root);
-    this.root = root;
-    this.iframe = iframe;
+    const iframe = root.find('iframe')
+    this.container.append(root)
+    this.root = root
+    this.iframe = iframe
     iframe.on('load', () => {
       root.find('.lake-embed-content-bg')
-        .hide();
-    });
-    this.mask = root.find('.lake-embed-mask');
+        .hide()
+    })
+    this.mask = root.find('.lake-embed-mask')
     if (value.height) {
-      iframe.attr('data-height', height);
+      iframe.attr('data-height', height)
     }
     if (status === 'done') {
       if (ext === 'xls' || ext === 'xlsx') {
-        iframe.css('border-top', 'none');
+        iframe.css('border-top', 'none')
       }
-      let src = url;
+      let src = url
       if (src.indexOf('?') > -1) {
-        src += '&view=doc_embed';
+        src += '&view=doc_embed'
       } else {
-        src += '?view=doc_embed';
+        src += '?view=doc_embed'
       }
-      this.renderIframe(iframe, src, 2e3);
+      this.renderIframe(iframe, src, 2e3)
     }
     if (this.state.activated === true) {
-      this.hideMask();
+      this.hideMask()
     }
   }
 
   renderReadView() {
     if (this.state.collapsed) {
-      this.renderCollapse();
+      this.renderCollapse()
     } else {
-      this.renderExpand();
-      this.hideMask();
+      this.renderExpand()
+      this.hideMask()
     }
   }
 
   didInsert(value) {
     if (value.status === 'uploading' || value.status === 'transfering') {
-      this.bindEvent(this.engine.asyncEvent, 'save:before', this.onSaveBefore);
+      this.bindEvent(this.engine.asyncEvent, 'save:before', this.onSaveBefore)
     }
   }
 
   getEmbedEmbedTitle() {
-    const ext = this.getAcceptExt();
-    const value = this.value;
+    const ext = this.getAcceptExt()
+    const value = this.value
     return '\n        <span class="lake-svg-icon-'
       .concat(
         Engine.StringUtils.escape(ext),
         '" style="\n          float: left;\n          margin-top: 5px;\n          margin-right: 6px;\n          width: 12.6px;\n          height: 13.5px;\n          background-size: 12.6px 13.5px;\n        "></span>\n        ',
       )
-      .concat(Engine.StringUtils.escape(value.name), '\n    ');
+      .concat(Engine.StringUtils.escape(value.name), '\n    ')
   }
 
   renderEditView() {
     if (this.state.collapsed) {
-      this.renderCollapse();
+      this.renderCollapse()
     } else {
-      this.renderExpand();
-      this.renderResizeController();
+      this.renderExpand()
+      this.renderResizeController()
     }
   }
 
   isError() {
-    return this.value.status === 'error';
+    return this.value.status === 'error'
   }
 
   renderError() {
-    const { value, container } = this;
+    const { value, container } = this
     ReactDOM.render(
       <Error
         sectionIcon={'<span class="lake-svg-icon lake-svg-icon-error-file"></span>'}
@@ -261,25 +261,25 @@ class Upload extends Embed {
         docWidth={this.getContainerWidth()}
       />,
       container[0],
-    );
+    )
   }
 
   render(_, value) {
     value = {
       ...this.value,
       value,
-    };
-    const { collapsed } = value;
-    this.value = value;
-    value.status = value.status || 'done';
-    this.state.collapsed = undefined !== collapsed && collapsed;
-    if (!value.ext && value.src) {
-      value.ext = Engine.UploadUtils.getFileExtname(value.src);
     }
-    value.ext = value.ext || 'html';
-    super.render.call(this);
+    const { collapsed } = value
+    this.value = value
+    value.status = value.status || 'done'
+    this.state.collapsed = undefined !== collapsed && collapsed
+    if (!value.ext && value.src) {
+      value.ext = Engine.UploadUtils.getFileExtname(value.src)
+    }
+    value.ext = value.ext || 'html'
+    super.render.call(this)
   }
 }
 
-Upload.type = 'block';
-export default Upload;
+Upload.type = 'block'
+export default Upload

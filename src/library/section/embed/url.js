@@ -1,17 +1,17 @@
-import Engine from '@hicooper/doc-engine';
-import Upload from './upload';
+import Engine from '@hicooper/doc-engine'
+import Upload from './upload'
 
 class Url extends Upload {
   handleInputKeydown = (e) => {
-    if (Engine.isHotkey('enter', e)) this.handleSubmit();
-  };
+    if (Engine.isHotkey('enter', e)) this.handleSubmit()
+  }
 
   handleSubmit = () => {
-    const url = this.find('url')[0].value.trim();
-    const options = this.getOptions();
+    const url = this.find('url')[0].value.trim()
+    const options = this.getOptions()
     const embedUrl = options.getDocEmbedURL
       ? options.getDocEmbedURL(url)
-      : this.getDocEmbedURL(url);
+      : this.getDocEmbedURL(url)
     if (embedUrl) {
       this.setValue({
         url: embedUrl,
@@ -19,30 +19,30 @@ class Url extends Upload {
         name: url,
         size: undefined,
         ext: 'html',
-      });
-      this.render();
+      })
+      this.render()
     } else {
-      this.engine.messageError(this.locale.addressInvalid);
+      this.engine.messageError(this.locale.addressInvalid)
     }
-  };
+  }
 
   getDocEmbedURL() {
-    return false;
+    return false
   }
 
   getUrl() {
-    const { src, url } = this.value;
-    return url || src;
+    const { src, url } = this.value
+    return url || src
   }
 
   embedToolbar() {
-    let toolbarExtends = [];
+    let toolbarExtends = []
     if (this.engine.options.type === 'max') {
       toolbarExtends = toolbarExtends.concat([
         {
           type: 'dnd',
         },
-      ]);
+      ])
     }
     toolbarExtends = toolbarExtends.concat([
       {
@@ -60,31 +60,31 @@ class Url extends Upload {
       {
         type: 'collapse',
       },
-    ]);
-    return toolbarExtends;
+    ])
+    return toolbarExtends
   }
 
   unactivate() {
-    super.unactivate.call(this);
+    super.unactivate.call(this)
     this.container.find('.lake-embed-content')
-      .removeClass('lake-embed-content-active');
+      .removeClass('lake-embed-content-active')
   }
 
   find(role) {
-    return this.container.find('[data-role='.concat(role, ']'));
+    return this.container.find('[data-role='.concat(role, ']'))
   }
 
   focusInput() {
     setTimeout(() => {
-      const urlElement = this.find('url');
+      const urlElement = this.find('url')
       if (urlElement.length > 0) {
-        urlElement[0].focus();
+        urlElement[0].focus()
       }
-    }, 50);
+    }, 50)
   }
 
   getPlaceHolder() {
-    return Engine.StringUtils.escape(this.locale.placeholder);
+    return Engine.StringUtils.escape(this.locale.placeholder)
   }
 
   renderInput() {
@@ -98,22 +98,22 @@ class Url extends Upload {
           Engine.StringUtils.escape(this.locale.submit),
           '</span></button></span>\n      </div>\n    </div>\n    ',
         ),
-    );
-    this.container.append(embedNode);
+    )
+    this.container.append(embedNode)
     this.find('url')
-      .on('keydown', this.handleInputKeydown);
+      .on('keydown', this.handleInputKeydown)
     this.find('submit')
-      .on('click', this.handleSubmit);
+      .on('click', this.handleSubmit)
   }
 
   renderEditView() {
     if (this.value.url) {
-      super.renderEditView();
+      super.renderEditView()
     } else {
-      this.renderInput();
+      this.renderInput()
     }
   }
 }
 
-Url.type = 'block';
-export default Url;
+Url.type = 'block'
+export default Url

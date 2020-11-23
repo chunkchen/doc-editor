@@ -1,24 +1,24 @@
-import React from 'react';
-import { Input } from 'antd';
-import 'antd/lib/input/style';
-import Engine from '@hicooper/doc-engine';
-import ColorPicker from '../../toolbar/color-picker';
+import React from 'react'
+import { Input } from 'antd'
+import 'antd/lib/input/style'
+import Engine from '@hicooper/doc-engine'
+import ColorPicker from '../../toolbar/color-picker'
 
 class InputLabel extends React.Component {
   constructor(props) {
-    super();
+    super()
     this.state = {
       activeColors: [props.colors[props.sectionValue.colorIndex]],
-    };
+    }
   }
 
   change(e) {
-    this.props.onChange(Object.assign({}, this.props.sectionValue, {}, e));
+    this.props.onChange({ ...this.props.sectionValue, ...e })
   }
 
   render() {
-    const { colors, sectionValue: { label }, onFocus, onBlur, onPressEnter } = this.props;
-    const { activeColors } = this.state;
+    const { colors, sectionValue: { label }, onFocus, onBlur, onPressEnter } = this.props
+    const { activeColors } = this.state
 
     return (
       <div>
@@ -27,19 +27,19 @@ class InputLabel extends React.Component {
           onChange={(event) => {
             this.change({
               label: Engine.StringUtils.escape(event.target.value.trim()),
-            });
+            })
           }}
           draggable={false}
           onDragStart={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
+            event.preventDefault()
+            event.stopPropagation()
           }}
           onClick={(event) => {
-            event.stopPropagation();
+            event.stopPropagation()
           }}
           onMouseDown={(event) => {
-            event.stopPropagation();
-            event.target.focus();
+            event.stopPropagation()
+            event.target.focus()
           }}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -51,16 +51,16 @@ class InputLabel extends React.Component {
           onSelect={(color) => {
             this.change({
               colorIndex: colors.indexOf(color),
-            });
+            })
             this.setState({
               activeColors: [color],
-            });
+            })
           }}
           colors={[colors]}
         />
       </div>
-    );
+    )
   }
 }
 
-export default InputLabel;
+export default InputLabel

@@ -1,16 +1,16 @@
-import LockedTextSection from '../section/locked-text';
+import LockedTextSection from '../section/locked-text'
 
-const PLUGIN_NAME = 'lockedtext';
+const PLUGIN_NAME = 'lockedtext'
 
 export default {
   initialize() {
     this.command.add(PLUGIN_NAME, {
       execute: () => {
-        this.change.insertSection(PLUGIN_NAME);
+        this.change.insertSection(PLUGIN_NAME)
       },
-    });
+    })
   },
-};
+}
 export {
   LockedTextSection,
-};
+}

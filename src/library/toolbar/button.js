@@ -1,102 +1,102 @@
-import React from 'react';
-import { Tooltip } from 'antd';
-import 'antd/lib/tooltip/style';
-import classnames from 'classnames';
+import React from 'react'
+import { Tooltip } from 'antd'
+import 'antd/lib/tooltip/style'
+import classnames from 'classnames'
 
 export default class Button extends React.Component {
   state = {
     visible: false,
-  };
+  }
 
   onClick = (event) => {
-    const { name, onClick, isPrevent, disabled } = this.props;
+    const { name, onClick, isPrevent, disabled } = this.props
 
     if (isPrevent !== false) {
-      event.preventDefault();
+      event.preventDefault()
     }
 
-    if (disabled) return;
+    if (disabled) return
 
     this.setState({
       visible: false,
-    });
+    })
 
-    onClick && onClick(event, name);
-  };
+    onClick && onClick(event, name)
+  }
 
   onMouseOver = (event) => {
-    const { onMouseOver, disabled } = this.props;
-    if (disabled) return;
-    onMouseOver && onMouseOver();
-    event.preventDefault();
-  };
+    const { onMouseOver, disabled } = this.props
+    if (disabled) return
+    onMouseOver && onMouseOver()
+    event.preventDefault()
+  }
 
   onMouseDown = (event) => {
-    event.preventDefault();
-    const { name, onMouseDown, disabled } = this.props;
-    if (disabled) return;
+    event.preventDefault()
+    const { name, onMouseDown, disabled } = this.props
+    if (disabled) return
     // fix：避免执行工具栏的 mousedown 事件里的 engine.focus()，这个会导致格式刷功能失效
     if (name === 'paintformat' || name === 'video') {
-      event.stopPropagation();
+      event.stopPropagation()
     }
-    onMouseDown && onMouseDown(event);
-  };
+    onMouseDown && onMouseDown(event)
+  }
 
   onMouseEnter = (event) => {
-    const { outerVisible, onMouseEnter } = this.props;
+    const { outerVisible, onMouseEnter } = this.props
     if (onMouseEnter) {
-      onMouseEnter(event);
+      onMouseEnter(event)
     }
     if (!outerVisible) {
       this.setState({
         visible: true,
-      });
+      })
     }
-  };
+  }
 
   onMouseLeave = (event) => {
-    const { outerVisible, onMouseLeave } = this.props;
+    const { outerVisible, onMouseLeave } = this.props
     if (onMouseLeave) {
-      onMouseLeave(event);
+      onMouseLeave(event)
     }
     if (!outerVisible) {
       this.setState({
         visible: false,
-      });
+      })
     }
-  };
+  }
 
   getIcon = () => {
-    const { icon } = this.props;
+    const { icon } = this.props
     if (icon && typeof icon === 'string') {
-      return <span dangerouslySetInnerHTML={{ __html: icon }}/>;
+      return <span dangerouslySetInnerHTML={{ __html: icon }} />
     }
     if (icon) {
-      return icon;
+      return icon
     }
-    return null;
-  };
+    return null
+  }
 
   render() {
-    let { name, className, title, hotkey, active, disabled, hasArrow, currentText, content, mobile, contentVisible, tooltip } = this.props;
+    let { name, className, title, hotkey, active, disabled, hasArrow, currentText, content, mobile, contentVisible, tooltip } = this.props
     if (hotkey) {
       title = (
         <div style={{ textAlign: 'center' }}>
           {title}
-          <br/>
+          <br />
           <span className="lake-button-hotkey">{hotkey}</span>
         </div>
-      );
+      )
     }
 
-    let visible = this.state.visible;
+    let visible = this.state.visible
     // 没有 title 时，不展示 tooltip
 
     if (!title || mobile) {
-      visible = false;
+      visible = false
     }
-    const accessbilityid = 'main-'.concat(name, '-button');
-    const showContent = contentVisible === undefined ? true : contentVisible;
+    const accessbilityid = 'main-'.concat(name, '-button')
+    const showContent = contentVisible === undefined ? true : contentVisible
 
     const button = (
       <button
@@ -104,8 +104,7 @@ export default class Button extends React.Component {
         className={classnames('lake-button', className, {
           'lake-button-active': active,
           'lake-button-disabled': disabled,
-        })
-        }
+        })}
         onClick={this.onClick}
         onMouseDown={this.onMouseDown}
         onMouseEnter={this.onMouseEnter}
@@ -122,10 +121,10 @@ export default class Button extends React.Component {
           this.getIcon()
         }
         {
-          hasArrow && <span className="lake-icon lake-icon-arrow"/>
+          hasArrow && <span className="lake-icon lake-icon-arrow" />
         }
       </button>
-    );
+    )
     return (
       tooltip === undefined || tooltip === true
         ? (
@@ -139,6 +138,6 @@ export default class Button extends React.Component {
           </Tooltip>
         )
         : button
-    );
+    )
   }
 }

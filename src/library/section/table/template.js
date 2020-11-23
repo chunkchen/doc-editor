@@ -1,34 +1,34 @@
-import Engine from '@hicooper/doc-engine';
-import { normalizeTable } from './utils';
+import Engine from '@hicooper/doc-engine'
+import { normalizeTable } from './utils'
 
-const { $ } = Engine;
+const { $ } = Engine
 
-const TABLE_WRAPPER_CLASS = 'table-wrapper';
-const TABLE_CLASS = 'lake-table';
-const COLS_HEADER_CLASS = 'table-cols-header';
-const COLS_HEADER_ITEM_CLASS = 'table-cols-header-item';
-const HEADER_ADD_CLASS = 'table-header-add-btn';
-const HEADER_DELETE_CLASS = 'table-header-delete-btn';
-const COLS_HEADER_TRIGGER_CLASS = 'cols-trigger';
-const ROWS_HEADER_CLASS = 'table-rows-header';
-const ROWS_HEADER_ITEM_CLASS = 'table-rows-header-item';
-const ROWS_HEADER_TRIGGER_CLASS = 'rows-trigger';
-const HEADER_CLASS = 'table-header';
-const ACTIVE_TD_CLASS = 'table-active-td';
-const ACTIVE_TD_TRIGGER_CLASS = 'table-active-td-trigger';
-const AREA_MASK = 'mask';
-const ROW_MASK = 'mask-row';
-const COL_MASK = 'mask-col';
-const SUB_EDITOR_CLASS = 'sub-editor';
-const SUB_EDITOR_CONTENT_CLASS = 'sub-editor-content';
-const MENUBAR_CLASS = 'table-menubar';
-const MENUBAR_ITEM_CLASS = 'table-menubar-item';
-const TABLE_TEXTAREA_CLASS = 'table-textarea';
-const VIEWPORT = 'table-viewport';
-const VIEWPORT_READER = 'lake-table-reader';
-const PLACEHOLDER_CLASS = 'table-placeholder';
-const SHADOW_LEFT_CLASS = 'table-shadow-left';
-const SHADOW_RIGHT_CLASS = 'table-shadow-right';
+const TABLE_WRAPPER_CLASS = 'table-wrapper'
+const TABLE_CLASS = 'lake-table'
+const COLS_HEADER_CLASS = 'table-cols-header'
+const COLS_HEADER_ITEM_CLASS = 'table-cols-header-item'
+const HEADER_ADD_CLASS = 'table-header-add-btn'
+const HEADER_DELETE_CLASS = 'table-header-delete-btn'
+const COLS_HEADER_TRIGGER_CLASS = 'cols-trigger'
+const ROWS_HEADER_CLASS = 'table-rows-header'
+const ROWS_HEADER_ITEM_CLASS = 'table-rows-header-item'
+const ROWS_HEADER_TRIGGER_CLASS = 'rows-trigger'
+const HEADER_CLASS = 'table-header'
+const ACTIVE_TD_CLASS = 'table-active-td'
+const ACTIVE_TD_TRIGGER_CLASS = 'table-active-td-trigger'
+const AREA_MASK = 'mask'
+const ROW_MASK = 'mask-row'
+const COL_MASK = 'mask-col'
+const SUB_EDITOR_CLASS = 'sub-editor'
+const SUB_EDITOR_CONTENT_CLASS = 'sub-editor-content'
+const MENUBAR_CLASS = 'table-menubar'
+const MENUBAR_ITEM_CLASS = 'table-menubar-item'
+const TABLE_TEXTAREA_CLASS = 'table-textarea'
+const VIEWPORT = 'table-viewport'
+const VIEWPORT_READER = 'lake-table-reader'
+const PLACEHOLDER_CLASS = 'table-placeholder'
+const SHADOW_LEFT_CLASS = 'table-shadow-left'
+const SHADOW_RIGHT_CLASS = 'table-shadow-right'
 
 export default function (section) {
   return {
@@ -71,14 +71,14 @@ export default function (section) {
      * @return {string} 返回 html 字符串
      */
     htmlEdit(value) {
-      const rows = value.rows;
-      const cols = value.cols;
-      let html = value.html;
-      const tds = '<td><p><br /></p></td>'.repeat(cols);
+      const rows = value.rows
+      const cols = value.cols
+      let html = value.html
+      const tds = '<td><p><br /></p></td>'.repeat(cols)
       const trs = '<tr>'.concat(tds, '</tr>')
-        .repeat(rows);
-      const col = '<col />'.repeat(cols);
-      const colgroup = '<colgroup>'.concat(col, '</colgroup>');
+        .repeat(rows)
+      const col = '<col />'.repeat(cols)
+      const colgroup = '<colgroup>'.concat(col, '</colgroup>')
 
       // 列头
       const colsHeader = '<div class="'
@@ -95,7 +95,7 @@ export default function (section) {
             .concat('<div class="col-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', COLS_HEADER_TRIGGER_CLASS
               .concat('"></div></div>')))
           .repeat(cols), '')
-        .concat('</div> ');
+        .concat('</div> ')
 
       // 行头
       const rowsHeader = '<div class="'
@@ -112,14 +112,14 @@ export default function (section) {
             .concat('<div class="row-dragger"><span class="lake-icon lake-icon-drag"></span><span class="drag-info"></span></div><div class="', ROWS_HEADER_TRIGGER_CLASS
               .concat('"></div></div>')))
           .repeat(rows), '')
-        .concat('</div> ');
+        .concat('</div> ')
 
       // 整个表 锚点
-      const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>');
+      const tableHeader = '<div class="'.concat(HEADER_CLASS, '"></div>')
 
       // 当前激活单元格
       const textArea = '<textarea class="'
-        .concat(TABLE_TEXTAREA_CLASS, '"></textarea>');
+        .concat(TABLE_TEXTAREA_CLASS, '"></textarea>')
       const activeBox = '<div class="'
         .concat(ACTIVE_TD_CLASS, '">')
         .concat(textArea, '<div class="')
@@ -132,45 +132,45 @@ export default function (section) {
         .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_w"></div><div class="s ')
         .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_s"></div> <div class="e ')
         .concat(ACTIVE_TD_TRIGGER_CLASS, '" direction="drag_e"></div>')
-        .concat(this.SubEditor, '     </div>');
+        .concat(this.SubEditor, '     </div>')
 
-      const placeholder = '<div class="'.concat(PLACEHOLDER_CLASS, '"></div>');
-      const shadowLeft = '<div class="'.concat(SHADOW_LEFT_CLASS, '"></div>');
-      const shadowRight = '<div class="'.concat(SHADOW_RIGHT_CLASS, '"></div>');
+      const placeholder = '<div class="'.concat(PLACEHOLDER_CLASS, '"></div>')
+      const shadowLeft = '<div class="'.concat(SHADOW_LEFT_CLASS, '"></div>')
+      const shadowRight = '<div class="'.concat(SHADOW_RIGHT_CLASS, '"></div>')
 
       // 右键菜单
       let menuBar = section.constants.MENU.map((menu) => {
         if (menu.split) {
-          return '<div class="split"></div>';
+          return '<div class="split"></div>'
         }
         return '<div class="'
           .concat(MENUBAR_ITEM_CLASS, '" data-action="')
           .concat(menu.action, '"><span class="lake-icon lake-icon-table-')
           .concat(menu.icon, '"></span>')
-          .concat(menu.text, '</div>');
-      });
+          .concat(menu.text, '</div>')
+      })
       menuBar = '<div class="'
         .concat(MENUBAR_CLASS, '">')
-        .concat(menuBar.join(''), '</div>');
+        .concat(menuBar.join(''), '</div>')
 
       if (html) {
-        const hasColGroup = html.includes('<colgroup>');
+        const hasColGroup = html.includes('<colgroup>')
 
         if (!hasColGroup) {
           html = html.replace(/^(<table[^>]+>)/, (match) => {
-            return match + colgroup;
-          });
+            return match + colgroup
+          })
         }
 
-        html = normalizeTable($(html)[0]).outerHTML;
+        html = normalizeTable($(html)[0]).outerHTML
       }
 
       const table = html || ' <table class="'
         .concat(TABLE_CLASS, '">')
         .concat(colgroup, '')
-        .concat(trs, '</table>');
+        .concat(trs, '</table>')
 
-      const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '');
+      const sectionClass = TABLE_WRAPPER_CLASS + (section.options.type === 'mini' ? ` ${TABLE_WRAPPER_CLASS}-mini` : '')
       return '<div class="'.concat(sectionClass, '">')
         .concat(tableHeader, ' <div class=" ')
         .concat(VIEWPORT, '">')
@@ -181,12 +181,12 @@ export default function (section) {
         .concat(shadowLeft, '')
         .concat(shadowRight, '</div>')
         .concat(rowsHeader, '')
-        .concat(menuBar, '</div>');
+        .concat(menuBar, '</div>')
     },
     htmlView: (value) => {
-      const html = value.html;
+      const html = value.html
       return '<div class="'.concat(VIEWPORT_READER, '">')
-        .concat(html, '</div>');
+        .concat(html, '</div>')
     },
-  };
+  }
 }

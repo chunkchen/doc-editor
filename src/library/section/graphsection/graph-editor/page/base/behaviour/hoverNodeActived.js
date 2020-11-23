@@ -1,35 +1,35 @@
-import Page from '../page';
+import Page from '../page'
 
 Page.registerBehaviour('hoverNodeActived', (page) => {
-  const graph = page.getGraph();
-  let hoverItem;
+  const graph = page.getGraph()
+  let hoverItem
   graph.behaviourOn('node:mouseenter', (ev) => {
     if (page.getSignal('panningItem') || page.getSignal('dragEdge') || (ev.item && ev.item.isSelected)) {
-      return;
+      return
     }
 
-    hoverItem = ev.item;
-    page.setActived(hoverItem, true);
-  });
+    hoverItem = ev.item
+    page.setActived(hoverItem, true)
+  })
   graph.behaviourOn('node:mouseleave', (ev) => {
-    const toShape = ev.toShape;
+    const toShape = ev.toShape
 
     if (!hoverItem) {
-      return;
+      return
     }
 
     if ((toShape && toShape.isAnchor && toShape.getItem() === hoverItem) || page.getSignal('dragEdge')) {
-      return;
+      return
     }
 
     if (!hoverItem.isSelected) {
-      page.setActived(hoverItem, false);
+      page.setActived(hoverItem, false)
     }
 
-    resetStatus();
-  });
+    resetStatus()
+  })
 
   function resetStatus() {
-    hoverItem = undefined;
+    hoverItem = undefined
   }
-});
+})

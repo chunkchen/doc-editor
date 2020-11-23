@@ -1,11 +1,11 @@
-import React from 'react';
-import Engine from '@hicooper/doc-engine';
-import { Tooltip } from 'antd';
-import 'antd/lib/tooltip/style';
+import React from 'react'
+import Engine from '@hicooper/doc-engine'
+import { Tooltip } from 'antd'
+import 'antd/lib/tooltip/style'
 
 class Toolbar extends React.Component {
   render() {
-    const { locale, onChange, onFocus, onBlur, code, options } = this.props;
+    const { locale, onChange, onFocus, onBlur, code, options } = this.props
     return (
       <div>
         <textarea
@@ -13,7 +13,7 @@ class Toolbar extends React.Component {
           onBlur={onBlur}
           defaultValue={code}
           onChange={(event) => {
-            onChange(event.target.value);
+            onChange(event.target.value)
           }}
         />
         <div className="lake-math-editor-toolbar">
@@ -26,7 +26,7 @@ class Toolbar extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="lake-icon lake-icon-question"/>
+                  <span className="lake-icon lake-icon-question" />
                   {Engine.StringUtils.escape(options.help.text)}
                 </a>
               )
@@ -44,8 +44,8 @@ class Toolbar extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Toolbar;
+export default Toolbar

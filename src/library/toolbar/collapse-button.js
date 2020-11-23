@@ -1,75 +1,75 @@
-import React from 'react';
-import classnames from 'classnames';
-import Button from './button';
-import Collapse from './collapse';
+import React from 'react'
+import classnames from 'classnames'
+import Button from './button'
+import Collapse from './collapse'
 
 class CollapseButton extends React.Component {
   constructor() {
-    super();
-    this.buttonArea = React.createRef();
+    super()
+    this.buttonArea = React.createRef()
   }
 
   state = {
     active: false,
-  };
+  }
 
   toggleDropdown = () => {
     if (this.props.disabled) {
-      return;
+      return
     }
 
     if (this.state.active) {
-      this.hideDropdown();
+      this.hideDropdown()
     } else {
-      this.showDropdown();
+      this.showDropdown()
     }
-  };
+  }
 
   showDropdown = () => {
-    if (this.state.active === true) return;
-    document.addEventListener('click', this.hideDropdown);
+    if (this.state.active === true) return
+    document.addEventListener('click', this.hideDropdown)
     this.setState({
       active: true,
-    });
-  };
+    })
+  }
 
   hideDropdown = (e) => {
     if (e) {
-      let node = e.target;
+      let node = e.target
       while (node) {
         if (node === this.buttonArea.current) {
-          return;
+          return
         }
-        node = node.parentNode;
+        node = node.parentNode
       }
     }
-    document.removeEventListener('click', this.hideDropdown);
+    document.removeEventListener('click', this.hideDropdown)
     this.setState({
       active: false,
-    });
-  };
+    })
+  }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.hideDropdown);
+    document.removeEventListener('click', this.hideDropdown)
   }
 
   render() {
-    const { active } = this.state;
+    const { active } = this.state
     // button component
 
-    const buttonProps = { ...this.props };
-    buttonProps.active = active;
-    buttonProps.onClick = this.toggleDropdown;
+    const buttonProps = { ...this.props }
+    buttonProps.active = active
+    buttonProps.onClick = this.toggleDropdown
     // collapse component
-    const collapseProps = { ...this.props };
-    collapseProps.active = active;
-    collapseProps.onClick = this.toggleDropdown;
-    collapseProps.hideDropdown = this.hideDropdown;
-    collapseProps.showDropdown = this.showDropdown;
-    collapseProps.onBeforeUpload = this.toggleDropdown;
+    const collapseProps = { ...this.props }
+    collapseProps.active = active
+    collapseProps.onClick = this.toggleDropdown
+    collapseProps.hideDropdown = this.hideDropdown
+    collapseProps.showDropdown = this.showDropdown
+    collapseProps.onBeforeUpload = this.toggleDropdown
     collapseProps.activeKeys = collapseProps.data.map((item, index) => {
-      return String(index);
-    });
+      return String(index)
+    })
     return (
       <div className="lake-button-set lake-collapse-button" ref={this.buttonArea}>
         <div className={classnames('lake-button-set-trigger', { 'lake-button-set-trigger-active': active })}>
@@ -77,8 +77,8 @@ class CollapseButton extends React.Component {
         </div>
         <Collapse {...collapseProps} />
       </div>
-    );
+    )
   }
 }
 
-export default CollapseButton;
+export default CollapseButton

@@ -1,16 +1,16 @@
-import G6 from '@antv/g6';
+import G6 from '@antv/g6'
 
-const Util = G6.Util;
+const Util = G6.Util
 
 class Base {
   constructor(cfg) {
-    const defaultCfg = this.getDefaultCfg();
-    Util.mix(true, this, defaultCfg, cfg);
-    this.init();
+    const defaultCfg = this.getDefaultCfg()
+    Util.mix(true, this, defaultCfg, cfg)
+    this.init()
   }
 
   getDefaultCfg() {
-    return {};
+    return {}
   }
 
   init() {
@@ -20,4 +20,4 @@ class Base {
   }
 }
 
-export default Base;
+export default Base

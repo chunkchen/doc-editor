@@ -1,5 +1,5 @@
-import Command from './command';
-import './zoom';
-import './collapseExpand';
+import Command from './command'
+import './zoom'
+import './collapseExpand'
 
-export default Command;
+export default Command

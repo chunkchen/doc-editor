@@ -1,19 +1,19 @@
-import Page from '../page';
+import Page from '../page'
 
 Page.registerBehaviour('keydownCmdWheelZoom', (page) => {
-  const graph = page.getGraph();
+  const graph = page.getGraph()
   graph.behaviourOn('keydown', (ev) => {
-    const domEvent = ev.domEvent;
+    const domEvent = ev.domEvent
 
     if (domEvent.keyCode === 91) {
-      page.setSignal('wheelZoom', true);
+      page.setSignal('wheelZoom', true)
     }
-  });
+  })
   graph.behaviourOn('keyup', (ev) => {
-    const domEvent = ev.domEvent;
+    const domEvent = ev.domEvent
 
     if (domEvent.keyCode === 91) {
-      page.setSignal('wheelZoom', false);
+      page.setSignal('wheelZoom', false)
     }
-  });
-});
+  })
+})

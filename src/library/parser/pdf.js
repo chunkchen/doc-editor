@@ -1,21 +1,19 @@
-import ExportParser from './export';
-import { lists } from './utils';
+import ExportParser from './export'
+import { lists } from './utils'
 
 class PdfParser extends ExportParser {
   getDefaultSectionParsers() {
-    return Object.assign(
-      {},
-      super.getDefaultSectionParsers.call(this),
-      {
-        checkbox: () => {
-        },
+    return {
+
+      ...super.getDefaultSectionParsers.call(this),
+      checkbox: () => {
       },
-    );
+    }
   }
 
   parseLists(element) {
-    return lists(element);
+    return lists(element)
   }
 }
 
-export default PdfParser;
+export default PdfParser

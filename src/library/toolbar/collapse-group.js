@@ -1,7 +1,7 @@
-import React from 'react';
-import { Tooltip } from 'antd';
-import 'antd/lib/tooltip/style';
-import './collapse-group.css';
+import React from 'react'
+import { Tooltip } from 'antd'
+import 'antd/lib/tooltip/style'
+import './collapse-group.css'
 
 const locale = {
   'zh-cn': {
@@ -10,15 +10,15 @@ const locale = {
   en: {
     supportFollowingExts: 'The following file formats are supported',
   },
-}[window.appData && window.appData.locale === 'en' ? 'en' : 'zh-cn'];
+}[window.appData && window.appData.locale === 'en' ? 'en' : 'zh-cn']
 
-const tooltipContainer = document.createElement('div');
-tooltipContainer.setAttribute('class', 'lake-section-tooltip-container');
+const tooltipContainer = document.createElement('div')
+tooltipContainer.setAttribute('class', 'lake-section-tooltip-container')
 tooltipContainer.addEventListener('click', (e) => {
-  e.stopPropagation();
-  e.preventDefault();
-});
-document.body.appendChild(tooltipContainer);
+  e.stopPropagation()
+  e.preventDefault()
+})
+document.body.appendChild(tooltipContainer)
 
 class CollapseGroup extends React.Component {
   renderHierarchy(data) {
@@ -30,8 +30,8 @@ class CollapseGroup extends React.Component {
             key={''.concat(key)
               .concat(child_key)}
           />
-        );
-      });
+        )
+      })
       return (
         <div key={''.concat(key)} className="lake-section-tooltip-hierarchy-cell">
           <p className="lake-section-tooltip-hierarchy-name-container">
@@ -40,8 +40,8 @@ class CollapseGroup extends React.Component {
           </p>
           <p>{children}</p>
         </div>
-      );
-    });
+      )
+    })
   }
 
   renderFlat(data) {
@@ -49,40 +49,40 @@ class CollapseGroup extends React.Component {
       return (
         <div key={'0'.concat(index)} className="lake-section-tooltip-flat-cell">
           <span>{item.name}</span>
-          <br/>
-          <span className={'lake-svg-icon lake-svg-icon-'.concat(item.icon)}/>
+          <br />
+          <span className={'lake-svg-icon lake-svg-icon-'.concat(item.icon)} />
         </div>
-      );
-    });
+      )
+    })
   }
 
   renderTooltip() {
-    const { data } = this.props;
-    const tooltip = data.length > 1 ? this.renderHierarchy(data) : this.renderFlat(data);
+    const { data } = this.props
+    const tooltip = data.length > 1 ? this.renderHierarchy(data) : this.renderFlat(data)
     return (
       <div className="lake-section-tooltip-content-container">
         <p className="lake-section-tooltip-title">{locale.supportFollowingExts}</p>
         {tooltip}
       </div>
-    );
+    )
   }
 
   render() {
-    const { children, data } = this.props;
+    const { children, data } = this.props
     return data ? (
       <Tooltip
         title={this.renderTooltip()}
         placement="right"
         getPopupContainer={() => {
-          return tooltipContainer;
+          return tooltipContainer
         }}
       >
         {children}
       </Tooltip>
     ) : (
       <div>{children}</div>
-    );
+    )
   }
 }
 
-export default CollapseGroup;
+export default CollapseGroup

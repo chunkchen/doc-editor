@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const Icons = {};
+const Icons = {}
 Icons.Preview = function () {
   return (
     <svg
@@ -35,6 +35,6 @@ Icons.Preview = function () {
         </g>
       </g>
     </svg>
-  );
-};
-export default Icons;
+  )
+}
+export default Icons

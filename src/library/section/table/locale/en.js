@@ -49,4 +49,4 @@ export default {
     decrease: 'Decrease indent',
     increase: 'Increase indent',
   },
-};
+}

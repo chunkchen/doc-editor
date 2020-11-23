@@ -1,9 +1,9 @@
-import Mind from '../../mind';
+import Mind from '../../mind'
 
 Mind.registerNode('mind-first-sub', {
   dy: 0,
   getPadding() {
-    return [6, 12, 8, 12];
+    return [6, 12, 8, 12]
   },
   getLabelStyle() {
     return {
@@ -11,6 +11,6 @@ Mind.registerNode('mind-first-sub', {
       fontWeight: 500,
       fontSize: 14,
       lineHeight: 20,
-    };
+    }
   },
-});
+})

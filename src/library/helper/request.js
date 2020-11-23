@@ -1,40 +1,39 @@
-import ajax from '../network/ajax';
+import ajax from '../network/ajax'
 
 class Request {
   constructor(options) {
-    this.options = Object.assign({
-      ajaxOptions: {
-        progress() {
-        },
-        error() {
-        },
-        success() {
-        },
-        data: {},
-        method: 'post',
-        url: '',
+    this.options = { ajaxOptions: {
+      progress() {
       },
-    }, options);
+      error() {
+      },
+      success() {
+      },
+      data: {},
+      method: 'post',
+      url: '',
+    },
+    ...options }
   }
 
   ajax(options) {
-    options = Object.assign({}, this.options.ajaxOptions, {}, options);
-    const { success, error } = options;
+    options = { ...this.options.ajaxOptions, ...options }
+    const { success, error } = options
     const promise = new Promise((resolve) => {
       options.success = (res) => {
-        success(res);
-        resolve();
-      };
+        success(res)
+        resolve()
+      }
       options.error = (res) => {
-        error(res);
-        resolve();
-      };
-    });
+        error(res)
+        resolve()
+      }
+    })
     return {
       xhr: ajax(options),
       promise,
-    };
+    }
   }
 }
 
-export default Request;
+export default Request

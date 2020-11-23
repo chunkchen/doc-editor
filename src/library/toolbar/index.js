@@ -1,147 +1,147 @@
-import React from 'react';
-import classnames from 'classnames';
-import Engine from '@hicooper/doc-engine';
-import toolbarConfig from '../config/toolbar';
-import ToolbarPlugins from './toolbar-plugins';
-import ToolbarGroup from './toolbar-group';
-import { getHotkeyText } from '../utils/string';
+import React from 'react'
+import classnames from 'classnames'
+import Engine from '@hicooper/doc-engine'
+import toolbarConfig from '../config/toolbar'
+import ToolbarPlugins from './toolbar-plugins'
+import ToolbarGroup from './toolbar-group'
+import { getHotkeyText } from '../utils/string'
 
 class Toolbar extends React.Component {
   state = {
     pluginToolbar: [],
     toolbarState: {},
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.handleH5Scroll = () => {
-      const { engine, mobile } = this.props;
+      const { engine, mobile } = this.props
       if (mobile) {
-        document.body.appendChild(Engine.$('.lake-toolbar')[0]);
-        this.toolbarEl = Engine.$('.lake-toolbar');
+        document.body.appendChild(Engine.$('.lake-toolbar')[0])
+        this.toolbarEl = Engine.$('.lake-toolbar')
         engine.on('select', () => {
           this.toolbarEl.css({
             position: 'absolute',
             top: `${document.body.scrollTop}px`,
-          });
-        });
+          })
+        })
         window.addEventListener('blur', () => {
           this.toolbarEl.css({
             position: 'fixed',
             top: 0,
-          });
-        });
+          })
+        })
         window.addEventListener('scroll', () => {
           if (this.toolbarEl.css('position') === 'absolute') {
             this.toolbarEl.css({
               top: `${document.body.scrollTop}px`,
-            });
+            })
           }
-        });
+        })
       }
-    };
+    }
 
     this.set = (config) => {
-      const nameList = [];
-      let subNameList = [];
+      const nameList = []
+      let subNameList = []
       config.forEach((item) => {
         if (item.type === 'separator') {
-          nameList.push(subNameList);
-          subNameList = [];
+          nameList.push(subNameList)
+          subNameList = []
         } else {
-          subNameList.push(item.name);
+          subNameList.push(item.name)
         }
-      });
+      })
       if (subNameList.length > 0) {
-        nameList.push(subNameList);
+        nameList.push(subNameList)
       }
-      this.setToolbar(nameList, config, true);
-    };
+      this.setToolbar(nameList, config, true)
+    }
 
     this.restore = () => {
-      const { engine } = this.props;
+      const { engine } = this.props
       if (!engine.isDestroyed) {
         this.setState({
           pluginToolbar: [],
-        });
+        })
       }
-    };
+    }
 
     this.disable = (disabled, exclude) => {
-      const { engine } = this.props;
+      const { engine } = this.props
       if (!engine.isDestroyed) {
-        exclude = exclude || ['save', 'undo', 'redo', 'toc'];
-        const toolbarState = Object.assign({}, this.state.toolbarState);
+        exclude = exclude || ['save', 'undo', 'redo', 'toc']
+        const toolbarState = { ...this.state.toolbarState }
         Object.keys(toolbarState)
           .forEach((name) => {
             if (exclude.indexOf(name) < 0) {
-              toolbarState[name].disabled = disabled;
+              toolbarState[name].disabled = disabled
             }
-          });
-        engine.toolbar.isDisabled = disabled;
+          })
+        engine.toolbar.isDisabled = disabled
         this.setState({
           toolbarState,
-        });
+        })
       }
-    };
+    }
 
     this.show = () => {
-      const { engine } = this.props;
+      const { engine } = this.props
       engine.container.closest('.lake-editor')
-        .removeClass('lake-toolbar-hidden');
-    };
+        .removeClass('lake-toolbar-hidden')
+    }
 
     this.hide = () => {
-      const { engine } = this.props;
+      const { engine } = this.props
       engine.container.closest('.lake-editor')
-        .addClass('lake-toolbar-hidden');
-    };
+        .addClass('lake-toolbar-hidden')
+    }
 
     this.updateState = () => {
-      const { type, engine } = this.props;
+      const { type, engine } = this.props
       if (!engine.isDestroyed) {
         if (type === 'mobile') {
-          this.restore();
+          this.restore()
         }
-        const isPluginToolbar = this.state.pluginToolbar.length > 0;
-        const toolbarState = Object.assign(
-          {},
-          isPluginToolbar ? this.state.pluginToolbarState : this.state.toolbarState,
-        );
+        const isPluginToolbar = this.state.pluginToolbar.length > 0
+        const toolbarState = {
+
+          ...(isPluginToolbar ? this.state.pluginToolbarState : this.state.toolbarState),
+        }
         if (Object.keys(toolbarState).length !== 0) {
-          let modified = false;
+          let modified = false
           Object.keys(toolbarState)
             .forEach((name) => {
               if (this.executeGetter(toolbarState[name])) {
                 if (!modified) {
-                  modified = true;
+                  modified = true
                 }
               }
-            });
+            })
           if (modified) {
             this.setState(
               isPluginToolbar ? { pluginToolbarState: toolbarState } : { toolbarState },
-            );
+            )
           }
         }
       }
-    };
+    }
   }
 
   componentDidMount() {
-    this.initToolbar();
+    this.initToolbar()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.engine.hash !== prevProps.engine.hash) {
-      this.initToolbar();
+      this.initToolbar()
     }
   }
 
   initToolbar = () => {
-    const { toolbar, engine } = this.props;
+    const { toolbar, engine } = this.props
     // 初始化 工具栏
-    this.setToolbar(toolbar, toolbarConfig(engine));
+    this.setToolbar(toolbar, toolbarConfig(engine))
     engine.toolbar = {
       set: this.set,
       updateState: this.updateState,
@@ -149,85 +149,85 @@ class Toolbar extends React.Component {
       disable: this.disable,
       show: this.show,
       hide: this.hide,
-    };
-    this.handleH5Scroll();
-  };
+    }
+    this.handleH5Scroll()
+  }
 
   componentWillUnmount() {
-    const toolbar = Engine.$('.lake-toolbar');
-    const toolbarElement = toolbar ? toolbar[0] : null;
+    const toolbar = Engine.$('.lake-toolbar')
+    const toolbarElement = toolbar ? toolbar[0] : null
     if (toolbarElement) {
-      toolbarElement.remove();
+      toolbarElement.remove()
     }
   }
 
   setToolbar(nameList, configList, isPluginToolbar) {
-    const toolbarState = {};
-    const toolbarConfigMap = {};
+    const toolbarState = {}
+    const toolbarConfigMap = {}
     configList.forEach((row) => {
-      toolbarConfigMap[row.name] = row;
-    });
+      toolbarConfigMap[row.name] = row
+    })
 
     const getKeys = (keyString) => {
-      let keys = null;
+      let keys = null
       if (keyString) {
-        keys = [];
+        keys = []
         keyString.split('+')
           .forEach((key) => {
-            keys.push(key.trim(), '+');
-          });
-        if (keys.length > 0) delete keys[keys.length - 1];
+            keys.push(key.trim(), '+')
+          })
+        if (keys.length > 0) delete keys[keys.length - 1]
       }
-      return keys;
-    };
+      return keys
+    }
 
     const setItemObject = (item) => {
-      toolbarConfigMap[item.name].title = item.title || toolbarConfigMap[item.name].title;
-      toolbarConfigMap[item.name].icon = item.icon || toolbarConfigMap[item.name].icon;
-      const keys = getKeys(item.hotkey);
+      toolbarConfigMap[item.name].title = item.title || toolbarConfigMap[item.name].title
+      toolbarConfigMap[item.name].icon = item.icon || toolbarConfigMap[item.name].icon
+      const keys = getKeys(item.hotkey)
       toolbarConfigMap[item.name].hotkey = keys
         ? getHotkeyText(keys)
-        : toolbarConfigMap[item.name].hotkey;
-      toolbarState[item.name] = toolbarConfigMap[item.name];
-      this.executeGetter(toolbarState[item.name]);
-    };
+        : toolbarConfigMap[item.name].hotkey
+      toolbarState[item.name] = toolbarConfigMap[item.name]
+      this.executeGetter(toolbarState[item.name])
+    }
     nameList.forEach((group) => {
       group.forEach((item) => {
         if (typeof item === 'object') {
-          const configMap = toolbarConfigMap[item.name] || {};
+          const configMap = toolbarConfigMap[item.name] || {}
           if (item.name === 'section') {
-            const data = [];
+            const data = []
             if (typeof item.items === 'object' && item.items.length > 0) {
               configMap.data.forEach((dataItem) => {
-                const items = [];
+                const items = []
                 dataItem.items.forEach((sectionItem) => {
                   const childItem = item.items.find(
-                    temp => (typeof temp === 'string' && temp === sectionItem.name)
+                    (temp) => (typeof temp === 'string' && temp === sectionItem.name)
                       || (typeof temp === 'object' && temp.name === sectionItem.name),
-                  );
+                  )
                   if (childItem) {
                     if (typeof childItem === 'object') {
-                      sectionItem.title = childItem.title || sectionItem.title;
-                      sectionItem.icon = childItem.icon || sectionItem.icon;
+                      sectionItem.title = childItem.title || sectionItem.title
+                      sectionItem.icon = childItem.icon || sectionItem.icon
                     }
-                    items.push(sectionItem);
+                    items.push(sectionItem)
                   }
-                });
+                })
                 if (items && items.length > 0) {
                   data.push({
                     title: dataItem.title,
                     items,
-                  });
+                  })
                 }
-              });
+              })
             }
             if (data.length > 0) {
-              configMap.data = data;
-              configMap.title = item.title || configMap.title;
-              configMap.icon = item.icon || configMap.icon;
-              toolbarState[item.name] = configMap;
-              this.executeGetter(toolbarState[item.name]);
-              return;
+              configMap.data = data
+              configMap.title = item.title || configMap.title
+              configMap.icon = item.icon || configMap.icon
+              toolbarState[item.name] = configMap
+              this.executeGetter(toolbarState[item.name])
+              return
             }
           } else if (
             item.name === 'heading'
@@ -235,115 +235,115 @@ class Toolbar extends React.Component {
             || item.name === 'moremark'
             || item.name === 'alignment'
           ) {
-            const data = [];
+            const data = []
             if (typeof item.items === 'object' && item.items.length > 0) {
               configMap.data.forEach((dataItem) => {
                 const childItem = item.items.find(
-                  temp => (typeof temp === 'string' && temp === dataItem.key)
+                  (temp) => (typeof temp === 'string' && temp === dataItem.key)
                     || (typeof temp === 'object' && temp.name === dataItem.key),
-                );
+                )
                 if (childItem) {
                   if (typeof childItem === 'object') {
-                    if (dataItem.value && !dataItem.title) dataItem.value = childItem.title || dataItem.value;
-                    dataItem.title = childItem.title || dataItem.title;
+                    if (dataItem.value && !dataItem.title) dataItem.value = childItem.title || dataItem.value
+                    dataItem.title = childItem.title || dataItem.title
 
-                    dataItem.icon = childItem.icon || dataItem.icon;
+                    dataItem.icon = childItem.icon || dataItem.icon
                   }
-                  data.push(dataItem);
+                  data.push(dataItem)
                 }
-              });
+              })
             }
             if (data.length > 0) {
-              configMap.data = data;
-              configMap.title = item.title || configMap.title;
-              configMap.icon = item.icon || configMap.icon;
-              toolbarState[item.name] = configMap;
-              this.executeGetter(toolbarState[item.name]);
-              return;
+              configMap.data = data
+              configMap.title = item.title || configMap.title
+              configMap.icon = item.icon || configMap.icon
+              toolbarState[item.name] = configMap
+              this.executeGetter(toolbarState[item.name])
+              return
             }
           }
           if (item.name) {
-            setItemObject(item);
+            setItemObject(item)
           }
         } else {
-          toolbarState[item] = toolbarConfigMap[item] || {};
-          this.executeGetter(toolbarState[item]);
+          toolbarState[item] = toolbarConfigMap[item] || {}
+          this.executeGetter(toolbarState[item])
         }
-      });
-    });
+      })
+    })
 
     if (isPluginToolbar) {
       this.setState({
         pluginToolbar: nameList,
         pluginToolbarState: toolbarState,
-      });
+      })
     } else {
       this.setState({
         toolbar: nameList,
         toolbarState,
-      });
+      })
     }
   }
 
   executeGetter(item) {
-    const engine = this.engine;
-    let modified = false;
+    const engine = this.engine
+    let modified = false
     if (item.getActive) {
-      const active = item.getActive();
+      const active = item.getActive()
       if (Array.isArray(item.active) && Array.isArray(active)) {
         const _loop = (i) => {
           if (
             item.active.find((val) => {
-              return val !== active[i];
+              return val !== active[i]
             })
           ) {
-            modified = true;
+            modified = true
           }
-        };
+        }
 
         for (let i = 0; i < active.length; i++) {
-          _loop(i);
+          _loop(i)
         }
       } else if (item.active !== active) {
-        modified = true;
+        modified = true
       }
-      item.active = active;
+      item.active = active
     }
 
     if (item.getCurrentText) {
-      const currentText = item.getCurrentText(item.active);
+      const currentText = item.getCurrentText(item.active)
       if (item.currentText !== currentText) {
-        modified = true;
+        modified = true
       }
-      item.currentText = currentText;
+      item.currentText = currentText
     }
 
     if (item.getDisabled && (!engine || !engine.toolbar.isDisabled)) {
-      const disabled = item.getDisabled();
+      const disabled = item.getDisabled()
       if (item.disabled !== disabled) {
-        modified = true;
+        modified = true
       }
-      item.disabled = disabled;
+      item.disabled = disabled
       if (disabled) {
-        return modified;
+        return modified
       }
     }
 
-    return modified;
+    return modified
   }
 
   render() {
-    const { engine, toolbar, hasMore, mobile } = this.props;
-    const { toolbarState, pluginToolbar, pluginToolbarState } = this.state;
+    const { engine, toolbar, hasMore, mobile } = this.props
+    const { toolbarState, pluginToolbar, pluginToolbarState } = this.state
 
-    let toolbarLength = 0;
-    let pluginToolbarLength = 0;
+    let toolbarLength = 0
+    let pluginToolbarLength = 0
     pluginToolbar.forEach((group) => {
-      pluginToolbarLength += group.length;
-    });
+      pluginToolbarLength += group.length
+    })
     toolbar.forEach((group) => {
-      toolbarLength += group.length;
-    });
+      toolbarLength += group.length
+    })
     return (
       <div
         className={classnames('lake-toolbar', {
@@ -351,20 +351,20 @@ class Toolbar extends React.Component {
         })}
         data-lake-element="toolbar"
         onMouseDown={(e) => {
-          e.preventDefault();
+          e.preventDefault()
           // fix：在搜狗浏览器上丢失选中状态
           if (!mobile) {
-            engine.focus();
+            engine.focus()
           }
         }}
         onMouseOver={(e) => {
-          return e.preventDefault();
+          return e.preventDefault()
         }}
         onMouseMove={(e) => {
-          return e.preventDefault();
+          return e.preventDefault()
         }}
         onContextMenu={(e) => {
-          return e.preventDefault();
+          return e.preventDefault()
         }}
       >
         {pluginToolbar.length === 0 && (
@@ -373,19 +373,15 @@ class Toolbar extends React.Component {
               {toolbar.map((subToolbar, index) => {
                 return (
                   <ToolbarGroup
-                    {...Object.assign(
-                      {
-                        key: index,
-                        isFirstGroup: index === 0,
-                      },
-                      this.props,
-                      {
-                        toolbarState,
-                        toolbar: subToolbar,
-                      },
-                    )}
+                    {...({
+                      key: index,
+                      isFirstGroup: index === 0,
+                      ...this.props,
+                      toolbarState,
+                      toolbar: subToolbar,
+                    })}
                   />
-                );
+                )
               })}
             </ToolbarPlugins>
           </div>
@@ -396,28 +392,24 @@ class Toolbar extends React.Component {
               {pluginToolbar.map((subToolbar, index) => {
                 return (
                   <ToolbarGroup
-                    {...Object.assign(
-                      {
-                        key: index,
-                      },
-                      this.props,
-                      {
-                        toolbar: subToolbar,
-                        toolbarState: pluginToolbarState,
-                      },
-                    )}
+                    {...({
+                      key: index,
+                      ...this.props,
+                      toolbar: subToolbar,
+                      toolbarState: pluginToolbarState,
+                    })}
                   />
-                );
+                )
               })}
             </ToolbarPlugins>
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
 Toolbar.defaultProps = {
   toolbar: [],
-};
-export default Toolbar;
+}
+export default Toolbar

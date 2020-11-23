@@ -1,149 +1,149 @@
-import ReactDOM from 'react-dom';
-import { message } from 'antd';
-import SectionBase from '../base';
-import 'antd/lib/message/style';
-import { getHeight } from '../../utils/dom';
-import local from './local';
+import ReactDOM from 'react-dom'
+import { message } from 'antd'
+import SectionBase from '../base'
+import 'antd/lib/message/style'
+import { getHeight } from '../../utils/dom'
+import local from './local'
 
 class Embed extends SectionBase {
   constructor(cfg) {
-    super(cfg);
+    super(cfg)
     this.options = {
       minHeight: 80,
       defaultHeight: 136,
       transition: 'all 0.3s linear',
       resize: true,
       ...cfg,
-    };
-    return this;
+    }
+    return this
   }
 
   isError() {
-    return false;
+    return false
   }
 
   getHeight() {
-    return this.value.height || this.options.defaultHeight;
+    return this.value.height || this.options.defaultHeight
   }
 
   renderError() {
   }
 
   addIframeItem() {
-    const iframeHelper = this.getViewEngine().iframeHelper;
-    this.iframeItem = {};
-    return !iframeHelper || iframeHelper.add(this.iframeItem);
+    const iframeHelper = this.getViewEngine().iframeHelper
+    this.iframeItem = {}
+    return !iframeHelper || iframeHelper.add(this.iframeItem)
   }
 
   renderIframe(iframe, url, width) {
-    const engine = this.getViewEngine();
+    const engine = this.getViewEngine()
     if (engine.iframeHelper) {
-      this.iframeItem.iframe = iframe;
-      this.iframeItem.url = url;
-      engine.iframeHelper.render(this.iframeItem, width, this.state.readonly);
+      this.iframeItem.iframe = iframe
+      this.iframeItem.url = url
+      engine.iframeHelper.render(this.iframeItem, width, this.state.readonly)
     } else {
-      iframe.attr('src', url);
+      iframe.attr('src', url)
     }
   }
 
   hitBlack = () => {
-    return true;
-  };
+    return true
+  }
 
   activate() {
-    this.showRisizeController();
-    this.hideMask();
+    this.showRisizeController()
+    this.hideMask()
   }
 
   unactivate() {
-    this.hideRisizeController();
-    this.showMask();
+    this.hideRisizeController()
+    this.showMask()
     if (this.engine) {
-      this.engine.sidebar.restore();
+      this.engine.sidebar.restore()
     }
   }
 
   renderResizeController() {
-    let height;
-    let moveHeight;
+    let height
+    let moveHeight
     let
-      dragBegin;
-    const { minHeight } = this.options;
+      dragBegin
+    const { minHeight } = this.options
     this.resizeController = this.createResizeController({
       container: this.root,
       dragstart: () => {
-        height = getHeight(this.iframe[0]);
-        this.iframe.css('transition', 'none');
-        this.showMask();
-        dragBegin = true;
+        height = getHeight(this.iframe[0])
+        this.iframe.css('transition', 'none')
+        this.showMask()
+        dragBegin = true
       },
       dragmove: (currentHeight) => {
-        moveHeight = height + currentHeight;
-        moveHeight = moveHeight >= minHeight ? moveHeight : minHeight;
-        this.iframe.css('height', `${moveHeight}px`);
-        this.iframe.attr('data-height', moveHeight);
+        moveHeight = height + currentHeight
+        moveHeight = moveHeight >= minHeight ? moveHeight : minHeight
+        this.iframe.css('height', `${moveHeight}px`)
+        this.iframe.attr('data-height', moveHeight)
       },
       dragend: () => {
-        this.iframe.css('transition', this.transition);
+        this.iframe.css('transition', this.transition)
         if (dragBegin) {
-          this.hideMask();
-          dragBegin = undefined;
+          this.hideMask()
+          dragBegin = undefined
           this.setValue({
             height: getHeight(this.iframe[0]),
-          });
+          })
         }
-        moveHeight = undefined;
+        moveHeight = undefined
       },
-    });
-    if (this.state.activated !== true) this.hideRisizeController();
+    })
+    if (this.state.activated !== true) this.hideRisizeController()
   }
 
   showMask() {
-    if (this.mask) this.mask.show();
+    if (this.mask) this.mask.show()
   }
 
   hideMask() {
-    if (this.mask) this.mask.hide();
+    if (this.mask) this.mask.hide()
   }
 
   showRisizeController() {
-    if (this.resizeController) this.resizeController.show();
+    if (this.resizeController) this.resizeController.show()
   }
 
   hideRisizeController() {
-    if (this.resizeController) this.resizeController.hide();
+    if (this.resizeController) this.resizeController.hide()
   }
 
   _removeIframe() {
-    const engine = this.getViewEngine();
+    const engine = this.getViewEngine()
     if (this.iframeItem && engine.iframeHelper) {
-      engine.iframeHelper.remove(this.iframeItem);
-      this.iframeItem = undefined;
+      engine.iframeHelper.remove(this.iframeItem)
+      this.iframeItem = undefined
     }
   }
 
   destroy() {
-    this._removeIframe();
-    super.destroy.call(this);
+    this._removeIframe()
+    super.destroy.call(this)
   }
 
   clear() {
-    this._removeIframe();
-    ReactDOM.unmountComponentAtNode(this.container[0]);
-    this.container.empty();
-    this.removeEvent();
+    this._removeIframe()
+    ReactDOM.unmountComponentAtNode(this.container[0])
+    this.container.empty()
+    this.removeEvent()
   }
 
   saveValue() {
     if (this.iframe) {
       this.setValue({
         height: getHeight(this.iframe[0]),
-      });
+      })
     }
   }
 
   getEmbedEmbedTitle() {
-    return '';
+    return ''
   }
 
   renderOverLimitView() {
@@ -157,59 +157,59 @@ class Embed extends SectionBase {
         )
         .concat(this.locale.canNotShowSection, '</p>\n      <p style="margin-bottom: 40px">')
         .concat(this.getiframeOverLimitSectionViewTips(), '</p>\n    </div>'),
-    );
+    )
   }
 
   getUrl() {
   }
 
   getiframeOverLimitSectionViewTips() {
-    const engine = this.getViewEngine();
+    const engine = this.getViewEngine()
     if (engine.iframeHelper) {
-      return this.locale.iframeOverLimitSectionView.replace('${limit}', engine.iframeHelper.options.limit);
+      return this.locale.iframeOverLimitSectionView.replace('${limit}', engine.iframeHelper.options.limit)
     }
   }
 
   getiframeOverLimitTips() {
-    const engine = this.getViewEngine();
+    const engine = this.getViewEngine()
     if (engine.iframeHelper) {
-      return this.locale.iframeOverLimit.replace('${limit}', engine.iframeHelper.options.limit);
+      return this.locale.iframeOverLimit.replace('${limit}', engine.iframeHelper.options.limit)
     }
   }
 
   renderView() {
-    const lang = this.getLang();
-    this.locale = local[lang];
-    const src = this.getUrl();
-    this.clear();
+    const lang = this.getLang()
+    this.locale = local[lang]
+    const src = this.getUrl()
+    this.clear()
     if (this.isError()) {
-      this.renderError();
+      this.renderError()
     } else if (this.addIframeItem()) {
       if (src && this.hitBlack(src)) {
-        message.error(this.locale.validUrl);
+        message.error(this.locale.validUrl)
       } else if (this.state.readonly) {
-        this.renderReadView();
+        this.renderReadView()
       } else {
-        this.renderEditView();
+        this.renderEditView()
         this.bindEvent(this.engine, 'save:before', () => {
-          return this.saveValue();
-        });
+          return this.saveValue()
+        })
       }
     } else if (src) {
-      this.renderOverLimitView();
+      this.renderOverLimitView()
     } else {
-      message.error(this.getiframeOverLimitTips());
-      this.remove();
+      message.error(this.getiframeOverLimitTips())
+      this.remove()
     }
   }
 
   render() {
-    const lang = this.getLang();
-    this.locale = local[lang];
-    this.value = this.value || {};
-    this.renderView();
-    this.container.css('border', '1px solid #d9d9d9');
+    const lang = this.getLang()
+    this.locale = local[lang]
+    this.value = this.value || {}
+    this.renderView()
+    this.container.css('border', '1px solid #d9d9d9')
   }
 }
 
-export default Embed;
+export default Embed

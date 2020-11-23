@@ -1,27 +1,27 @@
-import { macos } from '@hicooper/doc-engine/lib/utils/user-agent';
+import { macos } from '@hicooper/doc-engine/lib/utils/user-agent'
 
-const CTRL = macos ? '\u2318' : 'Ctrl';
+const CTRL = macos ? '\u2318' : 'Ctrl'
 const backgroundOrColor = {
   fontColor: 'Text color',
   bgColor: 'Highlight color',
   moreColor: 'More',
-};
+}
 const layoutLocale = {
   layout: 'Layout',
   layoutBlock: 'Break text',
   layoutInline: 'In line',
-};
+}
 const alignmentLocale = {
   alignment: 'Align',
   alignLeft: 'Left align',
   alignCenter: 'Centre align',
   alignRight: 'Right align',
-};
+}
 
 const uploadLocale = {
   uploadFailed: 'Failed to upload the file, please retry',
   notSupportExt: 'This file type is not supported',
-};
+}
 
 const dndLocale = {
   dndTips: '<span>Drag to reposition<br />Click for more options </span>',
@@ -31,14 +31,14 @@ const dndLocale = {
   dndCopySuccess: 'Copied successfully',
   dndEdit: 'Edit anchor',
   dndDelete: 'Delete',
-};
+}
 const linkLocale = {
   linkPlaceholder: 'Please input a link or an anchor',
   linkSave: 'Apply',
   linkEdit: 'Change',
   linkDelete: 'Remove',
   linkOpen: 'Open',
-};
+}
 const editorModalLocale = {
   editorModalClose: 'Dissection',
   editorModalPopupTips: 'Are you sure?',
@@ -49,7 +49,7 @@ const editorModalLocale = {
   editorModalDissectionAndExit: 'Dissection and exit',
   editorModalCancel: 'Cancel',
   editorModalSaveAndExit: 'Save and exit',
-};
+}
 export default {
   pure: {
     support: 'support',
@@ -421,4 +421,4 @@ export default {
     insertDoc: 'Insert document',
     placeholder: 'please select what needs to be translated in the document.',
   },
-};
+}

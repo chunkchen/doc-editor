@@ -1,18 +1,18 @@
-import React from 'react';
-import section from './section';
-import hotkey from './hotkey';
-import { getHotkeyText } from '../utils/string';
-import { addIframeSection } from '../utils/command';
+import React from 'react'
+import section from './section'
+import hotkey from './hotkey'
+import { getHotkeyText } from '../utils/string'
+import { addIframeSection } from '../utils/command'
 
 const getSections = (engine) => {
-  const locale = engine.locale;
-  const sectionMap = {};
+  const locale = engine.locale
+  const sectionMap = {}
   section(engine)
     .forEach((item) => {
-      sectionMap[item.name] = item;
-    });
+      sectionMap[item.name] = item
+    })
   // 分组形式的Section
-  const groups = [];
+  const groups = []
   // 普通Section
   groups.push({
     title: locale.section.normal,
@@ -28,7 +28,7 @@ const getSections = (engine) => {
       sectionMap.lockedtext,
       sectionMap.label,
     ],
-  });
+  })
   // 媒体Section
   const media = [
     sectionMap.website,
@@ -36,106 +36,106 @@ const getSections = (engine) => {
     sectionMap.localdoc,
     sectionMap.video,
     sectionMap.youku,
-  ];
+  ]
 
   groups.push({
     title: locale.section.embed,
     items: media,
-  });
-  return groups;
-};
+  })
+  return groups
+}
 
 export const setToolbarHotkey = (customList, keyList) => {
-  const hotkeyMap = {};
-  const hotkeyGroupMap = {};
+  const hotkeyMap = {}
+  const hotkeyGroupMap = {}
   if (!keyList) {
-    keyList = hotkey();
+    keyList = hotkey()
   }
   keyList.forEach((item) => {
-    item.keyText = getHotkeyText(item.keys);
+    item.keyText = getHotkeyText(item.keys)
     item.keyValue = item.keys.join('')
-      .toLowerCase();
-    hotkeyMap[item.name] = item;
+      .toLowerCase()
+    hotkeyMap[item.name] = item
     if (item.group) {
       if (hotkeyGroupMap[item.group]) {
-        hotkeyGroupMap[item.group].push(item.name);
+        hotkeyGroupMap[item.group].push(item.name)
       } else {
-        hotkeyGroupMap[item.group] = [item.name];
+        hotkeyGroupMap[item.group] = [item.name]
       }
     }
-  });
+  })
 
   return customList.map((group) => {
     return group.map((item) => {
       if (typeof item === 'object') {
         if (typeof item.items === 'object' && item.items.length > 0) {
           item.items = item.items.map((childItem) => {
-            const childName = typeof childItem === 'object' ? childItem.name : childItem;
-            const childConfig = hotkeyMap[childName];
+            const childName = typeof childItem === 'object' ? childItem.name : childItem
+            const childConfig = hotkeyMap[childName]
             if (!childItem.hotkey && childConfig && childConfig.keyValue) {
               if (typeof childItem === 'object') {
-                childItem.hotkey = childConfig.keyValue;
+                childItem.hotkey = childConfig.keyValue
               } else {
                 childItem = {
                   name: childName,
                   hotkey: childConfig.keyValue,
-                };
+                }
               }
             }
-            return childItem;
-          });
+            return childItem
+          })
         } else if (hotkeyGroupMap[item.name]) {
-          item.items = [];
+          item.items = []
           hotkeyGroupMap[item.name].forEach((child) => {
-            const config = hotkeyMap[child];
-            const childObj = { name: child };
+            const config = hotkeyMap[child]
+            const childObj = { name: child }
             if (config && config.keyValue) {
-              childObj.hotkey = config.keyValue;
+              childObj.hotkey = config.keyValue
             }
-            item.items.push(childObj);
-          });
+            item.items.push(childObj)
+          })
         } else if (!item.hotkey && hotkeyMap[item.name]) {
-          item.hotkey = hotkeyMap[item.name].keyValue;
+          item.hotkey = hotkeyMap[item.name].keyValue
         }
       } else if (hotkeyGroupMap[item]) {
         item = {
           name: item,
           items: [],
-        };
+        }
         hotkeyGroupMap[item.name].forEach((child) => {
-          const config = hotkeyMap[child];
-          const childObj = { name: child };
+          const config = hotkeyMap[child]
+          const childObj = { name: child }
           if (config && config.keyValue) {
-            childObj.hotkey = config.keyValue;
+            childObj.hotkey = config.keyValue
           }
-          item.items.push(childObj);
-        });
+          item.items.push(childObj)
+        })
       } else {
-        const config = hotkeyMap[item];
+        const config = hotkeyMap[item]
         if (config && config.keyValue) {
           item = {
             name: item,
             hotkey: config.keyValue,
-          };
+          }
         }
       }
-      return item;
-    });
-  });
-};
+      return item
+    })
+  })
+}
 
 const getToolbarConfig = (engine) => {
-  const locale = engine.locale;
+  const locale = engine.locale
   // 快捷键
 
-  const hotkeyMap = {};
+  const hotkeyMap = {}
   hotkey(locale)
     .forEach((item) => {
-      item.keyText = getHotkeyText(item.keys);
+      item.keyText = getHotkeyText(item.keys)
       item.keyValue = item.keys.join('')
-        .toLowerCase();
-      hotkeyMap[item.name] = item;
-    });
+        .toLowerCase()
+      hotkeyMap[item.name] = item
+    })
   // 标题
   const headingMap = {
     p: locale.heading.normal,
@@ -145,7 +145,7 @@ const getToolbarConfig = (engine) => {
     h4: locale.heading.heading_4,
     h5: locale.heading.heading_5,
     h6: locale.heading.heading_6,
-  };
+  }
   const fontsizeArray = [
     {
       key: '9',
@@ -195,21 +195,21 @@ const getToolbarConfig = (engine) => {
       key: '36',
       value: '48px',
     },
-  ];
-  const fontsizeMap = {};
+  ]
+  const fontsizeMap = {}
   fontsizeArray.forEach((fontsize) => {
-    fontsizeMap[fontsize.key] = fontsize.value;
-  });
+    fontsizeMap[fontsize.key] = fontsize.value
+  })
   return [
     {
       name: 'section',
-      title: <span dangerouslySetInnerHTML={{ __html: locale.section.buttonTitle }}/>,
+      title: <span dangerouslySetInnerHTML={{ __html: locale.section.buttonTitle }} />,
       type: 'collapse',
       icon: '<span class="lake-icon lake-icon-section" />',
       data: getSections(engine),
       description: locale.section.description,
       onClick: (name) => {
-        engine.command.execute(name);
+        engine.command.execute(name)
       },
     },
     {
@@ -219,7 +219,7 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.save.keyValue,
       icon: '<span class="lake-icon lake-icon-save" />',
       onClick: () => {
-        engine.command.execute('save');
+        engine.command.execute('save')
       },
     },
     {
@@ -229,10 +229,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.undo.keyValue,
       icon: '<span class="lake-icon lake-icon-undo" />',
       getDisabled: () => {
-        return !engine.command.queryState('undo');
+        return !engine.command.queryState('undo')
       },
       onClick: () => {
-        engine.command.execute('undo');
+        engine.command.execute('undo')
       },
     },
     {
@@ -242,10 +242,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.redo.keyValue,
       icon: '<span class="lake-icon lake-icon-redo" />',
       getDisabled: () => {
-        return !engine.command.queryState('redo');
+        return !engine.command.queryState('redo')
       },
       onClick: () => {
-        engine.command.execute('redo');
+        engine.command.execute('redo')
       },
     },
     {
@@ -253,10 +253,10 @@ const getToolbarConfig = (engine) => {
       title: locale.paintformat.buttonTitle,
       icon: '<span class="lake-icon lake-icon-paintformat" />',
       getActive: () => {
-        return engine.command.queryState('paintformat');
+        return engine.command.queryState('paintformat')
       },
       onClick: () => {
-        engine.command.execute('paintformat');
+        engine.command.execute('paintformat')
       },
     },
     {
@@ -264,7 +264,7 @@ const getToolbarConfig = (engine) => {
       title: locale.clearFormat.buttonTitle,
       icon: '<span class="lake-icon lake-icon-clean" />',
       onClick: () => {
-        engine.command.execute('removeformat');
+        engine.command.execute('removeformat')
       },
     },
     {
@@ -310,13 +310,13 @@ const getToolbarConfig = (engine) => {
         },
       ],
       getActive: () => {
-        return engine.command.queryState('heading') || 'p';
+        return engine.command.queryState('heading') || 'p'
       },
       getCurrentText: (active) => {
-        return headingMap[active] || locale.heading.normal;
+        return headingMap[active] || locale.heading.normal
       },
       onClick: (value) => {
-        engine.command.execute('heading', value);
+        engine.command.execute('heading', value)
       },
     },
     {
@@ -326,10 +326,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h1.keyValue,
       icon: '<span class="lake-icon lake-icon-h1" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h1';
+        return engine.command.queryState('heading') === 'h1'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h1');
+        engine.command.execute('heading', 'h1')
       },
     },
     {
@@ -339,10 +339,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h2.keyValue,
       icon: '<span class="lake-icon lake-icon-h2" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h2';
+        return engine.command.queryState('heading') === 'h2'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h2');
+        engine.command.execute('heading', 'h2')
       },
     },
     {
@@ -352,10 +352,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h3.keyValue,
       icon: '<span class="lake-icon lake-icon-h3" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h3';
+        return engine.command.queryState('heading') === 'h3'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h3');
+        engine.command.execute('heading', 'h3')
       },
     },
     {
@@ -365,10 +365,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h4.keyValue,
       icon: '<span class="lake-icon lake-icon-h4" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h4';
+        return engine.command.queryState('heading') === 'h4'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h4');
+        engine.command.execute('heading', 'h4')
       },
     },
     {
@@ -378,10 +378,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h5.keyValue,
       icon: '<span class="lake-icon lake-icon-h5" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h5';
+        return engine.command.queryState('heading') === 'h5'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h5');
+        engine.command.execute('heading', 'h5')
       },
     },
     {
@@ -391,10 +391,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.h6.keyValue,
       icon: '<span class="lake-icon lake-icon-h6" />',
       getActive: () => {
-        return engine.command.queryState('heading') === 'h6';
+        return engine.command.queryState('heading') === 'h6'
       },
       onClick: () => {
-        engine.command.execute('heading', 'h6');
+        engine.command.execute('heading', 'h6')
       },
     },
     {
@@ -404,15 +404,15 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.bold.keyValue,
       icon: '<span class="lake-icon lake-icon-bold" />',
       getActive: () => {
-        return engine.command.queryState('bold');
+        return engine.command.queryState('bold')
       },
       getDisabled: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock';
-        return /^h\d$/.test(tag) || isCodeblock;
+        const tag = engine.command.queryState('heading') || 'p'
+        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock'
+        return /^h\d$/.test(tag) || isCodeblock
       },
       onClick: () => {
-        engine.command.execute('bold');
+        engine.command.execute('bold')
       },
     },
     {
@@ -422,10 +422,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.italic.keyValue,
       icon: '<span class="lake-icon lake-icon-italic" />',
       getActive: () => {
-        return engine.command.queryState('italic');
+        return engine.command.queryState('italic')
       },
       onClick: () => {
-        engine.command.execute('italic');
+        engine.command.execute('italic')
       },
     },
     {
@@ -435,10 +435,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.strikethrough.keyValue,
       icon: '<span class="lake-icon lake-icon-strikethrough" />',
       getActive: () => {
-        return engine.command.queryState('strikethrough');
+        return engine.command.queryState('strikethrough')
       },
       onClick: () => {
-        engine.command.execute('strikethrough');
+        engine.command.execute('strikethrough')
       },
     },
     {
@@ -448,10 +448,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.underline.keyValue,
       icon: '<span class="lake-icon lake-icon-underline" />',
       getActive: () => {
-        return engine.command.queryState('underline');
+        return engine.command.queryState('underline')
       },
       onClick: () => {
-        engine.command.execute('underline');
+        engine.command.execute('underline')
       },
     },
     {
@@ -461,23 +461,23 @@ const getToolbarConfig = (engine) => {
       className: 'lake-button-fontsize',
       data: fontsizeArray,
       getActive: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock';
+        const tag = engine.command.queryState('heading') || 'p'
+        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock'
         if (/^h\d$/.test(tag) || isCodeblock) {
-          return '11';
+          return '11'
         }
-        return engine.command.queryState('fontsize') || '11';
+        return engine.command.queryState('fontsize') || '11'
       },
       getDisabled: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock';
-        return /^h\d$/.test(tag) || isCodeblock;
+        const tag = engine.command.queryState('heading') || 'p'
+        const isCodeblock = engine.command.queryState('codeblock') === 'codeblock'
+        return /^h\d$/.test(tag) || isCodeblock
       },
       getCurrentText: (active) => {
-        return fontsizeMap[active || '11'];
+        return fontsizeMap[active || '11']
       },
       onClick: (value) => {
-        engine.command.execute('fontsize', value);
+        engine.command.execute('fontsize', value)
       },
     },
     {
@@ -488,10 +488,10 @@ const getToolbarConfig = (engine) => {
       defaultColor: '#262626',
       currentColor: '#F5222D',
       getActive: () => {
-        return engine.command.queryState('fontcolor') || '';
+        return engine.command.queryState('fontcolor') || ''
       },
       onClick: (value) => {
-        engine.command.execute('fontcolor', value, '#262626');
+        engine.command.execute('fontcolor', value, '#262626')
       },
     },
     {
@@ -502,10 +502,10 @@ const getToolbarConfig = (engine) => {
       defaultColor: '#FFFFFF',
       currentColor: '#FADB14',
       getActive: () => {
-        return engine.command.queryState('backcolor') || '';
+        return engine.command.queryState('backcolor') || ''
       },
       onClick: (value) => {
-        engine.command.execute('backcolor', value, '#FFFFFF');
+        engine.command.execute('backcolor', value, '#FFFFFF')
       },
     },
     {
@@ -535,10 +535,10 @@ const getToolbarConfig = (engine) => {
         },
       ],
       getActive: () => {
-        return engine.command.queryState('moremark');
+        return engine.command.queryState('moremark')
       },
       onClick: (value) => {
-        engine.command.execute('moremark', value);
+        engine.command.execute('moremark', value)
       },
     },
     {
@@ -548,14 +548,14 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.sup.keyValue,
       icon: '<span class="lake-icon lake-icon-sup" />',
       getActive: () => {
-        return engine.command.queryState('sup');
+        return engine.command.queryState('sup')
       },
       getDisabled: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        return /^h\d$/.test(tag);
+        const tag = engine.command.queryState('heading') || 'p'
+        return /^h\d$/.test(tag)
       },
       onClick: () => {
-        engine.command.execute('moremark', 'sup');
+        engine.command.execute('moremark', 'sup')
       },
     },
     {
@@ -565,14 +565,14 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.sub.keyValue,
       icon: '<span class="lake-icon lake-icon-sub" />',
       getActive: () => {
-        return engine.command.queryState('sub');
+        return engine.command.queryState('sub')
       },
       getDisabled: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        return /^h\d$/.test(tag);
+        const tag = engine.command.queryState('heading') || 'p'
+        return /^h\d$/.test(tag)
       },
       onClick: () => {
-        engine.command.execute('moremark', 'sub');
+        engine.command.execute('moremark', 'sub')
       },
     },
     {
@@ -582,14 +582,14 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.code.keyValue,
       icon: '<span class="lake-icon lake-icon-code" />',
       getActive: () => {
-        return engine.command.queryState('code');
+        return engine.command.queryState('code')
       },
       getDisabled: () => {
-        const tag = engine.command.queryState('heading') || 'p';
-        return /^h\d$/.test(tag);
+        const tag = engine.command.queryState('heading') || 'p'
+        return /^h\d$/.test(tag)
       },
       onClick: () => {
-        engine.command.execute('moremark', 'code');
+        engine.command.execute('moremark', 'code')
       },
     },
     {
@@ -633,10 +633,10 @@ const getToolbarConfig = (engine) => {
         },
       ],
       getActive: () => {
-        return engine.command.queryState('alignment');
+        return engine.command.queryState('alignment')
       },
       onClick: (value) => {
-        engine.command.execute('alignment', value);
+        engine.command.execute('alignment', value)
       },
     },
     {
@@ -646,10 +646,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.left.keyValue,
       icon: '<span class="lake-icon lake-icon-align-left" />',
       getActive: () => {
-        return engine.command.queryState('alignment') === 'left';
+        return engine.command.queryState('alignment') === 'left'
       },
       onClick: () => {
-        engine.command.execute('alignment', 'left');
+        engine.command.execute('alignment', 'left')
       },
     },
     {
@@ -659,10 +659,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.center.keyValue,
       icon: '<span class="lake-icon lake-icon-align-center" />',
       getActive: () => {
-        return engine.command.queryState('alignment') === 'center';
+        return engine.command.queryState('alignment') === 'center'
       },
       onClick: () => {
-        engine.command.execute('alignment', 'center');
+        engine.command.execute('alignment', 'center')
       },
     },
     {
@@ -672,10 +672,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.right.keyValue,
       icon: '<span class="lake-icon lake-icon-align-right" />',
       getActive: () => {
-        return engine.command.queryState('alignment') === 'right';
+        return engine.command.queryState('alignment') === 'right'
       },
       onClick: () => {
-        engine.command.execute('alignment', 'right');
+        engine.command.execute('alignment', 'right')
       },
     },
     {
@@ -685,10 +685,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.justify.keyValue,
       icon: '<span class="lake-icon lake-icon-align-justify" />',
       getActive: () => {
-        return engine.command.queryState('alignment') === 'justify';
+        return engine.command.queryState('alignment') === 'justify'
       },
       onClick: () => {
-        engine.command.execute('alignment', 'justify');
+        engine.command.execute('alignment', 'justify')
       },
     },
     {
@@ -712,10 +712,10 @@ const getToolbarConfig = (engine) => {
         },
       ],
       getActive: () => {
-        return engine.command.queryState('tasklist');
+        return engine.command.queryState('tasklist')
       },
       onClick: (value) => {
-        engine.command.execute('tasklist', value);
+        engine.command.execute('tasklist', value)
       },
     },
     {
@@ -725,10 +725,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.orderedlist.keyValue,
       icon: '<span class="lake-icon lake-icon-ordered-list" />',
       getActive: () => {
-        return engine.command.queryState('tasklist') === 'orderedlist';
+        return engine.command.queryState('tasklist') === 'orderedlist'
       },
       onClick: () => {
-        engine.command.execute('tasklist', 'orderedlist');
+        engine.command.execute('tasklist', 'orderedlist')
       },
     },
     {
@@ -738,10 +738,10 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.unorderedlist.keyValue,
       icon: '<span class="lake-icon lake-icon-unordered-list" />',
       getActive: () => {
-        return engine.command.queryState('tasklist') === 'unorderedlist';
+        return engine.command.queryState('tasklist') === 'unorderedlist'
       },
       onClick: () => {
-        engine.command.execute('tasklist', 'unorderedlist');
+        engine.command.execute('tasklist', 'unorderedlist')
       },
     },
     {
@@ -767,7 +767,7 @@ const getToolbarConfig = (engine) => {
         },
       ],
       onClick: (value) => {
-        engine.command.execute(value);
+        engine.command.execute(value)
       },
     },
     {
@@ -775,7 +775,7 @@ const getToolbarConfig = (engine) => {
       title: locale.indent.increase,
       icon: '<span class="lake-icon lake-icon-indent" />',
       onClick: () => {
-        engine.command.execute('indent');
+        engine.command.execute('indent')
       },
     },
     {
@@ -783,7 +783,7 @@ const getToolbarConfig = (engine) => {
       title: locale.indent.decrease,
       icon: '<span class="lake-icon lake-icon-outdent" />',
       onClick: () => {
-        engine.command.execute('outdent');
+        engine.command.execute('outdent')
       },
     },
     {
@@ -791,10 +791,10 @@ const getToolbarConfig = (engine) => {
       title: locale.list.taskList,
       icon: '<span class="lake-icon lake-icon-task-list" />',
       getActive: () => {
-        return engine.command.queryState('tasklist') === 'tasklist';
+        return engine.command.queryState('tasklist') === 'tasklist'
       },
       onClick: () => {
-        engine.command.execute('tasklist', 'tasklist');
+        engine.command.execute('tasklist', 'tasklist')
       },
     },
     {
@@ -806,7 +806,7 @@ const getToolbarConfig = (engine) => {
       hotkeyVal: hotkeyMap.link.keyValue,
       icon: '<span class="lake-icon lake-icon-link" />',
       onClick: () => {
-        engine.command.execute('link', '', '链接', true);
+        engine.command.execute('link', '', '链接', true)
       },
     },
     {
@@ -814,7 +814,7 @@ const getToolbarConfig = (engine) => {
       icon: '<span class="lake-icon lake-icon-codeblock" />',
       title: locale.section.codeblock,
       onClick: () => {
-        engine.command.execute('codeblock', '');
+        engine.command.execute('codeblock', '')
       },
     },
     {
@@ -827,8 +827,8 @@ const getToolbarConfig = (engine) => {
           : {
             rows: 3,
             cols: 3,
-          };
-        engine.command.execute('table', opts);
+          }
+        engine.command.execute('table', opts)
       },
     },
     {
@@ -836,7 +836,7 @@ const getToolbarConfig = (engine) => {
       icon: '<span class="lake-icon lake-icon-math" />',
       title: locale.section.math,
       onClick: () => {
-        engine.command.execute('math');
+        engine.command.execute('math')
       },
     },
     {
@@ -851,7 +851,7 @@ const getToolbarConfig = (engine) => {
       title: locale.section.video,
       icon: '<span class="lake-icon lake-icon-video" />',
       setOnline: (value) => {
-        addIframeSection(engine, 'youku', value);
+        addIframeSection(engine, 'youku', value)
       },
     },
     {
@@ -865,10 +865,10 @@ const getToolbarConfig = (engine) => {
       title: locale.blockquote.buttonTitle,
       icon: '<span class="lake-icon lake-icon-quote" />',
       getActive: () => {
-        return engine.command.queryState('quote');
+        return engine.command.queryState('quote')
       },
       onClick: () => {
-        engine.command.execute('quote');
+        engine.command.execute('quote')
       },
     },
     {
@@ -876,7 +876,7 @@ const getToolbarConfig = (engine) => {
       title: locale.hr.buttonTitle,
       icon: '<span class="lake-icon lake-icon-hr" />',
       onClick: () => {
-        engine.command.execute('hr');
+        engine.command.execute('hr')
       },
     },
     {
@@ -884,10 +884,10 @@ const getToolbarConfig = (engine) => {
       title: locale.toc.title,
       icon: '<span class="lake-icon lake-icon-toc" accessbilityid="toc-button" />',
       getActive: () => {
-        return engine.command.queryState('toc');
+        return engine.command.queryState('toc')
       },
       onClick: () => {
-        engine.command.execute('toc');
+        engine.command.execute('toc')
       },
     },
     {
@@ -896,10 +896,10 @@ const getToolbarConfig = (engine) => {
       icon:
         '<span class="lake-icon lake-icon-searchreplace" accessbilityid="searchreplace-button" />',
       getActive: () => {
-        return engine.command.queryState('search');
+        return engine.command.queryState('search')
       },
       onClick: () => {
-        engine.command.execute('search');
+        engine.command.execute('search')
       },
     },
     {
@@ -908,10 +908,10 @@ const getToolbarConfig = (engine) => {
       icon:
         '<span class="lake-icon lake-icon-translate" accessbilityid="translate-button" />',
       getActive: () => {
-        return engine.command.queryState('translate');
+        return engine.command.queryState('translate')
       },
       onClick: () => {
-        engine.command.execute('translate');
+        engine.command.execute('translate')
       },
     },
     {
@@ -919,9 +919,9 @@ const getToolbarConfig = (engine) => {
       icon: '<span class="lake-icon lake-icon-label" />',
       title: locale.section.label,
       onClick: () => {
-        engine.command.execute('label');
+        engine.command.execute('label')
       },
     },
-  ];
-};
-export default getToolbarConfig;
+  ]
+}
+export default getToolbarConfig

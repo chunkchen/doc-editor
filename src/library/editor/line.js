@@ -1,48 +1,48 @@
-import React from 'react';
-import lang_en from '../lang/en';
-import lang_cn from '../lang/zh-cn';
-import Editor from './editor';
-import helper from '../helper';
-import Toolbar from '../toolbar';
+import React from 'react'
+import lang_en from '../lang/en'
+import lang_cn from '../lang/zh-cn'
+import Editor from './editor'
+import helper from '../helper'
+import Toolbar from '../toolbar'
 
 const language = {
   en: lang_en,
   'zh-cn': lang_cn,
-};
+}
 
 class LineEditor extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       engine: null,
       toolbar: props.toolbar,
-    };
-    this.locale = language[props.lang];
-    this.contentEditor = React.createRef();
+    }
+    this.locale = language[props.lang]
+    this.contentEditor = React.createRef()
   }
 
   onEngineReady = (engine) => {
-    this.engine = engine;
+    this.engine = engine
     this.setState(
       {
         engine,
       },
       () => {
-        const { image, file } = engine.options;
+        const { image, file } = engine.options
         helper(engine, 'uploader', {
           actions: {
             image: image ? image.action : '',
             file: file ? file.action : '',
           },
-        });
-        helper(engine, 'iframeHelper');
+        })
+        helper(engine, 'iframeHelper')
 
-        this.props.onLoad(engine);
-        engine.sidebar.disable = true;
+        this.props.onLoad(engine)
+        engine.sidebar.disable = true
       },
-    );
-  };
+    )
+  }
 
   componentDidMount() {
   }
@@ -51,41 +51,39 @@ class LineEditor extends React.Component {
   }
 
   render() {
-    const { engine, toolbar } = this.state;
-    const { type, extra } = this.props;
+    const { engine, toolbar } = this.state
+    const { type, extra } = this.props
     const toolbarOptions = {
       type,
       engine,
       toolbar,
       locale: this.locale,
-    };
+    }
 
     const editorOptions = (function (props) {
-      const options = Object.assign({}, props);
-      const { onLoad, extra, toolbar, ...editorOptions } = options;
-      return editorOptions;
-    }(this.props));
+      const options = { ...props }
+      const { onLoad, extra, toolbar, ...editorOptions } = options
+      return editorOptions
+    }(this.props))
 
     return (
       <div className="lake-editor lake-line-editor">
         <div className="lake-content-editor" ref={this.contentEditor}>
           <Editor
-            {...Object.assign(
-              {
-                onEngineReady: this.onEngineReady,
-              },
-              editorOptions,
-            )}
+            {...({
+              onEngineReady: this.onEngineReady,
+              ...editorOptions,
+            })}
           />
         </div>
         {engine && (
           <div className="lake-editor-bottom">
-            <Toolbar {...Object.assign({ hasMore: true }, toolbarOptions)} />
+            <Toolbar {...({ hasMore: true, ...toolbarOptions })} />
             {extra && <div className="lake-editor-extra">{extra}</div>}
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -109,7 +107,7 @@ LineEditor.defaultProps = {
   onLoad: () => {
   },
   onBeforeRenderImage: (url) => {
-    return url;
+    return url
   },
-};
-export default LineEditor;
+}
+export default LineEditor

@@ -1,50 +1,50 @@
-import React from 'react';
-import classnames from 'classnames';
-import Button from './button';
+import React from 'react'
+import classnames from 'classnames'
+import Button from './button'
 
 class ToolbarPluginsMore extends React.Component {
   state = {
     active: false,
-  };
+  }
 
   constructor() {
-    super();
+    super()
 
     this.toggleDropdown = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault()
+      e.stopPropagation()
 
       if (this.state.active) {
-        this.hideDropdown();
+        this.hideDropdown()
       } else {
-        this.showDropdown();
+        this.showDropdown()
       }
-    };
+    }
 
     this.showDropdown = () => {
-      document.addEventListener('click', this.hideDropdown);
+      document.addEventListener('click', this.hideDropdown)
       this.setState({
         active: true,
-      });
-    };
+      })
+    }
 
     this.hideDropdown = () => {
-      document.removeEventListener('click', this.hideDropdown);
+      document.removeEventListener('click', this.hideDropdown)
 
       this.setState({
         active: false,
-      });
-    };
+      })
+    }
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.hideDropdown);
+    document.removeEventListener('click', this.hideDropdown)
   }
 
   render() {
-    const { children, width } = this.props;
-    const { active } = this.state;
-    const moreIcon = '<span class="lake-icon lake-icon-more" />';
+    const { children, width } = this.props
+    const { active } = this.state
+    const moreIcon = '<span class="lake-icon lake-icon-more" />'
     return (
       <div className={classnames('lake-toolbar-area', {
         'lake-toolbar-area-hide': !children || !children.length,
@@ -67,14 +67,14 @@ class ToolbarPluginsMore extends React.Component {
           <div className={classnames('lake-button-set-list', 'lake-button-set-list-hoz', {
             'lake-button-set-list-active': active,
           })}
-               style={{ width: ''.concat(width, 'px') }}
+            style={{ width: ''.concat(width, 'px') }}
           >
             {children}
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default ToolbarPluginsMore;
+export default ToolbarPluginsMore

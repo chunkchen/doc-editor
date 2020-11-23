@@ -1,24 +1,24 @@
-import React from 'react';
-import classnames from 'classnames';
-import { Tooltip } from 'antd';
-import 'antd/lib/tooltip/style';
+import React from 'react'
+import classnames from 'classnames'
+import { Tooltip } from 'antd'
+import 'antd/lib/tooltip/style'
 
 class Dropdown extends React.Component {
   constructor() {
-    super();
+    super()
     this.onSelect = (e, value) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.props.onSelect(value);
-    };
+      e.preventDefault()
+      e.stopPropagation()
+      this.props.onSelect(value)
+    }
   }
 
   render() {
-    let { data, active, currentValue, className } = this.props;
-    const isIconList = className === 'lake-button-icon-list';
+    let { data, active, currentValue, className } = this.props
+    const isIconList = className === 'lake-button-icon-list'
 
     if (!Array.isArray(currentValue)) {
-      currentValue = [currentValue];
+      currentValue = [currentValue]
     }
 
     return (
@@ -39,15 +39,15 @@ class Dropdown extends React.Component {
                   <a
                     className={classnames('lake-button-set-list-item', row.className)}
                     onClick={(e) => {
-                      return this.onSelect(e, row.key);
+                      return this.onSelect(e, row.key)
                     }}
                   >
-                    {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot"/>}
-                    <span dangerouslySetInnerHTML={{ __html: row.icon }}/>
+                    {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
+                    <span dangerouslySetInnerHTML={{ __html: row.icon }} />
                     <span style={{ fontSize: 12 }}>{row.title}</span>
                   </a>
                 </Tooltip>
-              );
+              )
             }
 
             return (
@@ -55,18 +55,18 @@ class Dropdown extends React.Component {
                 key={index}
                 className={classnames('lake-button-set-list-item', row.className)}
                 onClick={(e) => {
-                  return this.onSelect(e, row.key);
+                  return this.onSelect(e, row.key)
                 }}
               >
-                {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot"/>}
+                {currentValue.indexOf(row.key) >= 0 && <span className="lake-icon lake-icon-dot" />}
                 <span>{row.value}</span>
               </a>
-            );
+            )
           })
         }
       </div>
-    );
+    )
   }
 }
 
-export default Dropdown;
+export default Dropdown

@@ -1,76 +1,76 @@
-import Engine from '@hicooper/doc-engine';
-import localeEn from './locale/en';
-import localeZhCn from './locale/zh-cn';
-import toolbar from './toolbar';
-import toolbarMini from './toolbar-mini';
-import constants from './constants';
-import template from './template';
-import ControlBar from './controlBar';
-import Command from './command';
-import Hotkey from './hotkey';
-import History from './history';
-import Selection from './selection';
-import Scrollbar from '../../scrollbar';
-import schema from './schema';
-import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils';
-import schemaConfig from '../../schema/config';
-import { getHeight } from '../../utils/dom';
-import SectionBase from '../base';
+import Engine from '@hicooper/doc-engine'
+import localeEn from './locale/en'
+import localeZhCn from './locale/zh-cn'
+import toolbar from './toolbar'
+import toolbarMini from './toolbar-mini'
+import constants from './constants'
+import template from './template'
+import ControlBar from './controlBar'
+import Command from './command'
+import Hotkey from './hotkey'
+import History from './history'
+import Selection from './selection'
+import Scrollbar from '../../scrollbar'
+import schema from './schema'
+import { tableInnerSchema, unWrapperTable, unWrapperTableHTML } from './utils'
+import schemaConfig from '../../schema/config'
+import { getHeight } from '../../utils/dom'
+import SectionBase from '../base'
 
-const { $ } = Engine;
+const { $ } = Engine
 const getKeys = (keyString) => {
-  let keys = null;
+  let keys = null
   if (keyString) {
-    keys = [];
+    keys = []
     keyString.split('+')
       .forEach((key) => {
-        keys.push(key.trim(), '+');
-      });
-    if (keys.length > 0) delete keys[keys.length - 1];
+        keys.push(key.trim(), '+')
+      })
+    if (keys.length > 0) delete keys[keys.length - 1]
   }
-  return keys;
-};
+  return keys
+}
 
 const locale = {
   en: localeEn,
   'zh-cn': localeZhCn,
-};
+}
 
 class Table extends SectionBase {
   constructor(engine, contentView) {
-    super();
+    super()
 
     this.destroy = () => {
-      this.active = false;
-      this.unBindKeyEvents();
-      this.engine.toolbar.restore();
-    };
+      this.active = false
+      this.unBindKeyEvents()
+      this.engine.toolbar.restore()
+    }
 
     this.activate = () => {
-      this.active = true;
-      this.container.css('user-select', 'none');
+      this.active = true
+      this.container.css('user-select', 'none')
       if (!this.mobile) {
         if (this.engine.options.type === 'mini') {
-          this.engine.toolbar.set(toolbarMini(this));
+          this.engine.toolbar.set(toolbarMini(this))
         } else {
-          this.engine.toolbar.set(toolbar(this));
+          this.engine.toolbar.set(toolbar(this))
         }
       }
-      this.controlBar.refresh();
-    };
+      this.controlBar.refresh()
+    }
 
     this.unactivate = () => {
-      this.active = false;
-      this.container.css('user-select', 'auto');
-      this.selection.clear();
-      this.controlBar.hide();
-      this.removeEditor();
-      this.engine.toolbar.restore();
-    };
+      this.active = false
+      this.container.css('user-select', 'auto')
+      this.selection.clear()
+      this.controlBar.hide()
+      this.removeEditor()
+      this.engine.toolbar.restore()
+    }
 
     this.embedToolbar = () => {
-      const options = this.engine ? this.engine.options : this.contentView.options;
-      const config = options.table || {};
+      const options = this.engine ? this.engine.options : this.contentView.options
+      const config = options.table || {}
       let embed = [
         {
           type: 'dnd',
@@ -83,13 +83,13 @@ class Table extends SectionBase {
         }, {
           type: 'delete',
         },
-      ];
+      ]
       if (this.mobile) {
         embed = [{
           type: 'copy',
         }, {
           type: 'delete',
-        }];
+        }]
       } else if (options.type === 'mini') {
         embed = [
           {
@@ -101,76 +101,76 @@ class Table extends SectionBase {
           }, {
             type: 'delete',
           },
-        ];
+        ]
       }
 
       if (Array.isArray(config.embed)) {
-        return config.embed;
+        return config.embed
       }
       if (typeof config.embed === 'object') {
-        const embedArray = [];
+        const embedArray = []
         embed.forEach((item) => {
           if (config.embed[item.type] !== false) {
-            embedArray.push(item);
+            embedArray.push(item)
           }
-        });
-        return embedArray;
+        })
+        return embedArray
       }
-      return embed;
-    };
+      return embed
+    }
 
     this.maximize = () => {
-      this.scrollbar.refresh();
+      this.scrollbar.refresh()
       if (this.engine) {
-        this.fullscreen = true;
-        this.setSectionValue();
+        this.fullscreen = true
+        this.setSectionValue()
       }
       if (this.options.type === 'mini') {
-        const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS);
-        const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS);
-        triggerCols.css('height', '100%');
-        triggerRows.css('width', '100%');
-        this.onTableSizeChange();
+        const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS)
+        const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS)
+        triggerCols.css('height', '100%')
+        triggerRows.css('width', '100%')
+        this.onTableSizeChange()
       }
-    };
+    }
 
     this.restore = () => {
-      this.scrollbar.refresh();
+      this.scrollbar.refresh()
       if (this.engine) {
-        this.fullscreen = false;
-        this.history.clear();
+        this.fullscreen = false
+        this.history.clear()
       }
       if (this.options.type === 'mini') {
-        this.onTableSizeChange();
+        this.onTableSizeChange()
       }
-    };
+    }
 
     this.handleTdChanged = () => {
       if (!this.subEngine) {
-        return;
+        return
       }
       // 输入字符的时候可能会撑大单元格，需要同步调整选区和控制条
-      this.subEngine.td.html(Engine.StringUtils.transformCustomTags(this.subEngine.change.getValue()));
-      this.subEngine.section.renderAll(this.subEngine.td, undefined, this.subEngine);
-      this.command.changed();
-      this.delayToUpdateToolbar();
-      const tdHeight = this.subEngine.td[0].offsetHeight;
+      this.subEngine.td.html(Engine.StringUtils.transformCustomTags(this.subEngine.change.getValue()))
+      this.subEngine.section.renderAll(this.subEngine.td, undefined, this.subEngine)
+      this.command.changed()
+      this.delayToUpdateToolbar()
+      const tdHeight = this.subEngine.td[0].offsetHeight
       if (!this.tdHeight || tdHeight !== this.tdHeight) {
-        this.tdHeight = tdHeight;
-        this.controlBar.render('input');
-        this.selection.reRenderActiveBox();
+        this.tdHeight = tdHeight
+        this.controlBar.render('input')
+        this.selection.reRenderActiveBox()
       }
-      this.onTableSizeChange();
-    };
+      this.onTableSizeChange()
+    }
 
     this.startEdit = (e) => {
       if (!this.active) {
-        return;
+        return
       }
       const hideTextarea = Engine.$(e.target)
-        .closest(this.template.TABLE_TEXTAREA_CLASS);
+        .closest(this.template.TABLE_TEXTAREA_CLASS)
       if (!hideTextarea[0]) {
-        return;
+        return
       }
       // 兼容 输入英文 和 输入中文 两种情况
       // 中文通过 compositionend 触发
@@ -181,125 +181,123 @@ class Table extends SectionBase {
       //   2.选中中文字符时，依次再触发 deleteCompositionText 的 input 事件 将字母删掉，然后是 insertFromComposition 将中文字符输入
       // 同时 safari 也支持 compositionend 事件，只需要将输中文的字母事件都阻止掉即可
       if (e.type === 'input' && (e.isComposing || e.inputType === 'insertCompositionText' || e.inputType === 'deleteCompositionText' || e.inputType === 'insertFromComposition')) {
-        return;
+        return
       }
       // 已经有激活的编辑单元格时
-      if (this.subEngine) return;
+      if (this.subEngine) return
       if (this.selection.td && this.selection.single) {
         // firefox 输入英文时，e.data 为 undefined 需要从 target 里取
-        this.createEditor(Engine.$(this.selection.td), '<p>'.concat(e.data || e.target.value, '</p>'));
+        this.createEditor(Engine.$(this.selection.td), '<p>'.concat(e.data || e.target.value, '</p>'))
       }
-    };
+    }
 
     this.saveValue = () => {
-      this.setSectionValue(true);
-    };
+      this.setSectionValue(true)
+    }
 
     this.setSectionValue = (self) => {
-      const tableModel = this.selection.tableModel;
-      let html = this.tableRoot[0].outerHTML;
-      if (html === this.lastSaveHtml) return;
-      this.lastSaveHtml = html;
+      const tableModel = this.selection.tableModel
+      let html = this.tableRoot[0].outerHTML
+      if (html === this.lastSaveHtml) return
+      this.lastSaveHtml = html
       // 根据主编辑器的过滤和转换规则，处理 HTML 代码
-      html = new Engine.HTMLParser(html, this.engine.schema, this.engine.conversion).toValue();
+      html = new Engine.HTMLParser(html, this.engine.schema, this.engine.conversion).toValue()
       const value = {
         rows: tableModel.rows,
         cols: tableModel.cols,
         html,
-      };
-      this.sectionManage.setValue(this.sectionRoot, value);
+      }
+      this.sectionManage.setValue(this.sectionRoot, value)
       // 自己撤销时的渲染，也需要设置value, 但不记录历史记录
       if (self) {
-        return;
+        return
       }
       // 保存 undo 记录
       if (this.fullscreen) {
-        this.history.save(value);
+        this.history.save(value)
       }
-      this.engine.history.save();
-    };
+      this.engine.history.save()
+    }
 
     this.tryUndo = () => {
       if (this.subEngine) {
         if (this.subEngine.history.index === 0) {
-          this.removeEditor(true);
+          this.removeEditor(true)
         }
-        return;
+        return
       }
-      this.undo();
-    };
+      this.undo()
+    }
 
     this.tryRedo = () => {
       if (this.subEngine) {
-        return;
+        return
       }
-      this.redo();
-    };
+      this.redo()
+    }
 
     this.undo = () => {
       if (this.subEngine && this.subEngine.history.hasUndo) {
-        this.subEngine.command.execute('undo');
-        return;
+        this.subEngine.command.execute('undo')
+        return
       }
 
       if (this.subEngine) {
-        this.removeEditor(true);
-        return;
+        this.removeEditor(true)
+        return
       }
 
       if (this.fullscreen) {
-        this.history.undo();
+        this.history.undo()
       } else {
-        this.focusSection();
-        this.engine.command.execute('undo');
+        this.focusSection()
+        this.engine.command.execute('undo')
       }
-    };
+    }
 
     this.focusSection = () => {
-      this.engine.change.selectSection(this.sectionRoot);
-      this.engine.change.focus();
-    };
+      this.engine.change.selectSection(this.sectionRoot)
+      this.engine.change.focus()
+    }
 
     this.redo = () => {
       if (this.subEngine) {
-        this.subEngine.command.execute('redo');
-        return;
+        this.subEngine.command.execute('redo')
+        return
       }
 
       if (this.fullscreen) {
-        this.history.redo();
+        this.history.redo()
       } else {
-        this.engine.command.execute('redo');
+        this.engine.command.execute('redo')
       }
-    };
+    }
 
     this.delayToUpdateToolbar = () => {
       if (this.toolbarTimer) {
-        clearTimeout(this.toolbarTimer);
+        clearTimeout(this.toolbarTimer)
       }
       this.toolbarTimer = setTimeout(() => {
-        this.engine.toolbar.updateState();
-      }, 100);
-    };
+        this.engine.toolbar.updateState()
+      }, 100)
+    }
 
     this.isEditing = (td) => {
-      return this.subEngine && td[0] === this.subEngine.td[0];
-    };
-
-
+      return this.subEngine && td[0] === this.subEngine.td[0]
+    }
 
     this.createEditor = (td, content) => {
       // 已经创建
       if (this.isEditing(td)) {
-        return;
+        return
       }
       // 开始创建小编辑器
-      this.selection.showSubEditor();
+      this.selection.showSubEditor()
       const imageOptions = {
         ...this.engine.options.image,
         fixSize: true,
         hideEmbedToolbar: false,
-      };
+      }
 
       this.subEngine = Engine.create(this.selection.editAreaContent, {
         plugins: ['bold', 'italic', 'fontcolor', 'fontsize', 'strikethrough', 'underline', 'backcolor', 'removeformat', 'code', 'file', 'label', 'list', 'link', 'image', 'tasklist', 'indent'],
@@ -307,307 +305,307 @@ class Table extends SectionBase {
         image: imageOptions,
         onBeforeRenderImage: this.engine.options.onBeforeRenderImage,
         file: this.engine.options.file,
-      });
-      this.subEngine.uploader = this.engine.uploader;
-      this.subEngine.td = td;
-      this.subEngine.locale = this.engine.locale;
-      this.subEngine.schema.add(this.innerSchema);
-      this.delayToUpdateToolbar();
-      this.subEngine.change.setValue(unWrapperTableHTML(td.html()));
+      })
+      this.subEngine.uploader = this.engine.uploader
+      this.subEngine.td = td
+      this.subEngine.locale = this.engine.locale
+      this.subEngine.schema.add(this.innerSchema)
+      this.delayToUpdateToolbar()
+      this.subEngine.change.setValue(unWrapperTableHTML(td.html()))
       if (content) {
         // 拷贝过来的 html 中可能会包含 table Section的容器层，需要去掉，否则还会被 render 出来。
-        let html = unWrapperTableHTML(content);
-        html = new Engine.HTMLParser(html, this.subEngine.schema, this.subEngine.conversion).toValue();
-        this.subEngine.command.execute('selectall');
-        this.subEngine.change.setValue(html);
-        this.handleTdChanged();
+        let html = unWrapperTableHTML(content)
+        html = new Engine.HTMLParser(html, this.subEngine.schema, this.subEngine.conversion).toValue()
+        this.subEngine.command.execute('selectall')
+        this.subEngine.change.setValue(html)
+        this.handleTdChanged()
       }
 
       setTimeout(() => {
-        if (!this.subEngine) return;
-        this.subEngine.focusToEnd();
-      }, 10);
-      this.subEngine.on('change', this.handleTdChanged);
-      this.subEngine.on('select', this.delayToUpdateToolbar);
-      this.subEngine.on('paste:origin', unWrapperTable);
+        if (!this.subEngine) return
+        this.subEngine.focusToEnd()
+      }, 10)
+      this.subEngine.on('change', this.handleTdChanged)
+      this.subEngine.on('select', this.delayToUpdateToolbar)
+      this.subEngine.on('paste:origin', unWrapperTable)
       // 单元格内不允许输入 tab，外部会切换单元格，用户需要用空格代替
       this.subEngine.on('keydown:tab', () => {
-        return false;
-      });
-    };
+        return false
+      })
+    }
 
     this.removeEditor = (silence) => {
       // 已经被移除
       if (!this.subEngine) {
-        return;
+        return
       }
-      this.handleTdChanged();
-      this.subEngine.destroy();
-      this.subEngine = null;
-      this.selection.hideSubEditor();
+      this.handleTdChanged()
+      this.subEngine.destroy()
+      this.subEngine = null
+      this.selection.hideSubEditor()
       // 更新Section数据
       if (!silence) {
-        this.setSectionValue();
+        this.setSectionValue()
       }
-    };
+    }
 
     this.prevent = (e) => {
       const table = Engine.$(e.target)
-        .closest('.lake-table');
+        .closest('.lake-table')
       if (table[0]) {
-        e.preventDefault();
+        e.preventDefault()
       }
-    };
+    }
 
     this.unBindKeyEvents = () => {
-      document.removeEventListener('contextmenu', this.prevent);
-    };
+      document.removeEventListener('contextmenu', this.prevent)
+    }
 
     this.bindKeyEvents = () => {
-      this.hotkey.add('backspace, del, delete', this.command.clear);
-      this.hotkey.add('up', this.selection.selectUp);
-      this.hotkey.add('down', this.selection.selectDown);
-      this.hotkey.add('left', this.selection.selectLeft);
-      this.hotkey.add('right', this.selection.selectRight);
-      this.hotkey.add('tab, shift+tab', this.tab);
-      this.hotkey.add('enter', this.selection.selectEnter);
-      this.hotkey.add('esc', this.selection.cancelSelect);
-      this.hotkey.add('command+a, ctrl+a', this.selection.selectTable);
-      this.hotkey.add('command+z, ctrl+z', this.tryUndo);
+      this.hotkey.add('backspace, del, delete', this.command.clear)
+      this.hotkey.add('up', this.selection.selectUp)
+      this.hotkey.add('down', this.selection.selectDown)
+      this.hotkey.add('left', this.selection.selectLeft)
+      this.hotkey.add('right', this.selection.selectRight)
+      this.hotkey.add('tab, shift+tab', this.tab)
+      this.hotkey.add('enter', this.selection.selectEnter)
+      this.hotkey.add('esc', this.selection.cancelSelect)
+      this.hotkey.add('command+a, ctrl+a', this.selection.selectTable)
+      this.hotkey.add('command+z, ctrl+z', this.tryUndo)
       this.hotkey.add('command+b, ctrl+b', () => {
-        this.command.execute('bold');
-      });
+        this.command.execute('bold')
+      })
       this.hotkey.add('command+i, ctrl+i', () => {
-        this.command.execute('italic');
-      });
+        this.command.execute('italic')
+      })
       this.hotkey.add('command+u, ctrl+u', () => {
-        this.command.execute('underline');
-      });
+        this.command.execute('underline')
+      })
       this.hotkey.add('command+shift+x, ctrl+shift+x', () => {
-        this.command.execute('strikethrough');
-      });
+        this.command.execute('strikethrough')
+      })
 
-      this.hotkey.add('command+y, command+shift+z, ctrl+y, ctrl+shift+z', this.tryRedo);
-      document.addEventListener('contextmenu', this.prevent);
-    };
+      this.hotkey.add('command+y, command+shift+z, ctrl+y, ctrl+shift+z', this.tryRedo)
+      document.addEventListener('contextmenu', this.prevent)
+    }
 
     this.tab = (e) => {
       if (this.subEngine) {
-        this.subEngine.command.queryState('tasklist');
+        this.subEngine.command.queryState('tasklist')
       } else {
-        this.selection.selectTab(e);
+        this.selection.selectTab(e)
       }
-    };
+    }
 
     this.bindEditEvents = () => {
-      if (this.inited) return;
-      this.controlBar.on('startChangeCellSize', this.selection.clear);
-      this.controlBar.on('clickColsHeader', this.selection.selectCol);
-      this.controlBar.on('clickRowsHeader', this.selection.selectRow);
-      this.controlBar.on('clickTableHeader', this.selection.selectTable);
+      if (this.inited) return
+      this.controlBar.on('startChangeCellSize', this.selection.clear)
+      this.controlBar.on('clickColsHeader', this.selection.selectCol)
+      this.controlBar.on('clickRowsHeader', this.selection.selectRow)
+      this.controlBar.on('clickTableHeader', this.selection.selectTable)
       this.controlBar.on('sizeChanged', () => {
-        this.setSectionValue();
-        this.onTableSizeChange();
-      });
+        this.setSectionValue()
+        this.onTableSizeChange()
+      })
 
       this.controlBar.on('tableSizeChange', () => {
-        this.onTableSizeChange();
-      });
+        this.onTableSizeChange()
+      })
 
       this.command.on('actioned', (action, silence) => {
         if (action === 'paste' || action === 'fontstyle') {
-          Engine.section.renderAll(this.container, undefined, this.engine);
+          Engine.section.renderAll(this.container, undefined, this.engine)
         }
-        this.removeEditor();
-        this.controlBar.render(action);
-        this.selection.render(action);
-        this.scrollbar.refresh();
+        this.removeEditor()
+        this.controlBar.render(action)
+        this.selection.render(action)
+        this.scrollbar.refresh()
         if (!silence) {
-          this.setSectionValue();
+          this.setSectionValue()
         }
-      });
+      })
 
-      this.command.on('tableRemoved', this.destroy);
+      this.command.on('tableRemoved', this.destroy)
       this.selection.on('select', () => {
-        this.delayToUpdateToolbar();
-        this.removeEditor();
-        this.controlBar.refresh('select');
-      });
+        this.delayToUpdateToolbar()
+        this.removeEditor()
+        this.controlBar.refresh('select')
+      })
 
       this.selection.on('cancelSelect', () => {
-        this.removeEditor();
-        this.controlBar.clearActiveStatus();
-      });
-      this.selection.on('active', this.createEditor);
-      this.container.on('compositionend', this.startEdit);
-      this.container.on('input', this.startEdit);
-      this.container.on('select', this.prevent);
-      this.bindKeyEvents();
+        this.removeEditor()
+        this.controlBar.clearActiveStatus()
+      })
+      this.selection.on('active', this.createEditor)
+      this.container.on('compositionend', this.startEdit)
+      this.container.on('input', this.startEdit)
+      this.container.on('select', this.prevent)
+      this.bindKeyEvents()
       this.engine.on('save:before', () => {
-        return this.setSectionValue();
-      });
-      this.inited = true;
-    };
-
-    this.reRender = (value) => {
-      this.delayToUpdateToolbar();
-      if (!value) return;
-      this.container.html('');
-      this.render(this.container, value, true);
-    };
-
-    this.engine = engine;
-    this.contentView = contentView;
-    const options = engine ? engine.options : contentView.options;
-    this.locale = locale[options.lang || 'en'];
-    this.constants = constants(this);
-    this.options = options.table || {};
-    this.options.type = this.options.type || (['mini', 'mobile', 'line'].indexOf(options.type) > -1 ? 'mini' : 'max');
-    this.template = template(this);
-
-    if (!engine) {
-      return;
+        return this.setSectionValue()
+      })
+      this.inited = true
     }
 
-    this.change = engine.change;
-    this.sectionManage = engine.section;
-    this.controlBar = new ControlBar(this);
-    this.selection = new Selection(this);
-    this.command = new Command(this);
-    this.hotkey = new Hotkey(this);
-    this.innerSchema = tableInnerSchema(schemaConfig);
-    this.history = new History(this);
-    this.mobile = this.engine.options.type === 'mobile';
+    this.reRender = (value) => {
+      this.delayToUpdateToolbar()
+      if (!value) return
+      this.container.html('')
+      this.render(this.container, value, true)
+    }
+
+    this.engine = engine
+    this.contentView = contentView
+    const options = engine ? engine.options : contentView.options
+    this.locale = locale[options.lang || 'en']
+    this.constants = constants(this)
+    this.options = options.table || {}
+    this.options.type = this.options.type || (['mini', 'mobile', 'line'].indexOf(options.type) > -1 ? 'mini' : 'max')
+    this.template = template(this)
+
+    if (!engine) {
+      return
+    }
+
+    this.change = engine.change
+    this.sectionManage = engine.section
+    this.controlBar = new ControlBar(this)
+    this.selection = new Selection(this)
+    this.command = new Command(this)
+    this.hotkey = new Hotkey(this)
+    this.innerSchema = tableInnerSchema(schemaConfig)
+    this.history = new History(this)
+    this.mobile = this.engine.options.type === 'mobile'
   }
 
   select() {
     if (this.state.readonly) {
-      super.select.call(this);
+      super.select.call(this)
     } else {
-      const { container } = this;
+      const { container } = this
       if (container[0].childNodes.length > 0) {
-        container.addClass('lake-table-selected');
+        container.addClass('lake-table-selected')
       }
     }
   }
 
   unselect() {
     if (this.state.readonly) {
-      super.unselect.call(this);
+      super.unselect.call(this)
     } else {
-      const { container } = this;
+      const { container } = this
       if (container[0].childNodes.length > 0) {
-        container.removeClass('lake-table-selected');
+        container.removeClass('lake-table-selected')
       }
     }
   }
 
   selectByOther(color) {
-    const { container } = this;
+    const { container } = this
     if (container[0].childNodes.length > 0) {
-      container.css('outline', `2px solid ${color}`);
+      container.css('outline', `2px solid ${color}`)
     }
   }
 
   unselectByOther() {
-    const { container } = this;
+    const { container } = this
     if (container[0].childNodes.length > 0) {
-      container.css('outline', '');
+      container.css('outline', '')
     }
   }
 
   getTableHeight() {
-    const height = getHeight(this.tableRoot[0]);
-    return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height;
+    const height = getHeight(this.tableRoot[0])
+    return this.options.type === 'mini' && !this.state.maximize ? height + 6 : height
   }
 
   onTableSizeChange() {
-    const tableWidth = this.tableRoot[0].offsetWidth;
-    const pageWidth = this.engine.container[0].offsetWidth;
-    const editAreaWidth = this.table.offsetWidth;
-    let margin = 0;
+    const tableWidth = this.tableRoot[0].offsetWidth
+    const pageWidth = this.engine.container[0].offsetWidth
+    const editAreaWidth = this.table.offsetWidth
+    let margin = 0
     // 表格宽度超出可编辑区域，左右margin 居中，最大margin为 ((pageWidth - editAreaWidth) / 2 - 20) px, 20 为 预留的最小页边距
-    const maxMargin = (pageWidth - editAreaWidth) / 2 - 20;
+    const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
     // 表格最大可显示区域
-    const tableMaxSize = editAreaWidth + maxMargin * 2;
+    const tableMaxSize = editAreaWidth + maxMargin * 2
     if (tableWidth > editAreaWidth) {
-      margin = (tableWidth - editAreaWidth) / 2;
-      const maxMargin = (pageWidth - editAreaWidth) / 2 - 20;
-      margin = Math.min(margin, maxMargin);
+      margin = (tableWidth - editAreaWidth) / 2
+      const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
+      margin = Math.min(margin, maxMargin)
       $(this.tableBody)
         .css({
-          'margin': `0 -${margin}px`,
-          'height': `${this.getTableHeight()}px`,
-          'width': `${Math.min(tableWidth, tableMaxSize)}px`,
-        });
+          margin: `0 -${margin}px`,
+          height: `${this.getTableHeight()}px`,
+          width: `${Math.min(tableWidth, tableMaxSize)}px`,
+        })
     }
     if (this.options.type === 'mini' && !this.state.maximize) {
-      const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS);
-      const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS);
-      triggerCols.css('height', `${this.tableRoot[0].offsetHeight}px`);
-      const wrapperWidth = this.tableWrapper[0].offsetWidth;
-      triggerRows.css('width', `${tableWidth > wrapperWidth ? wrapperWidth : tableWidth}px`);
+      const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS)
+      const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS)
+      triggerCols.css('height', `${this.tableRoot[0].offsetHeight}px`)
+      const wrapperWidth = this.tableWrapper[0].offsetWidth
+      triggerRows.css('width', `${tableWidth > wrapperWidth ? wrapperWidth : tableWidth}px`)
     }
-    this.scrollbar.refresh();
+    this.scrollbar.refresh()
   }
 
   render(container, value, self) {
-    const engine = this.engine;
+    const engine = this.engine
     container.on('dragstart', (event) => {
-      event.stopPropagation();
-      event.preventDefault();
-    });
+      event.stopPropagation()
+      event.preventDefault()
+    })
     if (value.html) {
       if (!engine) {
-        this.contentView.schema.add(schema);
-        value.html = new Engine.HTMLParser(value.html, this.contentView.schema, this.contentView.conversion).toValue();
+        this.contentView.schema.add(schema)
+        value.html = new Engine.HTMLParser(value.html, this.contentView.schema, this.contentView.conversion).toValue()
       }
-      value.html = Engine.StringUtils.transformCustomTags(value.html);
+      value.html = Engine.StringUtils.transformCustomTags(value.html)
     }
 
     if (!engine) {
-      const _sectionHTML = this.template.htmlView(value);
-      container.append(_sectionHTML);
-      Engine.section.renderAll(container, undefined, this.contentView);
-      this.viewport = container.find(this.template.VIEWPORT_READER);
-      this.scrollbar = new Scrollbar(this.viewport, true, false, true);
+      const _sectionHTML = this.template.htmlView(value)
+      container.append(_sectionHTML)
+      Engine.section.renderAll(container, undefined, this.contentView)
+      this.viewport = container.find(this.template.VIEWPORT_READER)
+      this.scrollbar = new Scrollbar(this.viewport, true, false, true)
       if (this.contentView.docVerstion === 0) {
         this.container.css({
           'margin-top': '24px',
           'margin-bottom': '24px',
-        });
+        })
       }
-      return;
+      return
     }
 
-    const sectionHTML = this.template.htmlEdit(value);
-    container.append(sectionHTML);
-    Engine.section.renderAll(container, undefined, engine);
+    const sectionHTML = this.template.htmlEdit(value)
+    container.append(sectionHTML)
+    Engine.section.renderAll(container, undefined, engine)
     if (this.options.type === 'mini') {
-      const root = container.closest('div[data-section-key=table]');
+      const root = container.closest('div[data-section-key=table]')
       if (root.length > 0) {
-        root.attr('data-section-table', 'mini');
+        root.attr('data-section-table', 'mini')
       }
     }
-    this.tableRoot = container.find(this.template.TABLE_CLASS);
-    this.viewport = container.find(this.template.VIEWPORT);
-    this.tableWrapper = container.find(this.template.TABLE_WRAPPER_CLASS);
-    this.table = this.engine.container[0].querySelector('[data-section-key="table"]');
-    this.tableBody = this.engine.container[0].querySelector('[data-section-key="table"] [data-section-element="body"]');
-    this.selection.init();
-    this.controlBar.init();
-    this.scrollbar = new Scrollbar(this.viewport, true, false, true);
-    this.bindEditEvents();
+    this.tableRoot = container.find(this.template.TABLE_CLASS)
+    this.viewport = container.find(this.template.VIEWPORT)
+    this.tableWrapper = container.find(this.template.TABLE_WRAPPER_CLASS)
+    this.table = this.engine.container[0].querySelector('[data-section-key="table"]')
+    this.tableBody = this.engine.container[0].querySelector('[data-section-key="table"] [data-section-element="body"]')
+    this.selection.init()
+    this.controlBar.init()
+    this.scrollbar = new Scrollbar(this.viewport, true, false, true)
+    this.bindEditEvents()
 
     if (!value.html || self) {
       // 新插入表格的时候设置sectionValue，这样外部立刻保存的时候，服务端不会报错
-      this.setSectionValue(self);
+      this.setSectionValue(self)
     }
-    this.onTableSizeChange();
+    this.onTableSizeChange()
   }
 }
 
-Table.type = 'block';
-Table.canSearch = true;
-Table.uid = true;
-export default Table;
+Table.type = 'block'
+Table.canSearch = true
+Table.uid = true
+export default Table

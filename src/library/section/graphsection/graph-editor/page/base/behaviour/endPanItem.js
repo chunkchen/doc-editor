@@ -1,28 +1,28 @@
-import Page from '../page';
+import Page from '../page'
 
 Page.registerBehaviour('endPanItem', (page) => {
-  const graph = page.getGraph();
+  const graph = page.getGraph()
   graph.behaviourOn('panitemend', () => {
-    const delegation = page.get('panItemDelegation');
+    const delegation = page.get('panItemDelegation')
 
     if (delegation) {
-      delegation.remove();
-      graph.draw();
+      delegation.remove()
+      graph.draw()
     }
 
-    page.setSignal('panningItem', false);
-    page.set('panItemDelegation', undefined);
-    page.set('panItemStartPoint', undefined);
-    page.set('panItemStartBox', undefined);
-    page.set('panItems', undefined);
-  });
+    page.setSignal('panningItem', false)
+    page.set('panItemDelegation', undefined)
+    page.set('panItemStartPoint', undefined)
+    page.set('panItemStartBox', undefined)
+    page.set('panItems', undefined)
+  })
   graph.behaviourOn('canvas:mouseleave', () => {
-    const panItems = page.get('panItems');
+    const panItems = page.get('panItems')
     if (!panItems) {
-      return;
+      return
     }
 
-    page.clearAlignLine();
-    graph.emit('panitemend');
-  });
-});
+    page.clearAlignLine()
+    graph.emit('panitemend')
+  })
+})

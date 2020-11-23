@@ -1,4 +1,4 @@
-import './panMindNode';
-import './hoverMindExpandButton';
-import './keydownMoveSelection';
-import './keydownEditLabel';
+import './panMindNode'
+import './hoverMindExpandButton'
+import './keydownMoveSelection'
+import './keydownEditLabel'

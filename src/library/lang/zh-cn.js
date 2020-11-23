@@ -1,27 +1,27 @@
-import { macos } from '@hicooper/doc-engine/lib/utils/user-agent';
+import { macos } from '@hicooper/doc-engine/lib/utils/user-agent'
 
-const CTRL = macos ? '⌘' : 'Ctrl';
+const CTRL = macos ? '⌘' : 'Ctrl'
 const backgroundOrColor = {
   fontColor: '字体颜色',
   bgColor: '背景颜色',
   moreColor: '更多颜色',
-};
+}
 const layoutLocale = {
   layout: '布局方式',
   layoutBlock: '独占一行',
   layoutInline: '嵌入行内',
-};
+}
 const alignmentLocale = {
   alignment: '对齐方式',
   alignLeft: '靠左对齐',
   alignCenter: '居中对齐',
   alignRight: '靠右对齐',
-};
+}
 
 const uploadLocale = {
   uploadFailed: '文件上传失败，请重试',
   notSupportExt: '不支持该文件类型',
-};
+}
 
 const dndLocale = {
   dndTips: '<span>拖动 调整位置<br />点击 打开更多菜单</span>',
@@ -31,14 +31,14 @@ const dndLocale = {
   dndCopySuccess: '已拷贝到粘贴板',
   dndEdit: '编辑锚点',
   dndDelete: '删除',
-};
+}
 const linkLocale = {
   linkPlaceholder: '请输入链接地址或者锚点',
   linkSave: '保存',
   linkEdit: '编辑',
   linkDelete: '取消链接',
   linkOpen: '打开链接',
-};
+}
 const editorModalLocale = {
   editorModalClose: '关闭',
   editorModalPopupTips: '确认要放弃刚才编辑的草稿吗？',
@@ -49,7 +49,7 @@ const editorModalLocale = {
   editorModalDissectionAndExit: '放弃编辑并退出',
   editorModalCancel: '取消',
   editorModalSaveAndExit: '保存并退出',
-};
+}
 
 export default {
   pure: {
@@ -424,4 +424,4 @@ export default {
     insertDoc: '插入文档',
     placeholder: '请在文档中选择需要翻译的内容',
   },
-};
+}

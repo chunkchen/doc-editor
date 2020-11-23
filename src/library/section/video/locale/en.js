@@ -4,4 +4,4 @@ export default {
   commonError: 'Video playback error, please try again later',
   transcoding: 'Transcoding, please wait a moment',
   preferences: 'Local video settings',
-};
+}

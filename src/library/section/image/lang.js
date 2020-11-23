@@ -15,8 +15,8 @@ const lang = {
     originSize: 'Origin Size',
     bestSize: 'Best Size',
   },
-};
+}
 
-const data = window.appData;
-const locale = data && data.locale === 'zh-cn' ? 'zh-cn' : 'en';
-export default lang[locale];
+const data = window.appData
+const locale = data && data.locale === 'zh-cn' ? 'zh-cn' : 'en'
+export default lang[locale]

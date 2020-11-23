@@ -13,42 +13,42 @@
 const addUiCommand = (engine, name, getConfig, ui, autoSave) => {
   engine.command.add(name, {
     autoSave: () => {
-      return autoSave;
+      return autoSave
     },
     queryState: () => {
       if (!engine[ui]) {
-        return false;
+        return false
       }
       // 判断一：以一个特殊属性，区分是否是 editor 拓展后的 engine
       // 判断二：以本地缓存区分是否该执行相应命令
-      return engine[ui].storeConfig && localStorage.getItem(`lake-${ui}`) === name;
+      return engine[ui].storeConfig && localStorage.getItem(`lake-${ui}`) === name
     },
     execute: (force) => {
       if (force === true || !engine.command.queryState(name)) {
-        const config = getConfig.call(engine);
-        engine[ui].store(config);
-        engine[ui].set(config);
-        return;
+        const config = getConfig.call(engine)
+        engine[ui].store(config)
+        engine[ui].set(config)
+        return
       }
-      engine[ui].close();
+      engine[ui].close()
     },
-  });
-};
+  })
+}
 
 export const addSidebarCommand = (engine, name, getConfig) => {
-  addUiCommand(engine, name, getConfig, 'sidebar');
-};
+  addUiCommand(engine, name, getConfig, 'sidebar')
+}
 
 export const addDialogCommand = (engine, name, getConfig) => {
-  addUiCommand(engine, name, getConfig, 'dialog');
-};
+  addUiCommand(engine, name, getConfig, 'dialog')
+}
 
 export const addIframeSection = (engine, name, value) => {
-  const { locale, iframeHelper } = engine;
+  const { locale, iframeHelper } = engine
   if (iframeHelper.canAdd()) {
-    engine.command.execute(name, value);
+    engine.command.execute(name, value)
   } else {
-    const limit = iframeHelper.options.limit;
-    engine.messageError(locale.section.iframeOverLimit.replace('${limit}', limit));
+    const limit = iframeHelper.options.limit
+    engine.messageError(locale.section.iframeOverLimit.replace('${limit}', limit))
   }
-};
+}

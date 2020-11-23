@@ -1,57 +1,57 @@
-import React from 'react';
-import { Button, Modal } from 'antd';
-import 'antd/lib/modal/style';
+import React from 'react'
+import { Button, Modal } from 'antd'
+import 'antd/lib/modal/style'
 
 class OnlineDoc extends React.Component {
   state = {
     visible: false,
     activated: false,
-  };
+  }
 
   constructor() {
-    super();
-    this.iframe = React.createRef();
+    super()
+    this.iframe = React.createRef()
   }
 
   handleMouseEnter() {
     this.setState({
       activated: true,
-    });
+    })
   }
 
   handleMouseLeave() {
     this.setState({
       activated: false,
-    });
+    })
   }
 
   handleMouseDown = (event) => {
     // 弹窗时，禁止 focus 编辑器
-    event.stopPropagation();
-  };
+    event.stopPropagation()
+  }
 
   handleClick = (event) => {
-    const { hideDropdown } = this.props;
-    event.preventDefault();
-    event.stopPropagation();
+    const { hideDropdown } = this.props
+    event.preventDefault()
+    event.stopPropagation()
 
     this.setState({
       visible: true,
     }, () => {
       if (hideDropdown) {
-        hideDropdown();
+        hideDropdown()
       }
-    });
-  };
+    })
+  }
 
   handleInsert = (event, collapsed) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const { item, removeSelect } = this.props;
-    const { fetchSelectedFile } = this.iframe.current.contentWindow;
+    event.preventDefault()
+    event.stopPropagation()
+    const { item, removeSelect } = this.props
+    const { fetchSelectedFile } = this.iframe.current.contentWindow
     if (fetchSelectedFile) {
-      const files = fetchSelectedFile();
-      const file = files.length > 0 ? files[0] : undefined;
+      const files = fetchSelectedFile()
+      const file = files.length > 0 ? files[0] : undefined
       if (file && item && item.onReadLocal) {
         item.onReadLocal({
           src: file.preView,
@@ -59,39 +59,39 @@ class OnlineDoc extends React.Component {
           name: file.fileName,
           size: 0,
           collapsed,
-        });
+        })
       }
     }
     this.setState({
       visible: false,
     }, () => {
       if (removeSelect) {
-        removeSelect();
+        removeSelect()
       }
-    });
-  };
+    })
+  }
 
   handleCancel = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const { removeSelect } = this.props;
+    event.preventDefault()
+    event.stopPropagation()
+    const { removeSelect } = this.props
     this.setState({
       visible: false,
     }, () => {
       if (removeSelect) {
-        removeSelect();
+        removeSelect()
       }
-    });
-  };
+    })
+  }
 
   render() {
-    const { visible } = this.state;
-    const { item, index, engine } = this.props;
-    const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : '';
+    const { visible } = this.state
+    const { item, index, engine } = this.props
+    const activeClass = this.state.activated ? ' lake-collapse-list-item-active' : ''
     const style = item.subTitle ? {
       height: 'auto',
-    } : {};
-    const options = engine.options.onlinedoc || {};
+    } : {}
+    const options = engine.options.onlinedoc || {}
     return (
       <div
         key={index}
@@ -121,7 +121,7 @@ class OnlineDoc extends React.Component {
               item.subNew && <span className="lake-sub-new-tag">{item.subNew}</span>
             }
             {
-              item.isNew ? <span className="lake-svg-icon-new-section"/> : ''
+              item.isNew ? <span className="lake-svg-icon-new-section" /> : ''
             }
           </div>
         </div>
@@ -137,8 +137,8 @@ class OnlineDoc extends React.Component {
           }}
           footer={(
             <div>
-              <Button onClick={event => this.handleInsert(event, false)} type="primary">预览插入</Button>
-              <Button onClick={event => this.handleInsert(event, true)} type="primary">文件插入</Button>
+              <Button onClick={(event) => this.handleInsert(event, false)} type="primary">预览插入</Button>
+              <Button onClick={(event) => this.handleInsert(event, true)} type="primary">文件插入</Button>
               <Button onClick={this.handleCancel}>取消</Button>
             </div>
           )}
@@ -156,8 +156,8 @@ class OnlineDoc extends React.Component {
           />
         </Modal>
       </div>
-    );
+    )
   }
 }
 
-export default OnlineDoc;
+export default OnlineDoc

@@ -1,14 +1,13 @@
-import React from 'react';
-import helper from '../helper';
-import Engine from './engine';
-import Dialog from '../dialog';
-import Toolbar from '../toolbar';
-import Editor from './editor';
-import {Dropdown, Menu} from 'antd'
-import {CaretDownOutlined, CheckOutlined} from '@ant-design/icons'
+import React from 'react'
+import { Dropdown, Menu } from 'antd'
+import { CaretDownOutlined, CheckOutlined } from '@ant-design/icons'
+import helper from '../helper'
+import Engine from './engine'
+import Dialog from '../dialog'
+import Toolbar from '../toolbar'
+import Editor from './editor'
 
 import './multi-page.less'
-
 
 class MultiPageEditor extends React.Component {
   constructor(props) {
@@ -21,14 +20,14 @@ class MultiPageEditor extends React.Component {
         pageName: '无标题',
         pageNum: 1,
         row: false,
-        content: '<p><br /></p>'
+        content: '<p><br /></p>',
       }],
     }
     this.pageEngine = {}
   }
 
   onEngineReady(engine, pageNum) {
-    const {activePageNum} = this.state
+    const { activePageNum } = this.state
     if (activePageNum === pageNum) {
       this.setState({
         engine,
@@ -40,7 +39,7 @@ class MultiPageEditor extends React.Component {
     })
 
     helper(engine, 'translate')
-    const {image, file} = engine.options
+    const { image, file } = engine.options
     helper(engine, 'uploader', {
       actions: {
         image: image ? image.action : '',
@@ -64,8 +63,8 @@ class MultiPageEditor extends React.Component {
   }
 
   engineChange = async () => {
-    const {engine, activePageNum, pageListData} = this.state
-    const currentPage = pageListData.find(s => s.pageNum === activePageNum)
+    const { engine, activePageNum, pageListData } = this.state
+    const currentPage = pageListData.find((s) => s.pageNum === activePageNum)
     let pageContentHeight = 0
     const overflowNodes = []
     let needSkipToNextPage = false
@@ -85,7 +84,7 @@ class MultiPageEditor extends React.Component {
     if (needSkipToNextPage) {
       let nextPageContent = ''
       if (overflowNodes.length) {
-        overflowNodes.forEach(s => nextPageContent += s.outerHTML)
+        overflowNodes.forEach((s) => nextPageContent += s.outerHTML)
       } else {
         nextPageContent = '<p><br /></p>>'
       }
@@ -153,13 +152,13 @@ class MultiPageEditor extends React.Component {
 
   setPageFormat = (page, type) => {
     page.row = type === 'row'
-    const {pageListData} = this.state
-    this.setState({pageListData})
+    const { pageListData } = this.state
+    this.setState({ pageListData })
   }
 
   editorClick = async (pageNum, e) => {
     e.preventDefault()
-    const {activePageNum, engine} = this.state
+    const { activePageNum, engine } = this.state
     if (activePageNum !== pageNum) {
       engine.change.activateSection(engine.container[0], 'click')
       await this.setState({
@@ -170,8 +169,8 @@ class MultiPageEditor extends React.Component {
   }
 
   render() {
-    const {engine, toolbar, pageListData} = this.state
-    const {type, header} = this.props
+    const { engine, toolbar, pageListData } = this.state
+    const { type, header } = this.props
     const toolbarOptions = {
       type,
       engine,
@@ -179,8 +178,8 @@ class MultiPageEditor extends React.Component {
     }
 
     const editorOptions = () => {
-      const options = Object.assign({}, this.props)
-      const {onLoad, header, type, toolbar, ...editorOptions} = options
+      const options = { ...this.props }
+      const { onLoad, header, type, toolbar, ...editorOptions } = options
       return editorOptions
     }
 
@@ -190,7 +189,7 @@ class MultiPageEditor extends React.Component {
           <Menu.ItemGroup key="0" title="页面版式">
             <Menu.Item selectedKeys="0-1" onClick={() => this.setPageFormat(page, 'col')}>
               {
-                !page.row && (<div className="checked"><CheckOutlined/></div>)
+                !page.row && (<div className="checked"><CheckOutlined /></div>)
               }
               <div className="option-item">
                 <p className="title">纵向</p>
@@ -199,7 +198,7 @@ class MultiPageEditor extends React.Component {
             </Menu.Item>
             <Menu.Item selectedKeys="0-2" onClick={() => this.setPageFormat(page, 'row')}>
               {
-                page.row && (<div className="checked"><CheckOutlined/></div>)
+                page.row && (<div className="checked"><CheckOutlined /></div>)
               }
               <div className="option-item">
                 <p className="title">横向</p>
@@ -207,10 +206,10 @@ class MultiPageEditor extends React.Component {
               </div>
             </Menu.Item>
           </Menu.ItemGroup>
-          <Menu.Divider/>
+          <Menu.Divider />
           <Menu.ItemGroup key="1" title="排版风格">
             <Menu.Item selectedKeys="1-1">
-              <div className="checked"><CheckOutlined/></div>
+              <div className="checked"><CheckOutlined /></div>
               <div className="option-item">
                 <p className="title">经典优雅</p>
                 <p className="desc">疏密有度</p>
@@ -229,8 +228,8 @@ class MultiPageEditor extends React.Component {
     return (
       <section className="lake-editor lake-multi-page-editor">
         <div className="lake-multi-page-editor-wrapper">
-          {engine && <Dialog engine={engine}/>}
-          {engine && <Toolbar {...Object.assign({hasMore: false}, toolbarOptions)} />}
+          {engine && <Dialog engine={engine} />}
+          {engine && <Toolbar {...({ hasMore: false, ...toolbarOptions })} />}
           <main className="lake-multi-page-editor-wrapper-content">
             <div className="lake-multi-page-editor-content">
               {/* {engine && <Sidebar />} */}
@@ -244,31 +243,31 @@ class MultiPageEditor extends React.Component {
                       className += ' lake-typography-a4'
                     }
                     return (
-                      <div className={className} key={index} onClick={e => this.editorClick(page.pageNum, e)}>
+                      <div className={className} key={index} onClick={(e) => this.editorClick(page.pageNum, e)}>
                         {
                           header && (
                             <div className="lake-content-editor-extra">
                               <Dropdown overlay={menu(page)}
-                                        trigger={['click']}
-                                        className="drop-menu"
+                                trigger={['click']}
+                                className="drop-menu"
                               >
                                 <span className="ant-dropdown-link">
                                   页面设置
-                                  <CaretDownOutlined/>
+                                  <CaretDownOutlined />
                                 </span>
                               </Dropdown>
                             </div>
                           )
                         }
-                        <div className="left-top"/>
-                        <div className="right-top"/>
-                        <div className="left-btn"/>
-                        <div className="right-btn"/>
+                        <div className="left-top" />
+                        <div className="right-top" />
+                        <div className="left-btn" />
+                        <div className="right-btn" />
                         <div className="btn-page-num">
                           <span>{page.pageNum}</span>
                         </div>
                         <Editor
-                          {...Object.assign({onEngineReady: (engine) => this.onEngineReady(engine, page.pageNum)}, editorOptions())}
+                          {...({ onEngineReady: (engine) => this.onEngineReady(engine, page.pageNum), ...editorOptions() })}
                           value={page.content}
                           defaultValue={page.content}
                         />

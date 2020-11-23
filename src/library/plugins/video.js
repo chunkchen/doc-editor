@@ -1,4 +1,4 @@
-import Engine from '@hicooper/doc-engine';
+import Engine from '@hicooper/doc-engine'
 
 export default {
   initialize() {
@@ -6,12 +6,12 @@ export default {
     this.on('setvalue', () => {
       this.container.find('[data-section-key=video]')
         .each((node) => {
-          const sectionRoot = Engine.$(node);
-          const value = this.section.getValue(sectionRoot);
+          const sectionRoot = Engine.$(node)
+          const value = this.section.getValue(sectionRoot)
           if (value.status === 'uploading') {
-            this.section.removeNode(sectionRoot);
+            this.section.removeNode(sectionRoot)
           }
-        });
-    });
+        })
+    })
   },
-};
+}

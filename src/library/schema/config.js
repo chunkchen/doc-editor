@@ -187,4 +187,4 @@ export default [
       allowfullscreen: ['true', 'false'],
     },
   },
-];
+]

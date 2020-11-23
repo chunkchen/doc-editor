@@ -12,4 +12,4 @@ export default {
   errorFeedback: 'Incorrect password',
   lockedFeedback: 'Password has gone wrong more than 5 times, please try again after 1 minute',
   contentFeedback: 'Please enter content in the section',
-};
+}

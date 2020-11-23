@@ -31,4 +31,4 @@ export default {
     lineDash: [4, 4],
     lineWidth: 1,
   },
-};
+}

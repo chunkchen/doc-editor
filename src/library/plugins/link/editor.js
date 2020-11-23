@@ -1,173 +1,173 @@
-import React from 'react';
-import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string';
-import { Button, Input, Tooltip } from 'antd';
-import languages from './lang';
+import React from 'react'
+import { sanitizeUrl } from '@hicooper/doc-engine/lib/utils/string'
+import { Button, Input, Tooltip } from 'antd'
+import languages from './lang'
 
 class LinkEditor extends React.Component {
   constructor(props) {
-    super(props);
-    const { type, target, lang } = props;
-    this.locale = languages[lang];
-    this.nativeEvents = [];
-    this.rect = target.getBoundingClientRect();
-    this.link = target.getAttribute('href');
+    super(props)
+    const { type, target, lang } = props
+    this.locale = languages[lang]
+    this.nativeEvents = []
+    this.rect = target.getBoundingClientRect()
+    this.link = target.getAttribute('href')
 
     this.state = {
       type,
       invalidLink: this.isInvalidLink(this.link),
-    };
-    this.preventScrollCancel = false;
-    this.setContainerPosition();
+    }
+    this.preventScrollCancel = false
+    this.setContainerPosition()
   }
 
   setContainerPosition() {
-    const { container, target } = this.props;
-    const { bottom } = target.getBoundingClientRect();
-    container.className = 'lake-prevent-section-activated';
-    container.style.top = ''.concat(+window.pageYOffset + bottom + 4, 'px');
-    container.style.left = ''.concat(window.pageXOffset, 'px');
-    container.style.position = 'absolute';
-    container.style['z-index'] = '1400';
+    const { container, target } = this.props
+    const { bottom } = target.getBoundingClientRect()
+    container.className = 'lake-prevent-section-activated'
+    container.style.top = ''.concat(+window.pageYOffset + bottom + 4, 'px')
+    container.style.left = ''.concat(window.pageXOffset, 'px')
+    container.style.position = 'absolute'
+    container.style['z-index'] = '1400'
   }
 
   adjustPosition() {
-    const { container, target } = this.props;
-    const { top, left, bottom } = target.getBoundingClientRect();
-    const { height, width } = container.getBoundingClientRect();
+    const { container, target } = this.props
+    const { top, left, bottom } = target.getBoundingClientRect()
+    const { height, width } = container.getBoundingClientRect()
     const styleLeft = (left + width) > window.innerWidth - 20
       ? window.pageXOffset + window.innerWidth - width - 20
       : left - window.pageXOffset < 20
         ? window.pageXOffset + 20
-        : window.pageXOffset + left;
+        : window.pageXOffset + left
     const styleTop = bottom + height > window.innerHeight - 20
       ? window.pageYOffset + top - height - 4
-      : window.pageYOffset + bottom + 4;
-    container.style.top = `${styleTop}px`;
-    container.style.left = `${styleLeft}px`;
+      : window.pageYOffset + bottom + 4
+    container.style.top = `${styleTop}px`
+    container.style.left = `${styleLeft}px`
   }
 
   componentDidMount() {
-    this.bindNativeEvents();
-    this.adjustPosition();
+    this.bindNativeEvents()
+    this.adjustPosition()
   }
 
   componentDidUpdate() {
-    this.adjustPosition();
+    this.adjustPosition()
   }
 
   componentWillUnmount() {
-    this.removeNativeEvents();
+    this.removeNativeEvents()
   }
 
   bindNativeEvents() {
-    const { container } = this.props;
-    let isMouseDown = false;
+    const { container } = this.props
+    let isMouseDown = false
     this.addNativeEvent(
       window,
       'scroll',
       (event) => {
-        const { target } = event;
+        const { target } = event
         if (this.preventScrollCancel) {
-          event.preventDefault();
+          event.preventDefault()
         } else if (!target.className || target.className.indexOf('lake-link') === -1) {
-          this.cancel();
+          this.cancel()
         }
       },
       true,
-    );
+    )
 
     this.addNativeEvent(
       window,
       'resize',
       () => {
-        this.cancel();
+        this.cancel()
       },
       true,
-    );
+    )
 
     this.addNativeEvent(
       window,
       'mousedown',
       (event) => {
         if (!container.contains(event.target)) {
-          isMouseDown = true;
+          isMouseDown = true
         }
       },
       true,
-    );
+    )
 
     this.addNativeEvent(
       window,
       'mouseup',
       (event) => {
         if (isMouseDown && !container.contains(event.target)) {
-          this.cancel();
+          this.cancel()
         }
-        isMouseDown = false;
+        isMouseDown = false
       },
       true,
-    );
+    )
 
     this.addNativeEvent(container, 'keydown', (event) => {
-      const { keyCode } = event;
+      const { keyCode } = event
 
       if (keyCode === 13 && !this.state.invalidLink) {
-        this.confirm();
+        this.confirm()
       }
       if (keyCode === 27) {
-        this.cancel();
+        this.cancel()
       }
-    });
+    })
   }
 
   cancel() {
-    const { target, onCancel } = this.props;
+    const { target, onCancel } = this.props
     onCancel({
       link: target ? target.getAttribute('href') : null,
-    });
+    })
   }
 
   addNativeEvent(dom, name, callback, useCapture) {
-    dom.addEventListener(name, callback, useCapture);
+    dom.addEventListener(name, callback, useCapture)
     this.nativeEvents.push({
       dom,
       name,
       callback,
       useCapture,
-    });
+    })
   }
 
   removeNativeEvents() {
     this.nativeEvents.forEach((nativeEvent) => {
-      const { dom, name, callback, useCapture } = nativeEvent;
-      dom.removeEventListener(name, callback, useCapture);
-    });
-    this.nativeEvents = [];
+      const { dom, name, callback, useCapture } = nativeEvent
+      dom.removeEventListener(name, callback, useCapture)
+    })
+    this.nativeEvents = []
   }
 
   confirm() {
-    const { onConfirm } = this.props;
-    const { invalidLink } = this.state;
-    const text = this.getText();
-    const link = this.getLink();
+    const { onConfirm } = this.props
+    const { invalidLink } = this.state
+    const text = this.getText()
+    const link = this.getLink()
 
     if (!invalidLink) {
-      onConfirm(text, link);
+      onConfirm(text, link)
     }
   }
 
   renderPreview() {
-    const { onDeleteLink, shouldTargetBlank } = this.props;
-    const link = this.getLink();
-    const locale = this.locale;
-    const text = link || locale.emptyLink;
+    const { onDeleteLink, shouldTargetBlank } = this.props
+    const link = this.getLink()
+    const locale = this.locale
+    const text = link || locale.emptyLink
 
     const linkContainer = link ? (
       shouldTargetBlank(link) ? (
         <a className="lake-link-editor-link-container"
-           href={sanitizeUrl(link)}
-           target="_blank"
-           rel="noopener noreferrer"
+          href={sanitizeUrl(link)}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {text}
         </a>
@@ -178,23 +178,23 @@ class LinkEditor extends React.Component {
       )
     ) : (
       <span className="lake-link-editor-link-empty">{text}</span>
-    );
+    )
 
     return (
       <div
         className="lake-link-editor lake-link-editor-preview"
-        ref={ref => (this.containerDom = ref)}
+        ref={(ref) => (this.containerDom = ref)}
       >
-        <span className="lake-icon lake-icon-link"/>
+        <span className="lake-icon lake-icon-link" />
         {linkContainer}
-        <span className="lake-link-editor-slash"/>
+        <span className="lake-link-editor-slash" />
         <Tooltip title={locale.editLink}>
           <span
             className="lake-icon lake-icon-edit lake-link-editor-button"
             onClick={() => {
               this.setState({
                 type: 'edit',
-              });
+              })
             }}
           />
         </Tooltip>
@@ -205,23 +205,23 @@ class LinkEditor extends React.Component {
           />
         </Tooltip>
       </div>
-    );
+    )
   }
 
   isInvalidLink = (link) => {
-    return !link || (link && !link.match(/^[\x00-\x7F]/)) || link.startsWith('javascript:');
-  };
+    return !link || (link && !link.match(/^[\x00-\x7F]/)) || link.startsWith('javascript:')
+  }
 
   renderEditor() {
-    const { invalidLink } = this.state;
-    const text = this.getText();
-    const link = this.getLink();
-    const locale = this.locale;
+    const { invalidLink } = this.state
+    const text = this.getText()
+    const link = this.getLink()
+    const locale = this.locale
 
     return (
       <div
         className="lake-link-editor lake-link-editor-edit"
-        ref={element => (this.containerDom = element)}
+        ref={(element) => (this.containerDom = element)}
       >
         <p>{locale.text}</p>
         <p>
@@ -229,16 +229,16 @@ class LinkEditor extends React.Component {
             className="lake-link-text-input"
             defaultValue={text}
             ref={(element) => {
-              this.preventScrollCancel = true;
-              if (element) element.focus();
-              this.textInputDom = element;
+              this.preventScrollCancel = true
+              if (element) element.focus()
+              this.textInputDom = element
               setTimeout(() => {
-                this.preventScrollCancel = false;
-              }, 32);
+                this.preventScrollCancel = false
+              }, 32)
             }}
             placeholder={locale.addDescription}
             onChange={(event) => {
-              this.text = event.target.value;
+              this.text = event.target.value
             }}
           />
         </p>
@@ -249,16 +249,16 @@ class LinkEditor extends React.Component {
             defaultValue={link}
             ref={(element) => {
               if (element) {
-                element.focus();
+                element.focus()
               }
-              this.linkInputDom = element;
+              this.linkInputDom = element
             }}
             placeholder={locale.linkAddress}
             onChange={(event) => {
-              this.link = event.target.value;
+              this.link = event.target.value
               this.setState({
                 invalidLink: this.isInvalidLink(this.link),
-              });
+              })
             }}
           />
         </p>
@@ -271,7 +271,7 @@ class LinkEditor extends React.Component {
           <Button
             className="lake-link-confirm-button"
             onClick={() => {
-              this.confirm();
+              this.confirm()
             }}
             disabled={!this.link || invalidLink}
           >
@@ -279,20 +279,20 @@ class LinkEditor extends React.Component {
           </Button>
         </p>
       </div>
-    );
+    )
   }
 
   getLink() {
-    const { target, getLink } = this.props;
-    return (this.link && getLink(this.link)) || target.getAttribute('href') || '';
+    const { target, getLink } = this.props
+    return (this.link && getLink(this.link)) || target.getAttribute('href') || ''
   }
 
   getText() {
-    return this.text || this.props.target.innerText;
+    return this.text || this.props.target.innerText
   }
 
   render() {
-    return this.state.type === 'edit' ? this.renderEditor() : this.renderPreview();
+    return this.state.type === 'edit' ? this.renderEditor() : this.renderPreview()
   }
 }
 
@@ -309,7 +309,7 @@ LinkEditor.defaultProps = {
   },
   shouldTargetBlank: () => {
   },
-  getLink: e => e,
-};
+  getLink: (e) => e,
+}
 
-export default LinkEditor;
+export default LinkEditor

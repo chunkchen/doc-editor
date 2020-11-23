@@ -1,7 +1,7 @@
-import { addIframeSection } from '../utils/command';
+import { addIframeSection } from '../utils/command'
 
 export default (engine) => {
-  const locale = engine.locale;
+  const locale = engine.locale
   return [
     {
       name: 'image',
@@ -23,8 +23,8 @@ export default (engine) => {
           : {
             rows: 3,
             cols: 3,
-          };
-        engine.command.execute('table', opts);
+          }
+        engine.command.execute('table', opts)
       },
     },
     {
@@ -57,7 +57,7 @@ export default (engine) => {
         },
       ],
       onClick: () => {
-        addIframeSection(engine, 'youku');
+        addIframeSection(engine, 'youku')
       },
     },
     {
@@ -67,7 +67,7 @@ export default (engine) => {
       pinyin: 'daimakuai,code',
       description: locale.section.codeblockDescription,
       onClick: () => {
-        engine.command.execute('codeblock', '');
+        engine.command.execute('codeblock', '')
       },
     },
     {
@@ -85,7 +85,7 @@ export default (engine) => {
       pinyin: 'gongshi,formula,math,latex',
       description: locale.section.mathDescription,
       onClick: () => {
-        engine.command.execute('math');
+        engine.command.execute('math')
       },
     },
     {
@@ -95,7 +95,7 @@ export default (engine) => {
       pinyin: 'siweinaotu,mindmap',
       description: locale.section.mindmapDescription,
       onClick: () => {
-        engine.command.execute('mindmap');
+        engine.command.execute('mindmap')
       },
     },
     {
@@ -128,7 +128,7 @@ export default (engine) => {
         },
       ],
       onClick: () => {
-        engine.command.execute('diagram');
+        engine.command.execute('diagram')
       },
     },
     {
@@ -138,7 +138,7 @@ export default (engine) => {
       pinyin: 'jiamiwenben,lockedtext',
       description: locale.section.lockedtextDescription,
       onClick: () => {
-        engine.command.execute('lockedtext');
+        engine.command.execute('lockedtext')
       },
     },
     {
@@ -148,7 +148,7 @@ export default (engine) => {
       pinyin: 'onlinewendang,onlinedoc',
       description: locale.section.onlineDescription,
       onReadLocal: (value) => {
-        addIframeSection(engine, 'localdoc', value);
+        addIframeSection(engine, 'localdoc', value)
       },
     },
     {
@@ -158,7 +158,7 @@ export default (engine) => {
       pinyin: 'qianruwangzhi,website',
       description: locale.section.websiteDescription,
       onClick: (url) => {
-        addIframeSection(engine, 'onlinedoc', url);
+        addIframeSection(engine, 'onlinedoc', url)
       },
     },
     {
@@ -215,7 +215,7 @@ export default (engine) => {
       pinyin: 'bendiwendang,localdocument,pdf,word,excel,ppt,powerpoint',
       description: locale.section.localdocDescription,
       onClick: (value) => {
-        addIframeSection(engine, 'localdoc', value);
+        addIframeSection(engine, 'localdoc', value)
       },
     },
     {
@@ -225,7 +225,7 @@ export default (engine) => {
       pinyin: 'zhuangtai,status',
       description: locale.section.labelDescription,
       onClick: () => {
-        engine.command.execute('label');
+        engine.command.execute('label')
       },
     },
     {
@@ -235,8 +235,8 @@ export default (engine) => {
       pinyin: 'mxgraph',
       description: 'mxgraph',
       onClick: () => {
-        engine.command.execute('mxgraph');
+        engine.command.execute('mxgraph')
       },
     },
-  ];
-};
+  ]
+}

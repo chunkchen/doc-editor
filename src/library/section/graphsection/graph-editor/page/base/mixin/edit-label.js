@@ -1,15 +1,15 @@
-import Util from '../util';
+import Util from '../util'
 
-const Mixin = {};
+const Mixin = {}
 Mixin.CFG = {
   labelEditable: false,
-};
-Mixin.INIT = '_initLabelEditor';
+}
+Mixin.INIT = '_initLabelEditor'
 Mixin.AUGMENT = {
   _initLabelEditor() {
-    const labelEditable = this.get('labelEditable');
+    const labelEditable = this.get('labelEditable')
     if (labelEditable) {
-      const graph = this.getGraph();
+      const graph = this.getGraph()
       const labelTextArea = Util.createDOM(
         '<div contenteditable="true" role="textbox" tabindex="1" class="g6-label-editor"></div>',
         {
@@ -29,114 +29,114 @@ Mixin.AUGMENT = {
           background: 'white',
           'box-sizing': 'content-box',
         },
-      );
+      )
       graph.getGraphContainer()
-        .appendChild(labelTextArea);
-      this.isCompositing = false;
+        .appendChild(labelTextArea)
+      this.isCompositing = false
       labelTextArea.on('compositionstart', () => {
-        this.isCompositing = true;
-      });
+        this.isCompositing = true
+      })
       labelTextArea.on('compositionend', () => {
-        this.isCompositing = false;
-      });
+        this.isCompositing = false
+      })
       labelTextArea.on('blur', (ev) => {
-        ev.stopPropagation();
+        ev.stopPropagation()
         if (!graph.destroyed) {
-          this.endEditLabel();
+          this.endEditLabel()
         }
-      });
+      })
       labelTextArea.on('keydown', (ev) => {
-        ev.stopPropagation();
-        const key = Util.getKeyboradKey(ev);
+        ev.stopPropagation()
+        const key = Util.getKeyboradKey(ev)
         if ((ev.metaKey && key === 's') || (ev.ctrlKey && key === 's')) {
-          ev.preventDefault();
+          ev.preventDefault()
         }
         if ((key === 'Enter' || key === 'Escape') && !this.isCompositing) {
-          this.endEditLabel();
+          this.endEditLabel()
         }
-      });
-      this.set('labelTextArea', labelTextArea);
+      })
+      this.set('labelTextArea', labelTextArea)
       graph.on('beforeviewportchange', () => {
         if (labelTextArea.focusItem) {
-          this.setLabelEditorBeginPosition(labelTextArea.focusItem);
+          this.setLabelEditorBeginPosition(labelTextArea.focusItem)
         }
-      });
+      })
     }
   },
   _getLabelTextAreaBox(labelShape, labelText) {
-    const padding = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0, 0];
+    const padding = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0, 0]
 
     if (labelText) {
-      labelShape.attr('text', labelText);
+      labelShape.attr('text', labelText)
     }
 
-    const graph = this.getGraph();
-    const rootGroup = graph.getRootGroup();
-    const labelBox = Util.getBBox(labelShape, rootGroup);
+    const graph = this.getGraph()
+    const rootGroup = graph.getRootGroup()
+    const labelBox = Util.getBBox(labelShape, rootGroup)
     return {
       minX: labelBox.minX - padding[1],
       minY: labelBox.minY - padding[0],
       maxX: labelBox.maxX + padding[1],
       maxY: labelBox.maxY + padding[0],
-    };
+    }
   },
   setLabelEditorBeginPosition(item) {
-    const labelTextArea = this.get('labelTextArea');
-    const labelShape = item.getLabel();
+    const labelTextArea = this.get('labelTextArea')
+    const labelShape = item.getLabel()
 
     if (labelShape) {
-      const labelBox = this._getLabelTextAreaBox(labelShape);
+      const labelBox = this._getLabelTextAreaBox(labelShape)
 
-      const lineHeight = labelShape.attr('lineHeight');
-      const fontSize = labelShape.attr('fontSize');
+      const lineHeight = labelShape.attr('lineHeight')
+      const fontSize = labelShape.attr('fontSize')
       const labelPoint = {
         x: labelBox.minX,
         y: labelBox.minY - lineHeight / 4 + fontSize / 4 - 1,
         width: labelBox.maxX - labelBox.minX,
         height: labelBox.maxY - labelBox.minY,
-      };
+      }
       labelTextArea.css({
         top: `${labelPoint.y}px`,
         left: `${labelPoint.x}px`,
-      });
-      labelTextArea.labelPoint = labelPoint;
+      })
+      labelTextArea.labelPoint = labelPoint
     } else {
-      const graph = this.getGraph();
-      const rootGroup = graph.getRootGroup();
-      const keyShape = item.getKeyShape();
-      const keyShapeBox = Util.getBBox(keyShape, rootGroup);
+      const graph = this.getGraph()
+      const rootGroup = graph.getRootGroup()
+      const keyShape = item.getKeyShape()
+      const keyShapeBox = Util.getBBox(keyShape, rootGroup)
       const _labelPoint = {
         x: keyShapeBox.minY + (keyShapeBox.maxY - keyShapeBox.minY - labelTextArea.height()) / 2,
         y: (keyShapeBox.minX + keyShapeBox.maxX) / 2,
-      };
+      }
       labelTextArea.css({
         top: `${_labelPoint.x}px`,
         left: `${_labelPoint.y}px`,
-      });
-      labelTextArea.labelPoint = _labelPoint;
+      })
+      labelTextArea.labelPoint = _labelPoint
     }
   },
   beginEditLabel(item) {
-    const labelTextArea = this.get('labelTextArea');
-    const graph = this.getGraph();
+    const labelTextArea = this.get('labelTextArea')
+    const graph = this.getGraph()
 
     if (Util.isString(item)) {
-      item = graph.find(item);
+      item = graph.find(item)
     }
 
     if (item && !item.destroyed && labelTextArea) {
-      this.setSignal('preventWheelPan', true);
-      const model = item.getModel();
-      const labelShape = item.getLabel();
-      const zoom = graph.getZoom();
-      labelTextArea.focusItem = item;
+      this.setSignal('preventWheelPan', true)
+      const model = item.getModel()
+      const labelShape = item.getLabel()
+      const zoom = graph.getZoom()
+      labelTextArea.focusItem = item
 
       if (labelShape) {
-        const lineHeight = labelShape.attr('lineHeight');
-        const labelBox = this._getLabelTextAreaBox(labelShape);
-        const minWidth = (labelBox.maxX - labelBox.minX) / zoom;
-        const minHeight = (labelBox.maxY - labelBox.minY + lineHeight / 4) / zoom;
-        labelTextArea.innerHTML = model.label;
+        const lineHeight = labelShape.attr('lineHeight')
+        const labelBox = this._getLabelTextAreaBox(labelShape)
+        const minWidth = (labelBox.maxX - labelBox.minX) / zoom
+        const minHeight = (labelBox.maxY - labelBox.minY + lineHeight / 4) / zoom
+        labelTextArea.innerHTML = model.label
         labelTextArea.css({
           'min-width': `${minWidth}px`,
           'min-height': `${minHeight}px`,
@@ -145,33 +145,33 @@ Mixin.AUGMENT = {
           'line-height': `${lineHeight}px`,
           'font-size': `${labelShape.attr('fontSize')}px`,
           transform: `scale(${zoom})`,
-        });
+        })
       } else {
-        labelTextArea.innerHTML = '';
+        labelTextArea.innerHTML = ''
         labelTextArea.css({
           'min-width': 'auto',
           'min-height': 'auto',
-        });
+        })
       }
 
-      this.setLabelEditorBeginPosition(item);
+      this.setLabelEditorBeginPosition(item)
       labelTextArea.css({
         visibility: 'visible',
-      });
-      labelTextArea.focus();
-      document.execCommand('selectAll', false, null);
+      })
+      labelTextArea.focus()
+      document.execCommand('selectAll', false, null)
     }
   },
   endEditLabel() {
-    const labelTextArea = this.get('labelTextArea');
-    this.setSignal('preventWheelPan', false);
+    const labelTextArea = this.get('labelTextArea')
+    this.setSignal('preventWheelPan', false)
 
     if (labelTextArea) {
-      const item = labelTextArea.focusItem;
+      const item = labelTextArea.focusItem
 
       if (item && !item.destroyed) {
-        const model = item.getModel();
-        const editor = this.editor;
+        const model = item.getModel()
+        const editor = this.editor
 
         if (model.label !== labelTextArea.textContent) {
           editor.executeCommand('update', {
@@ -180,19 +180,19 @@ Mixin.AUGMENT = {
             updateModel: {
               label: labelTextArea.textContent,
             },
-          });
+          })
         }
 
-        labelTextArea.hide();
-        labelTextArea.focusItem = undefined;
-        this.focusGraphWrapper();
+        labelTextArea.hide()
+        labelTextArea.focusItem = undefined
+        this.focusGraphWrapper()
       }
     }
   },
   cancelEditLabel() {
-    const labelTextArea = this.get('labelTextArea');
-    labelTextArea.focusItem = undefined;
-    labelTextArea.hide();
+    const labelTextArea = this.get('labelTextArea')
+    labelTextArea.focusItem = undefined
+    labelTextArea.hide()
   },
-};
-export default Mixin;
+}
+export default Mixin

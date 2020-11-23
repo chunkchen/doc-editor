@@ -1,8 +1,8 @@
 /**
  * @fileOverview base util
  */
-import G6 from '@antv/g6';
-import * as Palettes from '@ant-design/colors';
+import G6 from '@antv/g6'
+import * as Palettes from '@ant-design/colors'
 
 const keyCodeMap = {
   whitespace: {
@@ -118,7 +118,7 @@ const keyCodeMap = {
     109: 'subtract ',
     111: 'divide ',
   },
-};
+}
 
 const Util = {
   ...G6.Util,
@@ -128,27 +128,27 @@ const Util = {
    * @return {object} rst
    */
   getTypeAndChar: (keyCode) => {
-    keyCode = `${keyCode}`;
-    let type;
-    let character;
+    keyCode = `${keyCode}`
+    let type
+    let character
 
     for (const index in keyCodeMap) {
-      type = index;
+      type = index
 
       for (const i in keyCodeMap[index]) {
         if (i === keyCode) {
-          character = keyCodeMap[index][i];
+          character = keyCodeMap[index][i]
           return {
             type,
             character,
-          };
+          }
         }
       }
     }
-    return {};
+    return {}
   },
   getKeyboradKey: (domEvent) => {
-    return domEvent.key || Util.getTypeAndChar(domEvent.keyCode).character;
+    return domEvent.key || Util.getTypeAndChar(domEvent.keyCode).character
   },
 
   /**
@@ -162,14 +162,14 @@ const Util = {
    * @return {Number|NaN} distance
    */
   pointLineDistance: (x1, y1, x2, y2, x, y) => {
-    const d = [x2 - x1, y2 - y1];
+    const d = [x2 - x1, y2 - y1]
     if (G6.Util.vec2.exactEquals(d, [0, 0])) {
-      return NaN;
+      return NaN
     }
-    const u = [-d[1], d[0]];
-    G6.Util.vec2.normalize(u, u);
-    const a = [x - x1, y - y1];
-    return Math.abs(G6.Util.vec2.dot(a, u));
+    const u = [-d[1], d[0]]
+    G6.Util.vec2.normalize(u, u)
+    const a = [x - x1, y - y1]
+    return Math.abs(G6.Util.vec2.dot(a, u))
   },
 
   /**
@@ -188,7 +188,7 @@ const Util = {
         width: box.maxX - box.minX,
         height: box.maxY - box.minY,
       },
-    });
+    })
   },
 
   /**
@@ -197,15 +197,15 @@ const Util = {
    * @return  {array} rst array
    */
   objectToValues: (obj) => {
-    const rst = [];
-    let i;
+    const rst = []
+    let i
     for (i in obj) {
       if (obj.hasOwnProperty(i)) {
-        rst.push(obj[i]);
+        rst.push(obj[i])
       }
     }
 
-    return rst;
+    return rst
   },
 
   /**
@@ -215,21 +215,21 @@ const Util = {
    * @return {object} rst
    */
   getContrast: (obj1, obj2) => {
-    const rst = {};
+    const rst = {}
     G6.Util.each(obj2, (v, k) => {
-      rst[k] = obj1[k];
-    });
-    return rst;
+      rst[k] = obj1[k]
+    })
+    return rst
   },
   // 将光标移动到最后
   setEndOfContenteditable: (contentEditableElement) => {
-    const range = document.createRange();
-    range.selectNodeContents(contentEditableElement);
-    range.collapse(false);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+    const range = document.createRange()
+    range.selectNodeContents(contentEditableElement)
+    range.collapse(false)
+    const selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
   },
   Palettes,
-};
-export default Util;
+}
+export default Util

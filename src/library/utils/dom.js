@@ -1,4 +1,4 @@
-import { isNil } from './type';
+import { isNil } from './type'
 
 /**
  * 获取一串字符关于另一个字符的索引集
@@ -8,17 +8,17 @@ import { isNil } from './type';
  */
 
 const getKeywordIndexs = (str, keyword) => {
-  const rst = [];
-  const l = keyword.length;
-  let i = str.indexOf(keyword);
+  const rst = []
+  const l = keyword.length
+  let i = str.indexOf(keyword)
 
   while (i > -1) {
-    rst.push(i);
-    i = str.indexOf(keyword, i + l);
+    rst.push(i)
+    i = str.indexOf(keyword, i + l)
   }
 
-  return rst;
-};
+  return rst
+}
 
 /**
  * dom 元素是否在浏览器视口内
@@ -26,12 +26,12 @@ const getKeywordIndexs = (str, keyword) => {
  * @return {Boolean}
  */
 export const isInViewport = (dom) => {
-  const rect = dom.getBoundingClientRect();
+  const rect = dom.getBoundingClientRect()
   return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     /* or $(window).height() */
-    && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+    && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   /* or $(window).width() */
-};
+}
 
 /**
  * 获取样式
@@ -44,16 +44,16 @@ export const isInViewport = (dom) => {
 export const getStyle = (dom, name, defaultValue) => {
   try {
     if (window.getComputedStyle) {
-      return window.getComputedStyle(dom, null)[name];
+      return window.getComputedStyle(dom, null)[name]
     }
-    return dom.currentStyle[name];
+    return dom.currentStyle[name]
   } catch (e) {
     if (!isNil(defaultValue)) {
-      return defaultValue;
+      return defaultValue
     }
-    return null;
+    return null
   }
-};
+}
 
 /**
  * 获取宽度
@@ -62,14 +62,14 @@ export const getStyle = (dom, name, defaultValue) => {
  * @return {Number} 宽度
  */
 export const getWidth = (el, defaultValue) => {
-  let width = getStyle(el, 'width', defaultValue);
+  let width = getStyle(el, 'width', defaultValue)
 
   if (width === 'auto') {
-    width = el.offsetWidth;
+    width = el.offsetWidth
   }
 
-  return parseFloat(width);
-};
+  return parseFloat(width)
+}
 
 /**
  * 获取高度
@@ -78,12 +78,12 @@ export const getWidth = (el, defaultValue) => {
  * @return {Number} 高度
  */
 export const getHeight = (el, defaultValue = 50) => {
-  let height = getStyle(el, 'height', defaultValue);
+  let height = getStyle(el, 'height', defaultValue)
   if (height === 'auto') {
-    height = el.offsetHeight;
+    height = el.offsetHeight
   }
-  return parseFloat(height);
-};
+  return parseFloat(height)
+}
 
 /**
  * 获取一个 dom 元素内所有的 textnode 类型的元素
@@ -92,26 +92,26 @@ export const getHeight = (el, defaultValue = 50) => {
  * @return {Array} 获取的文本节点
  */
 export const getTextNodes = (elem, filter) => {
-  let textNodes = [];
+  let textNodes = []
   if (elem) {
     if (filter && !filter(elem)) {
-      return textNodes;
+      return textNodes
     }
 
-    const nodes = elem.childNodes;
+    const nodes = elem.childNodes
 
     for (let i = 0; i < nodes.length; i++) {
-      const node = nodes[i];
-      const nodeType = node.nodeType;
+      const node = nodes[i]
+      const nodeType = node.nodeType
       if (nodeType === 3) {
-        textNodes.push(node);
+        textNodes.push(node)
       } else if (nodeType === 1 || nodeType === 9 || nodeType === 11) {
-        textNodes = textNodes.concat(getTextNodes(node, filter));
+        textNodes = textNodes.concat(getTextNodes(node, filter))
       }
     }
   }
-  return textNodes;
-};
+  return textNodes
+}
 
 /**
  * 从一个 testNode 集合中获取关于一个 text 的 range 集合
@@ -120,29 +120,29 @@ export const getTextNodes = (elem, filter) => {
  * @return {Array} 区间集合
  */
 export const getRangesByText = (textNodes, text) => {
-  const ranges = [];
+  const ranges = []
   textNodes.forEach((textNode) => {
-    const textValue = textNode.nodeValue;
-    const l = text.length;
-    const strIndexs = getKeywordIndexs(textValue, text);
+    const textValue = textNode.nodeValue
+    const l = text.length
+    const strIndexs = getKeywordIndexs(textValue, text)
     strIndexs.forEach((strIndex) => {
-      const range = document.createRange();
-      range.setStart(textNode, strIndex);
-      range.setEnd(textNode, strIndex + l);
-      ranges.push(range);
-    });
-  });
-  return ranges;
-};
+      const range = document.createRange()
+      range.setStart(textNode, strIndex)
+      range.setEnd(textNode, strIndex + l)
+      ranges.push(range)
+    })
+  })
+  return ranges
+}
 
 export const loadImage = (src) => {
   return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.crossOrigin = 'Anonymous';
+    const image = new Image()
+    image.crossOrigin = 'Anonymous'
     image.onload = () => {
-      return resolve(image);
-    };
-    image.onerror = reject;
-    image.src = src;
-  });
-};
+      return resolve(image)
+    }
+    image.onerror = reject
+    image.src = src
+  })
+}

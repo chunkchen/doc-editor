@@ -1,26 +1,26 @@
-import React from 'react';
-import { Input } from 'antd';
-import 'antd/lib/input/style';
-import 'antd/lib/icon/style';
-import { UnlockOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Input } from 'antd'
+import 'antd/lib/input/style'
+import 'antd/lib/icon/style'
+import { UnlockOutlined } from '@ant-design/icons'
 
 class Unlock extends React.Component {
   changeUnlockPassword = (e) => {
-    this.password = e.target.value;
-  };
+    this.password = e.target.value
+  }
 
   unLock = () => {
-    this.props.onUnlock(this.password);
-  };
+    this.props.onUnlock(this.password)
+  }
 
   onPressEnter = (e) => {
-    this.props.onUnlock(e.target.value);
-  };
+    this.props.onUnlock(e.target.value)
+  }
 
   render() {
     return (
       <div className="unlock-panel">
-        <div className="lock-icon"/>
+        <div className="lock-icon" />
         <p>
           <Input
             type="password"
@@ -29,7 +29,7 @@ class Unlock extends React.Component {
             onPressEnter={this.onPressEnter}
             addonAfter={(
               <span className="unlock-btn" onClick={this.unLock}>
-                <UnlockOutlined/>
+                <UnlockOutlined />
                 {this.props.locale.unlock}
               </span>
             )}
@@ -38,8 +38,8 @@ class Unlock extends React.Component {
         <p className="error-info">{this.props.locale.errorFeedback}</p>
         <p className="lock-info">{this.props.locale.lockedFeedback}</p>
       </div>
-    );
+    )
   }
 }
 
-export default Unlock;
+export default Unlock

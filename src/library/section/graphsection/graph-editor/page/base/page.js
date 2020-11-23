@@ -2,20 +2,20 @@
  * @fileOverview page
  * abstract class
  */
-import G6 from '@antv/g6';
-import Base from '../../base';
-import Util from './util';
-import Global from './global';
-import GraphMixin from './mixin/graph';
-import GridMixin from './mixin/grid';
-import EventMixin from './mixin/event';
-import SelectMixin from './mixin/select';
-import ActiveMixin from './mixin/active';
-import AlignMixin from './mixin/align';
-import LabelEditor from './mixin/edit-label';
-import StatusMixin from './mixin/status';
+import G6 from '@antv/g6'
+import Base from '../../base'
+import Util from './util'
+import Global from './global'
+import GraphMixin from './mixin/graph'
+import GridMixin from './mixin/grid'
+import EventMixin from './mixin/event'
+import SelectMixin from './mixin/select'
+import ActiveMixin from './mixin/active'
+import AlignMixin from './mixin/align'
+import LabelEditor from './mixin/edit-label'
+import StatusMixin from './mixin/status'
 
-const Mixins = [GraphMixin, SelectMixin, ActiveMixin, GridMixin, EventMixin, AlignMixin, LabelEditor, StatusMixin];
+const Mixins = [GraphMixin, SelectMixin, ActiveMixin, GridMixin, EventMixin, AlignMixin, LabelEditor, StatusMixin]
 
 class Page extends Base {
   constructor(inputCfg) {
@@ -38,46 +38,46 @@ class Page extends Base {
       },
       _controllers: {},
       _signals: {},
-    };
+    }
     Util.each(Mixins, (Mixin) => {
-      Util.mix(cfg, Mixin.CFG);
-    });
-    Util.mix(true, cfg, inputCfg);
-    super(cfg);
-    this.isPage = true;
-    this.type = 'page';
-    this._init();
+      Util.mix(cfg, Mixin.CFG)
+    })
+    Util.mix(true, cfg, inputCfg)
+    super(cfg)
+    this.isPage = true
+    this.type = 'page'
+    this._init()
   }
 
   getTextDomLactions() {
-    const graph = this.getGraph();
-    const rootGroup = graph.getRootGroup();
-    const canvas = graph.getCanvas();
-    const data = [];
+    const graph = this.getGraph()
+    const rootGroup = graph.getRootGroup()
+    const canvas = graph.getCanvas()
+    const data = []
     Util.traverseTree(canvas, (child) => {
       if (child.type === 'text') {
-        const box = Util.getBBox(child, rootGroup);
-        const point = [box.minX, box.minY, 1];
+        const box = Util.getBBox(child, rootGroup)
+        const point = [box.minX, box.minY, 1]
         data.push({
           text: child.attr('text'),
           x: point[0],
           y: point[1],
           fontSize: +child.attr('fontSize'),
-        });
+        })
       }
     }, (e) => {
-      return e.get('children');
-    });
-    return data;
+      return e.get('children')
+    })
+    return data
   }
 
   getDelegation(items, group) {
     if (!group) {
-      const graph = this.getGraph();
-      group = graph.getRootGroup();
+      const graph = this.getGraph()
+      group = graph.getRootGroup()
     }
 
-    let delegation;
+    let delegation
     if (items.length === 1 && !items[0].isNode && !items[0].isGroup) {
       if (items[0].isEdge) {
         // 边的委托图形
@@ -87,65 +87,65 @@ class Page extends Base {
             ...Global.edgeDelegationStyle,
           },
           capture: false,
-        });
+        })
       } else {
         // 新拖出节点委托图形
-        delegation = Util.getRectByBox(items[0], group, Global.nodeDelegationStyle);
-        delegation.set('capture', false);
+        delegation = Util.getRectByBox(items[0], group, Global.nodeDelegationStyle)
+        delegation.set('capture', false)
       }
     } else {
       // 移动节点委托图形
       const startBox = Util.getTotalBBox(items.map((item) => {
-        return item.getBBox();
-      }));
-      delegation = Util.getRectByBox(startBox, group, Global.nodeDelegationStyle);
-      delegation.set('capture', false);
+        return item.getBBox()
+      }))
+      delegation = Util.getRectByBox(startBox, group, Global.nodeDelegationStyle)
+      delegation.set('capture', false)
     }
 
-    return delegation;
+    return delegation
   }
 
   focusGraphWrapper() {
-    const graph = this.getGraph();
+    const graph = this.getGraph()
     graph.getKeyboardEventWrapper()
-      .focus();
+      .focus()
   }
 
   saveImage(options) {
-    const graph = this.getGraph();
-    const box = graph.getBBox();
-    const padding = graph.getFitViewPadding();
-    let seletedIds;
-    let activedIds;
+    const graph = this.getGraph()
+    const box = graph.getBBox()
+    const padding = graph.getFitViewPadding()
+    let seletedIds
+    let activedIds
     return graph.saveImage({
       width: box.width + padding[1] + padding[3],
       height: box.height + padding[0] + padding[2],
       beforeTransform: () => {
         seletedIds = this.getSelected()
           .map((item) => {
-            return item.id;
-          });
+            return item.id
+          })
         activedIds = this.getSelected()
           .map((item) => {
-            return item.id;
-          });
-        this.clearSelected();
-        this.clearActived();
+            return item.id
+          })
+        this.clearSelected()
+        this.clearActived()
       },
       afterTransform: () => {
-        this.setSelected(seletedIds, true);
-        this.setActived(activedIds, true);
+        this.setSelected(seletedIds, true)
+        this.setActived(activedIds, true)
       },
       ...options,
-    });
+    })
   }
 
   _init() {
     Util.each(Mixins, (Mixin) => {
-      Mixin.INIT && this[Mixin.INIT]();
-    });
-    this.bindEvent();
-    this._cacheBBox();
+      Mixin.INIT && this[Mixin.INIT]()
+    })
+    this.bindEvent()
+    this._cacheBBox()
   }
 
   /**
@@ -154,32 +154,32 @@ class Page extends Base {
    * @param  {obj|undefined} cfg 配置项
    */
   executeCommand(callback, cfg) {
-    const eidtor = this.editor;
+    const eidtor = this.editor
     if (eidtor) {
-      eidtor.executeCommand(callback, cfg);
+      eidtor.executeCommand(callback, cfg)
     } else {
-      callback();
+      callback()
     }
   }
 
   // cache graph box
   _cacheBBox() {
-    const graph = this.getGraph();
-    this.set('bboxCache', graph.getBBox());
+    const graph = this.getGraph()
+    this.set('bboxCache', graph.getBBox())
   }
 
   bindEvent() {
-    const graph = this.getGraph();
+    const graph = this.getGraph()
     graph.on('afterchange', () => {
-      this._cacheBBox();
-    });
+      this._cacheBBox()
+    })
     graph.on('mouseenter', (shape) => {
       if (shape && shape.isKeyShape) {
         this.css({
           cursor: 'default',
-        });
+        })
       }
-    });
+    })
   }
 
   /**
@@ -189,30 +189,30 @@ class Page extends Base {
    * @return {boolean} shape
    */
   translateLimt(matrix) {
-    const graph = this.getGraph();
-    const bboxCache = this.get('bboxCache');
-    const width = graph.getWidth();
-    const height = graph.getHeight();
-    const horizontal = width / 2;
-    const vertical = height / 2;
-    const tl = [bboxCache.minX, bboxCache.minY, 1];
-    const br = [bboxCache.maxX, bboxCache.maxY, 1];
-    Util.vec3.transformMat3(tl, tl, matrix);
-    Util.vec3.transformMat3(br, br, matrix);
+    const graph = this.getGraph()
+    const bboxCache = this.get('bboxCache')
+    const width = graph.getWidth()
+    const height = graph.getHeight()
+    const horizontal = width / 2
+    const vertical = height / 2
+    const tl = [bboxCache.minX, bboxCache.minY, 1]
+    const br = [bboxCache.maxX, bboxCache.maxY, 1]
+    Util.vec3.transformMat3(tl, tl, matrix)
+    Util.vec3.transformMat3(br, br, matrix)
 
     if (br[0] < horizontal) {
-      Util.mat3.translate(matrix, matrix, [horizontal - br[0], 0]);
+      Util.mat3.translate(matrix, matrix, [horizontal - br[0], 0])
     }
     if (br[1] < vertical) {
-      Util.mat3.translate(matrix, matrix, [0, vertical - br[1]]);
+      Util.mat3.translate(matrix, matrix, [0, vertical - br[1]])
     }
     if (tl[1] > height - vertical) {
-      Util.mat3.translate(matrix, matrix, [0, height - vertical - tl[1]]);
+      Util.mat3.translate(matrix, matrix, [0, height - vertical - tl[1]])
     }
     if (tl[0] > width - horizontal) {
-      Util.mat3.translate(matrix, matrix, [width - horizontal - tl[0], 0]);
+      Util.mat3.translate(matrix, matrix, [width - horizontal - tl[0], 0])
     }
-    return true;
+    return true
   }
 
   /**
@@ -220,8 +220,8 @@ class Page extends Base {
    * @param  {Boolean} value set value
    */
   setSignal(name, value) {
-    const signals = this.get('_signals');
-    signals[name] = value;
+    const signals = this.get('_signals')
+    signals[name] = value
   }
 
   /**
@@ -229,8 +229,8 @@ class Page extends Base {
    * @return {Boolean} signal value
    */
   getSignal(name) {
-    const signals = this.get('_signals');
-    return signals[name];
+    const signals = this.get('_signals')
+    return signals[name]
   }
 
   /**
@@ -238,8 +238,8 @@ class Page extends Base {
    * @param  {object} controller controller object
    */
   setController(name, controller) {
-    const controllers = this.get('_controllers');
-    controllers[name] = controller;
+    const controllers = this.get('_controllers')
+    controllers[name] = controller
   }
 
   /**
@@ -247,22 +247,22 @@ class Page extends Base {
    * @return {object} controller controller object
    */
   getController(name) {
-    const controllers = this.get('_controllers');
-    return controllers[name];
+    const controllers = this.get('_controllers')
+    return controllers[name]
   }
 
   destroy() {
-    const graph = this.get('_graph');
-    const controllers = this.get('_controllers');
+    const graph = this.get('_graph')
+    const controllers = this.get('_controllers')
     Util.each(controllers, (controller) => {
-      controller.destroy();
-    });
-    graph.destroy();
-    this.destroyed = true;
+      controller.destroy()
+    })
+    graph.destroy()
+    this.destroyed = true
   }
 }
 
 Util.each(Mixins, (Mixin) => {
-  Util.mix(Page.prototype, Mixin.AUGMENT);
-});
-export default Page;
+  Util.mix(Page.prototype, Mixin.AUGMENT)
+})
+export default Page

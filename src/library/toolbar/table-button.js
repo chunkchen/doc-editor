@@ -1,23 +1,23 @@
-import React from 'react';
-import { Popover } from 'antd';
-import 'antd/lib/popover/style';
-import Button from './button';
-import TableSelector from './table-selector';
+import React from 'react'
+import { Popover } from 'antd'
+import 'antd/lib/popover/style'
+import Button from './button'
+import TableSelector from './table-selector'
 
 export default class extends React.Component {
   handleClick = (event, opts) => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.onClick(opts);
-  };
+    event.preventDefault()
+    event.stopPropagation()
+    this.props.onClick(opts)
+  }
 
   onMouseEnter = (event) => {
-    event.stopPropagation();
-  };
+    event.stopPropagation()
+  }
 
   onMouseLeave = (event) => {
-    event.stopPropagation();
-  };
+    event.stopPropagation()
+  }
 
   render() {
     return (
@@ -27,7 +27,7 @@ export default class extends React.Component {
             this.handleClick(event, {
               rows,
               cols,
-            });
+            })
           }}
           />
         )}
@@ -39,12 +39,12 @@ export default class extends React.Component {
           tooltip={false}
           outerVisible
           onClick={(event) => {
-            this.handleClick(event);
+            this.handleClick(event)
           }}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
         />
       </Popover>
-    );
+    )
   }
 }

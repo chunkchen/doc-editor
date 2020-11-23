@@ -1,29 +1,29 @@
-import React from 'react';
-import { Select } from 'antd';
-import 'antd/lib/select/style';
-import classNames from 'classnames';
-import modeConfig from './mode-config';
+import React from 'react'
+import { Select } from 'antd'
+import 'antd/lib/select/style'
+import classNames from 'classnames'
+import modeConfig from './mode-config'
 
-const Option = Select.Option;
+const Option = Select.Option
 
 class Header extends React.PureComponent {
   state = {
     open: false,
-  };
+  }
 
   onDropdownVisibleChange = (open) => {
     this.setState({
       open,
-    });
-  };
+    })
+  }
 
   handlerFilter = (input, option) => {
-    input = input.toLowerCase();
-    const key = option.key || '';
-    let name = option.name || '';
-    name = name.toLowerCase();
-    return key.includes(input) || name.includes(input);
-  };
+    input = input.toLowerCase()
+    const key = option.key || ''
+    let name = option.name || ''
+    name = name.toLowerCase()
+    return key.includes(input) || name.includes(input)
+  }
 
   render() {
     return (
@@ -48,11 +48,11 @@ class Header extends React.PureComponent {
             <Option name={item.name} value={item.value} key={item.value}>
               {item.name}
             </Option>
-          );
+          )
         })}
       </Select>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

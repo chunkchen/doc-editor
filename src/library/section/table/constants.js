@@ -63,5 +63,5 @@ export default function (section) {
       icon: 'remove-table',
       text: section.locale.removeTable,
     }],
-  };
+  }
 }

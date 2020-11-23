@@ -19,4 +19,4 @@ export default {
     iframeOverLimitSectionView: '嵌入Section不能多于 ${limit} 张',
     canNotShowSection: 'Section无法展示',
   },
-};
+}

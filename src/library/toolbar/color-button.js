@@ -1,87 +1,87 @@
-import React from 'react';
-import classnames from 'classnames';
-import Palette from '../utils/palette';
-import Button from './button';
-import ColorPicker from './color-picker';
+import React from 'react'
+import classnames from 'classnames'
+import Palette from '../utils/palette'
+import Button from './button'
+import ColorPicker from './color-picker'
 
 class ColorButton extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.toggleDropdown = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault()
+      e.stopPropagation()
 
       if (this.state.active) {
-        this.hideDropdown();
+        this.hideDropdown()
       } else {
-        this.showDropdown();
+        this.showDropdown()
       }
-    };
+    }
 
     this.showDropdown = () => {
-      document.addEventListener('click', this.hideDropdown);
+      document.addEventListener('click', this.hideDropdown)
       this.setState({
         active: true,
-      });
-    };
+      })
+    }
 
     this.hideDropdown = () => {
-      document.removeEventListener('click', this.hideDropdown);
+      document.removeEventListener('click', this.hideDropdown)
       this.setState({
         active: false,
-      });
-    };
+      })
+    }
 
     this.handleClick = () => {
-      this.props.onClick(this.state.currentColor);
-    };
+      this.props.onClick(this.state.currentColor)
+    }
 
     this.handleSelect = (color) => {
       this.setState({
         currentColor: color,
-      });
+      })
 
-      this.props.onClick(color);
-    };
+      this.props.onClick(color)
+    }
 
     this.getIcon = (name) => {
       if (name === 'fontcolor') {
-        return this.fontColorIcon();
+        return this.fontColorIcon()
       }
       if (name === 'backcolor') {
-        return this.backgroundColorIcon();
+        return this.backgroundColorIcon()
       }
       if (name === 'highlight') {
-        return this.textHighlightIcon();
+        return this.textHighlightIcon()
       }
-      return null;
-    };
+      return null
+    }
 
     this.state = {
       currentColor: props.currentColor,
       active: false,
-    };
+    }
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.hideDropdown);
+    document.removeEventListener('click', this.hideDropdown)
   }
 
   textHighlightIcon = () => {
     // 默认描边 & 填充
-    let stroke = '#FFD666';
-    let fill = '#FFFBE6';
+    let stroke = '#FFD666'
+    let fill = '#FFFBE6'
 
     if (this.state.disabled) {
-      fill = '#BFBFBF';
-      stroke = '#BFBFBF';
+      fill = '#BFBFBF'
+      stroke = '#BFBFBF'
     }
 
-    const currentColor = this.state.currentColor;
+    const currentColor = this.state.currentColor
 
     if (currentColor) {
-      fill = currentColor;
-      stroke = Palette.getStroke(currentColor);
+      fill = currentColor
+      stroke = Palette.getStroke(currentColor)
     }
 
     return (
@@ -124,22 +124,22 @@ class ColorButton extends React.Component {
           />
         </g>
       </svg>
-    );
-  };
+    )
+  }
 
   backgroundColorIcon = () => {
     // 默认描边 & 填充
-    let stroke = '#FFD666';
-    let fill = '#FFFBE6';
+    let stroke = '#FFD666'
+    let fill = '#FFFBE6'
 
     if (this.state.disabled) {
-      fill = '#BFBFBF';
-      stroke = '#BFBFBF';
+      fill = '#BFBFBF'
+      stroke = '#BFBFBF'
     }
-    const currentColor = this.state.currentColor;
+    const currentColor = this.state.currentColor
     if (currentColor) {
-      fill = currentColor;
-      stroke = Palette.getStroke(currentColor);
+      fill = currentColor
+      stroke = Palette.getStroke(currentColor)
     }
 
     return (
@@ -176,24 +176,24 @@ class ColorButton extends React.Component {
           />
         </g>
       </svg>
-    );
-  };
+    )
+  }
 
   fontColorIcon() {
     // 默认描边 & 填充
-    let stroke = '#F5222D';
-    let fill = '#F5222D';
+    let stroke = '#F5222D'
+    let fill = '#F5222D'
 
     if (this.state.disabled) {
-      fill = '#BFBFBF';
-      stroke = '#BFBFBF';
+      fill = '#BFBFBF'
+      stroke = '#BFBFBF'
     }
 
-    const currentColor = this.state.currentColor;
+    const currentColor = this.state.currentColor
 
     if (currentColor) {
-      fill = currentColor;
-      stroke = Palette.getStroke(currentColor);
+      fill = currentColor
+      stroke = Palette.getStroke(currentColor)
     }
 
     return (
@@ -229,19 +229,19 @@ class ColorButton extends React.Component {
           />
         </g>
       </svg>
-    );
+    )
   }
 
   render() {
-    let { name, title, moreTitle, disabled } = this.props;
-    const active = this.state.active;
+    let { name, title, moreTitle, disabled } = this.props
+    const active = this.state.active
 
     if (name.indexOf(':') >= 0) {
-      name = name.split(':')[1];
+      name = name.split(':')[1]
     }
 
-    const buttonContent = <span className="lake-icon lake-icon-svgs">{this.getIcon(name)}</span>;
-    const moreContent = <span className="lake-icon"/>;
+    const buttonContent = <span className="lake-icon lake-icon-svgs">{this.getIcon(name)}</span>
+    const moreContent = <span className="lake-icon" />
     return (
       <div className="lake-button-set">
         <div className={classnames('lake-button-set-trigger lake-button-set-trigger-double', {
@@ -272,11 +272,11 @@ class ColorButton extends React.Component {
           'lake-button-set-list-active': active,
         })}
         >
-          <ColorPicker {...Object.assign({}, this.props, { onSelect: this.handleSelect })} />
+          <ColorPicker {...({ ...this.props, onSelect: this.handleSelect })} />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default ColorButton;
+export default ColorButton
