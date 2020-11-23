@@ -20,6 +20,6 @@ const tempContent = `
       <span class="lake-icon lake-icon-delete"></span>
     </a>
   </div></div></div></div></div><p><span>注：</span><span>1</span><span>、</span><span>本申请</span><span>书适用于内资、外资公司</span><span>申请设立、变更、备案。</span></p><p style="text-indent: 20.45pt;"><span>2</span><span>、</span><span>申请书应当使用A4纸。依本表打印生成的，使用黑色墨水钢笔或签字笔签署；手工填写的，使用黑色墨水钢笔或签字笔工整填写、签署。</span></p>
-`;
+`
 
-export default tempContent;
+export default tempContent

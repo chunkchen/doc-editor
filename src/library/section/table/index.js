@@ -535,13 +535,12 @@ class Table extends SectionBase {
       const maxMargin = (pageWidth - editAreaWidth) / 2 - 20;
       margin = Math.min(margin, maxMargin);
       $(this.tableBody)
-        .css('margin', `0 -${margin}px`);
+        .css({
+          'margin': `0 -${margin}px`,
+          'height': `${this.getTableHeight()}px`,
+          'width': `${Math.min(tableWidth, tableMaxSize)}px`,
+        });
     }
-    // this.container 对应 subEdit 层级
-    this.container.css({
-      'height': `${this.getTableHeight()}px`,
-      'width': `${Math.min(tableWidth, tableMaxSize)}px`,
-    });
     if (this.options.type === 'mini' && !this.state.maximize) {
       const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS);
       const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS);

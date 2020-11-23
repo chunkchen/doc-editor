@@ -1,6 +1,6 @@
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import React from 'react';
-import routerConfig from './routerConfig';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
+import React from 'react'
+import routerConfig from './routerConfig'
 
 /**
  * 渲染路由组件
@@ -9,28 +9,28 @@ import routerConfig from './routerConfig';
  * @returns {*}
  */
 const renderNormalRoute = (config, parentPath) => {
-  if (!config || !config.length) return [];
-  let routerList = [];
+  if (!config || !config.length) return []
+  let routerList = []
   config.forEach((item) => {
-    let { path } = item;
+    let { path } = item
     if (!path) {
-      return;
+      return
     }
     if (item.component) {
       if (parentPath) {
-        path = parentPath + path;
+        path = parentPath + path
       }
-      const exact = (item.children && item.children.length > 0) || item.exact;
+      const exact = (item.children && item.children.length > 0) || item.exact
       routerList.push(
         <Route path={path} component={item.component} exact={exact} key={path} />,
-      );
+      )
     }
     if (item.children && item.children.length) {
-      routerList = routerList.concat(renderNormalRoute(item.children, path));
+      routerList = routerList.concat(renderNormalRoute(item.children, path))
     }
-  });
-  return routerList;
-};
+  })
+  return routerList
+}
 
 // 按照 Layout 分组路由
 // BlankLayout 对应的路由：/user/xxx
@@ -42,6 +42,6 @@ const router = () => (
       {renderNormalRoute(routerConfig)}
     </Switch>
   </HashRouter>
-);
+)
 
-export default router();
+export default router()

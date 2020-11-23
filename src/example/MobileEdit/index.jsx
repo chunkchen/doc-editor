@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { MobileEditor } from '../../library';
+import React, { Component } from 'react'
+import { MobileEditor } from '../../library'
 
-import tempContent from './tempContent';
+import tempContent from './tempContent'
 
 export default class MobileEdit extends Component {
   static displayName = 'MobileEdit';
@@ -9,31 +9,31 @@ export default class MobileEdit extends Component {
   cropImgRef = undefined;
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       type: null,
       content: tempContent,
-    };
+    }
   }
 
   onEditorLoaded = (engine) => {
-    this.engine = engine;
-    engine.focusToEnd();
+    this.engine = engine
+    engine.focusToEnd()
   };
 
   onEditorChange = (content) => {
     this.setState({
       content,
-    });
+    })
   };
 
   onEditorSave = () => {
-    const { type } = this.state;
-    console.log(`${type} save`);
+    const { type } = this.state
+    console.log(`${type} save`)
   };
 
   render() {
-    const { content } = this.state;
+    const { content } = this.state
     return (
       <MobileEditor
         value={content}
@@ -43,6 +43,6 @@ export default class MobileEdit extends Component {
         onSave={this.onEditorSave}
         ot={false}
       />
-    );
+    )
   }
 }
