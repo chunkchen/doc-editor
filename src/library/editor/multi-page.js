@@ -7,8 +7,6 @@ import Dialog from '../dialog'
 import Toolbar from '../toolbar'
 import Editor from './editor'
 
-import './multi-page.less'
-
 class MultiPageEditor extends React.Component {
   constructor(props) {
     super(props)
