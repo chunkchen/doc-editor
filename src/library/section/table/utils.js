@@ -139,8 +139,8 @@ export const normalizeTable = (table) => {
   } else {
     // pt 直接转为 px, 因为 col 的 width 属性是没有单位的，会直接被理解为 px, 这里 table 的 width 也直接换成 px。
     $table.css('width', `${parseInt(width, 10)}px`)
-  } // 表格 table 标签不允许有背景色，无法设置
-
+  }
+  // 表格 table 标签不允许有背景色，无法设置
   $table.css('background-color', '')
   const model = getTableModel(table)
   // 修正列的 span 场景

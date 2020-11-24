@@ -72,7 +72,8 @@ class MultiPageEditor extends React.Component {
       const node = engine.container[0].childNodes[i]
       pageContentHeight += node.offsetHeight
       const maxHeight = currentPage.row ? 542 : 919
-      if (needSkipToNextPage || pageContentHeight > maxHeight) {
+      if (needSkipToNextPage || (pageContentHeight > maxHeight && (node.offsetHeight/2 > (maxHeight - (pageContentHeight - node.offsetHeight))))) {
+        // 一个node节点一半超过当前页 才分页
         needSkipToNextPage = true
         overflowNodes.push(node)
         engine.container[0].removeChild(node)

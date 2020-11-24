@@ -644,6 +644,9 @@
   box-sizing: content-box;
 
 }
+.lake-engine .CodeMirror-sizer {
+  margin-bottom: unset !important;
+}
 
 .lake-engine .CodeMirror-measure,
 .lake-engine-view .CodeMirror-measure {

@@ -12,55 +12,53 @@ class ToolbarGroup extends React.Component {
     const { engine, locale, toolbar, toolbarState, mobile } = this.props
 
     return (
-      <div>
-        <div className="lake-toolbar-area">
-          {
-            toolbar.map((name, index) => {
-              // 配置参数
-              if (typeof name === 'object') {
-                if (name.items && name.items.length === 0) return null
-                name = name.name
-              }
+      <div className="lake-toolbar-area">
+        {
+          toolbar.map((name, index) => {
+            // 配置参数
+            if (typeof name === 'object') {
+              if (name.items && name.items.length === 0) return null
+              name = name.name
+            }
 
-              const buttonProps = toolbarState[name] || {}
-              const type = buttonProps.type
-              buttonProps.hasArrow = type === 'dropdown'
-              buttonProps.engine = engine
-              buttonProps.mobile = mobile
-              if (!buttonProps.getEngine) {
-                buttonProps.getEngine = () => {
-                  return engine
-                }
+            const buttonProps = toolbarState[name] || {}
+            const type = buttonProps.type
+            buttonProps.hasArrow = type === 'dropdown'
+            buttonProps.engine = engine
+            buttonProps.mobile = mobile
+            if (!buttonProps.getEngine) {
+              buttonProps.getEngine = () => {
+                return engine
               }
-              buttonProps.locale = locale
-              if (name === 'table') {
-                return <TableButton {...({ key: index, ...buttonProps })} />
-              }
-              if (type === 'collapse') {
-                return <CollapseButton {...({ key: index, ...buttonProps })} />
-              }
+            }
+            buttonProps.locale = locale
+            if (name === 'table') {
+              return <TableButton {...({ key: index, ...buttonProps })} />
+            }
+            if (type === 'collapse') {
+              return <CollapseButton {...({ key: index, ...buttonProps })} />
+            }
 
-              if (type === 'dropdown') {
-                return <DropdownButton {...({ key: index, ...buttonProps })} />
-              }
+            if (type === 'dropdown') {
+              return <DropdownButton {...({ key: index, ...buttonProps })} />
+            }
 
-              if (type === 'color') {
-                buttonProps.activeColors = [buttonProps.active]
-                return <ColorButton {...({ key: index, ...buttonProps })} />
-              }
+            if (type === 'color') {
+              buttonProps.activeColors = [buttonProps.active]
+              return <ColorButton {...({ key: index, ...buttonProps })} />
+            }
 
-              if (type === 'upload') {
-                return <UploadButton {...({ key: index, ...buttonProps })} />
-              }
+            if (type === 'upload') {
+              return <UploadButton {...({ key: index, ...buttonProps })} />
+            }
 
-              if (type === 'video') {
-                return <VideoButton {...({ key: index, ...buttonProps })} />
-              }
+            if (type === 'video') {
+              return <VideoButton {...({ key: index, ...buttonProps })} />
+            }
 
-              return <Button {...({ key: index, ...buttonProps })} />
-            })
-          }
-        </div>
+            return <Button {...({ key: index, ...buttonProps })} />
+          })
+        }
       </div>
     )
   }

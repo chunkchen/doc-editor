@@ -315,6 +315,7 @@ class Table extends SectionBase {
       if (content) {
         // 拷贝过来的 html 中可能会包含 table Section的容器层，需要去掉，否则还会被 render 出来。
         let html = unWrapperTableHTML(content)
+        console.log(html)
         html = new Engine.HTMLParser(html, this.subEngine.schema, this.subEngine.conversion).toValue()
         this.subEngine.command.execute('selectall')
         this.subEngine.change.setValue(html)
