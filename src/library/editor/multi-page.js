@@ -66,7 +66,6 @@ class MultiPageEditor extends React.Component {
   }
 
   engineChange = async () => {
-    console.log('engineChange')
     const { engine, activePageNum, pageListData } = this.state
     const currentPage = pageListData.find((s) => s.pageNum === activePageNum)
     let pageContentHeight = 0
