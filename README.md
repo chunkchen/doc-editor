@@ -1,3 +1,5 @@
+对 itellyou-editor （https://github.com/itellyou-com/itellyou-editor）进行开发
+
 ## Preview
 
 计划任务：

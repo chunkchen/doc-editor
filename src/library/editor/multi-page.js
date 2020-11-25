@@ -47,7 +47,8 @@ class MultiPageEditor extends React.Component {
 
     helper(engine, 'iframeHelper')
 
-    engine.on('change', () => this.engineChange())
+    engine.on('change', this.engineChange)
+    engine.on('select', this.engineSelect)
 
     engine.on('maximizesection', () => {
       engine.container.closest('.lake-editor')
@@ -60,7 +61,12 @@ class MultiPageEditor extends React.Component {
     })
   }
 
+  engineSelect = () => {
+    // console.log('select')
+  }
+
   engineChange = async () => {
+    console.log('engineChange')
     const { engine, activePageNum, pageListData } = this.state
     const currentPage = pageListData.find((s) => s.pageNum === activePageNum)
     let pageContentHeight = 0
@@ -70,22 +76,27 @@ class MultiPageEditor extends React.Component {
       const node = engine.container[0].childNodes[i]
       pageContentHeight += node.offsetHeight
       const maxHeight = currentPage.row ? 542 : 919
-      if (needSkipToNextPage || (pageContentHeight > maxHeight && (node.offsetHeight/2 > (maxHeight - (pageContentHeight - node.offsetHeight))))) {
-        // 一个node节点一半超过当前页 才分页
+      if (pageContentHeight > maxHeight) {
+        if (needSkipToNextPage || node.offsetHeight/2 > (maxHeight - (pageContentHeight - node.offsetHeight))) {
+          console.log('分页')
+          // 一个node节点一半超过当前页 才分页
+          overflowNodes.push(node)
+          engine.container[0].removeChild(node)
+        } else {
+          i++
+        }
+        // 无论当前节点是否分页，下一个节点一定开始分页
         needSkipToNextPage = true
-        overflowNodes.push(node)
-        engine.container[0].removeChild(node)
       } else {
         i++
       }
     }
-    // todo 这里没有做内容分割，如果某一段落在当前页放不下，那么整个段落会移到下一页，需优化
     if (needSkipToNextPage) {
       let nextPageContent = ''
       if (overflowNodes.length) {
         overflowNodes.forEach((s) => nextPageContent += s.outerHTML)
       } else {
-        nextPageContent = '<p><br /></p>>'
+        nextPageContent = '<p><br /></p>'
       }
       let createNewPage = false
       const nextPageNum = activePageNum + 1
@@ -101,17 +112,19 @@ class MultiPageEditor extends React.Component {
         })
         createNewPage = true
       }
+
+      // 聚焦到下一页开始
       setTimeout(() => {
         const nextEngine = this.pageEngine[nextPageNum]
-        this.setState({
-          engine: nextEngine,
-          activePageNum: nextPageNum,
-        })
         if (!createNewPage) {
           // 将溢出的节点插到下一页开始，
           nextEngine.setValue(nextPageContent + nextEngine.getValue())
         }
-        // 光标focus下一页开始
+        this.setState({
+          engine: nextEngine,
+          activePageNum: nextPageNum,
+        })
+        // 如果光标在最后一个节点，聚焦到下一页开始
         nextEngine.focusToStart()
       }, 0)
     }
@@ -298,5 +311,6 @@ MultiPageEditor.defaultProps = {
   ],
   onLoad() {
   },
+  ot: true
 }
 export default MultiPageEditor

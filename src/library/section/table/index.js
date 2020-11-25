@@ -534,8 +534,7 @@ class Table extends SectionBase {
       const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
       margin = Math.min(margin, maxMargin)
     }
-    console.log('onTableSizeChange', tableWidth, editAreaWidth, margin)
-
+    
     $(this.tableBody)
       .css({
         margin: `0 -${margin}px`,
