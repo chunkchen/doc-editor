@@ -217,6 +217,7 @@ class Command extends EventEmitter2 {
         }
       });
       this.emit('actioned', 'removeCol', silence);
+      this.section.onTableSizeChange();
     };
 
     this.insertRowAt = function (rowIndex) {

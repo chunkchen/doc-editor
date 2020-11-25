@@ -533,13 +533,15 @@ class Table extends SectionBase {
       margin = (tableWidth - editAreaWidth) / 2
       const maxMargin = (pageWidth - editAreaWidth) / 2 - 20
       margin = Math.min(margin, maxMargin)
-      $(this.tableBody)
-        .css({
-          margin: `0 -${margin}px`,
-          height: `${this.getTableHeight()}px`,
-          width: `${Math.min(tableWidth, tableMaxSize)}px`,
-        })
     }
+    console.log('onTableSizeChange', tableWidth, editAreaWidth, margin)
+
+    $(this.tableBody)
+      .css({
+        margin: `0 -${margin}px`,
+        height: `${this.getTableHeight()}px`,
+        width: `${Math.min(tableWidth, tableMaxSize)}px`,
+      })
     if (this.options.type === 'mini' && !this.state.maximize) {
       const triggerCols = this.container.find(this.template.COLS_HEADER_TRIGGER_CLASS)
       const triggerRows = this.container.find(this.template.ROWS_HEADER_TRIGGER_CLASS)
