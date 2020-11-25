@@ -20,6 +20,7 @@ class Sidebar extends React.Component {
     }
 
     this.set = (state) => {
+      console.log(state)
       if (!state) {
         this.close()
       }

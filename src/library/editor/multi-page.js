@@ -231,7 +231,6 @@ class MultiPageEditor extends React.Component {
           {engine && <Toolbar {...({ hasMore: false, ...toolbarOptions })} />}
           <main className="lake-multi-page-editor-wrapper-content">
             <div className="lake-multi-page-editor-content">
-              {/* {engine && <Sidebar />} */}
               <div className="lake-content-editor">
                 {
                   pageListData.map((page, index) => {
@@ -296,7 +295,6 @@ MultiPageEditor.defaultProps = {
     ['alignment'],
     ['unorderedlist', 'orderedlist', 'tasklist', 'indent-list'],
     ['link', 'quote', 'hr'],
-    ['search'],
   ],
   onLoad() {
   },
