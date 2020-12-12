@@ -7,6 +7,8 @@ import Dialog from '../dialog'
 import Toolbar from '../toolbar'
 import Sidebar from '../sidebar'
 import Editor from './editor'
+import { Dropdown, Menu } from 'antd'
+import { CaretDownOutlined, CheckOutlined } from '@ant-design/icons'
 
 const language = {
   en: lang_en,
@@ -19,6 +21,7 @@ class FullEditor extends React.Component {
     this.state = {
       engine: null,
       toolbar: props.toolbar,
+      row: false
     }
 
     this.locale = language[props.lang]
@@ -37,7 +40,10 @@ class FullEditor extends React.Component {
         })
 
         helper(engine, 'translate')
-        const { image, file } = engine.options
+        const {
+          image,
+          file,
+        } = engine.options
         helper(engine, 'uploader', {
           actions: {
             image: image ? image.action : '',
@@ -94,9 +100,19 @@ class FullEditor extends React.Component {
       })
   }
 
+  setPageFormat = (val) => {
+    this.setState({ row: val})
+  }
+
   render() {
-    const { engine, toolbar } = this.state
-    const { type, header } = this.props
+    const {
+      engine,
+      toolbar,
+    } = this.state
+    const {
+      type,
+      header,
+    } = this.props
     const toolbarOptions = {
       type,
       engine,
@@ -106,26 +122,101 @@ class FullEditor extends React.Component {
 
     const editorOptions = () => {
       const options = { ...this.props }
-      const { onLoad, header, type, toolbar, ...editorOptions } = options
+      const {
+        onLoad,
+        header,
+        type,
+        toolbar,
+        ...editorOptions
+      } = options
       return editorOptions
+    }
+
+    const menu = () => {
+      const { row } = this.state
+      return (
+        <Menu className="page-setting-menu">
+          <Menu.ItemGroup key="0" title="页面版式">
+            <Menu.Item selectedKeys="0-1" onClick={() => this.setPageFormat(false)}>
+              {
+                !row && (<div className="checked"><CheckOutlined/></div>)
+              }
+              <div className="option-item">
+                <p className="title">纵向</p>
+                <p className="desc">适合文本显示</p>
+              </div>
+            </Menu.Item>
+            <Menu.Item selectedKeys="0-2" onClick={() => this.setPageFormat(true)}>
+              {
+                row && (<div className="checked"><CheckOutlined/></div>)
+              }
+              <div className="option-item">
+                <p className="title">横向</p>
+                <p className="desc">适合超宽表格</p>
+              </div>
+            </Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.Divider/>
+          <Menu.ItemGroup key="1" title="排版风格">
+            <Menu.Item selectedKeys="1-1">
+              <div className="checked"><CheckOutlined/></div>
+              <div className="option-item">
+                <p className="title">经典优雅</p>
+                <p className="desc">疏密有度</p>
+              </div>
+            </Menu.Item>
+            <Menu.Item selectedKeys="1-2">
+              <div className="option-item">
+                <p className="title">传统紧凑</p>
+                <p className="desc">排版紧密</p>
+              </div>
+            </Menu.Item>
+          </Menu.ItemGroup>
+        </Menu>
+      )
+    }
+
+    let className = 'lake-content-editor show-return-tag ';
+    if (this.state.row) {
+      className += ' lake-typography-a4_row'
+    } else {
+      className += ' lake-typography-a4'
     }
 
     return (
       <section className="lake-editor lake-max-editor">
         <div className="lake-max-editor-wrapper">
-          {engine && <Dialog engine={engine} />}
+          {engine && <Dialog engine={engine}/>}
           {engine && <Toolbar {...({ hasMore: false, ...toolbarOptions })} />}
           <main className="lake-max-editor-wrapper-content">
             <div className="lake-max-editor-content">
               {engine && <Sidebar engine={engine} />}
-              <div className="lake-content-editor lake-typography-a4" ref={this.contentEditor}>
-                {header && <div className="lake-content-editor-extra">{header}</div>}
+              <div className={className} ref={this.contentEditor}>
+                {
+                  header && (
+                    <div className="lake-content-editor-extra">
+                      <Dropdown
+                        overlay={menu()}
+                        trigger={['click']}
+                        className="drop-menu"
+                      >
+                        <span className="ant-dropdown-link">
+                          页面设置
+                          <CaretDownOutlined/>
+                        </span>
+                      </Dropdown>
+                    </div>
+                  )
+                }
+                <div className="left-top" />
+                <div className="right-top" />
+                <div className="left-btn" />
+                <div className="right-btn" />
                 <Editor
                   {...({
                     onEngineReady: this.onEngineReady,
                     ...editorOptions(),
                   })}
-                  pageSize="a4"
                 />
               </div>
             </div>

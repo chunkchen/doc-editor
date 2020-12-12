@@ -36,6 +36,7 @@ export default class BlankPage extends Component {
     const { content } = this.state
     return (
       <FullEditor
+        header
         value={content}
         defaultValue={content}
         onLoad={this.onEditorLoaded}

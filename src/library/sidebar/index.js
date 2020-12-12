@@ -20,7 +20,6 @@ class Sidebar extends React.Component {
     }
 
     this.set = (state) => {
-      console.log(state)
       if (!state) {
         this.close()
       }
@@ -80,17 +79,6 @@ class Sidebar extends React.Component {
         <div className="lake-sidebar-wrapper">
           <div className="lake-sidebar-title">
             {title}
-            {
-              showCloseBtn !== false
-              && (
-                <div
-                  className="lake-sidebar-close"
-                  onClick={this.close}
-                >
-                  <span className="lake-icon lake-icon-close" />
-                </div>
-              )
-            }
           </div>
           <div
             className="lake-sidebar-content"

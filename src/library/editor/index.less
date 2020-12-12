@@ -1,0 +1,232 @@
+.lake-max-editor-content {
+
+
+  .lake-content-editor {
+    background-color: #FFFFFF;
+
+    .lake-content-editor-extra {
+      position: relative;
+      padding: 32px 60px 0 60px;
+
+      &:hover, .ant-dropdown-open {
+        .drop-menu {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
+      .ant-dropdown-open.drop-menu {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .drop-menu {
+        display: inline-block;
+        margin-bottom: 8px;
+        color: #575757;
+        padding: 2px 4px;
+        cursor: pointer;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .2s ease-in-out;
+
+        .anticon-caret-down {
+          font-size: 10px;
+          margin-left: 6px;
+        }
+      }
+    }
+
+  }
+
+
+  // page size start a4 纵向
+  .lake-typography-a4 {
+    width: 794px;
+    min-height: 1123px;
+    transition: all .3s;
+
+    .left-top {
+      position: absolute;
+      left: 96px;
+      top: 71px;
+      width: 25px;
+      height: 25px;
+      border-right: 1px solid #a59b9b;
+      border-bottom: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .right-top {
+      position: absolute;
+      right: 96px;
+      top: 71px;
+      width: 25px;
+      height: 25px;
+      border-left: 1px solid #a59b9b;
+      border-bottom: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .left-btn {
+      position: absolute;
+      left: 96px;
+      bottom: 71px;
+      width: 25px;
+      height: 25px;
+      border-right: 1px solid #a59b9b;
+      border-top: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .right-btn {
+      position: absolute;
+      right: 96px;
+      bottom: 71px;
+      width: 25px;
+      height: 25px;
+      border-left: 1px solid #a59b9b;
+      border-top: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .btn-page-num {
+      position: absolute;
+      bottom: 71px;
+      right: 125px;
+      color: #aaa;
+      font-size: 12px;
+      z-index: 1;
+    }
+
+
+    .lake-content-editor-core {
+      width: 794px;
+      height: calc(100% - 66px);
+      padding: 30px 121px 96px;
+    }
+
+    .lake-engine-view {
+      width: 794px;
+      height: 1123px;
+      padding: 96px 121px;
+    }
+  }
+
+  // page size start a4 横向
+  .lake-typography-a4_row {
+    width: 1123px;
+    min-height: 794px;
+    transition: all .3s;
+
+    .left-top {
+      position: absolute;
+      left: 71px;
+      top: 96px;
+      width: 25px;
+      height: 25px;
+      border-right: 1px solid #a59b9b;
+      border-bottom: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .right-top {
+      position: absolute;
+      right: 71px;
+      top: 96px;
+      width: 25px;
+      height: 25px;
+      border-left: 1px solid #a59b9b;
+      border-bottom: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .left-btn {
+      position: absolute;
+      left: 71px;
+      bottom: 96px;
+      width: 25px;
+      height: 25px;
+      border-right: 1px solid #a59b9b;
+      border-top: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .right-btn {
+      position: absolute;
+      right: 71px;
+      bottom: 96px;
+      width: 25px;
+      height: 25px;
+      border-left: 1px solid #a59b9b;
+      border-top: 1px solid #a59b9b;
+      z-index: 1;
+    }
+
+    .btn-page-num {
+      position: absolute;
+      bottom: 96px;
+      right: 100px;
+      color: #aaa;
+      font-size: 12px;
+      z-index: 1;
+    }
+
+    .lake-content-editor-core {
+      width: 1123px;
+      height: calc(100% - 66px);
+      padding: 55px 96px 121px;
+    }
+
+    .lake-engine-view {
+      width: 1123px;
+      height: 794px;
+      padding: 121px 96px;
+    }
+  }
+  // page size end
+
+}
+
+
+// 页面设置下拉
+.page-setting-menu .ant-dropdown-menu-item-group-list {
+
+  .ant-dropdown-menu-item {
+    padding: 5px 0;
+
+    .checked {
+      display: inline;
+      float: left;
+      margin-left: 12px;
+    }
+  }
+
+  .option-item {
+    padding: 0 16px 0 40px;
+    line-height: 22px;
+    cursor: pointer;
+
+    .title {
+      color: #595959;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      color: #8c8c8c;
+      font-size: 10px;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.lake-activated {
+  .lake-section-toolbar.lake-embed-toolbar-block {
+    left: -20px;
+    top: -82px;
+  }
+}

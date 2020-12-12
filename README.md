@@ -44,7 +44,6 @@
 + toc (大纲)
 
 ### 四种满足使用环境的编辑器模式
-+ MultiPageEditor (分页模式)
 + FullEditor (正常完整模式，适合专业文档撰写)
 + MiniEditor (迷你模式，评论、问答等简单撰写)
 + LineEditor (行模式 适合文字评论、表情评论、图片评论)
