@@ -70,7 +70,9 @@ class MobileEditor extends React.Component {
           <Toolbar {...({ hasMore: true, ...toolbarOptions, mobile: true })} />
         )}
         <div className="lake-content-editor" ref={this.contentEditor}>
-          <div className="lake-content-editor-extra">{header}</div>
+          {
+            header && (<div className="lake-content-editor-extra">{header}</div>)
+          }
           <Editor
             {...({
               onEngineReady: this.onEngineReady,

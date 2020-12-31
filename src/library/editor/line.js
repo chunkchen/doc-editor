@@ -65,6 +65,7 @@ class LineEditor extends React.Component {
       const { onLoad, extra, toolbar, ...editorOptions } = options
       return editorOptions
     }(this.props))
+    console.log(extra)
 
     return (
       <div className="lake-editor lake-line-editor">
