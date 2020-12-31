@@ -1,0 +1,308 @@
+.lake-multi-page-editor {
+  min-width: 1210px;
+
+  .lake-multi-page-editor-wrapper {
+    width: 100%;
+    height: 100%;
+    transition: height 0.25s cubic-bezier(0.3, 1.2, 0.2, 1);
+
+    .lake-multi-page-editor-wrapper-content {
+      width: 100%;
+      height: calc(100% - 40px);
+      overflow: auto;
+      display: flex;
+      flex: 1 0;
+      flex-direction: column;
+
+      .lake-multi-page-editor-content {
+        margin: 0 auto;
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-gap: 24px;
+        grid-template-rows: 1fr;
+        flex-grow: 1;
+        min-height: auto;
+        grid-template-columns: 1fr minmax(794px, 1123px) 1fr;
+
+        .lake-content-editor {
+          display: block;
+          position: relative;
+          font-family: 'Tahoma For Number', 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          color: #262626;
+          cursor: text;
+          white-space: normal;
+          height: fit-content;
+          margin: 24px auto;
+          align-self: start;
+          justify-self: center;
+          grid-column: 2;
+          grid-row: 1;
+          counter-reset: numbered;
+
+          &:last-child {
+            margin-bottom: 64px !important;
+          }
+
+          .lake-content-editor-extra {
+            position: relative;
+            padding: 32px 60px 0 60px;
+          }
+
+          // show return tag
+          .show-return-tag {
+            p {
+              br {
+                display: none;
+              }
+
+              &:after {
+                content: "↵";
+                color: #bfbfbf;
+                width: 0;
+                height: 0;
+                position: absolute;
+              }
+            }
+          }
+
+          // page wrapper start
+          .page-wrapper {
+            position: relative;
+            width: fit-content;
+            margin: 0 auto 20px;
+            border: var(--devsite-page-border, 0);
+            border-radius: var(--devsite-page-border-radius, 2px);
+            box-shadow: var(--devsite-page-box-shadow, 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15));
+            background-color: #fff;
+
+            .lake-content-editor-extra {
+
+              &:hover, .ant-dropdown-open {
+                .drop-menu {
+                  visibility: visible;
+                  opacity: 1;
+                }
+              }
+
+              .ant-dropdown-open.drop-menu {
+                visibility: visible;
+                opacity: 1;
+              }
+
+              .drop-menu {
+                display: inline-block;
+                margin-bottom: 8px;
+                color: #575757;
+                padding: 2px 4px;
+                cursor: pointer;
+                visibility: hidden;
+                opacity: 0;
+                transition: all .2s ease-in-out;
+
+                .anticon-caret-down {
+                  font-size: 10px;
+                  margin-left: 6px;
+                }
+              }
+            }
+          }
+
+          // page-wrapper end
+
+
+          // page size start a4 纵向
+          .lake-typography-a4 {
+            width: 794px;
+            height: 1123px;
+            transition: all .3s;
+
+            .left-top {
+              position: absolute;
+              left: 96px;
+              top: 71px;
+              width: 25px;
+              height: 25px;
+              border-right: 1px solid #a59b9b;
+              border-bottom: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .right-top {
+              position: absolute;
+              right: 96px;
+              top: 71px;
+              width: 25px;
+              height: 25px;
+              border-left: 1px solid #a59b9b;
+              border-bottom: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .left-btn {
+              position: absolute;
+              left: 96px;
+              bottom: 71px;
+              width: 25px;
+              height: 25px;
+              border-right: 1px solid #a59b9b;
+              border-top: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .right-btn {
+              position: absolute;
+              right: 96px;
+              bottom: 71px;
+              width: 25px;
+              height: 25px;
+              border-left: 1px solid #a59b9b;
+              border-top: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .btn-page-num {
+              position: absolute;
+              bottom: 71px;
+              right: 125px;
+              color: #aaa;
+              font-size: 12px;
+              z-index: 1;
+            }
+
+
+            .lake-content-editor-core {
+              width: 794px;
+              height: calc(100% - 66px);
+              padding: 30px 121px 96px;
+            }
+
+            .lake-engine-view {
+              width: 794px;
+              height: 1123px;
+              padding: 96px 121px;
+            }
+          }
+
+          // page size start a4 横向
+          .lake-typography-a4_row {
+            width: 1123px;
+            height: 794px;
+            transition: all .3s;
+
+            .left-top {
+              position: absolute;
+              left: 71px;
+              top: 96px;
+              width: 25px;
+              height: 25px;
+              border-right: 1px solid #a59b9b;
+              border-bottom: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .right-top {
+              position: absolute;
+              right: 71px;
+              top: 96px;
+              width: 25px;
+              height: 25px;
+              border-left: 1px solid #a59b9b;
+              border-bottom: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .left-btn {
+              position: absolute;
+              left: 71px;
+              bottom: 96px;
+              width: 25px;
+              height: 25px;
+              border-right: 1px solid #a59b9b;
+              border-top: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .right-btn {
+              position: absolute;
+              right: 71px;
+              bottom: 96px;
+              width: 25px;
+              height: 25px;
+              border-left: 1px solid #a59b9b;
+              border-top: 1px solid #a59b9b;
+              z-index: 1;
+            }
+
+            .btn-page-num {
+              position: absolute;
+              bottom: 96px;
+              right: 100px;
+              color: #aaa;
+              font-size: 12px;
+              z-index: 1;
+            }
+
+            .lake-content-editor-core {
+              width: 1123px;
+              height: calc(100% - 66px);
+              padding: 55px 96px 121px;
+            }
+
+            .lake-engine-view {
+              width: 1123px;
+              height: 794px;
+              padding: 121px 96px;
+            }
+          }
+
+          // page size end
+
+
+        }
+      }
+    }
+  }
+}
+
+.lake-activated {
+  .lake-section-toolbar.lake-embed-toolbar-block {
+    top: -82px;
+  }
+}
+
+// 页面设置下拉
+.page-setting-menu .ant-dropdown-menu-item-group-list {
+
+  .ant-dropdown-menu-item {
+    padding: 5px 0;
+
+    .checked {
+      display: inline;
+      float: left;
+      margin-left: 12px;
+    }
+  }
+
+  .option-item {
+    padding: 0 16px 0 40px;
+    line-height: 22px;
+    cursor: pointer;
+
+    .title {
+      color: #595959;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      color: #8c8c8c;
+      font-size: 10px;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}

@@ -2,6 +2,7 @@ import FullEdit from './example/FullEdit'
 import MiniEdit from './example/MiniEdit'
 import MobileEdit from './example/MobileEdit'
 import InlineEdit from './example/InlineEdit'
+import MultiPageEditor from './example/MultiPageEdit'
 
 const routerConfig = [
   {
@@ -27,6 +28,11 @@ const routerConfig = [
         name: 'Inline',
         path: '/inline',
         component: InlineEdit,
+      },
+      {
+        name: 'MultiPage',
+        path: '/multi-page',
+        component: MultiPageEditor,
       },
     ],
   },

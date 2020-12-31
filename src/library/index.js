@@ -2,6 +2,7 @@ import '@hicooper/doc-engine/lib/index.css'
 import hotkey from './config/hotkey'
 import Engine from './editor/engine'
 import FullEditor from './editor/full'
+import MultiPageEditor from './editor/multi-page'
 import MiniEditor from './editor/mini'
 import MobileEditor from './editor/mobile'
 import LineEditor from './editor/line'
@@ -30,6 +31,7 @@ export default FullEditor
 
 export {
   Engine,
+  MultiPageEditor,
   FullEditor,
   MiniEditor,
   MobileEditor,
